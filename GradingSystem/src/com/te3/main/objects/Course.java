@@ -2,6 +2,8 @@ package com.te3.main.objects;
 
 import java.util.ArrayList;
 
+import com.te3.main.exceptions.IllegalNameException;
+
 public class Course {
 
 	String name;
@@ -18,9 +20,9 @@ public class Course {
 		return name;
 	}
 
-	public void setName(String name) {
+	public void setName(String name) throws IllegalNameException {
 		if (name.length() < 3) {
-			this.name = "Kasta fel sen";
+			throw new IllegalNameException("Name to short");
 		} else {
 			this.name = name;
 		}
