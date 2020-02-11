@@ -6,7 +6,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
 
 /**
  * XML de-/encoder
@@ -22,9 +21,8 @@ public class XML<E> {
 	 * Writes an XML-file of object
 	 * 
 	 * @param fileLocation The path to the file
-	 * @param obj          The object
+	 * @param obj the object
 	 */
-	@SuppressWarnings("unused")
 	public void write(String fileLocation, E obj) {
 		try {
 			FileOutputStream fos = new FileOutputStream(new File(fileLocation));
@@ -44,7 +42,7 @@ public class XML<E> {
 	 * @param fileLocation the file path
 	 * @return the object from the XML File
 	 */
-	@SuppressWarnings({ "unchecked", "unused" })
+	@SuppressWarnings("unchecked")
 	public E read(String fileLocation) {
 		Object o = null;
 		try {
