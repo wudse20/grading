@@ -3,17 +3,37 @@ package com.te3.main.objects;
 import java.util.ArrayList;
 
 public class Task {
-	ArrayList<TaskGrade> assignedTaskGrades = new ArrayList<TaskGrade>();
 	
-	public Task() {
-		
+	private String name;
+	private boolean isGraded;
+	private ArrayList<TaskGrade> taskGrades = new ArrayList<TaskGrade>();
+	
+	public Task(String initName) {
+		this.setName(initName);
+		this.setGraded(false);
 	}
 	
-	private void addTask(TaskGrade newTask) {
-		assignedTaskGrades.add(newTask);
+	public String getName() {
+		return name;
 	}
-	
-	private void removeTask(TaskGrade deletedTask) {
-		assignedTaskGrades.remove(deletedTask);
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public boolean isGraded() {
+		return isGraded;
+	}
+
+	public void setGraded(boolean isGraded) {
+		this.isGraded = isGraded;
+	}
+
+	public ArrayList<TaskGrade> getTaskGrades() {
+		return taskGrades;
+	}
+
+	public void setTaskGrades(ArrayList<TaskGrade> taskGrades) {
+		this.taskGrades = taskGrades;
 	}
 }

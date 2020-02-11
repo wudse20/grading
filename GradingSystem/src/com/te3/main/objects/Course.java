@@ -4,9 +4,9 @@ import java.util.ArrayList;
 
 public class Course {
 
-	String name;
-	ArrayList<Student> students;
-	ArrayList<Task> tasks;
+	private String name;
+	private ArrayList<Student> students;
+	private ArrayList<Task> tasks;
 
 	public Course(String name, ArrayList<Student> students, ArrayList<Task> tasks) {
 		this.name = name;
