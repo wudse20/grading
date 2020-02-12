@@ -6,7 +6,7 @@ public class Student {
 	private short completedTasks;
 	
 	public Student(String name) {
-		this.name = name;
+		setName(name);
 	}
 
 	public String getName() {

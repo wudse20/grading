@@ -6,11 +6,12 @@ public class Task {
 	
 	private String name;
 	private boolean isGraded;
-	private ArrayList<TaskGrade> taskGrades = new ArrayList<TaskGrade>();
+	private ArrayList<Criteria> taskGrades = new ArrayList<Criteria>();
 	
-	public Task(String initName) {
-		this.setName(initName);
-		this.setGraded(false);
+	public Task(String initName, ArrayList<Criteria> taskGrades) {
+		setName(initName);
+		setGraded(false);
+		setTaskGrades(taskGrades);
 	}
 	
 	public String getName() {
@@ -29,11 +30,19 @@ public class Task {
 		this.isGraded = isGraded;
 	}
 
-	public ArrayList<TaskGrade> getTaskGrades() {
+	public ArrayList<Criteria> getTaskGrades() {
 		return taskGrades;
 	}
 
-	public void setTaskGrades(ArrayList<TaskGrade> taskGrades) {
+	public void setTaskGrades(ArrayList<Criteria> taskGrades) {
 		this.taskGrades = taskGrades;
+	}
+	
+	public void addTaskGrade(Criteria newGrade) {
+		taskGrades.add(newGrade);
+	}
+	
+	public void removeTaskGrade(Criteria deleteGrade) {
+		taskGrades.remove(deleteGrade);
 	}
 }
