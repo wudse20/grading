@@ -12,13 +12,23 @@ public class Course {
 	private ArrayList<Task> courseTasks;
 
 	public Course(String name, ArrayList<SchoolClass> classes, ArrayList<Criteria> courseCriteria) {
-		setName(name);
+		try {
+			setName(name);
+		} catch (IllegalNameException e) {
+			//Create popup with "Name too short" or something like that.
+			e.printStackTrace();
+		}
 		setLinkedClasses(classes);
 		setCourseCriteria(courseCriteria);
 	}
 	
 	public Course(String name, ArrayList<SchoolClass> classes, ArrayList<Criteria> courseCriteria, ArrayList<Task> courseTasks) {
-		setName(name);
+		try {
+			setName(name);
+		} catch (IllegalNameException e) {
+			//Create popup with "Name too short" or something like that.
+			e.printStackTrace();
+		}
 		setLinkedClasses(classes);
 		setCourseCriteria(courseCriteria);
 		setCourseTasks(courseTasks);

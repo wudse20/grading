@@ -13,6 +13,8 @@ public class MainFrame extends JFrame {
 	private static final long serialVersionUID = 1L;
 	
 	private Data mainData;
+	
+	private CBPanel mainCBPanel;
 
 	public MainFrame() 
 	{
@@ -21,11 +23,17 @@ public class MainFrame extends JFrame {
 		this.setSize(new Dimension(400, 300));
 		
 		mainData = getSavedData();
+		
+		initComponents();
+	}
+	
+	private void initComponents() {
+		mainCBPanel = new CBPanel(mainData);
 	}
 	
 	private Data getSavedData() {
 		//should be able to find local stored data, and import it. for now we just have it create a new empty data object.
-		//change this boolean if you do not want to run the program with default predefined classes, courses, students and tasks.
+		//change this boolean to false if you do not want to run the program with default predefined classes, courses, students and tasks.
 		
 		boolean debug = true;
 		
@@ -60,5 +68,4 @@ public class MainFrame extends JFrame {
 			return new Data();
 		}
 	}
-
 }
