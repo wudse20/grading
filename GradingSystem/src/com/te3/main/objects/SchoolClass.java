@@ -2,7 +2,7 @@ package com.te3.main.objects;
 
 import java.util.ArrayList;
 
-public class Group {
+public class SchoolClass {
 	
 	private String name;
 	
@@ -11,9 +11,18 @@ public class Group {
 	private ArrayList<Student> students = new ArrayList<Student>();
 	
 
-	public Group(String name, ArrayList<Course> courses) {
-		this.name = name;
+	public SchoolClass(String name, ArrayList<Course> courses, ArrayList<Student> students) {
+		this.setName(name);
 		this.courses = courses;
+		this.students = students;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 	public ArrayList<Course> getCourses() {

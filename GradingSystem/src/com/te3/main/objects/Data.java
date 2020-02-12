@@ -4,24 +4,24 @@ import java.util.ArrayList;
 
 public class Data {
 	
-	private ArrayList<Group> 	groups 	= new ArrayList<Group>();
-	private ArrayList<Course> 	courses = new ArrayList<Course>();
+	private ArrayList<SchoolClass> 	classes = new ArrayList<SchoolClass>();
+	private ArrayList<Course> 		courses = new ArrayList<Course>();
 	
 	public Data() {
 		
 	}
 	
-	public Data(ArrayList<Group> groups, ArrayList<Course> courses) {
-		this.groups = groups;
+	public Data(ArrayList<SchoolClass> classes, ArrayList<Course> courses) {
+		this.classes = classes;
 		this.courses = courses;
 	}
 
-	public ArrayList<Group> getGroups() {
-		return groups;
+	public ArrayList<SchoolClass> getGroups() {
+		return classes;
 	}
 
-	public void setGroups(ArrayList<Group> groups) {
-		this.groups = groups;
+	public void setGroups(ArrayList<SchoolClass> classes) {
+		this.classes = classes;
 	}
 
 	public ArrayList<Course> getCourses() {

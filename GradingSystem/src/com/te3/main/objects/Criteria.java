@@ -1,13 +1,13 @@
 package com.te3.main.objects;
 
-public class TaskGrade {
+public class Criteria {
 	
 	private String name;
 	private char grade;
 	
-	public TaskGrade(String initName) {
-		this.name = initName;
-		this.grade = 'F';
+	public Criteria(String name) {
+		setName(name);
+		setGrade('F');
 	}
 	
 	public String getName() {
