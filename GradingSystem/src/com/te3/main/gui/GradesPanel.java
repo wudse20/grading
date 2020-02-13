@@ -5,6 +5,7 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.util.ArrayList;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
@@ -30,8 +31,7 @@ public class GradesPanel extends JPanel {
 	JPanel panel = new JPanel();
 
 	BorderLayout layout = new BorderLayout();
-	// Måste bytas
-	GridLayout pLayout;
+	BoxLayout pLayout;
 
 	MainFrame mf;
 
@@ -84,7 +84,7 @@ public class GradesPanel extends JPanel {
 		criteriaPanels = new JPanel[criteria.size()];
 		criteriaBtnLayouts = new FlowLayout[criteria.size()];
 		criteriaLayouts = new BorderLayout[criteria.size()];
-		pLayout = new GridLayout(criteria.size(), 1);
+		pLayout = new BoxLayout(panel, BoxLayout.Y_AXIS);
 
 		panel.setLayout(pLayout);
 
