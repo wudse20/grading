@@ -32,7 +32,7 @@ public class Task {
 		this.isGraded = isGraded;
 	}
 
-	public ArrayList<Criteria> getTaskGrades() {
+	public ArrayList<Criteria> getCriteria() {
 		return taskGrades;
 	}
 
