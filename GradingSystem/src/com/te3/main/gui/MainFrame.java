@@ -1,10 +1,13 @@
 package com.te3.main.gui;
 
 import java.awt.Dimension;
+import java.awt.Graphics;
 import java.util.ArrayList;
 
+import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.Timer;
+import javax.swing.JPanel;
 
 import com.te3.main.exceptions.IllegalInputException;
 import com.te3.main.exceptions.IllegalNameException;
@@ -27,6 +30,13 @@ public class MainFrame extends JFrame {
 	private int saveTimer = 300;
 	
 	private String saveFilePath = "./saves.xml";
+	
+	BoxLayout mainLayout;
+	
+	CBPanel cbPanel;
+	
+	JPanel infoPanel;
+	JPanel controlPanel;
 
 	public MainFrame() 
 	{
@@ -39,6 +49,23 @@ public class MainFrame extends JFrame {
 		}); 
 		
 		mainData = getSavedData();
+		
+		initComponents();
+	}
+	
+	private void initComponents() {
+		mainLayout = new BoxLayout(this.getContentPane(), BoxLayout.Y_AXIS);
+		this.setLayout(mainLayout);
+		
+		cbPanel = new CBPanel(mainData);
+		
+		this.add(cbPanel);
+		
+		infoPanel = new JPanel();
+		this.add(infoPanel);
+		
+		controlPanel = new JPanel();
+		this.add(controlPanel);
 	}
 	
 	public void save(String filePath) {
@@ -60,7 +87,7 @@ public class MainFrame extends JFrame {
 	
 	private Data getSavedData() {
 		//should be able to find local stored data, and import it. for now we just have it create a new empty data object.
-		//change this boolean if you do not want to run the program with default predefined classes, courses, students and tasks.
+		//change this boolean to false if you do not want to run the program with default predefined classes, courses, students and tasks.
 		
 		boolean debug = true;
 		

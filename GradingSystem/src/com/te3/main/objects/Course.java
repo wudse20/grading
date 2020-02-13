@@ -21,6 +21,7 @@ public class Course {
 		}
 		setLinkedClasses(classes);
 		setCourseCriteria(courseCriteria);
+		setCourseTasks(new ArrayList<Task>());
 	}
 	
 	public Course(String name, ArrayList<SchoolClass> classes, ArrayList<Criteria> courseCriteria, ArrayList<Task> courseTasks) throws IllegalNameException {
@@ -40,7 +41,7 @@ public class Course {
 
 	public void setName(String name) throws IllegalNameException {
 		if (name.length() < 3) {
-			throw new IllegalNameException("Name to short");
+			throw new IllegalNameException("Name too short");
 		} else {
 			this.name = name;
 		}

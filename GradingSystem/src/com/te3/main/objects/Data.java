@@ -14,11 +14,11 @@ public class Data {
 		this.courses = courses;
 	}
 
-	public ArrayList<SchoolClass> getGroups() {
+	public ArrayList<SchoolClass> getClasses() {
 		return classes;
 	}
 
-	public void setGroups(ArrayList<SchoolClass> classes) {
+	public void setClasses(ArrayList<SchoolClass> classes) {
 		this.classes = classes;
 	}
 
