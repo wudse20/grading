@@ -36,7 +36,6 @@ public class CBPanel extends JPanel {
 	private void initComponents() {
 		//main panel
 		mainLayout 	= new GridLayout(2, 4);
-		mainLayout.setVgap(2);
 		this.setLayout(mainLayout);
 		
 		lblClass 	= new JLabel("Klass");
