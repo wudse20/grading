@@ -117,7 +117,7 @@ public class MainFrame extends JFrame {
 				courseCriteria.add(new Criteria("Teknikhistoria"));
 				courseCriteria.add(new Criteria("CAD"));
 				courseCriteria.add(new Criteria("Programering"));
-			} catch (IllegalInputException e) {
+			} catch (IllegalNameException e) {
 				e.printStackTrace();
 			}
 			

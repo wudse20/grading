@@ -6,7 +6,7 @@ import java.awt.Font;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
-import com.te3.main.exceptions.IllegalInputException;
+import com.te3.main.exceptions.IllegalNameException;
 
 public class Criteria {
 
@@ -25,17 +25,27 @@ public class Criteria {
 
 	public Criteria() {}
 
-	public Criteria(String name) throws IllegalInputException {
+	public Criteria(String name) throws IllegalNameException {
 		//Ville inte vara i setproperties av någon anledning.
 		lblCriteria = new JLabel(name);
 		
-		this.setProperties();
+		try {
+			this.setProperties();
+		} catch (IllegalNameException e) {
+			throw new IllegalNameException(e.getMessage());
+		}
+		
 		this.addActionListeneners();
 		this.updateGUI(grade);
 	}
 
-	private void setProperties() {
-		this.setName(name);
+	private void setProperties() throws IllegalNameException {
+		try {
+			this.setName(name);
+		} catch (IllegalNameException e) {
+			throw new IllegalNameException(e.getMessage());
+		}
+		
 		this.setGrade(Grades.F);
 
 		lblGrade = new JLabel();
@@ -124,8 +134,11 @@ public class Criteria {
 		return this.name;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setName(String name) throws IllegalNameException {
+		if (name.length() > 3)
+			this.name = name;
+		else
+			throw new IllegalNameException("För kort meddelande");
 	}
 
 	public Grades getGrade() {
