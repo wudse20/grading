@@ -39,6 +39,10 @@ public class CBPanel extends JPanel {
 	
 	private void initComponents() {
 		//main panel
+		//Vet inget annat sätt att få tag på dig
+		//Kör inte GridLayout, Einar skälde ut mig
+		//när jag gjorde det. Det är för att GUI:s
+		//blir typ jättefula, då allt måste vara lika stort.
 		mainLayout 	= new GridLayout(2, 4);
 		this.setLayout(mainLayout);
 		
