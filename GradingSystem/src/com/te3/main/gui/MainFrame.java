@@ -71,7 +71,7 @@ public class MainFrame extends JFrame {
 			try {
 				teknik = new Course("Teknik", classes, courseCriteria);
 			} catch (IllegalNameException e) {
-				// TODO handle illegal name
+				// TODO handle illegal name, sätt ruta röd typ
 				e.printStackTrace();
 			}
 			
