@@ -64,7 +64,7 @@ public class GradesPanel extends JPanel {
 		pLayout = new GridLayout(criteria.size(), 1);
 		
 		panel.setLayout(pLayout);
-
+		
 		for (int i = 0; i < criteria.size(); i++) {
 			criteriaBtnPanels[i] = new JPanel();
 			criteriaPanels[i] = new JPanel();
@@ -88,6 +88,8 @@ public class GradesPanel extends JPanel {
 				
 				panel.add(criteriaPanels[i]);
 			}
+		} else {
+			//TODO skriv denna koden.
 		}
 	}
 
