@@ -1,6 +1,7 @@
 package com.te3.main.objects;
 
 import java.awt.Color;
+import java.awt.Font;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -22,18 +23,54 @@ public class Criteria {
 	private JLabel lblCriteria;
 	private JLabel lblGrade;
 
-	public Criteria() {
-	}
+	public Criteria() {}
 
 	public Criteria(String name) throws IllegalInputException {
-		this.setName(name);
+		//Ville inte vara i setproperties av någon anledning.
+		lblCriteria = new JLabel(name);
+		
+		this.setProperties();
+		this.addActionListeneners();
+		this.updateGUI(grade);
+	}
 
+	private void setProperties() {
+		this.setName(name);
 		this.setGrade(Grades.F);
 
-		lblCriteria = new JLabel(name);
 		lblGrade = new JLabel();
+		
+		gradeBtns[0].setFont(new Font("Dialog", Font.PLAIN, 18));
+		gradeBtns[1].setFont(new Font("Dialog", Font.PLAIN, 18));
+		gradeBtns[2].setFont(new Font("Dialog", Font.PLAIN, 18));
+		gradeBtns[3].setFont(new Font("Dialog", Font.PLAIN, 18));
+		
+		lblGrade.setFont(new Font("Dialog", Font.BOLD, 18));
+		lblCriteria.setFont(new Font("Dialog", Font.BOLD, 18));
+	}
 
-		this.updateGUI(grade);
+	private void addActionListeneners() 
+	{
+		gradeBtns[0].addActionListener((e) -> {
+			btnClicked(Grades.F);
+		});
+		
+		gradeBtns[1].addActionListener((e) -> {
+			btnClicked(Grades.E);
+		});
+
+		gradeBtns[2].addActionListener((e) -> {
+			btnClicked(Grades.C);
+		});
+		
+		gradeBtns[3].addActionListener((e) -> {
+			btnClicked(Grades.A);
+		});
+	}
+	
+	private void btnClicked(Grades g) {
+		this.grade = g;
+		this.updateGUI(g);
 	}
 
 	private void updateGUI(Grades grade) {
@@ -41,42 +78,42 @@ public class Criteria {
 			case F:
 				for (int i = 0; i < gradeBtns.length; i++) {
 					if (i == 0)
-						gradeBtns[i].setBackground(Color.red);
+						gradeBtns[i].setForeground(Color.red);
 					else
-						gradeBtns[i].setBackground(Color.GRAY);
+						gradeBtns[i].setForeground(Color.GRAY);
 				}
 
-				lblGrade.setBackground(Color.red);
+				lblGrade.setForeground(Color.red);
 				break;
 			case E:
 				for (int i = 0; i < gradeBtns.length; i++) {
 					if (i == 1)
-						gradeBtns[i].setBackground(Color.green);
+						gradeBtns[i].setForeground(Color.green);
 					else
-						gradeBtns[i].setBackground(Color.GRAY);
+						gradeBtns[i].setForeground(Color.GRAY);
 				}
 
-				lblGrade.setBackground(Color.green);
+				lblGrade.setForeground(Color.green);
 				break;
 			case C:
 				for (int i = 0; i < gradeBtns.length; i++) {
 					if (i == 1 || i == 2)
-						gradeBtns[i].setBackground(Color.green);
+						gradeBtns[i].setForeground(Color.green);
 					else
-						gradeBtns[i].setBackground(Color.GRAY);
+						gradeBtns[i].setForeground(Color.GRAY);
 				}
 
-				lblGrade.setBackground(Color.green);
+				lblGrade.setForeground(Color.green);
 				break;
 			case A:
 				for (int i = 0; i < gradeBtns.length; i++) {
 					if (i != 0)
-						gradeBtns[i].setBackground(Color.green);
+						gradeBtns[i].setForeground(Color.green);
 					else
-						gradeBtns[i].setBackground(Color.GRAY);
+						gradeBtns[i].setForeground(Color.GRAY);
 				}
 
-				lblGrade.setBackground(Color.green);
+				lblGrade.setForeground(Color.green);
 				break;
 		}
 
