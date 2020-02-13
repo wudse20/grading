@@ -119,6 +119,7 @@ public class MainFrame extends JFrame {
 				courseCriteria.add(new Criteria("Teknikhistoria"));
 				courseCriteria.add(new Criteria("CAD"));
 				courseCriteria.add(new Criteria("Programering"));
+				courseCriteria.add(new Criteria("Fjäsk"));
 			} catch (IllegalNameException e) {
 				e.printStackTrace();
 			}
@@ -136,12 +137,16 @@ public class MainFrame extends JFrame {
 			try {
 				c.add(new Criteria("Mekanik"));
 				c.add(new Criteria("CAD"));
+				c.add(new Criteria("Fjäsk"));
 			} catch (IllegalNameException e) {
 				e.printStackTrace();
 			}
 
-			c.get(0).setGrade(Grades.A);
-			c.get(1).setGrade(Grades.C);
+			c.get(0).setGrade(Grades.C);
+			c.get(1).setGrade(Grades.E);
+			c.get(2).setGrade(Grades.A);
+			
+			teknik.getCourseCriteria().get(3).setGrade(Grades.A);
 			
 			teknik.addCourseTask(new Task("Vattenhallen", teknik.getCourseCriteria()));
 			teknik.addCourseTask(new Task("Teknikhistoria", c));
