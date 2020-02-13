@@ -1,31 +1,88 @@
 package com.te3.main.gui;
 
-import java.awt.FlowLayout;
+import java.awt.Dimension;
+import java.awt.GridLayout;
+import java.util.ArrayList;
 
-import javax.swing.BoxLayout;
 import javax.swing.JComboBox;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import com.te3.main.objects.Data;
+import com.te3.main.objects.*;
 
 public class CBPanel extends JPanel {
+	GridLayout mainLayout;
 	
+	JLabel lblClass;
+	JLabel lblCourse;
+	JLabel lblStudent;
+	JLabel lblTask;
 	
-	BoxLayout layout = new BoxLayout(this, BoxLayout.Y_AXIS);
-	FlowLayout cbLayout = new FlowLayout();
-	JComboBox<String> cbSelectedClass = new JComboBox<String>();
-	
-	String[] boxGroups = {"Grupp", "Kurs", "Elev", "Uppgift"};
+	JComboBox<String> cbClass;
+	JComboBox<String> cbCourse;
+	JComboBox<String> cbStudent;
+	JComboBox<String> cbTask;
 	
 	public CBPanel(Data importedData) {
 		initComponents();
+		refreshData(importedData);
+	}
+	
+	@Override
+	public Dimension getMaximumSize() {
+		return new Dimension(super.getMaximumSize().width, super.getPreferredSize().height);
 	}
 	
 	private void initComponents() {
-		layout = new BoxLayout(this, BoxLayout.Y_AXIS);
+		//main panel
+		mainLayout 	= new GridLayout(2, 4);
+		mainLayout.setVgap(2);
+		this.setLayout(mainLayout);
 		
-		cbLayout = new FlowLayout();
+		lblClass 	= new JLabel("Klass");
+		lblCourse 	= new JLabel("Kurs");
+		lblStudent 	= new JLabel("Elev");
+		lblTask 	= new JLabel("Uppgift");
 		
-		cbSelectedClass = new JComboBox<String>();
+		this.add(lblClass);
+		this.add(lblCourse);
+		this.add(lblStudent);
+		this.add(lblTask);
+		
+		cbClass 	= new JComboBox<String>();
+		cbCourse 	= new JComboBox<String>();
+		cbStudent 	= new JComboBox<String>();
+		cbTask 		= new JComboBox<String>();
+		
+		this.add(cbClass);
+		this.add(cbCourse);
+		this.add(cbStudent);
+		this.add(cbTask);
+	}
+	
+	/**
+	 * Adds the default items to the comboboxes (eg. new entry, edit entries)
+	 */
+	public void addDefaultItems() {
+		cbClass.addItem("Ny");
+		cbClass.addItem("Ändra");
+		cbCourse.addItem("Ny");
+		cbCourse.addItem("Ändra");
+		//shouldnt be able to add new students through the combobox
+		cbTask.addItem("Ny");
+		cbTask.addItem("Ändra");
+	}
+	
+	/**
+	 * Completely updates the entire combobox panel with new information.
+	 * @param newData the new information to be parsed and updated with.
+	 */
+	public void refreshData(Data newData) {
+		Data localData = newData;
+		ArrayList<SchoolClass> dataClasses = localData.getClasses();
+		ArrayList<Course> dataCourses = localData.getCourses();
+		
+		dataClasses.forEach((n) -> cbClass.addItem(n.getName()));
+		dataCourses.forEach((n) -> cbCourse.addItem(n.getName()));
 	}
 }

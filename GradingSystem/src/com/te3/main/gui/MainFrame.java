@@ -1,9 +1,12 @@
 package com.te3.main.gui;
 
 import java.awt.Dimension;
+import java.awt.Graphics;
 import java.util.ArrayList;
 
+import javax.swing.BoxLayout;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 import com.te3.main.objects.*;
 
@@ -12,9 +15,14 @@ public class MainFrame extends JFrame {
 	/** Default */
 	private static final long serialVersionUID = 1L;
 	
-	private Data mainData;
+	Data 	mainData;
 	
-	private CBPanel mainCBPanel;
+	BoxLayout mainLayout;
+	
+	CBPanel cbPanel;
+	
+	JPanel infoPanel;
+	JPanel controlPanel;
 
 	public MainFrame() 
 	{
@@ -28,7 +36,18 @@ public class MainFrame extends JFrame {
 	}
 	
 	private void initComponents() {
-		mainCBPanel = new CBPanel(mainData);
+		mainLayout = new BoxLayout(this.getContentPane(), BoxLayout.Y_AXIS);
+		this.setLayout(mainLayout);
+		
+		cbPanel = new CBPanel(mainData);
+		
+		this.add(cbPanel);
+		
+		infoPanel = new JPanel();
+		this.add(infoPanel);
+		
+		controlPanel = new JPanel();
+		this.add(controlPanel);
 	}
 	
 	private Data getSavedData() {
