@@ -1,13 +1,13 @@
 package com.te3.main.gui;
 
+import java.awt.Container;
 import java.awt.Dimension;
-import java.awt.Graphics;
 import java.util.ArrayList;
 
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
-import javax.swing.Timer;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 
 import com.te3.main.exceptions.IllegalInputException;
 import com.te3.main.exceptions.IllegalNameException;
@@ -28,16 +28,20 @@ public class MainFrame extends JFrame {
 	
 	//in seconds
 	private int saveTimer = 300;
+	private int currentlySelectedAssingmentIndex = 0;
 	
 	private String saveFilePath = "./saves.xml";
 	
 	BoxLayout mainLayout;
 	
 	CBPanel cbPanel;
+	GradesPanel gradePanel;
 	
 	JPanel infoPanel;
 	JPanel controlPanel;
 
+	Container cp = this.getContentPane();
+	
 	public MainFrame() 
 	{
 		super("Betygssättning");
@@ -57,15 +61,15 @@ public class MainFrame extends JFrame {
 		mainLayout = new BoxLayout(this.getContentPane(), BoxLayout.Y_AXIS);
 		this.setLayout(mainLayout);
 		
-		cbPanel = new CBPanel(mainData);
+		cbPanel = new CBPanel(mainData, this);
+		gradePanel = new GradesPanel(this);
 		
-		this.add(cbPanel);
+		cp.add(cbPanel);
 		
-		infoPanel = new JPanel();
-		this.add(infoPanel);
+		cp.add(gradePanel);
 		
 		controlPanel = new JPanel();
-		this.add(controlPanel);
+		cp.add(controlPanel);
 	}
 	
 	public void save(String filePath) {
@@ -111,6 +115,8 @@ public class MainFrame extends JFrame {
 				courseCriteria.add(new Criteria("Mekanik"));
 				courseCriteria.add(new Criteria("Genus"));
 				courseCriteria.add(new Criteria("Teknikhistoria"));
+				courseCriteria.add(new Criteria("CAD"));
+				courseCriteria.add(new Criteria("Programering"));
 			} catch (IllegalInputException e) {
 				e.printStackTrace();
 			}
@@ -160,5 +166,13 @@ public class MainFrame extends JFrame {
 
 	public void setSaveFilePath(String saveFilePath) {
 		this.saveFilePath = saveFilePath;
+	}
+
+	public int getCurrentlySelectedAssingmentIndex() {
+		return currentlySelectedAssingmentIndex;
+	}
+
+	public void setCurrentlySelectedAssingmentIndex(int currentlySelectedAssingmentIndex) {
+		this.currentlySelectedAssingmentIndex = currentlySelectedAssingmentIndex;
 	}
 }
