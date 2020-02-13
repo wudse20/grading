@@ -4,9 +4,17 @@ import java.awt.Dimension;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
+import javax.swing.Timer;
 
+import com.te3.main.exceptions.IllegalInputException;
 import com.te3.main.exceptions.IllegalNameException;
-import com.te3.main.objects.*;
+import com.te3.main.objects.Course;
+import com.te3.main.objects.Criteria;
+import com.te3.main.objects.Data;
+import com.te3.main.objects.SchoolClass;
+import com.te3.main.objects.Student;
+import com.te3.main.objects.Task;
+import com.te3.main.objects.XML;
 
 public class MainFrame extends JFrame {
 	
@@ -14,12 +22,21 @@ public class MainFrame extends JFrame {
 	private static final long serialVersionUID = 1L;
 	
 	private Data mainData;
+	
+	//in seconds
+	private int saveTimer = 300;
+	
+	private String saveFilePath = "./saves.xml";
 
 	public MainFrame() 
 	{
 		super("Betygssättning");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setSize(new Dimension(400, 300));
+		
+		Timer t = new Timer(saveTimer * 1000, (e) -> {
+			save(saveFilePath);
+		}); 
 		
 		mainData = getSavedData();
 	}
@@ -63,9 +80,13 @@ public class MainFrame extends JFrame {
 			classes.add(new SchoolClass("TE3A", courses, studentsA));
 			classes.add(new SchoolClass("TE3B", courses, studentsB));
 			
-			courseCriteria.add(new Criteria("Mekanik"));
-			courseCriteria.add(new Criteria("Genus"));
-			courseCriteria.add(new Criteria("Teknikhistoria"));
+			try {
+				courseCriteria.add(new Criteria("Mekanik"));
+				courseCriteria.add(new Criteria("Genus"));
+				courseCriteria.add(new Criteria("Teknikhistoria"));
+			} catch (IllegalInputException e) {
+				e.printStackTrace();
+			}
 			
 			Course teknik = null;
 			try {
@@ -85,4 +106,32 @@ public class MainFrame extends JFrame {
 		}
 	}
 
+	public Data getMainData() {
+		return mainData;
+	}
+
+	public void setMainData(Data mainData) {
+		this.mainData = mainData;
+	}
+
+	public int getSaveTimer() {
+		return saveTimer;
+	}
+
+	public void setSaveTimer(int saveTimer) throws IllegalInputException {
+		if (saveTimer > 60) {
+			this.saveTimer = saveTimer;
+		} else {
+			//Gör text ruta röd sen eller ngt.
+			throw new IllegalInputException("Intervallet måste vara längre");
+		}
+	}
+
+	public String getSaveFilePath() {
+		return saveFilePath;
+	}
+
+	public void setSaveFilePath(String saveFilePath) {
+		this.saveFilePath = saveFilePath;
+	}
 }
