@@ -46,7 +46,7 @@ public class MainFrame extends JFrame {
 	{
 		super("Betygssättning");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setSize(new Dimension(400, 300));
+		this.setSize(new Dimension(1200, 600));
 		
 		Timer t = new Timer(saveTimer * 1000, (e) -> {
 			save(saveFilePath);
