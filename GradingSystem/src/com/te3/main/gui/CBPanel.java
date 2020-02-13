@@ -25,9 +25,13 @@ public class CBPanel extends JPanel {
 	JComboBox<String> cbStudent;
 	JComboBox<String> cbTask;
 	
+	//Sparar en instans för att kunna använda getters och setters och slippa static
+	MainFrame mf;
+	
 	ActionListener cbUpdateListener;
 	
-	public CBPanel(Data importedData) {
+	public CBPanel(Data importedData, MainFrame mf) {
+		this.mf = mf;
 		initComponents();
 		refreshData(importedData);
 	}
@@ -70,7 +74,8 @@ public class CBPanel extends JPanel {
 				String curSelected = item.getSelectedItem().toString();
 				
 				//Test
-				System.out.println("Currently selected item: " + curSelected);
+				System.out.println("Currently selected item: " + curSelected + ", with index: " + item.getSelectedIndex());
+				mf.setCurrentlySelectedAssingmentIndex(item.getSelectedIndex());
 			}
 		};
 		
