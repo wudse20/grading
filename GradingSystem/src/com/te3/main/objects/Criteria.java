@@ -26,26 +26,20 @@ public class Criteria {
 	public Criteria() {}
 
 	public Criteria(String name) throws IllegalNameException {
-		//Ville inte vara i setproperties av någon anledning.
-		lblCriteria = new JLabel(name);
-		
-		try {
-			this.setProperties();
-		} catch (IllegalNameException e) {
-			throw new IllegalNameException(e.getMessage());
-		}
-		
-		this.addActionListeneners();
-		this.updateGUI(grade);
-	}
-
-	private void setProperties() throws IllegalNameException {
 		try {
 			this.setName(name);
 		} catch (IllegalNameException e) {
 			throw new IllegalNameException(e.getMessage());
 		}
 		
+		//Ville inte vara i setproperties av någon anledning.
+		lblCriteria = new JLabel(name);
+		this.setProperties(name);
+		this.addActionListeneners();
+		this.updateGUI(grade);
+	}
+
+	private void setProperties(String name) {
 		this.setGrade(Grades.F);
 
 		lblGrade = new JLabel();
@@ -135,7 +129,7 @@ public class Criteria {
 	}
 
 	public void setName(String name) throws IllegalNameException {
-		if (name.length() > 3)
+		if (name.length() >= 3)
 			this.name = name;
 		else
 			throw new IllegalNameException("För kort meddelande");
