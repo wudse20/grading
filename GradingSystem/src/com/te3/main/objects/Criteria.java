@@ -6,14 +6,11 @@ import java.awt.Font;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
+import com.te3.main.enums.Grades;
 import com.te3.main.exceptions.IllegalNameException;
 
 public class Criteria {
 
-	enum Grades {
-		F, E, C, A;
-	}
-	
 	private String name;
 	private Grades grade;
 
@@ -77,7 +74,7 @@ public class Criteria {
 		this.updateGUI(g);
 	}
 
-	private void updateGUI(Grades grade) {
+	public void updateGUI(Grades grade) {
 		switch (grade) {
 			case F:
 				for (int i = 0; i < gradeBtns.length; i++) {
@@ -159,13 +156,13 @@ public class Criteria {
 	 * Compares two grades
 	 * 
 	 * @param c the other criteria
-	 * @return the criteria with the highest grade
+	 * @return <b>true</b> -> if this criteria is higher <br><b>false</b> -> if this criteria is lower.
 	 */
-	public Criteria compare(Criteria c) {
+	public boolean compare(Criteria c) {
 		if (grade.ordinal() > c.grade.ordinal())
-			return this;
+			return true;
 		else
-			return c;
+			return false;
 	}
 	
 	/**
@@ -174,7 +171,9 @@ public class Criteria {
 	 * @param c the other criteria
 	 * @return <b>true</b> if the same name, else <b>false</b>
 	 */
-	public boolean isSameCriteria(Criteria c) {
+	@Override
+	public boolean equals(Object obj) {
+		Criteria c = (Criteria) obj;
 		return (this.name.equals(c.name));
 	}
 
