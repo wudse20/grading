@@ -11,14 +11,24 @@ public class Course {
 	private ArrayList<Criteria> courseCriteria;
 	private ArrayList<Task> courseTasks;
 
-	public Course(String name, ArrayList<SchoolClass> classes, ArrayList<Criteria> courseCriteria) {
-		setName(name);
+	public Course() {}
+	
+	public Course(String name, ArrayList<SchoolClass> classes, ArrayList<Criteria> courseCriteria) throws IllegalNameException {
+		try {
+			setName(name);
+		} catch (IllegalNameException e) {
+			throw new IllegalNameException(e.getMessage());
+		}
 		setLinkedClasses(classes);
 		setCourseCriteria(courseCriteria);
 	}
 	
-	public Course(String name, ArrayList<SchoolClass> classes, ArrayList<Criteria> courseCriteria, ArrayList<Task> courseTasks) {
-		setName(name);
+	public Course(String name, ArrayList<SchoolClass> classes, ArrayList<Criteria> courseCriteria, ArrayList<Task> courseTasks) throws IllegalNameException {
+		try {
+			setName(name);
+		} catch (IllegalNameException e) {
+			throw new IllegalNameException(e.getMessage());
+		}
 		setLinkedClasses(classes);
 		setCourseCriteria(courseCriteria);
 		setCourseTasks(courseTasks);

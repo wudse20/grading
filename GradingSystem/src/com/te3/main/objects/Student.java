@@ -5,6 +5,8 @@ public class Student {
 	private String comment;
 	private short completedTasks;
 	
+	public Student() {}
+	
 	public Student(String name) {
 		setName(name);
 	}

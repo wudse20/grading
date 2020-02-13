@@ -5,6 +5,8 @@ public class Criteria {
 	private String name;
 	private char grade;
 	
+	public Criteria() {}
+	
 	public Criteria(String name) {
 		setName(name);
 		setGrade('F');

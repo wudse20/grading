@@ -10,7 +10,8 @@ public class SchoolClass {
 	private ArrayList<Course> courses = new ArrayList<Course>();
 	private ArrayList<Student> students = new ArrayList<Student>();
 	
-
+	public SchoolClass() {}
+	
 	public SchoolClass(String name, ArrayList<Course> courses, ArrayList<Student> students) {
 		this.setName(name);
 		this.courses = courses;

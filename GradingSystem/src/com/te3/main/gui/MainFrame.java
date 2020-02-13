@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import javax.swing.JFrame;
 
+import com.te3.main.exceptions.IllegalNameException;
 import com.te3.main.objects.*;
 
 public class MainFrame extends JFrame {
@@ -21,6 +22,23 @@ public class MainFrame extends JFrame {
 		this.setSize(new Dimension(400, 300));
 		
 		mainData = getSavedData();
+	}
+	
+	public void save(String filePath) {
+		XML<Data> xml = new XML<Data>();
+		xml.write(filePath, this.mainData);
+	}
+	
+	public void load(String filePath) {
+		XML<Data> xml = new XML<Data>();
+		Data d;
+		d = xml.read(filePath);
+		
+		if (d == null) {
+			mainData = new Data(new ArrayList<SchoolClass>(), new ArrayList<Course>());
+		} else {
+			mainData = d;
+		}
 	}
 	
 	private Data getSavedData() {
@@ -49,7 +67,13 @@ public class MainFrame extends JFrame {
 			courseCriteria.add(new Criteria("Genus"));
 			courseCriteria.add(new Criteria("Teknikhistoria"));
 			
-			Course teknik = new Course("Teknik", classes, courseCriteria);
+			Course teknik = null;
+			try {
+				teknik = new Course("Teknik", classes, courseCriteria);
+			} catch (IllegalNameException e) {
+				// TODO handle illegal name
+				e.printStackTrace();
+			}
 			
 			teknik.addCourseTask(new Task("Vattenhallen", teknik.getCourseCriteria()));
 			

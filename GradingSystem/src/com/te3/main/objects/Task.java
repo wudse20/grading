@@ -8,6 +8,8 @@ public class Task {
 	private boolean isGraded;
 	private ArrayList<Criteria> taskGrades = new ArrayList<Criteria>();
 	
+	public Task() {}
+	
 	public Task(String initName, ArrayList<Criteria> taskGrades) {
 		setName(initName);
 		setGraded(false);

@@ -7,9 +7,7 @@ public class Data {
 	private ArrayList<SchoolClass> 	classes = new ArrayList<SchoolClass>();
 	private ArrayList<Course> 		courses = new ArrayList<Course>();
 	
-	public Data() {
-		
-	}
+	public Data() {}
 	
 	public Data(ArrayList<SchoolClass> classes, ArrayList<Course> courses) {
 		this.classes = classes;
