@@ -53,6 +53,7 @@ public class MainFrame extends JFrame {
 		}); 
 		
 		mainData = getSavedData();
+		t.start();
 		
 		initComponents();
 	}
