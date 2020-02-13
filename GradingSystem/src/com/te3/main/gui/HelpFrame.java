@@ -86,11 +86,11 @@ public class HelpFrame extends JFrame implements ActionListener {
 	}
 	
 	public void setTitle(String title) {
-		this.title = (title.trim().equals("")) ? "To short title" : title;
+		this.title = (title.trim().equals("")) ? "Too short title" : title;
 	}
 
 	public void setInfo(String info) {
-		this.info = (info.trim().equals("")) ? "To short info" : info;
+		this.info = (info.trim().equals("")) ? "Too short info" : info;
 	}
 
 	public void setHeight(int height) {
