@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+import com.te3.main.enums.Grades;
 import com.te3.main.exceptions.IllegalInputException;
 import com.te3.main.exceptions.IllegalNameException;
 import com.te3.main.objects.Course;
@@ -130,7 +131,20 @@ public class MainFrame extends JFrame {
 				e.printStackTrace();
 			}
 			
+			ArrayList<Criteria> c = new ArrayList<Criteria>();
+			
+			try {
+				c.add(new Criteria("Mekanik"));
+				c.add(new Criteria("CAD"));
+			} catch (IllegalNameException e) {
+				e.printStackTrace();
+			}
+
+			c.get(0).setGrade(Grades.A);
+			c.get(1).setGrade(Grades.C);
+			
 			teknik.addCourseTask(new Task("Vattenhallen", teknik.getCourseCriteria()));
+			teknik.addCourseTask(new Task("Teknikhistoria", c));
 			
 			courses.add(teknik);
 			
