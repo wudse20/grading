@@ -2,6 +2,7 @@ package com.te3.main.gui;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.util.ArrayList;
 
 import javax.swing.BoxLayout;
@@ -23,9 +24,11 @@ public class GradesPanel extends JPanel {
 
 	JPanel[] criteriaBtnPanels;
 	JPanel[] criteriaPanels;
+	JPanel[] criteriaPanelsNeedsNewName;
 
 	FlowLayout[] criteriaBtnLayouts;
 	BorderLayout[] criteriaLayouts;
+	GridLayout[] criteriaGridLayouts;
 
 	JPanel panel = new JPanel();
 
@@ -51,27 +54,26 @@ public class GradesPanel extends JPanel {
 		if (s.equals(State.SINGEL_STUDENT_ASSIGNMENT)) {
 			dispalyCriteria(criteria);
 		} else {
-			// Temporärt namn, det är inte bra
-			ArrayList<Criteria> highestGrades = new ArrayList<Criteria>();
+			ArrayList<Criteria> displayedGrades = new ArrayList<Criteria>();
 
 			for (int i = 0; i < tasks.size(); i++) {
 				for (var j = 0; j < tasks.get(i).getCriteria().size(); j++) {
 					Criteria c = tasks.get(i).getCriteria().get(j);
-					int index = highestGrades.indexOf(c);
+					int index = displayedGrades.indexOf(c);
 					
 					if (index != -1) {
-						if (!(highestGrades.get(index).compare(c))) {
-							highestGrades.remove(index);
-							highestGrades.add(c);
-							highestGrades.get(highestGrades.indexOf(c)).updateGUI(c.getGrade());
+						if (!(displayedGrades.get(index).compare(c))) {
+							displayedGrades.remove(index);
+							displayedGrades.add(c);
+							displayedGrades.get(displayedGrades.indexOf(c)).updateGUI(c.getGrade());
 						}
 					} else {
-						highestGrades.add(c);
+						displayedGrades.add(c);
 					}
 				}
 			}
 			
-			dispalyCriteria(highestGrades);
+			dispalyCriteria(displayedGrades);
 		}
 
 		// Updates the frame with the new components
@@ -81,8 +83,10 @@ public class GradesPanel extends JPanel {
 	private void dispalyCriteria(ArrayList<Criteria> criteria) {
 		criteriaBtnPanels = new JPanel[criteria.size()];
 		criteriaPanels = new JPanel[criteria.size()];
+		criteriaPanelsNeedsNewName = new JPanel[criteria.size()];
 		criteriaBtnLayouts = new FlowLayout[criteria.size()];
 		criteriaLayouts = new BorderLayout[criteria.size()];
+		criteriaGridLayouts = new GridLayout[criteria.size()];
 		pLayout = new BoxLayout(panel, BoxLayout.Y_AXIS);
 
 		panel.setLayout(pLayout);
@@ -90,22 +94,27 @@ public class GradesPanel extends JPanel {
 		for (int i = 0; i < criteria.size(); i++) {
 			criteriaBtnPanels[i] = new JPanel();
 			criteriaPanels[i] = new JPanel();
+			criteriaPanelsNeedsNewName[i] = new JPanel();
 			criteriaBtnLayouts[i] = new FlowLayout(FlowLayout.LEFT);
 			criteriaLayouts[i] = new BorderLayout();
+			criteriaGridLayouts[i] = new GridLayout(2, 2);
 		}
 		
 		for (int i = 0; i < criteria.size(); i++) {
 			Criteria c = criteria.get(i);
 			JButton[] b = c.getGradeBtns();
 			criteriaBtnPanels[i].setLayout(criteriaBtnLayouts[i]);
-
+			criteriaPanelsNeedsNewName[i].setLayout(criteriaGridLayouts[i]);
+			
 			for (int j = 0; j < b.length; j++) {
 				criteriaBtnPanels[i].add(b[j]);
 			}
-
-			criteriaPanels[i].add(c.getLblCriteria(), BorderLayout.LINE_START);
-			criteriaPanels[i].add(criteriaBtnPanels[i], BorderLayout.CENTER);
-			criteriaPanels[i].add(c.getLblGrade(), BorderLayout.LINE_END);
+			
+			//criteriaPanels[i].add(c.getLblCriteria(), BorderLayout.LINE_START);
+			criteriaPanelsNeedsNewName[i].add(c.getLblCriteria());
+			criteriaPanelsNeedsNewName[i].add(c.getLblGrade());
+			criteriaPanelsNeedsNewName[i].add(criteriaBtnPanels[i]);
+			criteriaPanels[i].add(criteriaPanelsNeedsNewName[i], BorderLayout.CENTER);
 
 			panel.add(criteriaPanels[i]);
 		}
