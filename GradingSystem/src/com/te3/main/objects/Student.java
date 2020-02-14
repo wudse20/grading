@@ -4,6 +4,7 @@ public class Student {
 	private String name;
 	private String comment;
 	private short completedTasks;
+	private short numOfTasks;
 	
 	public Student() {}
 	
@@ -44,5 +45,13 @@ public class Student {
 	 */
 	public void setCompletedTasks(short completedTasks) {
 		this.completedTasks = completedTasks;
+	}
+
+	public short getNumOfTasks() {
+		return numOfTasks;
+	}
+
+	public void setNumOfTasks(short numOfTasks) {
+		this.numOfTasks = numOfTasks;
 	}
 }
