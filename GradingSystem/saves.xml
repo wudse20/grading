@@ -14,7 +14,7 @@
             <void property="grade">
              <object class="java.lang.Enum" id="Grades0" method="valueOf">
               <class>com.te3.main.enums.Grades</class>
-              <string>A</string>
+              <string>C</string>
              </object>
             </void>
             <void property="name">
@@ -25,10 +25,7 @@
           <void method="add">
            <object class="com.te3.main.objects.Criteria">
             <void property="grade">
-             <object class="java.lang.Enum" id="Grades1" method="valueOf">
-              <class>com.te3.main.enums.Grades</class>
-              <string>F</string>
-             </object>
+             <object idref="Grades0"/>
             </void>
             <void property="name">
              <string>Genus</string>
@@ -38,7 +35,10 @@
           <void method="add">
            <object class="com.te3.main.objects.Criteria">
             <void property="grade">
-             <object idref="Grades1"/>
+             <object class="java.lang.Enum" id="Grades1" method="valueOf">
+              <class>com.te3.main.enums.Grades</class>
+              <string>A</string>
+             </object>
             </void>
             <void property="name">
              <string>Teknikhistoria</string>
@@ -48,7 +48,7 @@
           <void method="add">
            <object class="com.te3.main.objects.Criteria">
             <void property="grade">
-             <object idref="Grades1"/>
+             <object idref="Grades0"/>
             </void>
             <void property="name">
              <string>CAD</string>
@@ -68,7 +68,7 @@
           <void method="add">
            <object class="com.te3.main.objects.Criteria">
             <void property="grade">
-             <object idref="Grades1"/>
+             <object idref="Grades0"/>
             </void>
             <void property="name">
              <string>Fjäsk</string>
@@ -121,10 +121,7 @@
              <void method="add">
               <object class="com.te3.main.objects.Criteria">
                <void property="grade">
-                <object class="java.lang.Enum" method="valueOf">
-                 <class>com.te3.main.enums.Grades</class>
-                 <string>C</string>
-                </object>
+                <object idref="Grades0"/>
                </void>
                <void property="name">
                 <string>Mekanik</string>
@@ -147,7 +144,7 @@
              <void method="add">
               <object class="com.te3.main.objects.Criteria">
                <void property="grade">
-                <object idref="Grades0"/>
+                <object idref="Grades1"/>
                </void>
                <void property="name">
                 <string>Fjäsk</string>
