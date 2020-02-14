@@ -8,6 +8,7 @@ import javax.swing.JLabel;
 
 import com.te3.main.enums.Grades;
 import com.te3.main.exceptions.IllegalNameException;
+import com.te3.main.gui.MainFrame;
 
 public class Criteria {
 
@@ -19,15 +20,20 @@ public class Criteria {
 
 	private JLabel lblCriteria;
 	private JLabel lblGrade;
+	
+	//Försök att hitta en ny lösning senare
+	MainFrame mf;	
 
 	public Criteria() {}
 
-	public Criteria(String name) throws IllegalNameException {
+	public Criteria(String name, MainFrame mf) throws IllegalNameException {
 		try {
 			this.setName(name);
 		} catch (IllegalNameException e) {
 			throw new IllegalNameException(e.getMessage());
 		}
+				
+		this.mf = mf;
 		
 		//Ville inte vara i setproperties av någon anledning.
 		lblCriteria = new JLabel(name);
@@ -71,7 +77,9 @@ public class Criteria {
 	
 	private void btnClicked(Grades g) {
 		this.grade = g;
+		var gp = mf.getGradePanel();
 		this.updateGUI(g);
+		gp.updateGUI(gp.getState());
 	}
 
 	public void updateGUI(Grades grade) {
