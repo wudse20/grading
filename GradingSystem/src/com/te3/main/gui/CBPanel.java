@@ -28,6 +28,7 @@ public class CBPanel extends JPanel {
 	//Sparar en instans för att kunna använda getters och setters och slippa static
 	MainFrame mf;
 	
+	//Gör inte så, använd lamda eller anonym klass när du sätter actionlisteners. 
 	ActionListener cbUpdateListener;
 	
 	public CBPanel(Data importedData, MainFrame mf) {
