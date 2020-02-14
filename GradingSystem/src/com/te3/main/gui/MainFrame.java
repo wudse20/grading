@@ -30,6 +30,7 @@ public class MainFrame extends JFrame {
 	//in seconds
 	private int saveTimer = 300;
 	private int currentlySelectedAssingmentIndex = 0;
+	private int currentlySelectedStudentIndex = 0;
 	
 	private String saveFilePath = "./saves.xml";
 	
@@ -149,8 +150,8 @@ public class MainFrame extends JFrame {
 			
 			teknik.getCourseCriteria().get(3).setGrade(Grades.A);
 			
-			teknik.addCourseTask(new Task("Vattenhallen", teknik.getCourseCriteria()));
-			teknik.addCourseTask(new Task("Teknikhistoria", c));
+			teknik.addCourseTask(new Task("Vattenhallen", teknik.getCourseCriteria(), studentsA));
+			teknik.addCourseTask(new Task("Teknikhistoria", c, studentsA));
 			
 			courses.add(teknik);
 			
@@ -195,5 +196,13 @@ public class MainFrame extends JFrame {
 
 	public void setCurrentlySelectedAssingmentIndex(int currentlySelectedAssingmentIndex) {
 		this.currentlySelectedAssingmentIndex = currentlySelectedAssingmentIndex;
+	}
+
+	public int getCurrentlySelectedStudentIndex() {
+		return currentlySelectedStudentIndex;
+	}
+
+	public void setCurrentlySelectedStudentIndex(int currentlySelectedStudentIndex) {
+		this.currentlySelectedStudentIndex = currentlySelectedStudentIndex;
 	}
 }
