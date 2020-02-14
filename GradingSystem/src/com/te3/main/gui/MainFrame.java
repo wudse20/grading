@@ -120,6 +120,7 @@ public class MainFrame extends JFrame {
 				courseCriteria.add(new Criteria("CAD"));
 				courseCriteria.add(new Criteria("Programering"));
 				courseCriteria.add(new Criteria("Fjäsk"));
+				courseCriteria.add(new Criteria("Glass"));
 			} catch (IllegalNameException e) {
 				e.printStackTrace();
 			}
