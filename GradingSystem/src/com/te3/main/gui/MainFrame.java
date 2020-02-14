@@ -38,11 +38,8 @@ public class MainFrame extends JFrame {
 	
 	CBPanel cbPanel;
 	GradesPanel gradePanel;
+	ButtonPanel btnPanel;
 	
-
-	JPanel infoPanel;
-	JPanel controlPanel;
-
 	Container cp = this.getContentPane();
 	
 	public MainFrame() 
@@ -57,7 +54,6 @@ public class MainFrame extends JFrame {
 				
 		mainData = getSavedData();
 		
-		gradePanel = new GradesPanel(this);
 		t.start();
 		
 		initComponents();
@@ -68,13 +64,12 @@ public class MainFrame extends JFrame {
 		this.setLayout(mainLayout);
 		
 		cbPanel = new CBPanel(mainData, this);
+		gradePanel = new GradesPanel(this);
+		btnPanel = new ButtonPanel(this);
 		
 		cp.add(cbPanel);
-		
 		cp.add(gradePanel);
-		
-		controlPanel = new JPanel();
-		cp.add(controlPanel);
+		cp.add(btnPanel);
 	}
 	
 	public void save(String filePath) {
