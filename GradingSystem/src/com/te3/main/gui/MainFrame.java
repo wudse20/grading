@@ -77,16 +77,16 @@ public class MainFrame extends JFrame {
 		xml.write(filePath, this.mainData);
 	}
 	
-	public void load(String filePath) {
+	public Data load(String filePath) {
 		XML<Data> xml = new XML<Data>();
 		Data d;
 		d = xml.read(filePath);
 		
 		if (d == null) {
-			mainData = new Data(new ArrayList<SchoolClass>(), new ArrayList<Course>());
-		} else {
-			mainData = d;
+			d = new Data(new ArrayList<SchoolClass>(), new ArrayList<Course>());
 		}
+		
+		return d;
 	}
 	
 	private Data getSavedData() {
@@ -152,7 +152,7 @@ public class MainFrame extends JFrame {
 			
 			return new Data(classes, courses);
 		} else {
-			return new Data();
+			return load(saveFilePath);
 		}
 	}
 
