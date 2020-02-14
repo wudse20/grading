@@ -39,6 +39,7 @@ public class MainFrame extends JFrame {
 	CBPanel cbPanel;
 	GradesPanel gradePanel;
 	
+
 	JPanel infoPanel;
 	JPanel controlPanel;
 
@@ -53,8 +54,10 @@ public class MainFrame extends JFrame {
 		Timer t = new Timer(saveTimer * 1000, (e) -> {
 			save(saveFilePath);
 		}); 
-		
+				
 		mainData = getSavedData();
+		
+		gradePanel = new GradesPanel(this);
 		t.start();
 		
 		initComponents();
@@ -65,7 +68,6 @@ public class MainFrame extends JFrame {
 		this.setLayout(mainLayout);
 		
 		cbPanel = new CBPanel(mainData, this);
-		gradePanel = new GradesPanel(this);
 		
 		cp.add(cbPanel);
 		
@@ -115,13 +117,13 @@ public class MainFrame extends JFrame {
 			classes.add(new SchoolClass("TE3B", courses, studentsB));
 			
 			try {
-				courseCriteria.add(new Criteria("Mekanik"));
-				courseCriteria.add(new Criteria("Genus"));
-				courseCriteria.add(new Criteria("Teknikhistoria"));
-				courseCriteria.add(new Criteria("CAD"));
-				courseCriteria.add(new Criteria("Programering"));
-				courseCriteria.add(new Criteria("Fjäsk"));
-				courseCriteria.add(new Criteria("Glass"));
+				courseCriteria.add(new Criteria("Mekanik", this));
+				courseCriteria.add(new Criteria("Genus", this));
+				courseCriteria.add(new Criteria("Teknikhistoria", this));
+				courseCriteria.add(new Criteria("CAD", this));
+				courseCriteria.add(new Criteria("Programering", this));
+				courseCriteria.add(new Criteria("Fjäsk", this));
+				courseCriteria.add(new Criteria("Glass", this));
 			} catch (IllegalNameException e) {
 				e.printStackTrace();
 			}
@@ -137,9 +139,9 @@ public class MainFrame extends JFrame {
 			ArrayList<Criteria> c = new ArrayList<Criteria>();
 			
 			try {
-				c.add(new Criteria("Mekanik"));
-				c.add(new Criteria("CAD"));
-				c.add(new Criteria("Fjäsk"));
+				c.add(new Criteria("Mekanik", this));
+				c.add(new Criteria("CAD", this));
+				c.add(new Criteria("Fjäsk", this));
 			} catch (IllegalNameException e) {
 				e.printStackTrace();
 			}
@@ -147,9 +149,7 @@ public class MainFrame extends JFrame {
 			c.get(0).setGrade(Grades.C);
 			c.get(1).setGrade(Grades.E);
 			c.get(2).setGrade(Grades.A);
-			
-			teknik.getCourseCriteria().get(3).setGrade(Grades.A);
-			
+					
 			teknik.addCourseTask(new Task("Vattenhallen", teknik.getCourseCriteria(), studentsA));
 			teknik.addCourseTask(new Task("Teknikhistoria", c, studentsA));
 			
@@ -204,5 +204,9 @@ public class MainFrame extends JFrame {
 
 	public void setCurrentlySelectedStudentIndex(int currentlySelectedStudentIndex) {
 		this.currentlySelectedStudentIndex = currentlySelectedStudentIndex;
+	}
+	
+	public GradesPanel getGradePanel() {
+		return gradePanel;
 	}
 }
