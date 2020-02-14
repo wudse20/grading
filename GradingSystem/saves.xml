@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="13.0.1" class="java.beans.XMLDecoder">
+ <object class="com.te3.main.objects.Data" id="Data0">
+  <void id="ArrayList0" property="classes">
+   <void method="add">
+    <object class="com.te3.main.objects.SchoolClass" id="SchoolClass0">
+     <void id="ArrayList1" property="courses">
+      <void method="add">
+       <object class="com.te3.main.objects.Course">
+        <void property="courseCriteria">
+         <object class="java.util.ArrayList" id="ArrayList2">
+          <void method="add">
+           <object class="com.te3.main.objects.Criteria">
+            <void property="grade">
+             <object class="java.lang.Enum" id="Grades0" method="valueOf">
+              <class>com.te3.main.enums.Grades</class>
+              <string>F</string>
+             </object>
+            </void>
+            <void property="name">
+             <string>Mekanik</string>
+            </void>
+           </object>
+          </void>
+          <void method="add">
+           <object class="com.te3.main.objects.Criteria">
+            <void property="grade">
+             <object idref="Grades0"/>
+            </void>
+            <void property="name">
+             <string>Genus</string>
+            </void>
+           </object>
+          </void>
+          <void method="add">
+           <object class="com.te3.main.objects.Criteria">
+            <void property="grade">
+             <object idref="Grades0"/>
+            </void>
+            <void property="name">
+             <string>Teknikhistoria</string>
+            </void>
+           </object>
+          </void>
+          <void method="add">
+           <object class="com.te3.main.objects.Criteria">
+            <void property="grade">
+             <object class="java.lang.Enum" id="Grades1" method="valueOf">
+              <class>com.te3.main.enums.Grades</class>
+              <string>A</string>
+             </object>
+            </void>
+            <void property="name">
+             <string>CAD</string>
+            </void>
+           </object>
+          </void>
+          <void method="add">
+           <object class="com.te3.main.objects.Criteria">
+            <void property="grade">
+             <object idref="Grades0"/>
+            </void>
+            <void property="name">
+             <string>Programering</string>
+            </void>
+           </object>
+          </void>
+          <void method="add">
+           <object class="com.te3.main.objects.Criteria">
+            <void property="grade">
+             <object idref="Grades0"/>
+            </void>
+            <void property="name">
+             <string>Fjäsk</string>
+            </void>
+           </object>
+          </void>
+          <void method="add">
+           <object class="com.te3.main.objects.Criteria">
+            <void property="grade">
+             <object idref="Grades0"/>
+            </void>
+            <void property="name">
+             <string>Glass</string>
+            </void>
+           </object>
+          </void>
+         </object>
+        </void>
+        <void property="courseTasks">
+         <object class="java.util.ArrayList">
+          <void method="add">
+           <object class="com.te3.main.objects.Task" id="Task0">
+            <void property="criteria">
+             <object idref="ArrayList2"/>
+            </void>
+            <void property="name">
+             <string>Vattenhallen</string>
+            </void>
+            <void id="ArrayList3" property="students">
+             <void method="add">
+              <object class="com.te3.main.objects.Student">
+               <void property="name">
+                <string>Jon W</string>
+               </void>
+              </object>
+             </void>
+             <void method="add">
+              <object class="com.te3.main.objects.Student">
+               <void property="name">
+                <string>Adam G</string>
+               </void>
+              </object>
+             </void>
+            </void>
+           </object>
+          </void>
+          <void method="add">
+           <object class="com.te3.main.objects.Task" id="Task1">
+            <void property="criteria">
+             <void method="add">
+              <object class="com.te3.main.objects.Criteria">
+               <void property="grade">
+                <object class="java.lang.Enum" method="valueOf">
+                 <class>com.te3.main.enums.Grades</class>
+                 <string>C</string>
+                </object>
+               </void>
+               <void property="name">
+                <string>Mekanik</string>
+               </void>
+              </object>
+             </void>
+             <void method="add">
+              <object class="com.te3.main.objects.Criteria">
+               <void property="grade">
+                <object class="java.lang.Enum" method="valueOf">
+                 <class>com.te3.main.enums.Grades</class>
+                 <string>E</string>
+                </object>
+               </void>
+               <void property="name">
+                <string>CAD</string>
+               </void>
+              </object>
+             </void>
+             <void method="add">
+              <object class="com.te3.main.objects.Criteria">
+               <void property="grade">
+                <object idref="Grades1"/>
+               </void>
+               <void property="name">
+                <string>Fjäsk</string>
+               </void>
+              </object>
+             </void>
+            </void>
+            <void property="name">
+             <string>Teknikhistoria</string>
+            </void>
+            <void property="students">
+             <object idref="ArrayList3"/>
+            </void>
+           </object>
+          </void>
+         </object>
+        </void>
+        <void property="linkedClasses">
+         <object idref="ArrayList0"/>
+        </void>
+        <void property="name">
+         <string>Teknik</string>
+        </void>
+       </object>
+      </void>
+     </void>
+     <void property="name">
+      <string>TE3A</string>
+     </void>
+     <void property="students">
+      <object idref="ArrayList3"/>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="com.te3.main.objects.SchoolClass" id="SchoolClass1">
+     <void property="courses">
+      <object idref="ArrayList1"/>
+     </void>
+     <void property="name">
+      <string>TE3B</string>
+     </void>
+     <void property="students">
+      <void method="add">
+       <object class="com.te3.main.objects.Student">
+        <void property="name">
+         <string>Anton S</string>
+        </void>
+       </object>
+      </void>
+      <void method="add">
+       <object class="com.te3.main.objects.Student">
+        <void property="name">
+         <string>Liza H</string>
+        </void>
+       </object>
+      </void>
+     </void>
+    </object>
+   </void>
+  </void>
+  <void property="courses">
+   <object idref="ArrayList1"/>
+  </void>
+ </object>
+</java>
