@@ -2,7 +2,6 @@ package com.te3.main.gui;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
-import java.awt.GridLayout;
 import java.util.ArrayList;
 
 import javax.swing.BoxLayout;
