@@ -76,7 +76,6 @@ public class CBPanel extends JPanel {
 				
 				//Test
 				System.out.println("Currently selected item: " + curSelected + ", with index: " + item.getSelectedIndex());
-				mf.setCurrentlySelectedAssingmentIndex(item.getSelectedIndex());
 			}
 		};
 		
