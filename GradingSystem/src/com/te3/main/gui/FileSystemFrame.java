@@ -38,8 +38,11 @@ public class FileSystemFrame extends JFrame implements KeyListener, ListSelectio
 	/** Default */
 	private static final long serialVersionUID = 1L;
 
+	/** <b>-1</b>: still running <br><b>0</b>: new file <br><b>1</b>: canceled */
+	private byte exitCode;
+	
 	private String path;
-	private String name;
+	private String fileName;
 
 	private ArrayList<String> content;
 
@@ -86,6 +89,7 @@ public class FileSystemFrame extends JFrame implements KeyListener, ListSelectio
 		super("Filsystem");
 
 		this.path = "./";
+		this.exitCode = -1;
 		this.setName(name);
 		this.setProperties();
 		this.addComponents();
@@ -120,7 +124,7 @@ public class FileSystemFrame extends JFrame implements KeyListener, ListSelectio
 
 	private void setProperties() {
 		this.setLayout(layout);
-		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		this.setSize(new Dimension(500, 400));
 		this.refreshTable(this.path);
 
@@ -132,7 +136,7 @@ public class FileSystemFrame extends JFrame implements KeyListener, ListSelectio
 		
 		scr = new JScrollPane(files);
 
-		txfName.setText(name);
+		txfName.setText(fileName);
 
 		txfPath.addKeyListener(this);
 		txfPath.getDocument().addDocumentListener(new DocumentListener() {
@@ -161,6 +165,14 @@ public class FileSystemFrame extends JFrame implements KeyListener, ListSelectio
 				JOptionPane.showMessageDialog(this, ex.getMessage(), "Fel", JOptionPane.ERROR_MESSAGE);
 			}
 		});
+		
+		btnCancel.addActionListener((e) -> {
+			this.setVisible(false);
+			this.exitCode = 1;
+		});
+		
+		btnSave.addActionListener((e) -> {
+		});
 	}
 
 	private void createNewFolder(String path) throws IllegalNameException, UnsucessfulFolderCreationException {
@@ -173,6 +185,10 @@ public class FileSystemFrame extends JFrame implements KeyListener, ListSelectio
 		}
 
 		File file = new File(path);
+		
+		if (file.exists())
+			throw new IllegalNameException("Mappen finns redan!");
+		
 		boolean sucess = file.mkdir();
 
 		if (sucess) {
@@ -219,6 +235,10 @@ public class FileSystemFrame extends JFrame implements KeyListener, ListSelectio
 		}
 	}
 
+	public void close() {
+		this.dispose();
+	}
+	
 	public String getPath() {
 		return path;
 	}
@@ -237,19 +257,24 @@ public class FileSystemFrame extends JFrame implements KeyListener, ListSelectio
 	}
 
 	public String getName() {
-		return name;
+		return fileName;
 	}
 
-	public void setName(String name) {
-		if (name.trim().equals("")) {
-			this.name = "a.txt";
+	public void setFileName(String fileName) {
+		if (fileName.trim().equals("")) {
+			this.fileName = "a.txt";
 		} else {
-			this.name = name + ".txt";
+			this.fileName = fileName + ".txt";
 		}
 	}
 
 	public String getFilePath() {
-		return path + name;
+		return path + "/" + fileName;
+	}
+
+	/** <b>-1</b>: still running <br><b> 0</b>: new file <br><b>1</b>: canceled */
+	public byte getExitCode() {
+		return exitCode;
 	}
 
 	@Override
