@@ -13,6 +13,9 @@ import javax.swing.JPanel;
 import com.te3.main.objects.*;
 
 public class CBPanel extends JPanel {
+	/** Default */
+	private static final long serialVersionUID = 1L;
+
 	GridLayout mainLayout;
 	
 	JLabel lblClass;
@@ -72,28 +75,42 @@ public class CBPanel extends JPanel {
 		cbStudent 	= new JComboBox<String>();
 		cbTask 		= new JComboBox<String>();
 		
+		/*
+		 * Använd lambda det är mycket mer effektivt
+		 * när det kommmer till prestanda, enligt Einar iallafall.
+		 * 
+		 * cbClass.addActionListener((e) -> {
+		 * 		//Fräsig kod
+		 * });
+		 * 
+		 * Dessa behöver väl även kalla updateGUI i gradespanel på ngt sätt också.
+		 * */
 		cbClass.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				System.out.println(cbClass.getSelectedItem().toString());
+				mf.setCurrentlySelectedClassIndex(cbClass.getSelectedIndex());
 			}
 		});
 		cbCourse.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				System.out.println(cbCourse.getSelectedItem().toString());
+				mf.setCurrentlySelectedCourseIndex(cbCourse.getSelectedIndex());
 			}
 		});
 		cbStudent.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				System.out.println(cbStudent.getSelectedItem().toString());
+				mf.setCurrentlySelectedStudentIndex(cbStudent.getSelectedIndex());
 			}
 		});
 		cbTask.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				System.out.println(cbTask.getSelectedItem().toString());
+				mf.setCurrentlySelectedAssingmentIndex(cbTask.getSelectedIndex());
 			}
 		});
 		
