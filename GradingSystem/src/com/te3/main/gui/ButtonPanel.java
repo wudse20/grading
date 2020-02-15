@@ -2,9 +2,11 @@ package com.te3.main.gui;
 
 import java.awt.FlowLayout;
 import java.awt.print.PrinterException;
+
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -26,7 +28,7 @@ public class ButtonPanel extends JPanel {
 
 	private String helpTitle = "Huvudvy (Placeholder)";
 	private String helpInfo = "<html>Detta är en mening. <br> Detta är en till mening. <br> Detta är en placeholder!</html>";
-
+	
 	MainFrame mf;
 
 	FlowLayout layout = new FlowLayout(FlowLayout.RIGHT);
@@ -59,10 +61,7 @@ public class ButtonPanel extends JPanel {
 		});
 		
 		btnSaveToFile.addActionListener((e) -> {
-			FileSystemFrame fsf = new FileSystemFrame("Jon W");
-			fsf.setVisible(true);
 			saveToFile(mf.getGradePanel().getState());
-			//JOptionPane.showMessageDialog(mf, "Du har sparat till en fil!", "Sparat", JOptionPane.INFORMATION_MESSAGE);
 		});
 	}
 
@@ -73,19 +72,39 @@ public class ButtonPanel extends JPanel {
 	 * @param st
 	 */
 	private void saveToFile(State st) {
-		fillTextArea(st);
-		String text = printView.getText();
-		
 		Student s = mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getStudents()
 				.get(mf.getCurrentlySelectedStudentIndex());
 		
-		try {
-			BufferedWriter w = new BufferedWriter(new FileWriter("./" + s.getName() + ".txt", true));
-			w.append(text);
-			w.close();
-		} catch (IOException e) {
-			System.out.println(e.getMessage());
-		}
+		FileSystemFrame fsf = new FileSystemFrame(s.getName());
+		fsf.setVisible(true);
+		
+		/*
+		 * Kom inte på något bättre just nu
+		 * hjälp mig gärna.
+		 * */
+		Thread t = new Thread(() -> {
+			while (fsf.getExitCode() == -1) {}
+			
+			if (fsf.getExitCode() == 0) {
+				fillTextArea(st);
+				String text = printView.getText();
+				
+				try {
+					BufferedWriter w = new BufferedWriter(new FileWriter("./" + s.getName() + ".txt", true));
+					w.append(text);
+					w.close();
+					JOptionPane.showMessageDialog(mf, "Du har sparat till en fil!", "Sparat", JOptionPane.INFORMATION_MESSAGE);
+					fsf.close();
+				} catch (IOException e) {
+					System.out.println(e.getMessage());
+					fsf.close();
+				}
+			} else {
+				fsf.close();
+			}					
+		});
+
+		t.start();
 	}
 
 	private void print(State st) {
