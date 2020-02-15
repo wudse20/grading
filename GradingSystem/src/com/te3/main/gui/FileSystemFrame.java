@@ -43,6 +43,7 @@ public class FileSystemFrame extends JFrame implements KeyListener, ListSelectio
 	
 	private String path;
 	private String fileName;
+	private String fileType;
 
 	private ArrayList<String> content;
 
@@ -85,12 +86,24 @@ public class FileSystemFrame extends JFrame implements KeyListener, ListSelectio
 	
 	JScrollPane scr;
 
-	public FileSystemFrame(String name) {
+	public FileSystemFrame(String name, String fileType) {
 		super("Filsystem");
 
 		this.path = "./";
 		this.exitCode = -1;
-		this.setName(name);
+		try {
+			this.setFileType(fileType);
+		} catch (IllegalNameException e) {
+			e.printStackTrace();
+			this.fileType = "txt";
+		}
+		
+		try {
+			this.setFileName(name);
+		} catch (IllegalNameException e) {
+			this.fileName = "";
+		}
+		
 		this.setProperties();
 		this.addComponents();
 	}
@@ -155,6 +168,23 @@ public class FileSystemFrame extends JFrame implements KeyListener, ListSelectio
 			public void changedUpdate(DocumentEvent e) {
 			}
 		});
+		
+		txfName.getDocument().addDocumentListener(new DocumentListener() {
+			
+			@Override
+			public void removeUpdate(DocumentEvent e) {
+				txfName.setBackground(Color.WHITE);
+			}
+
+			@Override
+			public void insertUpdate(DocumentEvent e) {
+				txfName.setBackground(Color.WHITE);
+			}
+
+			@Override
+			public void changedUpdate(DocumentEvent e) {
+			}
+		});
 
 		files.getSelectionModel().addListSelectionListener(this);
 
@@ -172,7 +202,27 @@ public class FileSystemFrame extends JFrame implements KeyListener, ListSelectio
 		});
 		
 		btnSave.addActionListener((e) -> {
+			try {
+				this.save();
+			} catch (IllegalNameException ex) {
+				JOptionPane.showMessageDialog(this, ex.getMessage(), "Fel", JOptionPane.ERROR_MESSAGE);
+				txfName.setBackground(Color.PINK);
+			}
 		});
+	}
+
+	private void save() throws IllegalNameException {
+		if (fileName.trim().equals("")) {
+			throw new IllegalNameException("Du måste skriva något i rutan");
+		} else if (fileName.indexOf('.') != -1) {
+			throw new IllegalNameException("Du får inte ha några punkter, .,  i namnet.");
+		} else if (fileName.indexOf('/') != -1) {
+			throw new IllegalNameException("Du får inte ha några snedsträck, /, i namnet.");
+		}
+		
+		this.setFileName(txfName.getText());
+		this.exitCode = 0;
+		this.setVisible(false);
 	}
 
 	private void createNewFolder(String path) throws IllegalNameException, UnsucessfulFolderCreationException {
@@ -260,16 +310,28 @@ public class FileSystemFrame extends JFrame implements KeyListener, ListSelectio
 		return fileName;
 	}
 
-	public void setFileName(String fileName, String fileType) {
+	public void setFileName(String fileName) throws IllegalNameException {
 		if (fileName.trim().equals("")) {
-			this.fileName = "a.txt";
+			throw new IllegalNameException("För kort!");
 		} else {
-			this.fileName = fileName + "." + fileType;
+			this.fileName = fileName;
 		}
 	}
 
 	public String getFilePath() {
-		return path + "/" + fileName;
+		return path + "/" + fileName + fileType;
+	}
+
+	public String getFileType() {
+		return fileType;
+	}
+
+	public void setFileType(String fileType) throws IllegalNameException {
+		if (fileType.trim().equals("")) {
+			throw new IllegalNameException("För kort!");
+		} else {
+			this.fileType = "." + fileType;
+		}
 	}
 
 	/** <b>-1</b>: still running <br><b> 0</b>: new file <br><b>1</b>: canceled */
