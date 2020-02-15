@@ -135,10 +135,10 @@ public class GradesPanel extends JPanel {
 		int f = 0, e = 0, c = 0, a = 0;
 		
 		/*
-		 * Borde du inte använda al.forEach((n) -> {}); här?
-		 */
-		for (int i = 0; i < al.size(); i++) {
-			switch (al.get(i).getGrade()) {
+		 * Spelar ingen roll egentligen.
+		 * */
+		for (Criteria c1 : al) {
+			switch (c1.getGrade()) {
 				case F:
 					f++;
 					break;
