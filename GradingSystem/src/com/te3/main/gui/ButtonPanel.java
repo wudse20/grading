@@ -16,6 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
 import com.te3.main.enums.State;
+import com.te3.main.exceptions.IllegalNameException;
 import com.te3.main.objects.Criteria;
 import com.te3.main.objects.SchoolClass;
 import com.te3.main.objects.Student;
@@ -75,22 +76,25 @@ public class ButtonPanel extends JPanel {
 		Student s = mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getStudents()
 				.get(mf.getCurrentlySelectedStudentIndex());
 		
-		FileSystemFrame fsf = new FileSystemFrame(s.getName());
+		FileSystemFrame fsf = new FileSystemFrame(s.getName(), "txt");
 		fsf.setVisible(true);
 		
 		/*
-		 * Kom inte på något bättre just nu
-		 * hjälp mig gärna.
+		 * Kom inte på något bättre just nu 
+		 * Måste verkligen fixas, riktigt kass lösning.
+		 * 
+		 * Hjälp mig gärna!
 		 * */
 		Thread t = new Thread(() -> {
-			while (fsf.getExitCode() == -1) {}
+			//Skriver den något till konsolen fungerar det, annars inte...
+			while (fsf.getExitCode() == -1) {System.out.println("Väntar");}
 			
 			if (fsf.getExitCode() == 0) {
 				fillTextArea(st);
 				String text = printView.getText();
 				
 				try {
-					BufferedWriter w = new BufferedWriter(new FileWriter("./" + s.getName() + ".txt", true));
+					BufferedWriter w = new BufferedWriter(new FileWriter(fsf.getFilePath(), true));
 					w.append(text);
 					w.close();
 					JOptionPane.showMessageDialog(mf, "Du har sparat till en fil!", "Sparat", JOptionPane.INFORMATION_MESSAGE);
