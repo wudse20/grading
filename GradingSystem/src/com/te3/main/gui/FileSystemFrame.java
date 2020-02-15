@@ -7,8 +7,12 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+
+import java.io.File;
+
 import java.nio.file.Path;
 import java.nio.file.Paths;
+
 import java.util.ArrayList;
 import java.util.Comparator;
 
@@ -25,6 +29,8 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import com.te3.main.exceptions.IllegalInputException;
+import com.te3.main.exceptions.IllegalNameException;
+import com.te3.main.exceptions.UnsucessfulFolderCreationException;
 
 public class FileSystemFrame extends JFrame implements KeyListener, ListSelectionListener {
 
@@ -35,7 +41,7 @@ public class FileSystemFrame extends JFrame implements KeyListener, ListSelectio
 	private String name;
 
 	private ArrayList<String> content;
-	
+
 	Path p;
 
 	Container cp = this.getContentPane();
@@ -140,8 +146,36 @@ public class FileSystemFrame extends JFrame implements KeyListener, ListSelectio
 			public void changedUpdate(DocumentEvent e) {
 			}
 		});
-		
+
 		files.getSelectionModel().addListSelectionListener(this);
+
+		btnNewFolder.addActionListener((e) -> {
+			try {
+				createNewFolder(JOptionPane.showInputDialog(this, "Vad ska mappen heta?"));
+			} catch (IllegalNameException | UnsucessfulFolderCreationException ex) {
+				JOptionPane.showMessageDialog(this, ex.getMessage(), "Fel", JOptionPane.ERROR_MESSAGE);
+			}
+		});
+	}
+
+	private void createNewFolder(String path) throws IllegalNameException, UnsucessfulFolderCreationException {
+		if (path.trim().equals("")) {
+			throw new IllegalNameException("Du måste skriva något i rutan");
+		} else if (path.indexOf('.') != -1) {
+			throw new IllegalNameException("Du får inte ha några punkter, .,  i namnet.");
+		} else if (path.indexOf('/') != -1) {
+			throw new IllegalNameException("Du får inte ha några snedsträck, /, i namnet.");
+		}
+
+		File file = new File(path);
+		boolean sucess = file.mkdir();
+
+		if (sucess) {
+			refreshTable(this.path);
+			JOptionPane.showMessageDialog(this, "Mappen skapades", "Information", JOptionPane.INFORMATION_MESSAGE);
+		} else {
+			throw new UnsucessfulFolderCreationException("Mappen skapades inte! Något gick fel!");
+		}
 	}
 
 	private void refreshTable(String path) {
@@ -164,12 +198,12 @@ public class FileSystemFrame extends JFrame implements KeyListener, ListSelectio
 	}
 
 	private void listClicked(int selectedIndex) {
-		//Bara för att det händer två gånger.
+		// Bara för att det händer två gånger.
 		if (selectedIndex == -1)
 			return;
-		
+
 		String selected = content.get(selectedIndex);
-		
+
 		if (selected.indexOf('.') == -1) {
 			try {
 				this.setPath(this.path + "/" + selected);
@@ -179,7 +213,7 @@ public class FileSystemFrame extends JFrame implements KeyListener, ListSelectio
 			}
 		}
 	}
-	
+
 	public String getPath() {
 		return path;
 	}
