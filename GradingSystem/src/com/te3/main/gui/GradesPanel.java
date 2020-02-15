@@ -58,7 +58,7 @@ public class GradesPanel extends JPanel {
 	MainFrame mf;
 
 	public GradesPanel(MainFrame mf) {
-		this.state = State.SINGEL_STUDENT_ASSIGNMENT;
+		this.state = State.SINGLE_STUDENT_ASSIGNMENT;
 		this.mf = mf;
 		this.setLayout(layout);
 
@@ -76,8 +76,8 @@ public class GradesPanel extends JPanel {
 	}
 
 	public void updateGUI(State s) {
-		if (s.equals(State.SINGEL_STUDENT_ASSIGNMENT)) {
-			dispalyCriteria(criteria);
+		if (s.equals(State.SINGLE_STUDENT_ASSIGNMENT)) {
+			displayCriteria(criteria);
 		} else {
 			ArrayList<Criteria> displayedGrades = new ArrayList<Criteria>();
 
@@ -98,7 +98,7 @@ public class GradesPanel extends JPanel {
 				}
 			}
 
-			dispalyCriteria(displayedGrades);
+			displayCriteria(displayedGrades);
 		}
 
 		// Updates the frame with the new components
@@ -134,6 +134,9 @@ public class GradesPanel extends JPanel {
 	private String countGrades(ArrayList<Criteria> al) {
 		int f = 0, e = 0, c = 0, a = 0;
 		
+		/*
+		 * Borde du inte använda al.forEach((n) -> {}); här?
+		 */
 		for (int i = 0; i < al.size(); i++) {
 			switch (al.get(i).getGrade()) {
 				case F:
@@ -154,7 +157,7 @@ public class GradesPanel extends JPanel {
 		return "F: " + f + ", E: " + e + ", C: " + c + ", A: " + a;
 	}
 
-	private void dispalyCriteria(ArrayList<Criteria> criteria) {
+	private void displayCriteria(ArrayList<Criteria> criteria) {
 		//Removes all components
 		for (Component c : panel.getComponents())
 			panel.remove(c);

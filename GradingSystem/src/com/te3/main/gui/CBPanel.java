@@ -48,6 +48,12 @@ public class CBPanel extends JPanel {
 		//Kör inte GridLayout, Einar skälde ut mig
 		//när jag gjorde det. Det är för att GUI:s
 		//blir typ jättefula, då allt måste vara lika stort.
+		
+		/*
+		 * Har fixat problemet med gridlayout
+		 * Det är en positiv grej att allting måste ha samma storlek i det här användningsområdet
+		 * därför att labels och comboboxes kommer ha samma plats horisontellt utan större problem.
+		 */
 		mainLayout 	= new GridLayout(2, 4);
 		this.setLayout(mainLayout);
 		
@@ -66,23 +72,30 @@ public class CBPanel extends JPanel {
 		cbStudent 	= new JComboBox<String>();
 		cbTask 		= new JComboBox<String>();
 		
-		cbUpdateListener = new ActionListener() {
+		cbClass.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//Borde bara ändras när användaren trycker på comboboxen. Går ej att använda actionCommand:et comboBoxChanged
-				//eftersom att det actionCommand:et kallas när man lägger till nya items.
-				JComboBox<String> item = (JComboBox<String>) e.getSource();
-				String curSelected = item.getSelectedItem().toString();
-				
-				//Test
-				System.out.println("Currently selected item: " + curSelected + ", with index: " + item.getSelectedIndex());
+				System.out.println(cbClass.getSelectedItem().toString());
 			}
-		};
-		
-		cbClass.addActionListener(cbUpdateListener);
-		cbCourse.addActionListener(cbUpdateListener);
-		cbStudent.addActionListener(cbUpdateListener);
-		cbTask.addActionListener(cbUpdateListener);
+		});
+		cbCourse.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.out.println(cbCourse.getSelectedItem().toString());
+			}
+		});
+		cbStudent.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.out.println(cbStudent.getSelectedItem().toString());
+			}
+		});
+		cbTask.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.out.println(cbTask.getSelectedItem().toString());
+			}
+		});
 		
 		this.add(cbClass);
 		this.add(cbCourse);
