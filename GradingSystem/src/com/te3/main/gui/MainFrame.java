@@ -28,6 +28,8 @@ public class MainFrame extends JFrame {
 	
 	//in seconds
 	private int saveTimer = 300;
+	private int currentlySelectedClassIndex = 0;
+	private int currentlySelectedCourseIndex = 0;
 	private int currentlySelectedAssingmentIndex = 0;
 	private int currentlySelectedStudentIndex = 0;
 	
@@ -182,6 +184,22 @@ public class MainFrame extends JFrame {
 
 	public void setSaveFilePath(String saveFilePath) {
 		this.saveFilePath = saveFilePath;
+	}
+
+	public int getCurrentlySelectedClassIndex() {
+		return currentlySelectedClassIndex;
+	}
+
+	public void setCurrentlySelectedClassIndex(int currentlySelectedClassIndex) {
+		this.currentlySelectedClassIndex = currentlySelectedClassIndex;
+	}
+
+	public int getCurrentlySelectedCourseIndex() {
+		return currentlySelectedCourseIndex;
+	}
+
+	public void setCurrentlySelectedCourseIndex(int currentlySelectedCourseIndex) {
+		this.currentlySelectedCourseIndex = currentlySelectedCourseIndex;
 	}
 
 	public int getCurrentlySelectedAssingmentIndex() {
