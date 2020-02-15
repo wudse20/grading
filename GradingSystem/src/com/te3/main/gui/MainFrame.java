@@ -117,7 +117,7 @@ public class MainFrame extends JFrame {
 				courseCriteria.add(new Criteria("Genus", this));
 				courseCriteria.add(new Criteria("Teknikhistoria", this));
 				courseCriteria.add(new Criteria("CAD", this));
-				courseCriteria.add(new Criteria("Programering", this));
+				courseCriteria.add(new Criteria("Programmering", this));
 				courseCriteria.add(new Criteria("Fjäsk", this));
 				courseCriteria.add(new Criteria("Glass", this));
 			} catch (IllegalNameException e) {
