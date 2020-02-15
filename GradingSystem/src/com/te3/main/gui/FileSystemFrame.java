@@ -260,11 +260,11 @@ public class FileSystemFrame extends JFrame implements KeyListener, ListSelectio
 		return fileName;
 	}
 
-	public void setFileName(String fileName) {
+	public void setFileName(String fileName, String fileType) {
 		if (fileName.trim().equals("")) {
 			this.fileName = "a.txt";
 		} else {
-			this.fileName = fileName + ".txt";
+			this.fileName = fileName + "." + fileType;
 		}
 	}
 
