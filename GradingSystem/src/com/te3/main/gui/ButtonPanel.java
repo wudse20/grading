@@ -62,7 +62,7 @@ public class ButtonPanel extends JPanel {
 			FileSystemFrame fsf = new FileSystemFrame("Jon W");
 			fsf.setVisible(true);
 			saveToFile(mf.getGradePanel().getState());
-			JOptionPane.showMessageDialog(mf, "Du har sparat till en fil!", "Sparat", JOptionPane.INFORMATION_MESSAGE);
+			//JOptionPane.showMessageDialog(mf, "Du har sparat till en fil!", "Sparat", JOptionPane.INFORMATION_MESSAGE);
 		});
 	}
 
