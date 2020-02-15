@@ -22,6 +22,7 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -78,6 +79,8 @@ public class FileSystemFrame extends JFrame implements KeyListener, ListSelectio
 	JLabel lblSpacer7 = new JLabel("                      ");
 
 	JLabel lblInfo = new JLabel("Filer:");
+	
+	JScrollPane scr;
 
 	public FileSystemFrame(String name) {
 		super("Filsystem");
@@ -88,13 +91,13 @@ public class FileSystemFrame extends JFrame implements KeyListener, ListSelectio
 		this.addComponents();
 	}
 
-	private void addComponents() {
+	private void addComponents() {		
 		pHeader.add(lblInfo);
 		pHeader.add(lblSpacer7);
 		pHeader.add(txfPath);
 
 		pFiles.add(pHeader, BorderLayout.PAGE_START);
-		pFiles.add(files, BorderLayout.CENTER);
+		pFiles.add(scr, BorderLayout.CENTER);
 
 		pBtn.add(btnNewFolder);
 		pBtn.add(btnSave);
@@ -126,6 +129,8 @@ public class FileSystemFrame extends JFrame implements KeyListener, ListSelectio
 		pBtn.setLayout(pBtnLayout);
 		pFiles.setLayout(pFilesLayout);
 		pHeader.setLayout(pHeaderLayout);
+		
+		scr = new JScrollPane(files);
 
 		txfName.setText(name);
 
