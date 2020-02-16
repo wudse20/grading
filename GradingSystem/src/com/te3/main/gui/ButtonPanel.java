@@ -2,11 +2,9 @@ package com.te3.main.gui;
 
 import java.awt.FlowLayout;
 import java.awt.print.PrinterException;
-
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -16,7 +14,6 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
 import com.te3.main.enums.State;
-import com.te3.main.exceptions.IllegalNameException;
 import com.te3.main.objects.Criteria;
 import com.te3.main.objects.SchoolClass;
 import com.te3.main.objects.Student;
@@ -29,7 +26,9 @@ public class ButtonPanel extends JPanel {
 
 	private String helpTitle = "Huvudvy (Placeholder)";
 	private String helpInfo = "<html>Detta är en mening. <br> Detta är en till mening. <br> Detta är en placeholder!</html>";
-	
+
+	Thread t;
+
 	MainFrame mf;
 
 	FlowLayout layout = new FlowLayout(FlowLayout.RIGHT);
@@ -60,60 +59,69 @@ public class ButtonPanel extends JPanel {
 		btnPrint.addActionListener((e) -> {
 			print(mf.getGradePanel().getState());
 		});
-		
+
 		btnSaveToFile.addActionListener((e) -> {
 			saveToFile(mf.getGradePanel().getState());
 		});
 	}
 
 	/**
-	 * Behöver ett system för att välja 
-	 * spardestination.
+	 * Behöver ett system för att välja spardestination.
 	 * 
 	 * @param st
 	 */
 	private void saveToFile(State st) {
 		Student s = mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getStudents()
 				.get(mf.getCurrentlySelectedStudentIndex());
-		
+
 		FileSystemFrame fsf = new FileSystemFrame(s.getName(), "txt");
 		fsf.setVisible(true);
-		
+
 		/*
-		 * Kom inte på något bättre just nu 
-		 * Måste verkligen fixas, riktigt kass lösning.
+		 * Kom inte på något bättre just nu Måste verkligen fixas, riktigt kass lösning.
 		 * 
 		 * Hjälp mig gärna!
-		 * */
-		Thread t = new Thread(() -> {
-			//Skriver den något till konsolen fungerar det, annars inte...
-			while (fsf.getExitCode() == -1) {System.out.println("Väntar");}
-			
-			if (fsf.getExitCode() == 0) {
-				fillTextArea(st);
-				String text = printView.getText();
-				
-				try {
-					BufferedWriter w = new BufferedWriter(new FileWriter(fsf.getFilePath(), true));
-					w.append(text);
-					w.close();
-					JOptionPane.showMessageDialog(mf, "Du har sparat till en fil!", "Sparat", JOptionPane.INFORMATION_MESSAGE);
-					fsf.close();
-				} catch (IOException e) {
-					System.out.println(e.getMessage());
-					fsf.close();
-				}
-			} else {
-				fsf.close();
-			}					
+		 */
+		t = new Thread(() -> {
+			threadProcess(fsf, st);
 		});
 
 		t.start();
 	}
 
+	@SuppressWarnings("static-access")
+	private void threadProcess(FileSystemFrame fsf, State st) {
+		while (fsf.getExitCode() == -1) {
+			try {
+				t.sleep(100);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+
+		if (fsf.getExitCode() == 0) {
+			fillTextArea(st);
+			String text = printView.getText();
+
+			try {
+				BufferedWriter w = new BufferedWriter(new FileWriter(fsf.getFilePath(), true));
+				w.append(text);
+				w.close();
+				JOptionPane.showMessageDialog(mf, "Du har sparat till en fil!", "Sparat",
+						JOptionPane.INFORMATION_MESSAGE);
+				fsf.close();
+			} catch (IOException e) {
+				System.out.println(e.getMessage());
+				fsf.close();
+			}
+		} else {
+			fsf.close();
+		}
+	}
+
 	private void print(State st) {
 		fillTextArea(st);
-		
+
 		try {
 			printView.print();
 		} catch (PrinterException e) {
@@ -143,37 +151,37 @@ public class ButtonPanel extends JPanel {
 		} else {
 			c = mf.getMainData().getCourses().get(mf.getCurrentlySelectedCourseIndex()).getCourseCriteria();
 		}
-		
+
 		printView.append("Kunskapskrav: \n");
-		
+
 //		Gör om senare, detta är bara en temporär fix
 //		Detta är en extremt dåligt lösning, för att få
 //		fina jämna mellanrum i textfilen och utskriften.
 		int length = 0;
 		for (int i = 0; i < c.size(); i++) {
 			Criteria cr = c.get(i);
-			
+
 			if (cr.getName().length() > length)
 				length = cr.getName().length();
 		}
-		
-		//Lite spaceing
+
+		// Lite spaceing
 		length += 5;
-		
+
 		for (int i = 0; i < c.size(); i++) {
 			Criteria cr = c.get(i);
 			StringBuffer sbuf = new StringBuffer();
 			String added = "";
 			int maxCount = length - cr.getName().length();
-			
+
 			for (int j = 0; j < maxCount; j++) {
 				sbuf.append('.');
-				
+
 				if (j == maxCount - 1) {
 					added = sbuf.toString();
 				}
 			}
-			
+
 			printView.append(cr.getName() + ":" + added + cr.getGrade().toString() + "\n");
 		}
 	}
