@@ -33,7 +33,7 @@ public class MainFrame extends JFrame {
 	private int currentlySelectedAssingmentIndex = 0;
 	private int currentlySelectedStudentIndex = 0;
 	
-	private String saveFilePath = "./saves.xml";
+	private String saveFilePath;
 	
 	BoxLayout mainLayout;
 	
@@ -54,6 +54,7 @@ public class MainFrame extends JFrame {
 		}); 
 				
 		mainData = getSavedData();
+		this.saveFilePath = mainData.getSavePath();
 		
 		t.start();
 		
@@ -182,8 +183,13 @@ public class MainFrame extends JFrame {
 		return saveFilePath;
 	}
 
-	public void setSaveFilePath(String saveFilePath) {
-		this.saveFilePath = saveFilePath;
+	public void setSaveFilePath(String saveFilePath) throws IllegalInputException {
+		try {
+			mainData.setSavePath(saveFilePath);
+			this.saveFilePath = saveFilePath;
+		} catch (IllegalInputException e) {
+			throw e;
+		}
 	}
 
 	public int getCurrentlySelectedClassIndex() {
