@@ -67,6 +67,8 @@ public class ButtonPanel extends JPanel {
 		/*
 		 * Kom inte på något bättre just nu Måste verkligen fixas, riktigt kass lösning.
 		 * Vill inte ha den i fsf, eftersom vill att den ska gå och använda över allt.
+		 * Den kör bara 20ggr på 9s det är ju inga problem med performance. Det är enda lösnigen
+		 * jag kommer på. Den borde inte lagga ner något.
 		 * 
 		 * Hjälp mig gärna!
 		 */
@@ -202,6 +204,8 @@ public class ButtonPanel extends JPanel {
 		/*
 		 * Kom inte på något bättre just nu Måste verkligen fixas, riktigt kass lösning.
 		 * Vill inte ha den i fsf, eftersom vill att den ska gå och använda över allt.
+		 * Den kör bara 20ggr på 9s det är ju inga problem med performance. Det är enda lösnigen
+		 * jag kommer på. Den borde inte lagga ner något.
 		 * 
 		 * Hjälp mig gärna!
 		 */
