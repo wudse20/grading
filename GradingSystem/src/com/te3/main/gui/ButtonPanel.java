@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
 import com.te3.main.enums.State;
+import com.te3.main.exceptions.IllegalInputException;
 import com.te3.main.objects.Criteria;
 import com.te3.main.objects.SchoolClass;
 import com.te3.main.objects.Student;
@@ -27,13 +28,15 @@ public class ButtonPanel extends JPanel {
 	private String helpTitle = "Huvudvy (Placeholder)";
 	private String helpInfo = "<html>Detta är en mening. <br> Detta är en till mening. <br> Detta är en placeholder!</html>";
 
-	Thread t;
+	Thread threadSaveToFile;
+	Thread threadSaveAs;
 
 	MainFrame mf;
 
 	FlowLayout layout = new FlowLayout(FlowLayout.RIGHT);
 
 	JButton btnSave = new JButton("Spara");
+	JButton btnSaveAs = new JButton("Spara som");
 	JButton btnSaveToFile = new JButton("Spara till fil");
 	JButton btnPrint = new JButton("Skriv ut");
 	JButton btnHelp = new JButton("?");
@@ -46,23 +49,6 @@ public class ButtonPanel extends JPanel {
 		this.mf = mf;
 		this.setProperites();
 		this.addComponents();
-
-		btnHelp.addActionListener((e) -> {
-			new HelpFrame(helpTitle, helpInfo, 500).setVisible(true);
-		});
-
-		btnSave.addActionListener((e) -> {
-			mf.save(mf.getSaveFilePath());
-			JOptionPane.showMessageDialog(mf, "Du har sparat!", "Sparat", JOptionPane.INFORMATION_MESSAGE);
-		});
-
-		btnPrint.addActionListener((e) -> {
-			print(mf.getGradePanel().getState());
-		});
-
-		btnSaveToFile.addActionListener((e) -> {
-			saveToFile(mf.getGradePanel().getState());
-		});
 	}
 
 	/**
@@ -82,18 +68,18 @@ public class ButtonPanel extends JPanel {
 		 * 
 		 * Hjälp mig gärna!
 		 */
-		t = new Thread(() -> {
-			threadProcess(fsf, st);
+		threadSaveToFile = new Thread(() -> {
+			saveToFileThread(fsf, st);
 		});
 
-		t.start();
+		threadSaveToFile.start();
 	}
 
 	@SuppressWarnings("static-access")
-	private void threadProcess(FileSystemFrame fsf, State st) {
+	private void saveToFileThread(FileSystemFrame fsf, State st) {
 		while (fsf.getExitCode() == -1) {
 			try {
-				t.sleep(100);
+				threadSaveToFile.sleep(100);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -186,15 +172,72 @@ public class ButtonPanel extends JPanel {
 		}
 	}
 
+	public void saveAs(String path) {
+		FileSystemFrame fsf = new FileSystemFrame("saves", "xml");
+		fsf.setVisible(true);
+		
+		threadSaveAs = new Thread(() -> {
+			saveAsThread(fsf);
+		});
+		
+		threadSaveAs.start();
+	}
+	
+	@SuppressWarnings("static-access")
+	private void saveAsThread(FileSystemFrame fsf) {
+		while (fsf.getExitCode() == -1) {
+			try {
+				threadSaveAs.sleep(100);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		if (fsf.getExitCode() == 0) {
+			try {
+				mf.setSaveFilePath(fsf.getFilePath());
+				mf.save(mf.getSaveFilePath());
+				JOptionPane.showMessageDialog(mf, "Du har sparat", "Sparat", JOptionPane.INFORMATION_MESSAGE);
+			} catch (IllegalInputException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		fsf.close();
+	}
+
 	private void addComponents() {
 		this.add(lblSpacer1);
 		this.add(btnHelp);
 		this.add(btnPrint);
 		this.add(btnSaveToFile);
+		this.add(btnSaveAs);
 		this.add(btnSave);
 	}
 
 	private void setProperites() {
 		this.setLayout(layout);
+		
+		btnHelp.addActionListener((e) -> {
+			new HelpFrame(helpTitle, helpInfo, 500).setVisible(true);
+		});
+
+		btnSave.addActionListener((e) -> {
+			mf.save(mf.getSaveFilePath());
+			JOptionPane.showMessageDialog(mf, "Du har sparat!", "Sparat", JOptionPane.INFORMATION_MESSAGE);
+		});
+
+		btnPrint.addActionListener((e) -> {
+			print(mf.getGradePanel().getState());
+		});
+
+		btnSaveToFile.addActionListener((e) -> {
+			saveToFile(mf.getGradePanel().getState());
+		});
+		
+		btnSaveAs.addActionListener((e) -> {
+			saveAs(mf.getSaveFilePath());
+		});
 	}
 }
