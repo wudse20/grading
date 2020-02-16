@@ -45,6 +45,9 @@ public class ButtonPanel extends JPanel {
 
 	JTextArea printView = new JTextArea();
 
+	/**
+	 * @param mf the instance of the MainFrame
+	 */
 	public ButtonPanel(MainFrame mf) {
 		this.mf = mf;
 		this.setProperites();
@@ -52,9 +55,7 @@ public class ButtonPanel extends JPanel {
 	}
 
 	/**
-	 * Behöver ett system för att välja spardestination.
-	 * 
-	 * @param st
+	 * @param st the state of the data shown.
 	 */
 	private void saveToFile(State st) {
 		Student s = mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getStudents()
@@ -65,6 +66,7 @@ public class ButtonPanel extends JPanel {
 
 		/*
 		 * Kom inte på något bättre just nu Måste verkligen fixas, riktigt kass lösning.
+		 * Vill inte ha den i fsf, eftersom vill att den ska gå och använda över allt.
 		 * 
 		 * Hjälp mig gärna!
 		 */
@@ -75,6 +77,12 @@ public class ButtonPanel extends JPanel {
 		threadSaveToFile.start();
 	}
 
+	/**
+	 * Acts on the output from the FileSystemFrame
+	 * 
+	 * @param fsf the FileSystemFrame
+	 * @param st the state of the information in the program
+	 */
 	@SuppressWarnings("static-access")
 	private void saveToFileThread(FileSystemFrame fsf, State st) {
 		while (fsf.getExitCode() == -1) {
@@ -105,6 +113,11 @@ public class ButtonPanel extends JPanel {
 		}
 	}
 
+	/**
+	 * Prints the file.
+	 * 
+	 * @param st the State of the panel
+	 */
 	private void print(State st) {
 		fillTextArea(st);
 
@@ -115,6 +128,11 @@ public class ButtonPanel extends JPanel {
 		}
 	}
 
+	/**
+	 * Formats the text for save or print.
+	 * 
+	 * @param st the state of informations shown
+	 */
 	private void fillTextArea(State st) {
 		Student s = mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getStudents()
 				.get(mf.getCurrentlySelectedStudentIndex());
@@ -172,10 +190,21 @@ public class ButtonPanel extends JPanel {
 		}
 	}
 
+	/**
+	 * Changes and saves the file at a new location.
+	 * 
+	 * @param path the new path that should be saved at
+	 */
 	public void saveAs(String path) {
 		FileSystemFrame fsf = new FileSystemFrame("saves", "xml");
 		fsf.setVisible(true);
 		
+		/*
+		 * Kom inte på något bättre just nu Måste verkligen fixas, riktigt kass lösning.
+		 * Vill inte ha den i fsf, eftersom vill att den ska gå och använda över allt.
+		 * 
+		 * Hjälp mig gärna!
+		 */
 		threadSaveAs = new Thread(() -> {
 			saveAsThread(fsf);
 		});
@@ -183,6 +212,11 @@ public class ButtonPanel extends JPanel {
 		threadSaveAs.start();
 	}
 	
+	/**
+	 * Acts on the FileSystemFrames output.
+	 * 
+	 * @param fsf the FileSystemFrame
+	 */
 	@SuppressWarnings("static-access")
 	private void saveAsThread(FileSystemFrame fsf) {
 		while (fsf.getExitCode() == -1) {
@@ -207,6 +241,9 @@ public class ButtonPanel extends JPanel {
 		fsf.close();
 	}
 
+	/**
+	 * Adds Components.
+	 */
 	private void addComponents() {
 		this.add(lblSpacer1);
 		this.add(btnHelp);
@@ -216,6 +253,9 @@ public class ButtonPanel extends JPanel {
 		this.add(btnSave);
 	}
 
+	/**
+	 * Sets the properties.
+	 */
 	private void setProperites() {
 		this.setLayout(layout);
 		

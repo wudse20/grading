@@ -57,6 +57,9 @@ public class GradesPanel extends JPanel {
 
 	MainFrame mf;
 
+	/**
+	 * @param mf the instance of the MainFrame.
+	 */
 	public GradesPanel(MainFrame mf) {
 		this.state = State.SINGLE_STUDENT_ASSIGNMENT;
 		this.mf = mf;
@@ -75,6 +78,11 @@ public class GradesPanel extends JPanel {
 		this.add(lblSpacer6, BorderLayout.LINE_END);
 	}
 
+	/**
+	 * Updates the gui based on the state.
+	 * 
+	 * @param s the state of the program
+	 */
 	public void updateGUI(State s) {
 		if (s.equals(State.SINGLE_STUDENT_ASSIGNMENT)) {
 			displayCriteria(criteria);
@@ -106,6 +114,13 @@ public class GradesPanel extends JPanel {
 		mf.repaint();
 	}
 
+	/**
+	 * Updates the info in the top hand left corner.
+	 * 
+	 * @param s the current student
+	 * @param t the current task
+	 * @param al the current criteria
+	 */
 	private void updateInfo(Student s, Task t, ArrayList<Criteria> al) {
 		lblName.setText(s.getName());
 		lblGradedAsignments.setText("(" + s.getCompletedTasks() + "/" + s.getNumOfTasks() + ")");
@@ -131,12 +146,15 @@ public class GradesPanel extends JPanel {
 		panelInfo.add(lblSpacer4, BorderLayout.PAGE_END);
 	}
 
+	/**
+	 * Counts the grades.
+	 * 
+	 * @param al the current criteria
+	 * @return a string representation of the number of grades at each level.
+	 */
 	private String countGrades(ArrayList<Criteria> al) {
 		int f = 0, e = 0, c = 0, a = 0;
-		
-		/*
-		 * Spelar ingen roll egentligen.
-		 * */
+
 		for (Criteria c1 : al) {
 			switch (c1.getGrade()) {
 				case F:
@@ -157,6 +175,11 @@ public class GradesPanel extends JPanel {
 		return "F: " + f + ", E: " + e + ", C: " + c + ", A: " + a;
 	}
 
+	/**
+	 * Updates the GUI with all the buttons for each criteria.
+	 * 
+	 * @param criteria the criteria to be displayed
+	 */
 	private void displayCriteria(ArrayList<Criteria> criteria) {
 		//Removes all components
 		for (Component c : panel.getComponents())
@@ -203,10 +226,18 @@ public class GradesPanel extends JPanel {
 				tasks.get(mf.getCurrentlySelectedAssingmentIndex()), criteria);
 	}
 
+	/**
+	 * @return the current state
+	 */
 	public State getState() {
 		return state;
 	}
 
+	/**
+	 * Sets the new state.
+	 * 
+	 * @param state the new state
+	 */
 	public void setState(State state) {
 		this.state = state;
 	}

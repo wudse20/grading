@@ -86,11 +86,17 @@ public class FileSystemFrame extends JFrame implements KeyListener, ListSelectio
 	
 	JScrollPane scr;
 
+	/**
+	 * @param name the file name
+	 * @param fileType the file type
+	 */
 	public FileSystemFrame(String name, String fileType) {
 		super("Filsystem");
 
+		//Setup for att the variables.
 		this.path = "./";
 		this.exitCode = -1;
+		
 		try {
 			this.setFileType(fileType);
 		} catch (IllegalNameException e) {
@@ -104,10 +110,15 @@ public class FileSystemFrame extends JFrame implements KeyListener, ListSelectio
 			this.fileName = "";
 		}
 		
+		//Methods for GUI setup
 		this.setProperties();
 		this.addComponents();
 	}
 
+	
+	/**
+	 * Adds everything to the frame, and the different panels.
+	 */
 	private void addComponents() {		
 		pHeader.add(lblInfo);
 		pHeader.add(lblSpacer7);
@@ -135,22 +146,32 @@ public class FileSystemFrame extends JFrame implements KeyListener, ListSelectio
 		this.add(lblSpacer4, BorderLayout.PAGE_END);
 	}
 
+	/**
+	 * Sets all the properties.
+	 */
 	private void setProperties() {
+		//Everything to do with the frame
 		this.setLayout(layout);
 		this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		this.setSize(new Dimension(500, 400));
+		
+		//Refreshes the files in the window.
 		this.refreshTable(this.path);
 
+		//Sets all the panel layouts.
 		pInput.setLayout(pInputLayout);
 		pWindow.setLayout(pWindowLayout);
 		pBtn.setLayout(pBtnLayout);
 		pFiles.setLayout(pFilesLayout);
 		pHeader.setLayout(pHeaderLayout);
 		
+		//Sets upp the scrpane.
 		scr = new JScrollPane(files);
 
+		//Sets text in the name txtbox.
 		txfName.setText(fileName);
 
+		//Adds listeners
 		txfPath.addKeyListener(this);
 		txfPath.getDocument().addDocumentListener(new DocumentListener() {
 
@@ -211,6 +232,12 @@ public class FileSystemFrame extends JFrame implements KeyListener, ListSelectio
 		});
 	}
 
+	/**
+	 * Tells the program that the save button is pressed
+	 * and that hides the GUI.
+	 * 
+	 * @throws IllegalNameException if the name isn't accepted
+	 */
 	private void save() throws IllegalNameException {
 		if (fileName.trim().equals("")) {
 			throw new IllegalNameException("Du måste skriva något i rutan");
@@ -225,6 +252,13 @@ public class FileSystemFrame extends JFrame implements KeyListener, ListSelectio
 		this.setVisible(false);
 	}
 
+	/**
+	 * Creates a new folder.
+	 * 
+	 * @param path the path of the new folder.
+	 * @throws IllegalNameException If the name isn't accepted
+	 * @throws UnsucessfulFolderCreationException if the folder creation would fail.
+	 */
 	private void createNewFolder(String path) throws IllegalNameException, UnsucessfulFolderCreationException {
 		if (path.trim().equals("")) {
 			throw new IllegalNameException("Du måste skriva något i rutan");
@@ -249,6 +283,12 @@ public class FileSystemFrame extends JFrame implements KeyListener, ListSelectio
 		}
 	}
 
+	/**
+	 * Updates the part of the program with the files 
+	 * to a set directory.
+	 * 
+	 * @param path the path that should be displayed
+	 */
 	private void refreshTable(String path) {
 		p = Paths.get(path);
 
@@ -268,13 +308,19 @@ public class FileSystemFrame extends JFrame implements KeyListener, ListSelectio
 		txfPath.setText(path);
 	}
 
+	/**
+	 * Changes path to another path, when clicked.
+	 * 
+	 * @param selectedIndex the index of the table
+	 */
 	private void listClicked(int selectedIndex) {
-		// Bara för att det händer två gånger.
+		// It's called twice, to prevent error.
 		if (selectedIndex == -1)
 			return;
 
 		String selected = content.get(selectedIndex);
 
+		//If there isn't a dot then it's a folder and then we can open that.
 		if (selected.indexOf('.') == -1) {
 			try {
 				this.setPath(this.path + "/" + selected);
@@ -285,14 +331,28 @@ public class FileSystemFrame extends JFrame implements KeyListener, ListSelectio
 		}
 	}
 
+	/**
+	 * Kills the JFrame.
+	 */
 	public void close() {
 		this.dispose();
 	}
 	
+	/**
+	 * Gives the directory that's currently selected.
+	 * 
+	 * @return the path
+	 */
 	public String getPath() {
 		return path;
 	}
 
+	/**
+	 * Sets the new directory.
+	 * 
+	 * @param path the new path
+	 * @throws IllegalInputException if the path param isn't accepted.
+	 */
 	public void setPath(String path) throws IllegalInputException {
 		if (path.trim().equals("")) {
 			throw new IllegalInputException("Du måste skriva något i rutan");
@@ -306,10 +366,19 @@ public class FileSystemFrame extends JFrame implements KeyListener, ListSelectio
 		}
 	}
 
+	/**
+	 * returns the file name
+	 */
 	public String getName() {
 		return fileName;
 	}
 
+	/**
+	 * Sets the file name.
+	 * 
+	 * @param fileName the new file name
+	 * @throws IllegalNameException if the input isn't accepted.
+	 */
 	public void setFileName(String fileName) throws IllegalNameException {
 		if (fileName.trim().equals("")) {
 			throw new IllegalNameException("För kort!");
@@ -318,14 +387,31 @@ public class FileSystemFrame extends JFrame implements KeyListener, ListSelectio
 		}
 	}
 
+	/**
+	 * Gives the new file path.
+	 * 
+	 * @return the path with the filename and the type (i.e. ./saves/save.xml)
+	 */
 	public String getFilePath() {
 		return path + "/" + fileName + fileType;
 	}
 
+	/**
+	 * Returns the file type with a dot. <br>
+	 * I.e. .xml
+	 * 
+	 * @return the file type
+	 */
 	public String getFileType() {
 		return fileType;
 	}
 
+	/**
+	 * Sets the file type.
+	 * 
+	 * @param fileType the file type without a dot. (i.e. xml)
+	 * @throws IllegalNameException if the input isn't accepted.
+	 */
 	public void setFileType(String fileType) throws IllegalNameException {
 		if (fileType.trim().equals("")) {
 			throw new IllegalNameException("För kort!");
