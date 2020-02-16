@@ -87,7 +87,7 @@ public class ButtonPanel extends JPanel {
 	private void saveToFileThread(FileSystemFrame fsf, State st) {
 		while (fsf.getExitCode() == -1) {
 			try {
-				threadSaveToFile.sleep(100);
+				threadSaveToFile.sleep(450);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -221,7 +221,7 @@ public class ButtonPanel extends JPanel {
 	private void saveAsThread(FileSystemFrame fsf) {
 		while (fsf.getExitCode() == -1) {
 			try {
-				threadSaveAs.sleep(100);
+				threadSaveAs.sleep(450);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
