@@ -212,5 +212,8 @@
   <void property="courses">
    <object idref="ArrayList1"/>
   </void>
+  <void property="savePath">
+   <string>./saves.xml</string>
+  </void>
  </object>
 </java>
