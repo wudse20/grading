@@ -31,9 +31,6 @@ public class CBPanel extends JPanel {
 	//Sparar en instans för att kunna använda getters och setters och slippa static
 	MainFrame mf;
 	
-	//Gör inte så, använd lamda eller anonym klass när du sätter actionlisteners. 
-	ActionListener cbUpdateListener;
-	
 	public CBPanel(Data importedData, MainFrame mf) {
 		this.mf = mf;
 		initComponents();
@@ -85,33 +82,21 @@ public class CBPanel extends JPanel {
 		 * 
 		 * Dessa behöver väl även kalla updateGUI i gradespanel på ngt sätt också.
 		 * */
-		cbClass.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				System.out.println(cbClass.getSelectedItem().toString());
-				mf.setCurrentlySelectedClassIndex(cbClass.getSelectedIndex());
-			}
+		cbClass.addActionListener((e) -> {
+			System.out.println(cbClass.getSelectedItem().toString());
+			mf.setCurrentlySelectedClassIndex(cbClass.getSelectedIndex());
 		});
-		cbCourse.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				System.out.println(cbCourse.getSelectedItem().toString());
-				mf.setCurrentlySelectedCourseIndex(cbCourse.getSelectedIndex());
-			}
+		cbCourse.addActionListener((e) -> {
+			System.out.println(cbCourse.getSelectedItem().toString());
+			mf.setCurrentlySelectedCourseIndex(cbCourse.getSelectedIndex());
 		});
-		cbStudent.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				System.out.println(cbStudent.getSelectedItem().toString());
-				mf.setCurrentlySelectedStudentIndex(cbStudent.getSelectedIndex());
-			}
+		cbStudent.addActionListener((e) -> {
+			System.out.println(cbStudent.getSelectedItem().toString());
+			mf.setCurrentlySelectedStudentIndex(cbStudent.getSelectedIndex());
 		});
-		cbTask.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				System.out.println(cbTask.getSelectedItem().toString());
-				mf.setCurrentlySelectedAssingmentIndex(cbTask.getSelectedIndex());
-			}
+		cbTask.addActionListener((e) -> {
+			System.out.println(cbTask.getSelectedItem().toString());
+			mf.setCurrentlySelectedAssingmentIndex(cbTask.getSelectedIndex());
 		});
 		
 		this.add(cbClass);
