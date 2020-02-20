@@ -1,10 +1,13 @@
 package com.te3.main.objects;
 
 import java.awt.Color;
+import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.GridLayout;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 import com.te3.main.enums.Grades;
 import com.te3.main.exceptions.IllegalNameException;
@@ -20,6 +23,13 @@ public class Criteria {
 
 	private JLabel lblCriteria;
 	private JLabel lblGrade;
+	
+	private JPanel pButtons = new JPanel();
+	private JPanel pCriteria = new JPanel();
+	
+	private FlowLayout pButtonsLayout = new FlowLayout(FlowLayout.LEFT);
+	
+	private GridLayout pCriteriaLayout = new GridLayout(2, 2);
 	
 	//Försök att hitta en ny lösning senare
 	MainFrame mf;	
@@ -54,6 +64,20 @@ public class Criteria {
 		
 		lblGrade.setFont(new Font("Dialog", Font.BOLD, 18));
 		lblCriteria.setFont(new Font("Dialog", Font.BOLD, 18));
+		
+		//Buttons
+		pButtons.setLayout(pButtonsLayout);
+		
+		for (int i = 0; i < gradeBtns.length; i++) {
+			pButtons.add(gradeBtns[i]);
+		}
+		
+		//The rest
+		pCriteria.setLayout(pCriteriaLayout);
+		
+		pCriteria.add(lblCriteria);
+		pCriteria.add(lblGrade);
+		pCriteria.add(pButtons);
 	}
 
 	private void addActionListeneners() 
@@ -148,18 +172,10 @@ public class Criteria {
 		this.grade = grade;
 	}
 
-	public JButton[] getGradeBtns() {
-		return gradeBtns;
+	public JPanel getPanelCriteria() {
+		return pCriteria;
 	}
 
-	public JLabel getLblCriteria() {
-		return lblCriteria;
-	}
-
-	public JLabel getLblGrade() {
-		return lblGrade;
-	}
-	
 	/**
 	 * Compares two grades
 	 * 

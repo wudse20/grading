@@ -28,12 +28,6 @@ public class GradesPanel extends JPanel {
 	private ArrayList<Criteria> criteria;
 	private ArrayList<Task> tasks;
 
-	JPanel[] criteriaBtnPanels;
-	JPanel[] criteriaPanelsNeedsNewName;
-
-	FlowLayout[] criteriaBtnLayouts;
-	GridLayout[] criteriaGridLayouts;
-
 	JPanel panel = new JPanel();
 	JPanel panelInfo = new JPanel();
 	JPanel panelInfo2 = new JPanel();
@@ -188,36 +182,11 @@ public class GradesPanel extends JPanel {
 		panel.revalidate();
 		panel.repaint();
 		
-		criteriaBtnPanels = new JPanel[criteria.size()];
-		criteriaPanelsNeedsNewName = new JPanel[criteria.size()];
-		criteriaBtnLayouts = new FlowLayout[criteria.size()];
-		criteriaGridLayouts = new GridLayout[criteria.size()];
 		pLayout = new BoxLayout(panel, BoxLayout.Y_AXIS);
-
 		panel.setLayout(pLayout);
 
-		for (int i = 0; i < criteria.size(); i++) {
-			criteriaBtnPanels[i] = new JPanel();
-			criteriaPanelsNeedsNewName[i] = new JPanel();
-			criteriaBtnLayouts[i] = new FlowLayout(FlowLayout.LEFT);
-			criteriaGridLayouts[i] = new GridLayout(2, 2);
-		}
-
-		for (int i = 0; i < criteria.size(); i++) {
-			Criteria c = criteria.get(i);
-			JButton[] b = c.getGradeBtns();
-			criteriaBtnPanels[i].setLayout(criteriaBtnLayouts[i]);
-			criteriaPanelsNeedsNewName[i].setLayout(criteriaGridLayouts[i]);
-
-			for (int j = 0; j < b.length; j++) {
-				criteriaBtnPanels[i].add(b[j]);
-			}
-
-			criteriaPanelsNeedsNewName[i].add(c.getLblCriteria());
-			criteriaPanelsNeedsNewName[i].add(c.getLblGrade());
-			criteriaPanelsNeedsNewName[i].add(criteriaBtnPanels[i]);
-
-			panel.add(criteriaPanelsNeedsNewName[i]);
+		for (var i = 0; i < criteria.size(); i++) {
+			panel.add(criteria.get(i).getPanelCriteria());
 		}
 		
 		updateInfo(
