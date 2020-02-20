@@ -1,6 +1,7 @@
 package com.te3.main.objects;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -74,6 +75,7 @@ public class Criteria {
 		
 		//The rest
 		pCriteria.setLayout(pCriteriaLayout);
+		pCriteria.setMaximumSize(new Dimension(640, 75));
 		
 		pCriteria.add(lblCriteria);
 		pCriteria.add(lblGrade);
