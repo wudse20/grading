@@ -2,6 +2,7 @@ package com.te3.main.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.util.ArrayList;
 
@@ -26,14 +27,18 @@ public class GradesPanel extends JPanel {
 	private ArrayList<Task> tasks;
 
 	JPanel panel = new JPanel();
+	JPanel panelCriteria = new JPanel();
 	JPanel panelInfo = new JPanel();
 	JPanel panelInfo2 = new JPanel();
 
 	BorderLayout layout = new BorderLayout();
 	BorderLayout pInfoLayout = new BorderLayout();
+	
 	BoxLayout pInfoLayout2 = new BoxLayout(panelInfo2, BoxLayout.Y_AXIS);
-	BoxLayout pLayout;
+	BoxLayout pCriteriaLayout;
 
+	FlowLayout pLayout = new FlowLayout(FlowLayout.LEFT);
+	
 	JScrollPane scroll = new JScrollPane(panel);
 
 	JLabel lblName = new JLabel();
@@ -173,18 +178,21 @@ public class GradesPanel extends JPanel {
 	 */
 	private void displayCriteria(ArrayList<Criteria> criteria) {
 		//Removes all components
-		for (Component c : panel.getComponents())
-			panel.remove(c);
+		for (Component c : panelCriteria.getComponents())
+			panelCriteria.remove(c);
 		
-		panel.revalidate();
-		panel.repaint();
+		panelCriteria.revalidate();
+		panelCriteria.repaint();
 		
-		pLayout = new BoxLayout(panel, BoxLayout.Y_AXIS);
-		panel.setLayout(pLayout);
+		pCriteriaLayout = new BoxLayout(panelCriteria, BoxLayout.Y_AXIS);
+		panelCriteria.setLayout(pCriteriaLayout);
 
 		for (var i = 0; i < criteria.size(); i++) {
-			panel.add(criteria.get(i).getPanelCriteria());
+			panelCriteria.add(criteria.get(i).getPanelCriteria());
 		}
+		
+		panel.setLayout(pLayout);
+		panel.add(panelCriteria);
 		
 		updateInfo(
 				tasks.get(mf.getCurrentlySelectedAssingmentIndex()).getStudents()
