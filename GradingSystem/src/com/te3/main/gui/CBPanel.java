@@ -2,15 +2,15 @@ package com.te3.main.gui;
 
 import java.awt.Dimension;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import com.te3.main.objects.*;
+import com.te3.main.objects.Course;
+import com.te3.main.objects.Data;
+import com.te3.main.objects.SchoolClass;
 
 public class CBPanel extends JPanel {
 	/** Default */
