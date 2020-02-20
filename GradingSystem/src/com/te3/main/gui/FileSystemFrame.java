@@ -207,6 +207,27 @@ public class FileSystemFrame extends JFrame implements KeyListener, ListSelectio
 			}
 		});
 
+		txfName.addKeyListener(new KeyListener() {
+			
+			@Override
+			public void keyTyped(KeyEvent e) {}
+			
+			@Override
+			public void keyReleased(KeyEvent e) {}
+			
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode() == 10) {
+					try {
+						save();
+					} catch (IllegalNameException ex) {
+						txfName.setBackground(Color.PINK);
+						JOptionPane.showMessageDialog(null, ex.getMessage(), "Fel", JOptionPane.ERROR_MESSAGE);
+					}
+				}
+			}
+		});
+		
 		files.getSelectionModel().addListSelectionListener(this);
 
 		btnNewFolder.addActionListener((e) -> {
