@@ -148,48 +148,25 @@ public class ButtonPanel extends JPanel {
 		ArrayList<Criteria> c;
 
 		printView.setText("");
-		printView.append("Namn:......." + s.getName() + "\n");
-		printView.append("Klass:......" + sc.getName() + "\n");
+		
+		printView.append(String.format("%-20s%s", "Namn:", s.getName()) + "\n");
+		printView.append(String.format("%-20s%s", "Kalss:", sc.getName()) + "\n");
 
 		if (st.equals(State.SINGLE_STUDENT_ASSIGNMENT)) {
-			printView.append("Uppgift:...." + t.getName() + "\n\n");
+			printView.append(String.format("%-20s%s", "Uppgift:", t.getName()) + "\n");
 			c = t.getCriteria();
 		} else {
 			c = mf.getMainData().getCourses().get(mf.getCurrentlySelectedCourseIndex()).getCourseCriteria();
 		}
 
-		printView.append("Kunskapskrav: \n");
-
-//		Gör om senare, detta är bara en temporär fix
-//		Detta är en extremt dåligt lösning, för att få
-//		fina jämna mellanrum i textfilen och utskriften.
-		int length = 0;
+		printView.append("\nKunskapskrav:\n");
+		
 		for (int i = 0; i < c.size(); i++) {
 			Criteria cr = c.get(i);
-
-			if (cr.getName().length() > length)
-				length = cr.getName().length();
+			printView.append(String.format("%-20s%-1s", cr.getName() + ":", cr.getGrade().toString()) + "\n");
 		}
+		
 
-		// Lite spaceing
-		length += 5;
-
-		for (int i = 0; i < c.size(); i++) {
-			Criteria cr = c.get(i);
-			StringBuffer sbuf = new StringBuffer();
-			String added = "";
-			int maxCount = length - cr.getName().length();
-
-			for (int j = 0; j < maxCount; j++) {
-				sbuf.append('.');
-
-				if (j == maxCount - 1) {
-					added = sbuf.toString();
-				}
-			}
-
-			printView.append(cr.getName() + ":" + added + cr.getGrade().toString() + "\n");
-		}
 	}
 
 	/**
