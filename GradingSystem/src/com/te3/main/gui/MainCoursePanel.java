@@ -20,6 +20,7 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
 import com.te3.main.exceptions.IllegalNameException;
+import com.te3.main.objects.Course;
 import com.te3.main.objects.Criteria;
 import com.te3.main.objects.SchoolClass;
 
@@ -30,6 +31,8 @@ public class MainCoursePanel extends JPanel implements DocumentListener {
 	private int selectedIndexAddedClasses = -1;
 	private int selectedIndexNotAddedClasses = -1;
 	private int selectedIndexCriteria = -1;
+	
+	private Course c;
 
 	private ArrayList<SchoolClass> notAddedClasses = new ArrayList<SchoolClass>();
 	private ArrayList<SchoolClass> addedClasses = new ArrayList<SchoolClass>();
@@ -76,6 +79,12 @@ public class MainCoursePanel extends JPanel implements DocumentListener {
 		this.addComonents();
 	}
 
+	public MainCoursePanel(MainFrame mf, Course c) {
+		this.mf = mf;
+		this.c = c;
+		
+	}
+	
 	private void copyArrayLists() {
 		ArrayList<SchoolClass> al = mf.getMainData().getClasses();
 
