@@ -67,4 +67,10 @@ public class Course {
 	public void removeCourseTask(Task deletedTask) {
 		courseTasks.remove(deletedTask);
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		Course c = (Course) obj;
+		return (this.name.equals(c.name));
+	}
 }

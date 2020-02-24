@@ -202,5 +202,4 @@ public class Criteria {
 		Criteria c = (Criteria) obj;
 		return (this.name.equals(c.name));
 	}
-
 }
