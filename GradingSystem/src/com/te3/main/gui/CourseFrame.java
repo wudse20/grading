@@ -29,14 +29,18 @@ public class CourseFrame extends JFrame {
 			+ "minst tre tecken långt. Skulle du vilja ta bort <br>"
 			+ "ett kunskapskrav behöver du bara klicka på det<br>" + "i <b>kunskapskravs</b>-rutan.";
 
+	Course c;
+	
 	MainFrame mf;
 
 	NamePanel np = new NamePanel();
 
 	MainCoursePanel mcp;
 
-	AddControllPanel ccp = new AddControllPanel();
+	AddControllPanel acp = new AddControllPanel();
 
+	EditControllPanel ecp = new EditControllPanel();
+	
 	Container cp = this.getContentPane();
 
 	BorderLayout layout = new BorderLayout();
@@ -49,6 +53,11 @@ public class CourseFrame extends JFrame {
 
 	JPanel panel = new JPanel();
 
+	/**
+	 * For adding.
+	 * 
+	 * @param mf The instance of the MainFrame.
+	 */
 	public CourseFrame(MainFrame mf) {
 		super("Lägg till en kurs");
 		this.mf = mf;
@@ -58,22 +67,62 @@ public class CourseFrame extends JFrame {
 
 		mcp = new MainCoursePanel(mf);
 
-		ccp.getBtnAdd().addActionListener((e) -> {
+		acp.getBtnAdd().addActionListener((e) -> {
 			newCourse();
 		});
 
-		ccp.getBtnCancel().addActionListener((e) -> {
+		acp.getBtnCancel().addActionListener((e) -> {
 			dispose();
 		});
 
-		ccp.getBtnHelp().addActionListener((e) -> {
+		acp.getBtnHelp().addActionListener((e) -> {
 			new HelpFrame("Lägg till kurs", "<html><p>" + helpInfo + "</p></html>", 500).setVisible(true);
 		});
 
 		panel.setLayout(pLayout);
 		panel.add(np, BorderLayout.PAGE_START);
 		panel.add(mcp, BorderLayout.CENTER);
-		panel.add(ccp, BorderLayout.PAGE_END);
+		panel.add(acp, BorderLayout.PAGE_END);
+
+		this.add(lblSpacer1, BorderLayout.PAGE_START);
+		this.add(lblSpacer2, BorderLayout.LINE_START);
+		this.add(panel, BorderLayout.CENTER);
+		this.add(lblSpacer3, BorderLayout.LINE_END);
+		this.add(lblSpacer4, BorderLayout.PAGE_END);
+	}
+	
+	/**
+	 * For editing.
+	 * 
+	 * @param mf the instance of the MainFrame
+	 * @param c the course that's being updated.
+	 */
+	public CourseFrame(MainFrame mf, Course c) {
+		super("Uppdatera en kurs");
+		this.mf = mf;
+		this.c = c;
+		this.setLayout(layout);
+		this.setSize(new Dimension(600, 600));
+		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		
+		mcp = new MainCoursePanel(mf, c);
+		
+		ecp.getBtnUpdate().addActionListener((e) -> {
+			newCourse();
+		});
+
+		ecp.getBtnCancel().addActionListener((e) -> {
+			dispose();
+		});
+
+		ecp.getBtnHelp().addActionListener((e) -> {
+			new HelpFrame("Lägg till kurs", "<html><p>" + helpInfo + "</p></html>", 500).setVisible(true);
+		});
+
+		panel.setLayout(pLayout);
+		panel.add(np, BorderLayout.PAGE_START);
+		panel.add(mcp, BorderLayout.CENTER);
+		panel.add(ecp, BorderLayout.PAGE_END);
 
 		this.add(lblSpacer1, BorderLayout.PAGE_START);
 		this.add(lblSpacer2, BorderLayout.LINE_START);

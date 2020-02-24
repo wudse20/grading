@@ -24,6 +24,12 @@ import com.te3.main.objects.Course;
 import com.te3.main.objects.Criteria;
 import com.te3.main.objects.SchoolClass;
 
+/**
+ * TODO: Fixa så att klasserna blir av med kursen ifall
+ * det klickas i. Fixa så att GUI:t ser vettigt ut i editing mode... 
+ * 
+ * @author Anton Skorup
+ */
 public class MainCoursePanel extends JPanel implements DocumentListener {
 	/** Default */
 	private static final long serialVersionUID = 1L;
@@ -70,19 +76,48 @@ public class MainCoursePanel extends JPanel implements DocumentListener {
 
 	MainFrame mf;
 
+	/**
+	 * For adding.
+	 * 
+	 * @param mf the instance of the MainFrame
+	 */
 	public MainCoursePanel(MainFrame mf) {
 		this.mf = mf;
 		this.setLayout(layout);
 		this.copyArrayLists();
 		this.refreshClasses();
 		this.setProperties();
-		this.addComonents();
+		this.addComponents();
 	}
 
+	/**
+	 * For editing.
+	 * 
+	 * @param mf the instance of the MainFrame
+	 * @param c the course that's being edited
+	 */
 	public MainCoursePanel(MainFrame mf, Course c) {
 		this.mf = mf;
 		this.c = c;
 		
+		ArrayList<SchoolClass> al = mf.getMainData().getClasses();
+		
+		for (int i = 0; i < al.size(); i++) {
+			SchoolClass sc = al.get(i);
+			
+			if (sc.getCourses().contains(c)) {
+				addedClasses.add(sc);
+			} else {
+				notAddedClasses.add(sc);
+			}
+		}
+		
+		criteria = c.getCourseCriteria();
+		
+		this.refreshClasses();
+		this.refreshCriteria();
+		this.setProperties();
+		this.addComponents();
 	}
 	
 	private void copyArrayLists() {
@@ -179,7 +214,6 @@ public class MainCoursePanel extends JPanel implements DocumentListener {
 	 * @param index the selected index
 	 */
 	private void classesSelceted(byte mode, int index) {
-		System.out.println("index: " + index);
 		if (mode == 0) {
 			SchoolClass sc = notAddedClasses.get(index);
 			addedClasses.add(sc);
@@ -205,7 +239,7 @@ public class MainCoursePanel extends JPanel implements DocumentListener {
 		listCriteria.setListData(criteria.toArray(arrCriteria));
 	}
 
-	private void addComonents() {
+	private void addComponents() {
 		pLables.setLayout(pLablesLayout);
 		pLables.add(lblNotAddedClasses, BorderLayout.LINE_START);
 		pLables.add(lblAddedClasses, BorderLayout.LINE_END);

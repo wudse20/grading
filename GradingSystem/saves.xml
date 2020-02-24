@@ -48,16 +48,6 @@
              <object idref="Grades0"/>
             </void>
             <void property="name">
-             <string>CAD</string>
-            </void>
-           </object>
-          </void>
-          <void method="add">
-           <object class="com.te3.main.objects.Criteria">
-            <void property="grade">
-             <object idref="Grades0"/>
-            </void>
-            <void property="name">
              <string>Programmering</string>
             </void>
            </object>
@@ -205,9 +195,6 @@
      </void>
     </object>
    </void>
-  </void>
-  <void property="courses">
-   <object idref="ArrayList0"/>
   </void>
   <void property="savePath">
    <string>./saves.xml</string>
