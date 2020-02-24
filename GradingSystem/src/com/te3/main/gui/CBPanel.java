@@ -28,7 +28,6 @@ public class CBPanel extends JPanel {
 	JComboBox<String> cbStudent;
 	JComboBox<String> cbTask;
 	
-	//Sparar en instans för att kunna använda getters och setters och slippa static
 	MainFrame mf;
 	
 	public CBPanel(Data importedData, MainFrame mf) {
@@ -43,17 +42,6 @@ public class CBPanel extends JPanel {
 	}
 	
 	private void initComponents() {
-		//main panel
-		//Vet inget annat sätt att få tag på dig
-		//Kör inte GridLayout, Einar skälde ut mig
-		//när jag gjorde det. Det är för att GUI:s
-		//blir typ jättefula, då allt måste vara lika stort.
-		
-		/*
-		 * Har fixat problemet med gridlayout
-		 * Det är en positiv grej att allting måste ha samma storlek i det här användningsområdet
-		 * därför att labels och comboboxes kommer ha samma plats horisontellt utan större problem.
-		 */
 		mainLayout 	= new GridLayout(2, 4);
 		this.setLayout(mainLayout);
 		
@@ -72,30 +60,26 @@ public class CBPanel extends JPanel {
 		cbStudent 	= new JComboBox<String>();
 		cbTask 		= new JComboBox<String>();
 		
-		/*
-		 * Använd lambda det är mycket mer effektivt
-		 * när det kommmer till prestanda, enligt Einar iallafall.
-		 * 
-		 * cbClass.addActionListener((e) -> {
-		 * 		//Fräsig kod
-		 * });
-		 * 
-		 * Dessa behöver väl även kalla updateGUI i gradespanel på ngt sätt också.
-		 * */
 		cbClass.addActionListener((e) -> {
 			System.out.println(cbClass.getSelectedItem().toString());
-			mf.setCurrentlySelectedClassIndex(cbClass.getSelectedIndex());
+			int i = cbClass.getSelectedIndex();
+			System.out.println(i);
+			if (i != -1 && cbClass.getItemCount() - 2 <= i) {
+				mf.setCurrentlySelectedClassIndex(i);
+			} else {
+				System.out.println("Selected new or change");
+			}
 		});
 		cbCourse.addActionListener((e) -> {
-			System.out.println(cbCourse.getSelectedItem().toString());
+			System.out.println(cbCourse.getSelectedIndex());
 			mf.setCurrentlySelectedCourseIndex(cbCourse.getSelectedIndex());
 		});
 		cbStudent.addActionListener((e) -> {
-			System.out.println(cbStudent.getSelectedItem().toString());
+			System.out.println(cbStudent.getSelectedIndex());
 			mf.setCurrentlySelectedStudentIndex(cbStudent.getSelectedIndex());
 		});
 		cbTask.addActionListener((e) -> {
-			System.out.println(cbTask.getSelectedItem().toString());
+			System.out.println(cbTask.getSelectedIndex());
 			mf.setCurrentlySelectedAssingmentIndex(cbTask.getSelectedIndex());
 		});
 		
@@ -104,22 +88,16 @@ public class CBPanel extends JPanel {
 		this.add(cbStudent);
 		this.add(cbTask);
 	}
-	/**
-	 * Removes all items from the comboboxes
-	 */
-	private void resetComboboxes() {
-		cbClass.removeAllItems();
-		cbCourse.removeAllItems();
-		cbStudent.removeAllItems();
-		cbTask.removeAllItems();
-	}
 	
 	/**
 	 * Completely updates the entire combobox panel with new information.
 	 * @param newData the new information to be parsed and updated with.
 	 */
 	private void refreshData(Data newData) {
-		resetComboboxes();
+		cbClass.removeAllItems();
+		cbCourse.removeAllItems();
+		cbStudent.removeAllItems();
+		cbTask.removeAllItems();
 		
 		Data localData = newData;
 		ArrayList<SchoolClass> dataClasses = localData.getClasses();
