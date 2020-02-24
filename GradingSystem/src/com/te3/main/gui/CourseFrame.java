@@ -3,6 +3,7 @@ package com.te3.main.gui;
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -11,6 +12,7 @@ import javax.swing.JPanel;
 
 import com.te3.main.exceptions.IllegalNameException;
 import com.te3.main.objects.Course;
+import com.te3.main.objects.SchoolClass;
 
 public class CourseFrame extends JFrame {
 
@@ -33,7 +35,7 @@ public class CourseFrame extends JFrame {
 
 	MainCoursePanel mcp;
 
-	CourseControllPanel ccp = new CourseControllPanel();
+	AddControllPanel ccp = new AddControllPanel();
 
 	Container cp = this.getContentPane();
 
@@ -66,7 +68,6 @@ public class CourseFrame extends JFrame {
 
 		ccp.getBtnHelp().addActionListener((e) -> {
 			new HelpFrame("Lägg till kurs", "<html><p>" + helpInfo + "</p></html>", 500).setVisible(true);
-			;
 		});
 
 		panel.setLayout(pLayout);
@@ -97,7 +98,16 @@ public class CourseFrame extends JFrame {
 		}
 
 		try {
-			mf.getMainData().getCourses().add(new Course(np.getLastInput(), mcp.getCriteria()));
+			Course cr = new Course(np.getName(), mcp.getCriteria());
+			ArrayList<SchoolClass> al = mf.getMainData().getClasses();
+			ArrayList<SchoolClass> al2 = mcp.getAddedClasses();
+
+			for (SchoolClass sc : al2) {
+				if (al.contains(sc)) {
+					al.get(al.indexOf(sc)).getCourses().add(cr);
+				}
+			}
+
 			mf.save(mf.getSaveFilePath());
 			JOptionPane.showMessageDialog(this, "Du har lagt till kursen: " + np.getLastInput(),
 					"Du har lagt till en kurs", JOptionPane.INFORMATION_MESSAGE);

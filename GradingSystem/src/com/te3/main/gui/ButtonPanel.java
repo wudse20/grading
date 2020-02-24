@@ -156,7 +156,8 @@ public class ButtonPanel extends JPanel {
 				.get(mf.getCurrentlySelectedCourseIndex()).getCourseTasks()
 				.get(mf.getCurrentlySelectedAssingmentIndex());
 
-		Course co = mf.getMainData().getCourses().get(mf.getCurrentlySelectedCourseIndex());
+		Course co = mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getCourses()
+				.get(mf.getCurrentlySelectedCourseIndex());
 
 		ArrayList<Criteria> c;
 
@@ -171,7 +172,8 @@ public class ButtonPanel extends JPanel {
 			printView.append("\nUppgift:\t" + t.getName());
 			c = t.getCriteria();
 		} else {
-			c = mf.getMainData().getCourses().get(mf.getCurrentlySelectedCourseIndex()).getCourseCriteria();
+			c = mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getCourses()
+					.get(mf.getCurrentlySelectedCourseIndex()).getCourseCriteria();
 		}
 
 		printView.append("\n\nKunskapskrav:\n");
@@ -196,7 +198,8 @@ public class ButtonPanel extends JPanel {
 				.get(mf.getCurrentlySelectedCourseIndex()).getCourseTasks()
 				.get(mf.getCurrentlySelectedAssingmentIndex());
 
-		Course co = mf.getMainData().getCourses().get(mf.getCurrentlySelectedCourseIndex());
+		Course co = mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getCourses()
+				.get(mf.getCurrentlySelectedCourseIndex());
 
 		ArrayList<Criteria> c;
 
@@ -210,7 +213,8 @@ public class ButtonPanel extends JPanel {
 			printView.append(String.format("%-20s%s", "Uppgift:", t.getName()) + "\n");
 			c = t.getCriteria();
 		} else {
-			c = mf.getMainData().getCourses().get(mf.getCurrentlySelectedCourseIndex()).getCourseCriteria();
+			c = mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getCourses()
+					.get(mf.getCurrentlySelectedCourseIndex()).getCourseCriteria();
 		}
 
 		printView.append("\nKunskapskrav:\n");

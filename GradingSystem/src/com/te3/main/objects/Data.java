@@ -7,7 +7,6 @@ import com.te3.main.exceptions.IllegalInputException;
 public class Data {
 	
 	private ArrayList<SchoolClass> 	classes = new ArrayList<SchoolClass>();
-	private ArrayList<Course> 		courses = new ArrayList<Course>();
 	
 	private String savePath;
 	
@@ -15,7 +14,6 @@ public class Data {
 	
 	public Data(ArrayList<SchoolClass> classes, ArrayList<Course> courses) {
 		this.classes = classes;
-		this.courses = courses;
 		this.savePath = "./saves.xml";
 	}
 
@@ -25,14 +23,6 @@ public class Data {
 
 	public void setClasses(ArrayList<SchoolClass> classes) {
 		this.classes = classes;
-	}
-
-	public ArrayList<Course> getCourses() {
-		return courses;
-	}
-
-	public void setCourses(ArrayList<Course> courses) {
-		this.courses = courses;
 	}
 
 	public String getSavePath() {

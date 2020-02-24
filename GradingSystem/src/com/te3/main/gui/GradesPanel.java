@@ -34,12 +34,12 @@ public class GradesPanel extends JPanel {
 
 	BorderLayout layout = new BorderLayout();
 	BorderLayout pInfoLayout = new BorderLayout();
-	
+
 	BoxLayout pInfoLayout2 = new BoxLayout(panelInfo2, BoxLayout.Y_AXIS);
 	BoxLayout pCriteriaLayout;
 
 	FlowLayout pLayout = new FlowLayout(FlowLayout.LEFT);
-	
+
 	JScrollPane scroll = new JScrollPane(panel);
 
 	JLabel lblName = new JLabel();
@@ -62,11 +62,13 @@ public class GradesPanel extends JPanel {
 		this.mf = mf;
 		this.setLayout(layout);
 
-		criteria = mf.getMainData().getCourses().get(mf.getCurrentlySelectedAssingmentIndex()).getCourseCriteria();
-		tasks = mf.getMainData().getCourses().get(mf.getCurrentlySelectedAssingmentIndex()).getCourseTasks();
+		criteria = mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getCourses()
+				.get(mf.getCurrentlySelectedCourseIndex()).getCourseCriteria();
+		tasks = mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getCourses()
+				.get(mf.getCurrentlySelectedCourseIndex()).getCourseTasks();
 
 		updateGUI(state);
-		
+
 		scroll.setBorder(BorderFactory.createEmptyBorder());
 
 		this.add(lblSpacer1, BorderLayout.PAGE_START);
@@ -114,8 +116,8 @@ public class GradesPanel extends JPanel {
 	/**
 	 * Updates the info in the top hand left corner.
 	 * 
-	 * @param s the current student
-	 * @param t the current task
+	 * @param s  the current student
+	 * @param t  the current task
 	 * @param al the current criteria
 	 */
 	private void updateInfo(Student s, Task t, ArrayList<Criteria> al) {
@@ -168,7 +170,7 @@ public class GradesPanel extends JPanel {
 					break;
 			}
 		}
-		
+
 		return "F: " + f + ", E: " + e + ", C: " + c + ", A: " + a;
 	}
 
@@ -178,23 +180,23 @@ public class GradesPanel extends JPanel {
 	 * @param criteria the criteria to be displayed
 	 */
 	private void displayCriteria(ArrayList<Criteria> criteria) {
-		//Removes all components
+		// Removes all components
 		for (Component c : panelCriteria.getComponents())
 			panelCriteria.remove(c);
-		
+
 		panelCriteria.revalidate();
 		panelCriteria.repaint();
-		
+
 		pCriteriaLayout = new BoxLayout(panelCriteria, BoxLayout.Y_AXIS);
 		panelCriteria.setLayout(pCriteriaLayout);
 
 		for (var i = 0; i < criteria.size(); i++) {
 			panelCriteria.add(criteria.get(i).getPanelCriteria());
 		}
-		
+
 		panel.setLayout(pLayout);
 		panel.add(panelCriteria);
-		
+
 		updateInfo(
 				tasks.get(mf.getCurrentlySelectedAssingmentIndex()).getStudents()
 						.get(mf.getCurrentlySelectedStudentIndex()),

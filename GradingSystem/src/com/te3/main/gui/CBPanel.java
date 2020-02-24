@@ -101,13 +101,14 @@ public class CBPanel extends JPanel {
 		
 		Data localData = newData;
 		ArrayList<SchoolClass> dataClasses = localData.getClasses();
-		ArrayList<Course> dataCourses = localData.getCourses();
+//		Sorry att jag pajjade detta, du får gå på klassen som är vald.
+//		ArrayList<Course> dataCourses = localData.getCourses();
 		
 		cbStudent.addItem("Samlad vy");
 		cbTask.addItem("Samlad vy");
 		
 		dataClasses.forEach((n) -> cbClass.addItem(n.getName()));
-		dataCourses.forEach((n) -> cbCourse.addItem(n.getName()));
+//		dataCourses.forEach((n) -> cbCourse.addItem(n.getName()));
 		
 		cbClass.addItem("Ny");
 		cbClass.addItem("Ändra");
