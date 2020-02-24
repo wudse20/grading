@@ -2,7 +2,6 @@ package com.te3.main.gui;
 
 import java.awt.Container;
 import java.awt.Dimension;
-
 import java.util.ArrayList;
 
 import javax.swing.BoxLayout;
@@ -10,6 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.Timer;
 
 import com.te3.main.enums.Grades;
+import com.te3.main.enums.State;
 import com.te3.main.exceptions.IllegalInputException;
 import com.te3.main.exceptions.IllegalNameException;
 import com.te3.main.objects.Course;
@@ -170,6 +170,14 @@ public class MainFrame extends JFrame {
 		}
 	}
 
+	public void updateGradeGUI() {
+		gradePanel.updateGUI(gradePanel.getState());
+	}
+	
+	public void updateState(State s) {
+		gradePanel.setState(s);
+	}
+	
 	public Data getMainData() {
 		return mainData;
 	}
