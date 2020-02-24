@@ -1,7 +1,14 @@
 package com.te3.main.exceptions;
 
+/**
+ * Used if the inputed value isn't accepted.
+ * 
+ * @author Anton Skorup
+ */
 public class IllegalInputException extends Exception{
 	
+	/** Default */
+	private static final long serialVersionUID = 1L;
 	private String message;
 	
 	public IllegalInputException() {

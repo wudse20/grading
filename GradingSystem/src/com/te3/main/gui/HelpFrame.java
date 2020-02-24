@@ -12,6 +12,11 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+/**
+ * The frame used to display a help message.
+ * 
+ * @author Anton Skorup
+ */
 public class HelpFrame extends JFrame implements ActionListener {
 	
 	/** Default */
@@ -26,18 +31,18 @@ public class HelpFrame extends JFrame implements ActionListener {
 	
 	JButton btnOk = new JButton("Ok");
 	
-	JLabel lblTitle = new JLabel();
 	JLabel lblInfo = new JLabel();
+	JLabel lblTitle = new JLabel();
 	JLabel lblSpacer1 = new JLabel(" ");
 	JLabel lblSpacer2 = new JLabel("     ");
 	JLabel lblSpacer3 = new JLabel("     ");
 	JLabel lblSpacer4 = new JLabel(" ");
-
 	
 	JPanel pContent = new JPanel();
 	
 	/**
-	 * @param title the title of the window and the text
+	 * @param title the title of the window and the text<br>
+	 * Must be HTML-tags.<br>.
 	 * @param info the help info about the subject
 	 */
 	public HelpFrame(String title, String info) {
@@ -48,7 +53,8 @@ public class HelpFrame extends JFrame implements ActionListener {
 	}
 	
 	/**
-	 * @param title the title of the window and the text
+	 * @param title the title of the window and the text<br>
+	 * Must be HTML-tags.<br>.
 	 * @param info the help info about the subject
 	 * @param height the height of the window
 	 */
@@ -86,11 +92,11 @@ public class HelpFrame extends JFrame implements ActionListener {
 	}
 	
 	public void setTitle(String title) {
-		this.title = (title.trim().equals("")) ? "To short title" : title;
+		this.title = (title.trim().equals("")) ? "Too short title" : title;
 	}
 
 	public void setInfo(String info) {
-		this.info = (info.trim().equals("")) ? "To short info" : info;
+		this.info = (info.trim().equals("")) ? "Too short info" : info;
 	}
 
 	public void setHeight(int height) {

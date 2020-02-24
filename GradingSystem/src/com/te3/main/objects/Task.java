@@ -6,14 +6,16 @@ public class Task {
 	
 	private String name;
 	private boolean isGraded;
-	private ArrayList<Criteria> taskGrades = new ArrayList<Criteria>();
+	private ArrayList<Criteria> criteria = new ArrayList<Criteria>();
+	private ArrayList<Student> students = new ArrayList<Student>();
 	
 	public Task() {}
 	
-	public Task(String initName, ArrayList<Criteria> taskGrades) {
+	public Task(String initName, ArrayList<Criteria> criteria, ArrayList<Student> students) {
 		setName(initName);
 		setGraded(false);
-		setTaskGrades(taskGrades);
+		setCriteria(criteria);
+		setStudents(students);
 	}
 	
 	public String getName() {
@@ -32,19 +34,33 @@ public class Task {
 		this.isGraded = isGraded;
 	}
 
-	public ArrayList<Criteria> getTaskGrades() {
-		return taskGrades;
+	public ArrayList<Criteria> getCriteria() {
+		return criteria;
 	}
 
-	public void setTaskGrades(ArrayList<Criteria> taskGrades) {
-		this.taskGrades = taskGrades;
+	public void setCriteria(ArrayList<Criteria> taskGrades) {
+		this.criteria = taskGrades;
 	}
 	
+	public ArrayList<Student> getStudents() {
+		return students;
+	}
+
+	public void setStudents(ArrayList<Student> students) {
+		this.students = students;
+	}
+
 	public void addTaskGrade(Criteria newGrade) {
-		taskGrades.add(newGrade);
+		criteria.add(newGrade);
 	}
 	
 	public void removeTaskGrade(Criteria deleteGrade) {
-		taskGrades.remove(deleteGrade);
+		criteria.remove(deleteGrade);
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		Task t = (Task) obj;
+		return (t.name.equals(this.name));
 	}
 }

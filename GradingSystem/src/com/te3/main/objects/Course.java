@@ -7,30 +7,27 @@ import com.te3.main.exceptions.IllegalNameException;
 public class Course {
 
 	private String name;
-	private ArrayList<SchoolClass> linkedClasses;
 	private ArrayList<Criteria> courseCriteria;
 	private ArrayList<Task> courseTasks;
 
 	public Course() {}
 	
-	public Course(String name, ArrayList<SchoolClass> classes, ArrayList<Criteria> courseCriteria) throws IllegalNameException {
+	public Course(String name, ArrayList<Criteria> courseCriteria) throws IllegalNameException {
 		try {
 			setName(name);
 		} catch (IllegalNameException e) {
 			throw new IllegalNameException(e.getMessage());
 		}
-		setLinkedClasses(classes);
 		setCourseCriteria(courseCriteria);
 		setCourseTasks(new ArrayList<Task>());
 	}
 	
-	public Course(String name, ArrayList<SchoolClass> classes, ArrayList<Criteria> courseCriteria, ArrayList<Task> courseTasks) throws IllegalNameException {
+	public Course(String name, ArrayList<Criteria> courseCriteria, ArrayList<Task> courseTasks) throws IllegalNameException {
 		try {
 			setName(name);
 		} catch (IllegalNameException e) {
 			throw new IllegalNameException(e.getMessage());
 		}
-		setLinkedClasses(classes);
 		setCourseCriteria(courseCriteria);
 		setCourseTasks(courseTasks);
 	}
@@ -45,14 +42,6 @@ public class Course {
 		} else {
 			this.name = name;
 		}
-	}
-
-	public ArrayList<SchoolClass> getLinkedClasses() {
-		return linkedClasses;
-	}
-
-	public void setLinkedClasses(ArrayList<SchoolClass> linkedClasses) {
-		this.linkedClasses = linkedClasses;
 	}
 
 	public ArrayList<Criteria> getCourseCriteria() {
@@ -77,5 +66,11 @@ public class Course {
 	
 	public void removeCourseTask(Task deletedTask) {
 		courseTasks.remove(deletedTask);
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		Course c = (Course) obj;
+		return (this.name.equals(c.name));
 	}
 }
