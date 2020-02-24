@@ -17,6 +17,16 @@ public class CourseFrame extends JFrame {
 	/** Default */
 	private static final long serialVersionUID = 1L;
 
+	private String helpInfo = "I <b>namn</b>-rutan skall namnet på kursen skrivas in. <br>"
+			+ "Namnet måste vara minst 3 tecken långt. <br><br>"
+			+ "Klicka på en klass i rutan <b>klasser</b> så kommer den att <br>"
+			+ "kopplas till kursen. För att tabort en klass från kursen <br>"
+			+ "klicka på den i rutan <b>tillagda klasser</b>. <br><br>"
+			+ "För att lägga till ett kunskaps krav till kursen så skriv in <br>"
+			+ "in den i rutan: <b>Nytt kunskapskrav</b>. Detta måste vara <br>"
+			+ "minst tre tecken långt. Skulle du vilja ta bort <br>"
+			+ "ett kunskapskrav behöver du bara klicka på det<br>" + "i <b>kunskapskravs</b>-rutan.";
+
 	MainFrame mf;
 
 	NamePanel np = new NamePanel();
@@ -49,13 +59,14 @@ public class CourseFrame extends JFrame {
 		ccp.getBtnAdd().addActionListener((e) -> {
 			newCourse();
 		});
-		
+
 		ccp.getBtnCancel().addActionListener((e) -> {
 			dispose();
 		});
-		
+
 		ccp.getBtnHelp().addActionListener((e) -> {
-			new HelpFrame("Lägg till kurs", "<html>Placeholder</html>").setVisible(true);;
+			new HelpFrame("Lägg till kurs", "<html><p>" + helpInfo + "</p></html>", 500).setVisible(true);
+			;
 		});
 
 		panel.setLayout(pLayout);

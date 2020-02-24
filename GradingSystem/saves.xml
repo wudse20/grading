@@ -170,50 +170,6 @@
         </void>
        </object>
       </void>
-      <void method="add">
-       <object class="com.te3.main.objects.Course">
-        <void property="courseCriteria">
-         <object class="java.util.ArrayList">
-          <void method="add">
-           <object class="com.te3.main.objects.Criteria">
-            <void property="grade">
-             <object idref="Grades0"/>
-            </void>
-            <void property="name">
-             <string>Fusk</string>
-            </void>
-           </object>
-          </void>
-          <void method="add">
-           <object class="com.te3.main.objects.Criteria">
-            <void property="grade">
-             <object idref="Grades0"/>
-            </void>
-            <void property="name">
-             <string>Fjäsk</string>
-            </void>
-           </object>
-          </void>
-          <void method="add">
-           <object class="com.te3.main.objects.Criteria">
-            <void property="grade">
-             <object idref="Grades0"/>
-            </void>
-            <void property="name">
-             <string>Krokodil</string>
-            </void>
-           </object>
-          </void>
-         </object>
-        </void>
-        <void property="courseTasks">
-         <object class="java.util.ArrayList"/>
-        </void>
-        <void property="name">
-         <string>Anton</string>
-        </void>
-       </object>
-      </void>
      </void>
      <void property="name">
       <string>TE3A</string>
