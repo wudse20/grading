@@ -57,4 +57,10 @@ public class Task {
 	public void removeTaskGrade(Criteria deleteGrade) {
 		criteria.remove(deleteGrade);
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		Task t = (Task) obj;
+		return (t.name.equals(this.name));
+	}
 }

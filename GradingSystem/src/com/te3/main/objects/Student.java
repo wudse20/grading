@@ -54,4 +54,10 @@ public class Student {
 	public void setNumOfTasks(short numOfTasks) {
 		this.numOfTasks = numOfTasks;
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		Student s = (Student) obj;
+		return (s.name.equals(this.name));
+	}
 }

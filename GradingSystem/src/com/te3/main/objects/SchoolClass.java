@@ -41,4 +41,10 @@ public class SchoolClass {
 	public void setStudents(ArrayList<Student> students) {
 		this.students = students;
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		SchoolClass s = (SchoolClass) obj;
+		return (s.name.equals(this.name));
+	}
 }
