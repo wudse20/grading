@@ -1,5 +1,10 @@
 package com.te3.main.exceptions;
 
+/**
+ * Used if the inputed value isn't accepted.
+ * 
+ * @author Anton Skorup
+ */
 public class IllegalInputException extends Exception{
 	
 	/** Default */

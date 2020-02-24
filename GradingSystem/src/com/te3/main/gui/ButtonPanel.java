@@ -20,6 +20,11 @@ import com.te3.main.objects.SchoolClass;
 import com.te3.main.objects.Student;
 import com.te3.main.objects.Task;
 
+/**
+ * The panel with the buttons on the bottom of the GUI.
+ * 
+ * @author Anton Skorup
+ */
 public class ButtonPanel extends JPanel {
 
 	/** Default */

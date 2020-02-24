@@ -1,5 +1,10 @@
 package com.te3.main.exceptions;
 
+/**
+ * When a folder was unsuccessful in its creation.
+ * 
+ * @author Anton Skorup
+ */
 public class UnsucessfulFolderCreationException extends Exception {
 
 	/** Default */

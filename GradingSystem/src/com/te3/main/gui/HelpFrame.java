@@ -12,6 +12,11 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+/**
+ * The frame used to display a help message.
+ * 
+ * @author Anton Skorup
+ */
 public class HelpFrame extends JFrame implements ActionListener {
 	
 	/** Default */

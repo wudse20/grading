@@ -2,6 +2,7 @@ package com.te3.main.gui;
 
 import java.awt.Container;
 import java.awt.Dimension;
+
 import java.util.ArrayList;
 
 import javax.swing.BoxLayout;
@@ -19,6 +20,11 @@ import com.te3.main.objects.Student;
 import com.te3.main.objects.Task;
 import com.te3.main.objects.XML;
 
+/**
+ * The mainframe of the program.
+ * 
+ * @author Anton Skorup, Jon Westring
+ */
 public class MainFrame extends JFrame {
 	
 	/** Default */
