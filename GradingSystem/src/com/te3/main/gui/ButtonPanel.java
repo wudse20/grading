@@ -15,6 +15,7 @@ import javax.swing.JTextArea;
 
 import com.te3.main.enums.State;
 import com.te3.main.exceptions.IllegalInputException;
+import com.te3.main.objects.Course;
 import com.te3.main.objects.Criteria;
 import com.te3.main.objects.SchoolClass;
 import com.te3.main.objects.Student;
@@ -42,9 +43,10 @@ public class ButtonPanel extends JPanel {
 
 	JButton btnSave = new JButton("Spara");
 	JButton btnSaveAs = new JButton("Spara som");
-	JButton btnSaveToFile = new JButton("Spara till fil"); //Ska vi döpa om denna?
+	JButton btnSaveToFile = new JButton("Spara till fil"); // Ska vi döpa om denna?
 	JButton btnPrint = new JButton("Skriv ut");
 	JButton btnHelp = new JButton("?");
+	JButton btnTemp = new JButton("Temp");
 
 	JLabel lblSpacer1 = new JLabel("  ");
 
@@ -57,6 +59,10 @@ public class ButtonPanel extends JPanel {
 		this.mf = mf;
 		this.setProperites();
 		this.addComponents();
+
+		btnTemp.addActionListener((e) -> {
+			new CourseFrame(mf).setVisible(true);
+		});
 	}
 
 	/**
@@ -72,8 +78,8 @@ public class ButtonPanel extends JPanel {
 		/*
 		 * Kom inte på något bättre just nu Måste verkligen fixas, riktigt kass lösning.
 		 * Vill inte ha den i fsf, eftersom vill att den ska gå och använda över allt.
-		 * Den kör bara 20ggr på 9s det är ju inga problem med performance. Det är enda lösnigen
-		 * jag kommer på. Den borde inte lagga ner något.
+		 * Den kör bara 20ggr på 9s det är ju inga problem med performance. Det är enda
+		 * lösnigen jag kommer på. Den borde inte lagga ner något.
 		 * 
 		 * Hjälp mig gärna!
 		 */
@@ -88,7 +94,7 @@ public class ButtonPanel extends JPanel {
 	 * Acts on the output from the FileSystemFrame
 	 * 
 	 * @param fsf the FileSystemFrame
-	 * @param st the state of the information in the program
+	 * @param st  the state of the information in the program
 	 */
 	@SuppressWarnings("static-access")
 	private void saveToFileThread(FileSystemFrame fsf, State st) {
@@ -150,21 +156,24 @@ public class ButtonPanel extends JPanel {
 				.get(mf.getCurrentlySelectedCourseIndex()).getCourseTasks()
 				.get(mf.getCurrentlySelectedAssingmentIndex());
 
+		Course co = mf.getMainData().getCourses().get(mf.getCurrentlySelectedCourseIndex());
+
 		ArrayList<Criteria> c;
-		
+
 		printView.setText("");
 		printView.setTabSize(15);
-		
+
 		printView.append("Namn:\t" + s.getName());
 		printView.append("\nKlass:\t" + sc.getName());
-		
+		printView.append("\nKurs:\t" + co.getName());
+
 		if (st.equals(State.SINGLE_STUDENT_ASSIGNMENT)) {
 			printView.append("\nUppgift:\t" + t.getName());
 			c = t.getCriteria();
 		} else {
 			c = mf.getMainData().getCourses().get(mf.getCurrentlySelectedCourseIndex()).getCourseCriteria();
 		}
-		
+
 		printView.append("\n\nKunskapskrav:\n");
 		for (int i = 0; i < c.size(); i++) {
 			Criteria cr = c.get(i);
@@ -187,12 +196,15 @@ public class ButtonPanel extends JPanel {
 				.get(mf.getCurrentlySelectedCourseIndex()).getCourseTasks()
 				.get(mf.getCurrentlySelectedAssingmentIndex());
 
+		Course co = mf.getMainData().getCourses().get(mf.getCurrentlySelectedCourseIndex());
+
 		ArrayList<Criteria> c;
 
 		printView.setText("");
-		
+
 		printView.append(String.format("%-20s%s", "Namn:", s.getName()) + "\n");
-		printView.append(String.format("%-20s%s", "Kalss:", sc.getName()) + "\n");
+		printView.append(String.format("%-20s%s", "Klass:", sc.getName()) + "\n");
+		printView.append(String.format("%-20s%s", "Kurs:", co.getName()) + "\n");
 
 		if (st.equals(State.SINGLE_STUDENT_ASSIGNMENT)) {
 			printView.append(String.format("%-20s%s", "Uppgift:", t.getName()) + "\n");
@@ -202,12 +214,11 @@ public class ButtonPanel extends JPanel {
 		}
 
 		printView.append("\nKunskapskrav:\n");
-		
+
 		for (int i = 0; i < c.size(); i++) {
 			Criteria cr = c.get(i);
 			printView.append(String.format("%-20s%-1s", cr.getName() + ":", cr.getGrade().toString()) + "\n");
 		}
-		
 
 	}
 
@@ -219,22 +230,22 @@ public class ButtonPanel extends JPanel {
 	public void saveAs(String path) {
 		FileSystemFrame fsf = new FileSystemFrame("saves", "xml");
 		fsf.setVisible(true);
-		
+
 		/*
 		 * Kom inte på något bättre just nu Måste verkligen fixas, riktigt kass lösning.
 		 * Vill inte ha den i fsf, eftersom vill att den ska gå och använda över allt.
-		 * Den kör bara 20ggr på 9s det är ju inga problem med performance. Det är enda lösnigen
-		 * jag kommer på. Den borde inte lagga ner något.
+		 * Den kör bara 20ggr på 9s det är ju inga problem med performance. Det är enda
+		 * lösnigen jag kommer på. Den borde inte lagga ner något.
 		 * 
 		 * Hjälp mig gärna!
 		 */
 		threadSaveAs = new Thread(() -> {
 			saveAsThread(fsf);
 		});
-		
+
 		threadSaveAs.start();
 	}
-	
+
 	/**
 	 * Acts on the FileSystemFrames output.
 	 * 
@@ -250,7 +261,7 @@ public class ButtonPanel extends JPanel {
 				e.printStackTrace();
 			}
 		}
-		
+
 		if (fsf.getExitCode() == 0) {
 			try {
 				mf.setSaveFilePath(fsf.getFilePath());
@@ -260,7 +271,7 @@ public class ButtonPanel extends JPanel {
 				e.printStackTrace();
 			}
 		}
-		
+
 		fsf.close();
 	}
 
@@ -274,6 +285,7 @@ public class ButtonPanel extends JPanel {
 		this.add(btnSaveToFile);
 		this.add(btnSaveAs);
 		this.add(btnSave);
+		this.add(btnTemp);
 	}
 
 	/**
@@ -281,7 +293,7 @@ public class ButtonPanel extends JPanel {
 	 */
 	private void setProperites() {
 		this.setLayout(layout);
-		
+
 		btnHelp.addActionListener((e) -> {
 			new HelpFrame(helpTitle, helpInfo, 500).setVisible(true);
 		});
@@ -298,7 +310,7 @@ public class ButtonPanel extends JPanel {
 		btnSaveToFile.addActionListener((e) -> {
 			saveToFile(mf.getGradePanel().getState());
 		});
-		
+
 		btnSaveAs.addActionListener((e) -> {
 			saveAs(mf.getSaveFilePath());
 		});
