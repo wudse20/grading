@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <java version="13.0.1" class="java.beans.XMLDecoder">
  <object class="com.te3.main.objects.Data" id="Data0">
-  <void id="ArrayList0" property="classes">
+  <void property="classes">
    <void method="add">
     <object class="com.te3.main.objects.SchoolClass" id="SchoolClass0">
-     <void id="ArrayList1" property="courses">
+     <void id="ArrayList0" property="courses">
       <void method="add">
        <object class="com.te3.main.objects.Course">
         <void property="courseCriteria">
-         <object class="java.util.ArrayList" id="ArrayList2">
+         <object class="java.util.ArrayList" id="ArrayList1">
           <void method="add">
            <object class="com.te3.main.objects.Criteria">
             <void property="grade">
@@ -89,12 +89,12 @@
           <void method="add">
            <object class="com.te3.main.objects.Task" id="Task0">
             <void property="criteria">
-             <object idref="ArrayList2"/>
+             <object idref="ArrayList1"/>
             </void>
             <void property="name">
              <string>Vattenhallen</string>
             </void>
-            <void id="ArrayList3" property="students">
+            <void id="ArrayList2" property="students">
              <void method="add">
               <object class="com.te3.main.objects.Student">
                <void property="name">
@@ -159,14 +159,11 @@
              <string>Teknikhistoria</string>
             </void>
             <void property="students">
-             <object idref="ArrayList3"/>
+             <object idref="ArrayList2"/>
             </void>
            </object>
           </void>
          </object>
-        </void>
-        <void property="linkedClasses">
-         <object idref="ArrayList0"/>
         </void>
         <void property="name">
          <string>Teknik</string>
@@ -178,14 +175,14 @@
       <string>TE3A</string>
      </void>
      <void property="students">
-      <object idref="ArrayList3"/>
+      <object idref="ArrayList2"/>
      </void>
     </object>
    </void>
    <void method="add">
     <object class="com.te3.main.objects.SchoolClass" id="SchoolClass1">
      <void property="courses">
-      <object idref="ArrayList1"/>
+      <object idref="ArrayList0"/>
      </void>
      <void property="name">
       <string>TE3B</string>
@@ -210,7 +207,7 @@
    </void>
   </void>
   <void property="courses">
-   <object idref="ArrayList1"/>
+   <object idref="ArrayList0"/>
   </void>
   <void property="savePath">
    <string>./saves.xml</string>
