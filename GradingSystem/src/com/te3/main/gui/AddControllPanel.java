@@ -5,7 +5,7 @@ import java.awt.FlowLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-public class CourseControllPanel extends JPanel {
+public class AddControllPanel extends JPanel {
 	
 	/** Generated */
 	private static final long serialVersionUID = -7606289199305316004L;
@@ -16,7 +16,7 @@ public class CourseControllPanel extends JPanel {
 	JButton btnCancel = new JButton("Avbryt");
 	JButton btnAdd = new JButton("Lägg till");
 	
-	public CourseControllPanel() {
+	public AddControllPanel() {
 		this.setLayout(layout);
 		this.add(btnHelp);
 		this.add(btnCancel);
