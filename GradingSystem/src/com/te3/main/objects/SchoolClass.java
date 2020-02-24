@@ -47,4 +47,9 @@ public class SchoolClass {
 		SchoolClass s = (SchoolClass) obj;
 		return (s.name.equals(this.name));
 	}
+	
+	@Override
+	public String toString() {
+		return this.name;
+	}
 }

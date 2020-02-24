@@ -202,4 +202,9 @@ public class Criteria {
 		Criteria c = (Criteria) obj;
 		return (this.name.equals(c.name));
 	}
+	
+	@Override
+	public String toString() {
+		return this.name;
+	}
 }
