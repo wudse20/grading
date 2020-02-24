@@ -60,19 +60,6 @@ public class CBPanel extends JPanel {
 	}
 	
 	/**
-	 * Adds the default items to the comboboxes (eg. new entry, edit entries)
-	 */
-	public void addDefaultItems() {
-		cbClass.addItem("Ny");
-		cbClass.addItem("Ändra");
-		cbCourse.addItem("Ny");
-		cbCourse.addItem("Ändra");
-		//shouldnt be able to add new students through the combobox
-		cbTask.addItem("Ny");
-		cbTask.addItem("Ändra");
-	}
-	
-	/**
 	 * Completely updates the entire combobox panel with new information.
 	 * @param newData the new information to be parsed and updated with.
 	 */
@@ -81,7 +68,17 @@ public class CBPanel extends JPanel {
 		ArrayList<SchoolClass> dataClasses = localData.getClasses();
 		ArrayList<Course> dataCourses = localData.getCourses();
 		
+		cbStudent.addItem("Samlad vy");
+		cbTask.addItem("Samlad vy");
+		
 		dataClasses.forEach((n) -> cbClass.addItem(n.getName()));
 		dataCourses.forEach((n) -> cbCourse.addItem(n.getName()));
+		
+		cbClass.addItem("Ny");
+		cbClass.addItem("Ändra");
+		cbCourse.addItem("Ny");
+		cbCourse.addItem("Ändra");
+		cbTask.addItem("Ny");
+		cbTask.addItem("Ändra");
 	}
 }
