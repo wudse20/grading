@@ -133,7 +133,7 @@ public class MainFrame extends JFrame {
 			
 			Course teknik = null;
 			try {
-				teknik = new Course("Teknik", classes, courseCriteria);
+				teknik = new Course("Teknik", courseCriteria);
 			} catch (IllegalNameException e) {
 				// TODO handle illegal name, sätt ruta röd typ
 				e.printStackTrace();
