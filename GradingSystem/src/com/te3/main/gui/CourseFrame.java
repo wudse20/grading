@@ -30,7 +30,7 @@ public class CourseFrame extends JFrame {
 			+ "ett kunskapskrav behöver du bara klicka på det<br>" + "i <b>kunskapskravs</b>-rutan.";
 
 	Course c;
-	
+
 	MainFrame mf;
 
 	NamePanel np = new NamePanel();
@@ -40,7 +40,7 @@ public class CourseFrame extends JFrame {
 	AddControllPanel acp = new AddControllPanel();
 
 	EditControllPanel ecp = new EditControllPanel();
-	
+
 	Container cp = this.getContentPane();
 
 	BorderLayout layout = new BorderLayout();
@@ -90,12 +90,12 @@ public class CourseFrame extends JFrame {
 		this.add(lblSpacer3, BorderLayout.LINE_END);
 		this.add(lblSpacer4, BorderLayout.PAGE_END);
 	}
-	
+
 	/**
 	 * For editing.
 	 * 
 	 * @param mf the instance of the MainFrame
-	 * @param c the course that's being updated.
+	 * @param c  the course that's being updated.
 	 */
 	public CourseFrame(MainFrame mf, Course c) {
 		super("Uppdatera en kurs");
@@ -104,12 +104,12 @@ public class CourseFrame extends JFrame {
 		this.setLayout(layout);
 		this.setSize(new Dimension(600, 600));
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		
+
 		mcp = new MainCoursePanel(mf, c);
 		np.setLastInput(c.getName());
-		
+
 		ecp.getBtnUpdate().addActionListener((e) -> {
-			newCourse();
+			updateCourse();
 		});
 
 		ecp.getBtnCancel().addActionListener((e) -> {
@@ -140,15 +140,17 @@ public class CourseFrame extends JFrame {
 	private void newCourse() {
 		if (mcp.getAddedClasses().size() == 0) {
 			JOptionPane.showMessageDialog(this, "Du måste välja minst en klass!", "Fel", JOptionPane.ERROR_MESSAGE);
+			return;
 		}
 
 		if (mcp.getCriteria().size() == 0) {
 			JOptionPane.showMessageDialog(this, "Du måste lägga till minst ett kunskapskrav!", "Fel",
 					JOptionPane.ERROR_MESSAGE);
+			return;
 		}
 
 		try {
-			Course cr = new Course(np.getName(), mcp.getCriteria());
+			Course cr = new Course(np.getLastInput(), mcp.getCriteria());
 			ArrayList<SchoolClass> al = mf.getMainData().getClasses();
 			ArrayList<SchoolClass> al2 = mcp.getAddedClasses();
 
@@ -164,6 +166,58 @@ public class CourseFrame extends JFrame {
 			this.dispose();
 		} catch (IllegalNameException e) {
 			JOptionPane.showMessageDialog(this, e.getMessage(), "Fel", JOptionPane.ERROR_MESSAGE);
+		}
+	}
+
+	/**
+	 * TODO: Update CBPanel.
+	 * 
+	 * Updates a course.
+	 */
+	private void updateCourse() {
+		int ans = JOptionPane.showConfirmDialog(this,
+				"Är du säker på att du vill uppdatera kursen: " + np.getLastInput() + "?", "Är du säker?",
+				JOptionPane.YES_NO_OPTION);
+
+		if (ans == JOptionPane.NO_OPTION)
+			return;
+
+		if (mcp.getAddedClasses().size() == 0) {
+			JOptionPane.showMessageDialog(this, "Du måste välja minst en klass!", "Fel", JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+
+		if (mcp.getCriteria().size() == 0) {
+			JOptionPane.showMessageDialog(this, "Du måste lägga till minst ett kunskapskrav!", "Fel",
+					JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+
+		try {
+			Course cr = new Course(np.getLastInput(), mcp.getCriteria());
+
+			// removes old course from all school classes.
+			for (SchoolClass sc : mf.getMainData().getClasses()) {
+				int index = sc.getCourses().indexOf(c);
+
+				if (index != -1) {
+					mf.getMainData().getClasses().remove(index);
+				}
+			}
+
+			// Adds the course to the correct school classes
+			ArrayList<SchoolClass> al = mf.getMainData().getClasses();
+			ArrayList<SchoolClass> al2 = mcp.getAddedClasses();
+
+			for (SchoolClass sc : al2) {
+				if (al.contains(sc)) {
+					al.get(al.indexOf(sc)).getCourses().add(cr);
+				}
+			}
+
+		} catch (IllegalNameException e) {
+			JOptionPane.showMessageDialog(this, e.getMessage(), "Fel", JOptionPane.ERROR_MESSAGE);
+			return;
 		}
 	}
 }

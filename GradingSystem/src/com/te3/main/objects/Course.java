@@ -73,4 +73,9 @@ public class Course {
 		Course c = (Course) obj;
 		return (this.name.equals(c.name));
 	}
+	
+	@Override
+	public String toString() {
+		return this.name;
+	}
 }

@@ -61,8 +61,10 @@ public class ButtonPanel extends JPanel {
 		this.addComponents();
 
 		btnTemp.addActionListener((e) -> {
-			new CourseFrame(mf, mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getCourses()
-					.get(mf.getCurrentlySelectedCourseIndex())).setVisible(true);
+			new CourseUpdateChooser(mf).setVisible(true);
+//			new CourseFrame(mf, mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getCourses()
+//					.get(mf.getCurrentlySelectedCourseIndex())).setVisible(true);
+//			new CourseFrame(mf).setVisible(true);
 		});
 	}
 

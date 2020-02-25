@@ -26,7 +26,7 @@ import com.te3.main.objects.SchoolClass;
 
 /**
  * TODO: Fixa så att klasserna blir av med kursen ifall
- * det klickas i. Fixa så att GUI:t ser vettigt ut i editing mode... 
+ * det klickas i. Update metod för uppdatering. 
  * 
  * @author Anton Skorup
  */
