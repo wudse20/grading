@@ -114,6 +114,7 @@ public class MainCoursePanel extends JPanel implements DocumentListener {
 		
 		criteria = c.getCourseCriteria();
 		
+		this.setLayout(layout);
 		this.refreshClasses();
 		this.refreshCriteria();
 		this.setProperties();

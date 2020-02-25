@@ -106,6 +106,7 @@ public class CourseFrame extends JFrame {
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
 		mcp = new MainCoursePanel(mf, c);
+		np.setLastInput(c.getName());
 		
 		ecp.getBtnUpdate().addActionListener((e) -> {
 			newCourse();

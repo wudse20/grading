@@ -32,6 +32,6 @@ public class NamePanel extends JPanel {
 
 	public void setLastInput(String lastInput) {
 		this.lastInput = lastInput;
-		txfName.setName(this.lastInput);
+		txfName.setText(this.lastInput);
 	}
 }
