@@ -1,5 +1,7 @@
 package com.te3.main.objects;
 
+import com.te3.main.exceptions.IllegalNameException;
+
 public class Student {
 	private String name;
 	private String comment;
@@ -8,7 +10,7 @@ public class Student {
 	
 	public Student() {}
 	
-	public Student(String name) {
+	public Student(String name) throws IllegalNameException {
 		setName(name);
 	}
 
@@ -16,8 +18,12 @@ public class Student {
 		return name;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setName(String name) throws IllegalNameException{
+		if (name.length() < 3) {
+			throw new IllegalNameException("För kort namn");
+		} else {
+			this.name = name;
+		}
 	}
 
 	public String getComment() {
@@ -59,5 +65,10 @@ public class Student {
 	public boolean equals(Object obj) {
 		Student s = (Student) obj;
 		return (s.name.equals(this.name));
+	}
+	
+	@Override
+	public String toString() {
+		return this.name;
 	}
 }

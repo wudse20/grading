@@ -2,6 +2,8 @@ package com.te3.main.objects;
 
 import java.util.ArrayList;
 
+import com.te3.main.exceptions.IllegalNameException;
+
 public class SchoolClass {
 	
 	private String name;
@@ -12,7 +14,13 @@ public class SchoolClass {
 	
 	public SchoolClass() {}
 	
-	public SchoolClass(String name, ArrayList<Course> courses, ArrayList<Student> students) {
+	public SchoolClass(String name, ArrayList<Student> students) throws IllegalNameException {
+		this.setName(name);
+		this.courses = new ArrayList<Course>();
+		this.students = students;
+	}
+	
+	public SchoolClass(String name, ArrayList<Course> courses, ArrayList<Student> students) throws IllegalNameException {
 		this.setName(name);
 		this.courses = courses;
 		this.students = students;
@@ -22,8 +30,12 @@ public class SchoolClass {
 		return name;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setName(String name) throws IllegalNameException {
+		if (name.length() < 3) {
+			throw new IllegalNameException("För kort namn");
+		} else {
+			this.name = name;
+		}
 	}
 	
 	public ArrayList<Course> getCourses() {

@@ -116,6 +116,7 @@ public class ListUpdateChooser<E> extends JFrame implements ListSelectionListene
 					mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getCourses().get(index))
 							.setVisible(true);
 		} else if (clazz.equals(SchoolClass.class)) {
+			new SchoolClassFrame(mf, mf.getMainData().getClasses().get(index)).setVisible(true);
 		} else if (clazz.equals(Task.class)) {
 		}
 	}

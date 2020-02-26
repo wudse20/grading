@@ -117,14 +117,22 @@ public class MainFrame extends JFrame {
 			ArrayList<Student> studentsB = new ArrayList<Student>();
 			ArrayList<Criteria> courseCriteria = new ArrayList<Criteria>();
 
-			studentsA.add(new Student("Jon W"));
-			studentsA.add(new Student("Adam G"));
+			try {
+				studentsA.add(new Student("Jon W"));
+				studentsA.add(new Student("Adam G"));
 
-			studentsB.add(new Student("Anton S"));
-			studentsB.add(new Student("Liza H"));
+				studentsB.add(new Student("Anton S"));
+				studentsB.add(new Student("Liza H"));
+			} catch (IllegalNameException e) {
+				e.printStackTrace();
+			}
 
-			classes.add(new SchoolClass("TE3A", courses, studentsA));
-			classes.add(new SchoolClass("TE3B", coursesB, studentsB));
+			try {
+				classes.add(new SchoolClass("TE3A", courses, studentsA));
+				classes.add(new SchoolClass("TE3B", coursesB, studentsB));
+			} catch (IllegalNameException e) {
+				e.printStackTrace();
+			}
 
 			try {
 				courseCriteria.add(new Criteria("Mekanik", this));
