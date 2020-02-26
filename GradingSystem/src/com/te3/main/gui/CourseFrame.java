@@ -133,7 +133,8 @@ public class CourseFrame extends JFrame {
 	}
 
 	/**
-	 * TODO: Update CBPanel.
+	 * TODO: Update CBPanel.<br>
+	 * <br>
 	 * 
 	 * Adds a new course to the main data.
 	 */
@@ -150,15 +151,14 @@ public class CourseFrame extends JFrame {
 		}
 
 		try {
-			Course cr = new Course(np.getLastInput(), mcp.getCriteria());
 			ArrayList<SchoolClass> al = mf.getMainData().getClasses();
 			ArrayList<SchoolClass> al2 = mcp.getAddedClasses();
 
 			for (int i = 0; i < al.size(); i++) {
 				SchoolClass sc = al.get(i);
-				
+
 				if (al2.contains(sc)) {
-					al.get(i).getCourses().add(cr);
+					al.get(i).getCourses().add(new Course(np.getLastInput(), mcp.getCriteria()));
 				}
 			}
 
@@ -172,7 +172,8 @@ public class CourseFrame extends JFrame {
 	}
 
 	/**
-	 * TODO: Update CBPanel. Lös buggen: med dubbelt och ta bort grupper.
+	 * TODO: Update CBPanel. <br>
+	 * <br>
 	 * 
 	 * Updates a course.
 	 */
@@ -196,11 +197,8 @@ public class CourseFrame extends JFrame {
 		}
 
 		try {
-			Course cr = new Course(np.getLastInput(), mcp.getCriteria());
-
 			for (int i = 0; i < mf.getMainData().getClasses().size(); i++) {
 				int index = mf.getMainData().getClasses().get(i).getCourses().indexOf(c);
-				System.out.println(index);
 				if (index != -1) {
 					mf.getMainData().getClasses().get(i).getCourses().remove(index);
 				}
@@ -212,12 +210,12 @@ public class CourseFrame extends JFrame {
 
 			for (int i = 0; i < al.size(); i++) {
 				SchoolClass sc = al.get(i);
-				
+
 				if (al2.contains(sc)) {
-					al.get(i).getCourses().add(cr);
+					al.get(i).getCourses().add(new Course(np.getLastInput(), mcp.getCriteria()));
 				}
 			}
-			
+
 			this.dispose();
 		} catch (IllegalNameException e) {
 			JOptionPane.showMessageDialog(this, e.getMessage(), "Fel", JOptionPane.ERROR_MESSAGE);

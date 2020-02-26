@@ -112,6 +112,7 @@ public class MainFrame extends JFrame {
 		if (debug) {
 			ArrayList<SchoolClass> classes = new ArrayList<SchoolClass>();
 			ArrayList<Course> courses = new ArrayList<Course>();
+			ArrayList<Course> coursesB = new ArrayList<Course>();
 			ArrayList<Student> studentsA = new ArrayList<Student>();
 			ArrayList<Student> studentsB = new ArrayList<Student>();
 			ArrayList<Criteria> courseCriteria = new ArrayList<Criteria>();
@@ -123,7 +124,7 @@ public class MainFrame extends JFrame {
 			studentsB.add(new Student("Liza H"));
 
 			classes.add(new SchoolClass("TE3A", courses, studentsA));
-			classes.add(new SchoolClass("TE3B", courses, studentsB));
+			classes.add(new SchoolClass("TE3B", coursesB, studentsB));
 
 			try {
 				courseCriteria.add(new Criteria("Mekanik", this));
@@ -138,8 +139,10 @@ public class MainFrame extends JFrame {
 			}
 
 			Course teknik = null;
+			Course teknikB = null;
 			try {
 				teknik = new Course("Teknik", courseCriteria);
+				teknikB = new Course("Teknik", courseCriteria);
 			} catch (IllegalNameException e) {
 				// TODO handle illegal name, sätt ruta röd typ
 				e.printStackTrace();
@@ -161,8 +164,12 @@ public class MainFrame extends JFrame {
 
 			teknik.addCourseTask(new Task("Vattenhallen", teknik.getCourseCriteria(), studentsA));
 			teknik.addCourseTask(new Task("Teknikhistoria", c, studentsA));
+			
+			teknikB.addCourseTask(new Task("Vattenhallen", teknik.getCourseCriteria(), studentsA));
+			teknikB.addCourseTask(new Task("Teknikhistoria", c, studentsA));
 
 			courses.add(teknik);
+			coursesB.add(teknikB);
 
 			return new Data(classes, courses);
 		} else {

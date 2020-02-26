@@ -4,11 +4,11 @@
   <void property="classes">
    <void method="add">
     <object class="com.te3.main.objects.SchoolClass" id="SchoolClass0">
-     <void id="ArrayList0" property="courses">
+     <void property="courses">
       <void method="add">
        <object class="com.te3.main.objects.Course">
         <void property="courseCriteria">
-         <object class="java.util.ArrayList">
+         <object class="java.util.ArrayList" id="ArrayList0">
           <void method="add">
            <object class="com.te3.main.objects.Criteria">
             <void property="grade">
@@ -88,7 +88,7 @@
          <object class="java.util.ArrayList"/>
         </void>
         <void property="name">
-         <string>Teknik</string>
+         <string>Tekn</string>
         </void>
        </object>
       </void>
@@ -117,7 +117,19 @@
    <void method="add">
     <object class="com.te3.main.objects.SchoolClass" id="SchoolClass1">
      <void property="courses">
-      <object idref="ArrayList0"/>
+      <void method="add">
+       <object class="com.te3.main.objects.Course">
+        <void property="courseCriteria">
+         <object idref="ArrayList0"/>
+        </void>
+        <void property="courseTasks">
+         <object class="java.util.ArrayList"/>
+        </void>
+        <void property="name">
+         <string>Tekn</string>
+        </void>
+       </object>
+      </void>
      </void>
      <void property="name">
       <string>TE3B</string>
