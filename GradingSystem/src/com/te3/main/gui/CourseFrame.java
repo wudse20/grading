@@ -213,6 +213,7 @@ public class CourseFrame extends JFrame {
 
 				if (al2.contains(sc)) {
 					al.get(i).getCourses().add(new Course(np.getLastInput(), mcp.getCriteria()));
+					al.get(i).getCourses().get(al.get(i).getCourses().size() - 1).setCourseTasks(c.getCourseTasks());
 				}
 			}
 
