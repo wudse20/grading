@@ -10,14 +10,14 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import com.te3.main.enums.Grades;
+import com.te3.main.enums.Grade;
 import com.te3.main.exceptions.IllegalNameException;
 import com.te3.main.gui.MainFrame;
 
 public class Criteria {
 
 	private String name;
-	private Grades grade;
+	private Grade grade;
 
 	private JButton[] gradeBtns = new JButton[] { new JButton("F"), new JButton("E"), new JButton("C"),
 			new JButton("A") };
@@ -54,7 +54,7 @@ public class Criteria {
 	}
 
 	private void setProperties(String name) {
-		this.setGrade(Grades.F);
+		this.setGrade(Grade.F);
 
 		lblGrade = new JLabel();
 		
@@ -85,30 +85,30 @@ public class Criteria {
 	private void addActionListeneners() 
 	{
 		gradeBtns[0].addActionListener((e) -> {
-			btnClicked(Grades.F);
+			btnClicked(Grade.F);
 		});
 		
 		gradeBtns[1].addActionListener((e) -> {
-			btnClicked(Grades.E);
+			btnClicked(Grade.E);
 		});
 
 		gradeBtns[2].addActionListener((e) -> {
-			btnClicked(Grades.C);
+			btnClicked(Grade.C);
 		});
 		
 		gradeBtns[3].addActionListener((e) -> {
-			btnClicked(Grades.A);
+			btnClicked(Grade.A);
 		});
 	}
 	
-	private void btnClicked(Grades g) {
+	private void btnClicked(Grade g) {
 		this.grade = g;
 		var gp = mf.getGradePanel();
 		this.updateGUI(g);
 		gp.updateGUI(gp.getState());
 	}
 
-	public void updateGUI(Grades grade) {
+	public void updateGUI(Grade grade) {
 		switch (grade) {
 			case F:
 				for (int i = 0; i < gradeBtns.length; i++) {
@@ -166,11 +166,11 @@ public class Criteria {
 			throw new IllegalNameException("För kort meddelande");
 	}
 
-	public Grades getGrade() {
+	public Grade getGrade() {
 		return this.grade;
 	}
 
-	public void setGrade(Grades grade) {
+	public void setGrade(Grade grade) {
 		this.grade = grade;
 	}
 

@@ -5,6 +5,6 @@ package com.te3.main.enums;
  * 
  * @author Anton Skorup
  */
-public enum Grades {
+public enum Grade {
 	F, E, C, A;
 }

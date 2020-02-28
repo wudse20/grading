@@ -11,7 +11,14 @@ import javax.swing.JPanel;
 import com.te3.main.objects.Course;
 import com.te3.main.objects.Data;
 import com.te3.main.objects.SchoolClass;
+import com.te3.main.objects.Task;
 
+/**
+ *	Du behöver fixa en metod i MainFrame för att uppdatera din panel.
+ *	Du behöver även uppdatera GUI:t och sätta vilket stadie panelen är i
+ *	m.h.a. updateGradeState(state), där state är enumet State. Samt kalla
+ *	updateGUI i mainframe. Vid uppdatering.
+ */
 public class CBPanel extends JPanel {
 	/** Default */
 	private static final long serialVersionUID = 1L;
@@ -70,7 +77,7 @@ public class CBPanel extends JPanel {
 				mf.setCurrentlySelectedClassIndex(i);
 			} else {
 				System.out.println("Selected new or change");
-				mf.openEditPanel();
+				mf.openEditPanel(SchoolClass.class, true);
 			}
 		});
 		cbCourse.addActionListener((e) -> {
@@ -83,7 +90,7 @@ public class CBPanel extends JPanel {
 				mf.setCurrentlySelectedCourseIndex(i);
 			} else {
 				System.out.println("Selected new or change");
-				mf.openEditPanel();
+				mf.openEditPanel(Course.class, true);
 			}
 		});
 		cbStudent.addActionListener((e) -> {
@@ -98,10 +105,10 @@ public class CBPanel extends JPanel {
 			
 			System.out.println(i);
 			if (i != -1 && i < cbTask.getItemCount() - 2) {
-				mf.setCurrentlySelectedCourseIndex(i);
+				mf.setCurrentlySelectedAssingmentIndex(cbTask.getSelectedIndex());
 			} else {
 				System.out.println("Selected new or change");
-				mf.openEditPanel();
+				mf.openEditPanel(Task.class, true); //Måste ändras ifall det är ny eller ändra.
 			}
 		});
 		

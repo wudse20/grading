@@ -10,6 +10,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.event.ListSelectionEvent;
@@ -118,6 +119,8 @@ public class ListUpdateChooser<E> extends JFrame implements ListSelectionListene
 		} else if (clazz.equals(SchoolClass.class)) {
 			new SchoolClassFrame(mf, mf.getMainData().getClasses().get(index)).setVisible(true);
 		} else if (clazz.equals(Task.class)) {
+			JOptionPane.showMessageDialog(this, "Not yet implemented", "Not yet implemented",
+					JOptionPane.INFORMATION_MESSAGE);
 		}
 	}
 

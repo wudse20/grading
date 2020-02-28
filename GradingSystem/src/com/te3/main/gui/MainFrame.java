@@ -6,9 +6,10 @@ import java.util.ArrayList;
 
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
-import com.te3.main.enums.Grades;
+import com.te3.main.enums.Grade;
 import com.te3.main.enums.State;
 import com.te3.main.exceptions.IllegalInputException;
 import com.te3.main.exceptions.IllegalNameException;
@@ -48,6 +49,8 @@ public class MainFrame extends JFrame {
 	ButtonPanel btnPanel;
 
 	Container cp = this.getContentPane();
+
+	private State s;
 
 	public MainFrame() {
 		super("Betygssättning");
@@ -166,13 +169,13 @@ public class MainFrame extends JFrame {
 				e.printStackTrace();
 			}
 
-			c.get(0).setGrade(Grades.C);
-			c.get(1).setGrade(Grades.E);
-			c.get(2).setGrade(Grades.A);
+			c.get(0).setGrade(Grade.C);
+			c.get(1).setGrade(Grade.E);
+			c.get(2).setGrade(Grade.A);
 
 			teknik.addCourseTask(new Task("Vattenhallen", teknik.getCourseCriteria(), studentsA));
 			teknik.addCourseTask(new Task("Teknikhistoria", c, studentsA));
-			
+
 			teknikB.addCourseTask(new Task("Vattenhallen", teknik.getCourseCriteria(), studentsA));
 			teknikB.addCourseTask(new Task("Teknikhistoria", c, studentsA));
 
@@ -185,14 +188,58 @@ public class MainFrame extends JFrame {
 		}
 	}
 
+	public void updateGradeState(State s) {
+		this.s = s;
+	}
+
+	public void updateGUI() {
+		gradePanel.updateGUI(s);
+	}
+
+	/**
+	 * Used to show the frames that are handeling the updates.
+	 *
+	 * @param <E>       The class that's being edited/added
+	 * @param clazz     The class that's being edited/added
+	 * @param isAddMode <br>
+	 *                  If true -> add mode<br>
+	 *                  If false -> edit mode
+	 */
+	@SuppressWarnings("unchecked")
+	public <E> void openEditPanel(Class<E> clazz, boolean isAddMode) {
+		if (isAddMode) {
+			if (clazz.equals(SchoolClass.class)) {
+				new SchoolClassFrame(this).setVisible(true);
+			} else if (clazz.equals(Course.class)) {
+				new CourseFrame(this).setVisible(true);
+			} else if (clazz.equals(Task.class)) {
+				JOptionPane.showMessageDialog(this, "Not yet implemented", "Not yet implemented",
+						JOptionPane.INFORMATION_MESSAGE);
+			}
+		} else {
+			if (clazz.equals(SchoolClass.class)) {
+				new ListUpdateChooser<SchoolClass>(this, mainData.getClasses(), (Class<SchoolClass>) clazz)
+						.setVisible(true);
+			} else if (clazz.equals(Course.class)) {
+				new ListUpdateChooser<Course>(this, mainData.getClasses().get(currentlySelectedClassIndex).getCourses(),
+						(Class<Course>) clazz).setVisible(true);
+			} else if (clazz.equals(Task.class)) {
+				new ListUpdateChooser<Task>(this,
+						mainData.getClasses().get(currentlySelectedClassIndex).getCourses()
+								.get(currentlySelectedCourseIndex).getCourseTasks(),
+						(Class<Task>) clazz).setVisible(true);
+			}
+		}
+	}
+
 	public void updateGradeGUI() {
 		gradePanel.updateGUI(gradePanel.getState());
 	}
-	
+
 	public void updateState(State s) {
 		gradePanel.setState(s);
 	}
-	
+
 	public Data getMainData() {
 		return mainData;
 	}
@@ -257,16 +304,6 @@ public class MainFrame extends JFrame {
 
 	public void setCurrentlySelectedStudentIndex(int currentlySelectedStudentIndex) {
 		this.currentlySelectedStudentIndex = currentlySelectedStudentIndex;
-	}
-	
-	/**
-	 * Denna funktionen kan vi kanske använda när vi ska öppna en ny "ändra" eller "ny" panel.
-	 * Jag tänker att antingen kan den ta parametrar såsom "ändra" eller "ny" så att funktionen vet vilken typ av panel den ska öppna
-	 * Och även vilken typ av ändring den ska ta (ny klass, ny kurs eller ny uppgift)
-	 * Just nu använder jag bara den som en placeholder.
-	 */
-	public void openEditPanel() {
-		javax.swing.JOptionPane.showMessageDialog(this, "This is a placeholder");
 	}
 
 	public GradesPanel getGradePanel() {
