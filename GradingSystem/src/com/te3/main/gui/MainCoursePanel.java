@@ -25,8 +25,7 @@ import com.te3.main.objects.Criteria;
 import com.te3.main.objects.SchoolClass;
 
 /**
- * TODO: Fixa så att klasserna blir av med kursen ifall
- * det klickas i. Update metod för uppdatering. 
+ * The main part of the CourseFrame GUI.
  * 
  * @author Anton Skorup
  */
@@ -38,6 +37,7 @@ public class MainCoursePanel extends JPanel implements DocumentListener {
 	private int selectedIndexNotAddedClasses = -1;
 	private int selectedIndexCriteria = -1;
 	
+	@SuppressWarnings("unused")
 	private Course c;
 
 	private ArrayList<SchoolClass> notAddedClasses = new ArrayList<SchoolClass>();

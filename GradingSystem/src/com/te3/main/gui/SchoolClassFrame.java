@@ -74,7 +74,7 @@ public class SchoolClassFrame extends JFrame {
 		});
 
 		acp.getBtnHelp().addActionListener((e) -> {
-			new HelpFrame("Klasser", "<html><p>" + helpInfo + "</p></html>").setVisible(true);
+			new HelpFrame("Klasser", "<html><p>" + helpInfo + "</p></html>", 500).setVisible(true);
 		});
 	}
 

@@ -213,8 +213,7 @@ public class MainFrame extends JFrame {
 			} else if (clazz.equals(Course.class)) {
 				new CourseFrame(this).setVisible(true);
 			} else if (clazz.equals(Task.class)) {
-				JOptionPane.showMessageDialog(this, "Not yet implemented", "Not yet implemented",
-						JOptionPane.INFORMATION_MESSAGE);
+				new AssignmentFrame(this).setVisible(true);
 			}
 		} else {
 			if (clazz.equals(SchoolClass.class)) {
