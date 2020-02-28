@@ -258,6 +258,16 @@ public class MainFrame extends JFrame {
 	public void setCurrentlySelectedStudentIndex(int currentlySelectedStudentIndex) {
 		this.currentlySelectedStudentIndex = currentlySelectedStudentIndex;
 	}
+	
+	/**
+	 * Denna funktionen kan vi kanske använda när vi ska öppna en ny "ändra" eller "ny" panel.
+	 * Jag tänker att antingen kan den ta parametrar såsom "ändra" eller "ny" så att funktionen vet vilken typ av panel den ska öppna
+	 * Och även vilken typ av ändring den ska ta (ny klass, ny kurs eller ny uppgift)
+	 * Just nu använder jag bara den som en placeholder.
+	 */
+	public void openEditPanel() {
+		javax.swing.JOptionPane.showMessageDialog(this, "This is a placeholder");
+	}
 
 	public GradesPanel getGradePanel() {
 		return gradePanel;

@@ -62,25 +62,47 @@ public class CBPanel extends JPanel {
 		
 		cbClass.addActionListener((e) -> {
 			System.out.println(cbClass.getSelectedItem().toString());
+			
 			int i = cbClass.getSelectedIndex();
+			
 			System.out.println(i);
-			if (i != -1 && cbClass.getItemCount() - 2 <= i) {
+			if (i != -1 && i < cbClass.getItemCount() - 2) {
 				mf.setCurrentlySelectedClassIndex(i);
 			} else {
 				System.out.println("Selected new or change");
+				mf.openEditPanel();
 			}
 		});
 		cbCourse.addActionListener((e) -> {
-			System.out.println(cbCourse.getSelectedIndex());
-			mf.setCurrentlySelectedCourseIndex(cbCourse.getSelectedIndex());
+			System.out.println(cbCourse.getSelectedItem().toString());
+			
+			int i = cbCourse.getSelectedIndex();
+			
+			System.out.println(i);
+			if (i != -1 && i < cbCourse.getItemCount() - 2) {
+				mf.setCurrentlySelectedCourseIndex(i);
+			} else {
+				System.out.println("Selected new or change");
+				mf.openEditPanel();
+			}
 		});
 		cbStudent.addActionListener((e) -> {
+			System.out.println(cbStudent.getSelectedItem().toString());
 			System.out.println(cbStudent.getSelectedIndex());
 			mf.setCurrentlySelectedStudentIndex(cbStudent.getSelectedIndex());
 		});
 		cbTask.addActionListener((e) -> {
-			System.out.println(cbTask.getSelectedIndex());
-			mf.setCurrentlySelectedAssingmentIndex(cbTask.getSelectedIndex());
+			System.out.println(cbTask.getSelectedItem().toString());
+			
+			int i = cbTask.getSelectedIndex();
+			
+			System.out.println(i);
+			if (i != -1 && i < cbTask.getItemCount() - 2) {
+				mf.setCurrentlySelectedCourseIndex(i);
+			} else {
+				System.out.println("Selected new or change");
+				mf.openEditPanel();
+			}
 		});
 		
 		this.add(cbClass);
