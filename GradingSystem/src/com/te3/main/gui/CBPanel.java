@@ -77,7 +77,7 @@ public class CBPanel extends JPanel {
 				mf.setCurrentlySelectedClassIndex(i);
 			} else {
 				System.out.println("Selected new or change");
-				mf.openEditPanel(SchoolClass.class, true);
+				mf.openAddEditGUI(SchoolClass.class, true);
 			}
 		});
 		cbCourse.addActionListener((e) -> {
@@ -90,7 +90,7 @@ public class CBPanel extends JPanel {
 				mf.setCurrentlySelectedCourseIndex(i);
 			} else {
 				System.out.println("Selected new or change");
-				mf.openEditPanel(Course.class, true);
+				mf.openAddEditGUI(Course.class, true);
 			}
 		});
 		cbStudent.addActionListener((e) -> {
@@ -108,7 +108,7 @@ public class CBPanel extends JPanel {
 				mf.setCurrentlySelectedAssingmentIndex(cbTask.getSelectedIndex());
 			} else {
 				System.out.println("Selected new or change");
-				mf.openEditPanel(Task.class, true); //Måste ändras ifall det är ny eller ändra.
+				mf.openAddEditGUI(Task.class, true); //Måste ändras ifall det är ny eller ändra.
 			}
 		});
 		

@@ -206,7 +206,7 @@ public class MainFrame extends JFrame {
 	 *                  If false -> edit mode
 	 */
 	@SuppressWarnings("unchecked")
-	public <E> void openEditPanel(Class<E> clazz, boolean isAddMode) {
+	public <E> void openAddEditGUI(Class<E> clazz, boolean isAddMode) {
 		if (isAddMode) {
 			if (clazz.equals(SchoolClass.class)) {
 				new SchoolClassFrame(this).setVisible(true);
