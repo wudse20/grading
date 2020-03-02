@@ -172,11 +172,17 @@ public class MainFrame extends JFrame {
 			c.get(1).setGrade(Grade.E);
 			c.get(2).setGrade(Grade.A);
 
-			teknik.addCourseTask(new Task("Vattenhallen", teknik.getCourseCriteria(), studentsA));
-			teknik.addCourseTask(new Task("Teknikhistoria", c, studentsA));
+			
+			try {
+				teknik.addCourseTask(new Task("Vattenhallen", teknik.getCourseCriteria()));
+				teknik.addCourseTask(new Task("Teknikhistoria", c));
 
-			teknikB.addCourseTask(new Task("Vattenhallen", teknik.getCourseCriteria(), studentsA));
-			teknikB.addCourseTask(new Task("Teknikhistoria", c, studentsA));
+				teknikB.addCourseTask(new Task("Vattenhallen", teknik.getCourseCriteria()));
+				teknikB.addCourseTask(new Task("Teknikhistoria", c));
+			} catch (IllegalNameException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 
 			courses.add(teknik);
 			coursesB.add(teknikB);

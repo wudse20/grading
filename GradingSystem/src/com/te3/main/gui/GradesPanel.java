@@ -197,10 +197,10 @@ public class GradesPanel extends JPanel {
 		panel.setLayout(pLayout);
 		panel.add(panelCriteria);
 
-		updateInfo(
-				tasks.get(mf.getCurrentlySelectedAssingmentIndex()).getStudents()
-						.get(mf.getCurrentlySelectedStudentIndex()),
-				tasks.get(mf.getCurrentlySelectedAssingmentIndex()), criteria);
+//		updateInfo(
+//				tasks.get(mf.getCurrentlySelectedAssingmentIndex()).getStudents()
+//						.get(mf.getCurrentlySelectedStudentIndex()),
+//				tasks.get(mf.getCurrentlySelectedAssingmentIndex()), criteria);
 	}
 
 	/**
