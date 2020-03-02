@@ -1,5 +1,7 @@
 package com.te3.main.objects;
 
+import com.te3.main.exceptions.IllegalNameException;
+
 import java.util.ArrayList;
 
 public class Task {
@@ -11,19 +13,28 @@ public class Task {
 	
 	public Task() {}
 	
-	public Task(String initName, ArrayList<Criteria> criteria, ArrayList<Student> students) {
+	public Task(String initName, ArrayList<Criteria> criteria) throws IllegalNameException {
 		setName(initName);
 		setGraded(false);
 		setCriteria(criteria);
-		setStudents(students);
 	}
 	
 	public String getName() {
 		return name;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	/**
+	 * Sets the name of the assignment
+	 *
+	 * @param name the new name
+	 * @throws IllegalNameException if the name is less then 3 characters and it's being trimmed in this test.
+	 * */
+	public void setName(String name) throws IllegalNameException {
+		if (name.trim().length() < 3) {
+			throw new IllegalNameException("För kort namn!");
+		} else {
+			this.name = name;
+		}
 	}
 
 	public boolean isGraded() {
@@ -40,14 +51,6 @@ public class Task {
 
 	public void setCriteria(ArrayList<Criteria> taskGrades) {
 		this.criteria = taskGrades;
-	}
-	
-	public ArrayList<Student> getStudents() {
-		return students;
-	}
-
-	public void setStudents(ArrayList<Student> students) {
-		this.students = students;
 	}
 
 	public void addTaskGrade(Criteria newGrade) {
