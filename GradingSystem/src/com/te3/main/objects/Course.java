@@ -44,8 +44,15 @@ public class Course {
 		}
 	}
 
+	/**
+	 * Clones the course criteria.
+	 * 
+	 * @return a clone of the course criteria
+	 */
 	public ArrayList<Criteria> getCourseCriteria() {
-		return courseCriteria;
+		ArrayList<Criteria> clone = new ArrayList<Criteria>();
+		clone.addAll(this.courseCriteria);
+		return clone;
 	}
 
 	public void setCourseCriteria(ArrayList<Criteria> courseCriteria) {

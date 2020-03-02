@@ -35,7 +35,7 @@ public class AssignmentFrame extends JFrame {
 	 * @param mf the instance of the MainFrae
 	 */
 	public AssignmentFrame(MainFrame mf) {
-		super("Lägg till en kurs");
+		super("Lägg till en uppgift");
 		this.mf = mf;
 		this.setLayout(layout);
 		this.setSize(new Dimension(600, 600));

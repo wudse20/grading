@@ -177,6 +177,14 @@ public class Criteria {
 	public JPanel getPanelCriteria() {
 		return pCriteria;
 	}
+	
+	public void setMF(MainFrame mf) {
+		this.mf = mf;
+	}
+	
+	public MainFrame getMF() {
+		return this.mf;
+	}
 
 	/**
 	 * Compares two grades
