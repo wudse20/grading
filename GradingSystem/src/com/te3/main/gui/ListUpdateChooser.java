@@ -38,6 +38,8 @@ public class ListUpdateChooser<E> extends JFrame implements ListSelectionListene
 
 	JList<E> listObjects = new JList<E>();
 
+	ArrayList<E> al;
+	
 	JScrollPane scrObjects = new JScrollPane(listObjects);
 
 	JButton btnHelp = new JButton("?");
@@ -63,6 +65,7 @@ public class ListUpdateChooser<E> extends JFrame implements ListSelectionListene
 	public ListUpdateChooser(MainFrame mf, ArrayList<E> al, Class<E> clazz) {
 		super("Uppdatera en kurs");
 		this.mf = mf;
+		this.al = al;
 		this.setSize(new Dimension(400, 300));
 		this.clazz = clazz;
 		this.setLabelText();
@@ -113,14 +116,11 @@ public class ListUpdateChooser<E> extends JFrame implements ListSelectionListene
 
 	private void selection(int index) {
 		if (clazz.equals(Course.class)) {
-			new CourseFrame(mf,
-					mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getCourses().get(index))
-							.setVisible(true);
+			new CourseFrame(mf, (Course) al.get(index)).setVisible(true);
 		} else if (clazz.equals(SchoolClass.class)) {
-			new SchoolClassFrame(mf, mf.getMainData().getClasses().get(index)).setVisible(true);
+			new SchoolClassFrame(mf, (SchoolClass) al.get(index)).setVisible(true);
 		} else if (clazz.equals(Task.class)) {
-			JOptionPane.showMessageDialog(this, "Not yet implemented", "Not yet implemented",
-					JOptionPane.INFORMATION_MESSAGE);
+			new AssignmentFrame(mf, (Task) al.get(index)).setVisible(true);
 		}
 	}
 

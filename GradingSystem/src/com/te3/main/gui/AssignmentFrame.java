@@ -1,13 +1,18 @@
 package com.te3.main.gui;
 
-import com.te3.main.exceptions.IllegalInputException;
-import com.te3.main.exceptions.IllegalNameException;
-import com.te3.main.objects.Task;
-
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.util.ArrayList;
 
-import javax.swing.*;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
+import com.te3.main.exceptions.IllegalInputException;
+import com.te3.main.exceptions.IllegalNameException;
+import com.te3.main.objects.Student;
+import com.te3.main.objects.Task;
 
 public class AssignmentFrame extends JFrame {
 
@@ -20,17 +25,17 @@ public class AssignmentFrame extends JFrame {
 	JLabel lblSpacer2 = new JLabel("     ");
 	JLabel lblSpacer3 = new JLabel("     ");
 	JLabel lblSpacer4 = new JLabel(" ");
-	
+
 	BorderLayout layout = new BorderLayout();
 	BorderLayout pLayout = new BorderLayout();
-	
+
 	JPanel panel = new JPanel();
-	
+
 	NamePanel np = new NamePanel();
 	MainAssignmentPanel map;
 	AddControllPanel acp = new AddControllPanel();
 	EditControllPanel ecp = new EditControllPanel();
-	
+
 	MainFrame mf;
 
 	Task t;
@@ -64,9 +69,10 @@ public class AssignmentFrame extends JFrame {
 	/**
 	 * Sets the properties
 	 *
-	 * @param isAddMoce  <br> if {@code true} then the frame is in add mode <br>
-	 *                        if {@code false} then the frame is in edit mode
-	 * */
+	 * @param isAddMoce <br>
+	 *                  if {@code true} then the frame is in add mode <br>
+	 *                  if {@code false} then the frame is in edit mode
+	 */
 	private void setProperties(boolean isAddMoce) {
 		this.setLayout(layout);
 		this.setSize(new Dimension(600, 600));
@@ -115,9 +121,10 @@ public class AssignmentFrame extends JFrame {
 	/**
 	 * Adds the components
 	 *
-	 * @param isAddMode  <br> if {@code true} then the frame is in add mode <br>
-	 *                        if {@code false} then the frame is in edit mode
-	 * */
+	 * @param isAddMode <br>
+	 *                  if {@code true} then the frame is in add mode <br>
+	 *                  if {@code false} then the frame is in edit mode
+	 */
 	private void addComponents(boolean isAddMode) {
 		map = (isAddMode) ? new MainAssignmentPanel(mf) : new MainAssignmentPanel(mf, t);
 
@@ -136,7 +143,7 @@ public class AssignmentFrame extends JFrame {
 
 	/**
 	 * Adds a new assignment
-	 * */
+	 */
 	private void addAssignment() throws IllegalNameException, IllegalInputException {
 		if (np.getLastInput().length() < 3) {
 			throw new IllegalNameException("För kort namn!");
@@ -146,7 +153,18 @@ public class AssignmentFrame extends JFrame {
 			throw new IllegalInputException("Du måste ha minst ett kunskapskrav i uppgiften.");
 		}
 
-		mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getCourses().get(mf.getCurrentlySelectedCourseIndex()).getCourseTasks().add(new Task(np.getLastInput(), map.getAddedCriteria()));
+		Task t = new Task(np.getLastInput(), map.getAddedCriteria());
+
+		mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getCourses()
+				.get(mf.getCurrentlySelectedCourseIndex()).getCourseTasks().add(t);
+
+		ArrayList<Student> al = new ArrayList<Student>();
+
+		// Adds the task to the students
+		for (int i = 0; i < al.size(); i++) {
+			Student s = al.get(i);
+			s.addTask(t);
+		}
 	}
 
 	private void updateAssignment() throws IllegalNameException, IllegalInputException {
@@ -158,11 +176,26 @@ public class AssignmentFrame extends JFrame {
 			throw new IllegalInputException("Du måste ha minst ett kunskapskrav i uppgiften.");
 		}
 
-		//Removes the task
-		mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getCourses().get(mf.getCurrentlySelectedCourseIndex()).getCourseTasks().get(mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getCourses().get(mf.getCurrentlySelectedCourseIndex()).getCourseTasks().indexOf(this.t));
+		ArrayList<Student> al = mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getStudents();
+		
+		// Removes the task
+		mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getCourses()
+				.get(mf.getCurrentlySelectedCourseIndex()).getCourseTasks()
+				.get(mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getCourses()
+						.get(mf.getCurrentlySelectedCourseIndex()).getCourseTasks().indexOf(this.t));
 
-		//Adds the new task
-		mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getCourses().get(mf.getCurrentlySelectedCourseIndex()).getCourseTasks().add(new Task(np.getLastInput(), map.getAddedCriteria()));
+		// Adds the new task
+		Task t = new Task(np.getLastInput(), map.getAddedCriteria());
+		
+		mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getCourses()
+				.get(mf.getCurrentlySelectedCourseIndex()).getCourseTasks()
+				.add(t);
+		
+		for (int i = 0; i < al.size(); i++) {
+			al.get(i).getTasks().remove(al.get(i).getTasks().indexOf(this.t));
+			al.get(i).addTask(t);
+		}
+		
 	}
 
 }

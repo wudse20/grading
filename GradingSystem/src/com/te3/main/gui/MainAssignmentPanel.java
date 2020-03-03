@@ -44,7 +44,6 @@ public class MainAssignmentPanel extends JPanel {
      */
     public MainAssignmentPanel(MainFrame mf) {
         this.mf = mf;
-        this.setLayout(layout);
 
         this.courseCriteria = mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getCourses()
                 .get(mf.getCurrentlySelectedCourseIndex()).getCourseCriteria();
@@ -73,6 +72,8 @@ public class MainAssignmentPanel extends JPanel {
     private void setProperties() {
         listAddedCriteria.setPreferredSize(new Dimension(250, 100));
         listCourseCriteria.setPreferredSize(new Dimension(250, 100));
+        
+        this.setLayout(layout);
 
         listAddedCriteria.getSelectionModel().addListSelectionListener((e) -> {
             updateCriteriaLists(false, listAddedCriteria.getSelectedIndex());

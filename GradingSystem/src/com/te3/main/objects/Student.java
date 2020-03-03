@@ -1,17 +1,23 @@
 package com.te3.main.objects;
 
+import java.util.ArrayList;
+
 import com.te3.main.exceptions.IllegalNameException;
 
 public class Student {
 	private String name;
 	private String comment;
+
+	private ArrayList<Task> tasks;
+	
 	private short completedTasks;
 	private short numOfTasks;
 	
 	public Student() {}
 	
 	public Student(String name) throws IllegalNameException {
-		setName(name);
+		this.setName(name);
+		this.setTasks(new ArrayList<Task>());
 	}
 
 	public String getName() {
@@ -23,6 +29,17 @@ public class Student {
 			throw new IllegalNameException("För kort namn");
 		} else {
 			this.name = name;
+		}
+	}
+	
+	/**
+	 * Adds a task to the student's tasks.
+	 * 
+	 * @param t the task if {@code null} then it dosen't do anything.
+	 */
+	public void addTask(Task t) {
+		if (t != null) {
+			this.tasks.add(t);
 		}
 	}
 
@@ -39,7 +56,7 @@ public class Student {
 	}
 
 	/**
-	 * Calculates the students amount of completed tasks
+	 * TODO: Calculates the students amount of completed tasks
 	 */
 	public void setCompletedTasks() {
 		this.completedTasks = 0;
@@ -61,6 +78,14 @@ public class Student {
 		this.numOfTasks = numOfTasks;
 	}
 	
+	public ArrayList<Task> getTasks() {
+		return tasks;
+	}
+
+	public void setTasks(ArrayList<Task> tasks) {
+		this.tasks = tasks;
+	}
+
 	@Override
 	public boolean equals(Object obj) {
 		Student s = (Student) obj;

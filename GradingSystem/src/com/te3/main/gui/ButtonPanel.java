@@ -61,7 +61,9 @@ public class ButtonPanel extends JPanel {
 		this.addComponents();
 
 		btnTemp.addActionListener((e) -> {
-			new AssignmentFrame(mf).setVisible(true);
+			new ListUpdateChooser<Task>(mf, mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex())
+					.getCourses().get(mf.getCurrentlySelectedAssingmentIndex()).getCourseTasks(), Task.class).setVisible(true);
+//			new AssignmentFrame(mf).setVisible(true);
 //			new ListUpdateChooser<SchoolClass>(mf, mf.getMainData().getClasses(), SchoolClass.class).setVisible(true);
 //			new SchoolClassFrame(mf).setVisible(true);
 //			new ListUpdateChooser<Course>(mf,
