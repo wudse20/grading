@@ -217,10 +217,10 @@ public class GradesPanel extends JPanel {
 		panel.setLayout(pLayout);
 		panel.add(panelCriteria);
 
-//		updateInfo(
-//				tasks.get(mf.getCurrentlySelectedAssingmentIndex()).getStudents()
-//						.get(mf.getCurrentlySelectedStudentIndex()),
-//				tasks.get(mf.getCurrentlySelectedAssingmentIndex()), criteria);
+//		TODO: Fixa så att det går att visa generellt också, även så att metoden hämtar allt rätt. Ska kolla på det sen.
+//		updateInfo(mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getStudents().get(mf.getCurrentlySelectedStudentIndex()),
+//				mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getStudents().get(mf.getCurrentlySelectedStudentIndex()).getTasks().get(mf.getCurrentlySelectedAssingmentIndex()),
+//				mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getStudents().get(mf.getCurrentlySelectedStudentIndex()).getTasks().get(mf.getCurrentlySelectedAssingmentIndex()).getCriteria());
 	}
 
 	private void btnClicked(Grade g, Criteria c) {
