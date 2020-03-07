@@ -5,6 +5,8 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.beans.JavaBean;
+import java.beans.Transient;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -44,7 +46,6 @@ public class Criteria {
 		//Ville inte vara i setproperties av någon anledning.
 		lblCriteria = new JLabel(name);
 		this.setProperties(name);
-//		this.addActionListeneners();
 		this.updateGUI(grade);
 	}
 
@@ -76,32 +77,6 @@ public class Criteria {
 		pCriteria.add(lblGrade);
 		pCriteria.add(pButtons);
 	}
-
-/*	private void addActionListeneners()
-	{
-		gradeBtns[0].addActionListener((e) -> {
-			btnClicked(Grade.F);
-		});
-		
-		gradeBtns[1].addActionListener((e) -> {
-			btnClicked(Grade.E);
-		});
-
-		gradeBtns[2].addActionListener((e) -> {
-			btnClicked(Grade.C);
-		});
-		
-		gradeBtns[3].addActionListener((e) -> {
-			btnClicked(Grade.A);
-		});
-	}
-	
-	private void btnClicked(Grade g) {
-		this.grade = g;
-		var gp = mf.getGradePanel();
-		this.updateGUI(g);
-		gp.updateGUI(gp.getState());
-	}*/
 
 	public void updateGUI(Grade grade) {
 		switch (grade) {
@@ -169,10 +144,12 @@ public class Criteria {
 		this.grade = grade;
 	}
 
+	@Transient
 	public JPanel getPanelCriteria() {
 		return pCriteria;
 	}
 
+	@Transient
 	public JButton[] getGradeBtns() {
 		return this.gradeBtns;
 	}

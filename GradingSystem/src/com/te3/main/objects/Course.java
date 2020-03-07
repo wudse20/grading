@@ -51,7 +51,11 @@ public class Course {
 	 */
 	public ArrayList<Criteria> getCourseCriteria() {
 		ArrayList<Criteria> clone = new ArrayList<Criteria>();
-		clone.addAll(this.courseCriteria);
+		try {
+			clone.addAll(this.courseCriteria);
+		} catch (NullPointerException ex) {
+			return new ArrayList<Criteria>();
+		}
 		return clone;
 	}
 

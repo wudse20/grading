@@ -49,15 +49,15 @@ public class Task {
 		return criteria;
 	}
 
-	public void setCriteria(ArrayList<Criteria> taskGrades) {
-		this.criteria = taskGrades;
+	public void setCriteria(ArrayList<Criteria> criteria) {
+		this.criteria = criteria;
 	}
 
-	public void addTaskGrade(Criteria newGrade) {
-		criteria.add(newGrade);
+	public void addCriteria(Criteria criteria) {
+		this.criteria.add(criteria);
 	}
 	
-	public void removeTaskGrade(Criteria deleteGrade) {
+	public void removeCriteria(Criteria deleteGrade) {
 		criteria.remove(deleteGrade);
 	}
 	
