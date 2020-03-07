@@ -5,14 +5,14 @@ import java.util.ArrayList;
 import com.te3.main.exceptions.IllegalInputException;
 
 public class Data {
-	
-	private ArrayList<SchoolClass> 	classes = new ArrayList<SchoolClass>();
+
+	private ArrayList<SchoolClass> classes = new ArrayList<SchoolClass>();
 	
 	private String savePath;
 	
 	public Data() {}
-	
-	public Data(ArrayList<SchoolClass> classes, ArrayList<Course> courses) {
+
+	public Data(ArrayList<SchoolClass> classes) {
 		this.classes = classes;
 		this.savePath = "./saves.xml";
 	}

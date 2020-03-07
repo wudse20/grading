@@ -97,7 +97,7 @@ public class MainFrame extends JFrame {
 		d = xml.read(filePath);
 
 		if (d == null) {
-			d = new Data(new ArrayList<SchoolClass>(), new ArrayList<Course>());
+			d = new Data(new ArrayList<SchoolClass>());
 		}
 
 		return d;
@@ -187,7 +187,7 @@ public class MainFrame extends JFrame {
 			courses.add(teknik);
 			coursesB.add(teknikB);
 
-			return new Data(classes, courses);
+			return new Data(classes);
 		} else {
 			return load(saveFilePath);
 		}
