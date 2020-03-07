@@ -7,12 +7,9 @@ import java.awt.Font;
 
 import java.util.ArrayList;
 
-import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
+import javax.swing.*;
 
+import com.te3.main.enums.Grade;
 import com.te3.main.enums.State;
 import com.te3.main.objects.Criteria;
 import com.te3.main.objects.Student;
@@ -191,6 +188,29 @@ public class GradesPanel extends JPanel {
 		panelCriteria.setLayout(pCriteriaLayout);
 
 		for (var i = 0; i < criteria.size(); i++) {
+			//Adds the action listeners
+			JButton[] gradeBtns = criteria.get(i).getGradeBtns();
+
+			//Since it needs to be final or effectively final in lambda
+			final int i2 = i;
+
+			gradeBtns[0].addActionListener((e) -> {
+				btnClicked(Grade.F, criteria.get(i2));
+			});
+
+			gradeBtns[1].addActionListener((e) -> {
+				btnClicked(Grade.E, criteria.get(i2));
+			});
+
+			gradeBtns[2].addActionListener((e) -> {
+				btnClicked(Grade.C, criteria.get(i2));
+			});
+
+			gradeBtns[3].addActionListener((e) -> {
+				btnClicked(Grade.A, criteria.get(i2));
+			});
+
+			//Adds the panel
 			panelCriteria.add(criteria.get(i).getPanelCriteria());
 		}
 
@@ -201,6 +221,13 @@ public class GradesPanel extends JPanel {
 //				tasks.get(mf.getCurrentlySelectedAssingmentIndex()).getStudents()
 //						.get(mf.getCurrentlySelectedStudentIndex()),
 //				tasks.get(mf.getCurrentlySelectedAssingmentIndex()), criteria);
+	}
+
+	private void btnClicked(Grade g, Criteria c) {
+		c.setGrade(g);
+		c.updateGUI(g);
+		var gp = mf.getGradePanel();
+		gp.updateGUI(state);
 	}
 
 	/**

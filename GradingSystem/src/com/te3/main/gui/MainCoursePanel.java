@@ -188,7 +188,7 @@ public class MainCoursePanel extends JPanel implements DocumentListener {
 
 	private void addCriteria() {
 		try {
-			Criteria c = new Criteria(txfCriteria.getText(), mf);
+			Criteria c = new Criteria(txfCriteria.getText());
 
 			if (criteria.contains(c)) {
 				JOptionPane.showMessageDialog(this, "Du har redan lagt till detta kunskapskravet!", "Fel",

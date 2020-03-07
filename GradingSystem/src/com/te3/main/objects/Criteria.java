@@ -31,25 +31,20 @@ public class Criteria {
 	private FlowLayout pButtonsLayout = new FlowLayout(FlowLayout.LEFT);
 	
 	private GridLayout pCriteriaLayout = new GridLayout(2, 2);
-	
-	//Försök att hitta en ny lösning senare
-	MainFrame mf;	
 
 	public Criteria() {}
 
-	public Criteria(String name, MainFrame mf) throws IllegalNameException {
+	public Criteria(String name) throws IllegalNameException {
 		try {
 			this.setName(name);
 		} catch (IllegalNameException e) {
 			throw new IllegalNameException(e.getMessage());
 		}
-				
-		this.mf = mf;
 		
 		//Ville inte vara i setproperties av någon anledning.
 		lblCriteria = new JLabel(name);
 		this.setProperties(name);
-		this.addActionListeneners();
+//		this.addActionListeneners();
 		this.updateGUI(grade);
 	}
 
@@ -82,7 +77,7 @@ public class Criteria {
 		pCriteria.add(pButtons);
 	}
 
-	private void addActionListeneners() 
+/*	private void addActionListeneners()
 	{
 		gradeBtns[0].addActionListener((e) -> {
 			btnClicked(Grade.F);
@@ -106,7 +101,7 @@ public class Criteria {
 		var gp = mf.getGradePanel();
 		this.updateGUI(g);
 		gp.updateGUI(gp.getState());
-	}
+	}*/
 
 	public void updateGUI(Grade grade) {
 		switch (grade) {
@@ -177,13 +172,9 @@ public class Criteria {
 	public JPanel getPanelCriteria() {
 		return pCriteria;
 	}
-	
-	public void setMF(MainFrame mf) {
-		this.mf = mf;
-	}
-	
-	public MainFrame getMF() {
-		return this.mf;
+
+	public JButton[] getGradeBtns() {
+		return this.gradeBtns;
 	}
 
 	/**

@@ -137,13 +137,13 @@ public class MainFrame extends JFrame {
 			}
 
 			try {
-				courseCriteria.add(new Criteria("Mekanik", this));
-				courseCriteria.add(new Criteria("Genus", this));
-				courseCriteria.add(new Criteria("Teknikhistoria", this));
-				courseCriteria.add(new Criteria("CAD", this));
-				courseCriteria.add(new Criteria("Programmering", this));
-				courseCriteria.add(new Criteria("Fjäsk", this));
-				courseCriteria.add(new Criteria("Glass", this));
+				courseCriteria.add(new Criteria("Mekanik"));
+				courseCriteria.add(new Criteria("Genus"));
+				courseCriteria.add(new Criteria("Teknikhistoria"));
+				courseCriteria.add(new Criteria("CAD"));
+				courseCriteria.add(new Criteria("Programmering"));
+				courseCriteria.add(new Criteria("Fjäsk"));
+				courseCriteria.add(new Criteria("Glass"));
 			} catch (IllegalNameException e) {
 				e.printStackTrace();
 			}
@@ -161,9 +161,9 @@ public class MainFrame extends JFrame {
 			ArrayList<Criteria> c = new ArrayList<Criteria>();
 
 			try {
-				c.add(new Criteria("Mekanik", this));
-				c.add(new Criteria("CAD", this));
-				c.add(new Criteria("Fjäsk", this));
+				c.add(new Criteria("Mekanik"));
+				c.add(new Criteria("CAD"));
+				c.add(new Criteria("Fjäsk"));
 			} catch (IllegalNameException e) {
 				e.printStackTrace();
 			}
