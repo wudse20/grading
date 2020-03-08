@@ -165,6 +165,8 @@ public class AssignmentFrame extends JFrame {
 			Student s = al.get(i);
 			s.addTask(t);
 		}
+		
+		mf.save(mf.getSaveFilePath());
 	}
 
 	private void updateAssignment() throws IllegalNameException, IllegalInputException {
@@ -196,6 +198,7 @@ public class AssignmentFrame extends JFrame {
 			al.get(i).addTask(t);
 		}
 		
+		mf.save(mf.getSaveFilePath());
 	}
 
 }
