@@ -111,6 +111,8 @@ public class GradesPanel extends JPanel {
 	}
 
 	/**
+	 * TODO: Fixa så att den inte visar kursen om det ska vara så<br>
+	 * <br>
 	 * Updates the info in the top hand left corner.
 	 * 
 	 * @param s  the current student
@@ -188,10 +190,10 @@ public class GradesPanel extends JPanel {
 		panelCriteria.setLayout(pCriteriaLayout);
 
 		for (var i = 0; i < criteria.size(); i++) {
-			//Adds the action listeners
+			// Adds the action listeners
 			JButton[] gradeBtns = criteria.get(i).getGradeBtns();
 
-			//Since it needs to be final or effectively final in lambda
+			// Since it needs to be final or effectively final in lambda
 			final int i2 = i;
 
 			gradeBtns[0].addActionListener((e) -> {
@@ -210,17 +212,20 @@ public class GradesPanel extends JPanel {
 				btnClicked(Grade.A, criteria.get(i2));
 			});
 
-			//Adds the panel
+			// Adds the panel
 			panelCriteria.add(criteria.get(i).getPanelCriteria());
 		}
 
 		panel.setLayout(pLayout);
 		panel.add(panelCriteria);
 
-//		TODO: Fixa så att det går att visa generellt också, även så att metoden hämtar allt rätt. Ska kolla på det sen.
-//		updateInfo(mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getStudents().get(mf.getCurrentlySelectedStudentIndex()),
-//				mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getStudents().get(mf.getCurrentlySelectedStudentIndex()).getTasks().get(mf.getCurrentlySelectedAssingmentIndex()),
-//				mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getStudents().get(mf.getCurrentlySelectedStudentIndex()).getTasks().get(mf.getCurrentlySelectedAssingmentIndex()).getCriteria());
+		updateInfo(
+				mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getStudents()
+						.get(mf.getCurrentlySelectedStudentIndex()),
+				mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getStudents()
+						.get(mf.getCurrentlySelectedStudentIndex()).getTasks()
+						.get(mf.getCurrentlySelectedAssingmentIndex()),
+				criteria);
 	}
 
 	private void btnClicked(Grade g, Criteria c) {

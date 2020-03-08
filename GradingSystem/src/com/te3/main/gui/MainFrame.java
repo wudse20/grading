@@ -119,23 +119,9 @@ public class MainFrame extends JFrame {
 			ArrayList<Student> studentsB = new ArrayList<Student>();
 			ArrayList<Criteria> courseCriteria = new ArrayList<Criteria>();
 
-			try {
-				studentsA.add(new Student("Jon W"));
-				studentsA.add(new Student("Adam G"));
-
-				studentsB.add(new Student("Anton S"));
-				studentsB.add(new Student("Liza H"));
-			} catch (IllegalNameException e) {
-				e.printStackTrace();
-			}
-
-			try {
-				classes.add(new SchoolClass("TE3A", courses, studentsA));
-				classes.add(new SchoolClass("TE3B", coursesB, studentsB));
-			} catch (IllegalNameException e) {
-				e.printStackTrace();
-			}
-
+			Course teknik = null;
+			Course teknikB = null;
+			
 			try {
 				courseCriteria.add(new Criteria("Mekanik"));
 				courseCriteria.add(new Criteria("Genus"));
@@ -147,14 +133,36 @@ public class MainFrame extends JFrame {
 			} catch (IllegalNameException e) {
 				e.printStackTrace();
 			}
-
-			Course teknik = null;
-			Course teknikB = null;
+			
 			try {
 				teknik = new Course("Teknik", courseCriteria);
 				teknikB = new Course("Teknik", courseCriteria);
 			} catch (IllegalNameException e) {
 				// TODO handle illegal name, sätt ruta röd typ
+				e.printStackTrace();
+			}
+			
+			try {
+				studentsA.add(new Student("Jon W"));
+				studentsA.add(new Student("Adam G"));
+
+				studentsB.add(new Student("Anton S"));
+				studentsB.add(new Student("Liza H"));
+				
+				for (int i = 0; i < studentsA.size(); i++) {
+					studentsA.get(i).addTask(new Task("Vattenhallen", teknik.getCourseCriteria()));
+					studentsA.get(i).addTask(new Task("Teknikhisotira", teknik.getCourseCriteria()));
+					studentsB.get(i).addTask(new Task("Vattenhallen", teknikB.getCourseCriteria()));
+					studentsB.get(i).addTask(new Task("Teknikhisotira", teknikB.getCourseCriteria()));
+				}
+			} catch (IllegalNameException e) {
+				e.printStackTrace();
+			}
+
+			try {
+				classes.add(new SchoolClass("TE3A", courses, studentsA));
+				classes.add(new SchoolClass("TE3B", coursesB, studentsB));
+			} catch (IllegalNameException e) {
 				e.printStackTrace();
 			}
 
@@ -172,7 +180,6 @@ public class MainFrame extends JFrame {
 			c.get(1).setGrade(Grade.E);
 			c.get(2).setGrade(Grade.A);
 
-			
 			try {
 				teknik.addCourseTask(new Task("Vattenhallen", teknik.getCourseCriteria()));
 				teknik.addCourseTask(new Task("Teknikhistoria", c));
