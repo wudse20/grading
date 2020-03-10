@@ -111,15 +111,14 @@ public class GradesPanel extends JPanel {
 	}
 
 	/**
-	 * TODO: Fixa så att den inte visar kursen om det ska vara så<br>
-	 * <br>
 	 * Updates the info in the top hand left corner.
 	 * 
 	 * @param s  the current student
 	 * @param t  the current task
 	 * @param al the current criteria
+	 * @param st the current state of the panel.
 	 */
-	private void updateInfo(Student s, Task t, ArrayList<Criteria> al) {
+	private void updateInfo(Student s, Task t, ArrayList<Criteria> al, State st) {
 		lblName.setText(s.getName());
 		lblGradedAsignments.setText("(" + s.getCompletedTasks() + "/" + s.getNumOfTasks() + ")");
 		lblGrades.setText(countGrades(al));
@@ -133,10 +132,16 @@ public class GradesPanel extends JPanel {
 		panelInfo.setLayout(pInfoLayout);
 		panelInfo2.setLayout(pInfoLayout2);
 
-		panelInfo2.add(lblName);
-		panelInfo2.add(lblAssingment);
-		panelInfo2.add(lblGradedAsignments);
-		panelInfo2.add(lblGrades);
+		if (st.equals(State.SINGLE_STUDENT_ASSIGNMENT)) {
+			panelInfo2.add(lblName);
+			panelInfo2.add(lblAssingment);
+			panelInfo2.add(lblGradedAsignments);
+			panelInfo2.add(lblGrades);
+		} else if (st.equals(State.SINGLE_STUDENT_GENERALIZED)) {
+			panelInfo2.add(lblName);
+			panelInfo2.add(lblGradedAsignments);
+			panelInfo2.add(lblGrades);
+		}
 
 		panelInfo.add(lblSpacer2, BorderLayout.LINE_START);
 		panelInfo.add(panelInfo2, BorderLayout.CENTER);
@@ -225,7 +230,7 @@ public class GradesPanel extends JPanel {
 				mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getStudents()
 						.get(mf.getCurrentlySelectedStudentIndex()).getTasks()
 						.get(mf.getCurrentlySelectedAssingmentIndex()),
-				criteria);
+				criteria, this.state);
 	}
 
 	private void btnClicked(Grade g, Criteria c) {
