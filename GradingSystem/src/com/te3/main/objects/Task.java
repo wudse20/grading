@@ -46,8 +46,7 @@ public class Task {
 			if (!(criteria.get(i).getGrade().equals(Grade.F))) {
 				this.isGraded = true;
 				break;
-			}
-			else if (criteria.size() - 1 == i) {
+			} else if (criteria.size() - 1 == i) {
 				this.isGraded = false;
 			}
 		}
@@ -63,6 +62,7 @@ public class Task {
 		return criteria;
 	}
 
+	//src don't match byte kolla upp det senare.
 	public void setCriteria(ArrayList<Criteria> criteria) {
 		this.criteria = criteria;
 	}

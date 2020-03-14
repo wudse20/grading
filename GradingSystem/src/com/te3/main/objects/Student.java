@@ -78,16 +78,23 @@ public class Student {
 		this.completedTasks = completedTasks;
 	}
 
+	//Denna ger nullpointer tror jag
 	public short getNumOfTasks() {
+		if (tasks == null)
+			return 0;
+
 		this.numOfTasks = (short) this.tasks.size();
 		return numOfTasks;
 	}
 
+	//Om inte getNumOfTasks så denna.
 	public void setNumOfTasks(short numOfTasks) {
 		this.numOfTasks = numOfTasks;
 	}
 	
 	public ArrayList<Task> getTasks() {
+		if (this.tasks == null)
+			return new ArrayList<Task>();
 		return tasks;
 	}
 
