@@ -52,7 +52,15 @@ public class Student {
 	}
 
 	public short getCompletedTasks() {
-		return completedTasks;
+		this.completedTasks = 0;
+		
+		for (int i = 0; i < tasks.size(); i++) {
+			if (tasks.get(i).isGraded()) {
+				this.completedTasks++;
+			}
+		}
+		
+		return this.completedTasks;
 	}
 
 	/**
@@ -71,6 +79,7 @@ public class Student {
 	}
 
 	public short getNumOfTasks() {
+		this.numOfTasks = (short) this.tasks.size();
 		return numOfTasks;
 	}
 

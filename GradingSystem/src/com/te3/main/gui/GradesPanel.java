@@ -236,8 +236,7 @@ public class GradesPanel extends JPanel {
 	private void btnClicked(Grade g, Criteria c) {
 		c.setGrade(g);
 		c.updateGUI(g);
-		var gp = mf.getGradePanel();
-		gp.updateGUI(state);
+		this.updateGUI(this.state);
 	}
 
 	/**

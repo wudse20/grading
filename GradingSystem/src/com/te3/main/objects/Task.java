@@ -1,5 +1,6 @@
 package com.te3.main.objects;
 
+import com.te3.main.enums.Grade;
 import com.te3.main.exceptions.IllegalNameException;
 
 import java.util.ArrayList;
@@ -9,6 +10,9 @@ public class Task {
 	private String name;
 	private boolean isGraded;
 	private ArrayList<Criteria> criteria = new ArrayList<Criteria>();
+	/**
+	 * ??? Vad skulle vi med denna till ???
+	 */
 	private ArrayList<Student> students = new ArrayList<Student>();
 	
 	public Task() {}
@@ -38,7 +42,17 @@ public class Task {
 	}
 
 	public boolean isGraded() {
-		return isGraded;
+		for (int i = 0; i < criteria.size(); i++) {
+			if (!(criteria.get(i).getGrade().equals(Grade.F))) {
+				this.isGraded = true;
+				break;
+			}
+			else if (criteria.size() - 1 == i) {
+				this.isGraded = false;
+			}
+		}
+		
+		return this.isGraded;
 	}
 
 	public void setGraded(boolean isGraded) {
