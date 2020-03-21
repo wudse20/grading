@@ -6,7 +6,7 @@ import com.te3.main.exceptions.IllegalNameException;
 
 public class Student {
 	private String name;
-	private String comment;
+    private String comment;
 
 	private ArrayList<Task> tasks;
 	
@@ -18,6 +18,7 @@ public class Student {
 	public Student(String name) throws IllegalNameException {
 		this.setName(name);
 		this.setTasks(new ArrayList<Task>());
+		this.setComment("");
 	}
 
 	public String getName() {
@@ -44,6 +45,9 @@ public class Student {
 	}
 
 	public String getComment() {
+	    if (this.comment == null)
+	        return "";
+
 		return comment;
 	}
 
@@ -63,13 +67,16 @@ public class Student {
 		return this.completedTasks;
 	}
 
-	/**
-	 * TODO: Calculates the students amount of completed tasks
-	 */
-	public void setCompletedTasks() {
-		this.completedTasks = 0;
-	}
-	
+    public ArrayList<Task> getTasks() {
+        if (this.tasks == null)
+            return new ArrayList<Task>();
+        return tasks;
+    }
+
+    public void setTasks(ArrayList<Task> tasks) {
+        this.tasks = tasks;
+    }
+
 	/**
 	 * Overrides the students amount of completed tasks
 	 * @param completedTasks override
@@ -78,7 +85,6 @@ public class Student {
 		this.completedTasks = completedTasks;
 	}
 
-	//Denna ger nullpointer tror jag
 	public short getNumOfTasks() {
 		if (tasks == null)
 			return 0;
@@ -87,19 +93,8 @@ public class Student {
 		return numOfTasks;
 	}
 
-	//Om inte getNumOfTasks så denna.
 	public void setNumOfTasks(short numOfTasks) {
 		this.numOfTasks = numOfTasks;
-	}
-	
-	public ArrayList<Task> getTasks() {
-		if (this.tasks == null)
-			return new ArrayList<Task>();
-		return tasks;
-	}
-
-	public void setTasks(ArrayList<Task> tasks) {
-		this.tasks = tasks;
 	}
 
 	@Override

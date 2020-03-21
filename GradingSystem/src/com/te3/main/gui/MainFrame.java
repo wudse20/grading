@@ -86,6 +86,9 @@ public class MainFrame extends JFrame {
 		cp.add(btnPanel);
 	}
 
+	/**
+	 * Might throw null pointers for now nothing to worry about.
+	 * */
 	public void save(String filePath) {
 		XML<Data> xml = new XML<Data>();
 		xml.write(filePath, this.mainData);
@@ -108,6 +111,7 @@ public class MainFrame extends JFrame {
 		// it create a new empty data object.
 		// change this boolean to false if you do not want to run the program with
 		// default predefined classes, courses, students and tasks.
+		// Kommenterat bort för att spar debug tid
 
 		boolean debug = true;
 
@@ -120,25 +124,24 @@ public class MainFrame extends JFrame {
 			ArrayList<Criteria> courseCriteria = new ArrayList<Criteria>();
 
 			Course teknik = null;
-			Course teknikB = null;
+//			Course teknikB = null;
 			
 			try {
 				courseCriteria.add(new Criteria("Mekanik"));
-				courseCriteria.add(new Criteria("Genus"));
-				courseCriteria.add(new Criteria("Teknikhistoria"));
-				courseCriteria.add(new Criteria("CAD"));
-				courseCriteria.add(new Criteria("Programmering"));
-				courseCriteria.add(new Criteria("Fjäsk"));
-				courseCriteria.add(new Criteria("Glass"));
+//				courseCriteria.add(new Criteria("Genus"));
+//				courseCriteria.add(new Criteria("CAD"));
+//				courseCriteria.add(new Criteria("Teknikhistoria"));
+//				courseCriteria.add(new Criteria("Programmering"));
+//				courseCriteria.add(new Criteria("Fjäsk"));
+//				courseCriteria.add(new Criteria("Glass"));
 			} catch (IllegalNameException e) {
 				e.printStackTrace();
 			}
 			
 			try {
 				teknik = new Course("Teknik", courseCriteria);
-				teknikB = new Course("Teknik", courseCriteria);
+//				teknikB = new Course("Teknik", courseCriteria);
 			} catch (IllegalNameException e) {
-				// TODO handle illegal name, sätt ruta röd typ
 				e.printStackTrace();
 			}
 			
@@ -146,14 +149,14 @@ public class MainFrame extends JFrame {
 				studentsA.add(new Student("Jon W"));
 				studentsA.add(new Student("Adam G"));
 
-				studentsB.add(new Student("Anton S"));
-				studentsB.add(new Student("Liza H"));
+//				studentsB.add(new Student("Anton S"));
+//				studentsB.add(new Student("Liza H"));
 				
 				for (int i = 0; i < studentsA.size(); i++) {
 					studentsA.get(i).addTask(new Task("Vattenhallen", teknik.getCourseCriteria()));
-					studentsA.get(i).addTask(new Task("Teknikhisotira", teknik.getCourseCriteria()));
-					studentsB.get(i).addTask(new Task("Vattenhallen", teknikB.getCourseCriteria()));
-					studentsB.get(i).addTask(new Task("Teknikhisotira", teknikB.getCourseCriteria()));
+//					studentsA.get(i).addTask(new Task("Teknikhisotira", teknik.getCourseCriteria()));
+//					studentsB.get(i).addTask(new Task("Vattenhallen", teknikB.getCourseCriteria()));
+//					studentsB.get(i).addTask(new Task("Teknikhisotira", teknikB.getCourseCriteria()));
 				}
 			} catch (IllegalNameException e) {
 				e.printStackTrace();
@@ -161,7 +164,7 @@ public class MainFrame extends JFrame {
 
 			try {
 				classes.add(new SchoolClass("TE3A", courses, studentsA));
-				classes.add(new SchoolClass("TE3B", coursesB, studentsB));
+//				classes.add(new SchoolClass("TE3B", coursesB, studentsB));
 			} catch (IllegalNameException e) {
 				e.printStackTrace();
 			}
@@ -170,29 +173,29 @@ public class MainFrame extends JFrame {
 
 			try {
 				c.add(new Criteria("Mekanik"));
-				c.add(new Criteria("CAD"));
-				c.add(new Criteria("Fjäsk"));
+//				c.add(new Criteria("CAD"));
+//				c.add(new Criteria("Fjäsk"));
 			} catch (IllegalNameException e) {
 				e.printStackTrace();
 			}
 
 			c.get(0).setGrade(Grade.C);
-			c.get(1).setGrade(Grade.E);
-			c.get(2).setGrade(Grade.A);
+//			c.get(1).setGrade(Grade.E);
+//			c.get(2).setGrade(Grade.A);
 
 			try {
 				teknik.addCourseTask(new Task("Vattenhallen", teknik.getCourseCriteria()));
 				teknik.addCourseTask(new Task("Teknikhistoria", c));
 
-				teknikB.addCourseTask(new Task("Vattenhallen", teknik.getCourseCriteria()));
-				teknikB.addCourseTask(new Task("Teknikhistoria", c));
+//				teknikB.addCourseTask(new Task("Vattenhallen", teknik.getCourseCriteria()));
+//				teknikB.addCourseTask(new Task("Teknikhistoria", c));
 			} catch (IllegalNameException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 
 			courses.add(teknik);
-			coursesB.add(teknikB);
+//			coursesB.add(teknikB);
 
 			return new Data(classes);
 		} else {
