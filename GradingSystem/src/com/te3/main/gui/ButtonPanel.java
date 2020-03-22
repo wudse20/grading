@@ -45,6 +45,7 @@ public class ButtonPanel extends JPanel {
 	JButton btnSaveAs = new JButton("Spara som");
 	JButton btnSaveToFile = new JButton("Spara till fil"); // Ska vi döpa om denna?
 	JButton btnPrint = new JButton("Skriv ut");
+	JButton btnSettings = new JButton("Inställningar");
 	JButton btnHelp = new JButton("?");
 
 	JLabel lblSpacer1 = new JLabel("  ");
@@ -78,9 +79,7 @@ public class ButtonPanel extends JPanel {
 		 * 
 		 * Hjälp mig gärna!
 		 */
-		threadSaveToFile = new Thread(() -> {
-			saveToFileThread(fsf, st);
-		});
+		threadSaveToFile = new Thread(() -> saveToFileThread(fsf, st));
 
 		threadSaveToFile.start();
 	}
@@ -230,9 +229,7 @@ public class ButtonPanel extends JPanel {
 		 * 
 		 * Hjälp mig gärna!
 		 */
-		threadSaveAs = new Thread(() -> {
-			saveAsThread(fsf);
-		});
+		threadSaveAs = new Thread(() -> saveAsThread(fsf));
 
 		threadSaveAs.start();
 	}
@@ -248,7 +245,6 @@ public class ButtonPanel extends JPanel {
 			try {
 				threadSaveAs.sleep(450);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -266,12 +262,17 @@ public class ButtonPanel extends JPanel {
 		fsf.close();
 	}
 
+	private void settings() {
+		new SettingsFrame(mf).setVisible(true);
+	}
+
 	/**
 	 * Adds Components.
 	 */
 	private void addComponents() {
 		this.add(lblSpacer1);
 		this.add(btnHelp);
+		this.add(btnSettings);
 		this.add(btnPrint);
 		this.add(btnSaveToFile);
 		this.add(btnSaveAs);
@@ -284,25 +285,19 @@ public class ButtonPanel extends JPanel {
 	private void setProperties() {
 		this.setLayout(layout);
 
-		btnHelp.addActionListener((e) -> {
-			new HelpFrame(helpTitle, helpInfo, 500).setVisible(true);
-		});
+		btnHelp.addActionListener((e) -> new HelpFrame(helpTitle, helpInfo, 500).setVisible(true));
 
 		btnSave.addActionListener((e) -> {
 			mf.saveData(mf.getSaveFilePath());
 			JOptionPane.showMessageDialog(mf, "Du har sparat!", "Sparat", JOptionPane.INFORMATION_MESSAGE);
 		});
 
-		btnPrint.addActionListener((e) -> {
-			print(mf.getGradePanel().getState());
-		});
+		btnPrint.addActionListener((e) -> print(mf.getGradePanel().getState()));
 
-		btnSaveToFile.addActionListener((e) -> {
-			saveToFile(mf.getGradePanel().getState());
-		});
+		btnSaveToFile.addActionListener((e) -> saveToFile(mf.getGradePanel().getState()));
 
-		btnSaveAs.addActionListener((e) -> {
-			saveAs(mf.getSaveFilePath());
-		});
+		btnSaveAs.addActionListener((e) -> saveAs(mf.getSaveFilePath()));
+
+		btnSettings.addActionListener((e) -> settings());
 	}
 }

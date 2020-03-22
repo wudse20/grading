@@ -93,7 +93,9 @@ public class FileSystemFrame extends JFrame implements KeyListener, ListSelectio
 
 	/**
 	 * @param name the file name
-	 * @param fileType the file type
+	 * @param fileType the file type<br>
+	 *                 Ex: xml <br>
+	 *                 NOT: .xml
 	 */
 	public FileSystemFrame(String name, String fileType) {
 		super("Filsystem");
@@ -119,7 +121,6 @@ public class FileSystemFrame extends JFrame implements KeyListener, ListSelectio
 		this.setProperties();
 		this.addComponents();
 	}
-
 	
 	/**
 	 * Adds everything to the frame, and the different panels.

@@ -66,6 +66,7 @@ public class MainFrame extends JFrame {
 			settings = new Settings("./saves.xml", 300);
 
 		this.saveFilePath = settings.getSavePath();
+		this.saveTimer = settings.getSaveTimer();
 
 		mainData = getSavedData();
 
@@ -224,16 +225,13 @@ public class MainFrame extends JFrame {
 	}
 
 	public int getSaveTimer() {
-		return saveTimer;
+		this.saveTimer = settings.getSaveTimer();
+		return this.saveTimer;
 	}
 
 	public void setSaveTimer(int saveTimer) throws IllegalInputException {
-		if (saveTimer > 60) {
-			this.saveTimer = saveTimer;
-		} else {
-			// Gör text ruta röd sen eller ngt.
-			throw new IllegalInputException("Intervallet måste vara längre");
-		}
+		settings.setSaveTimer(saveTimer);
+		this.saveTimer = saveTimer;
 	}
 
 	public String getSettingsFilePath() {
@@ -288,5 +286,15 @@ public class MainFrame extends JFrame {
 
 	public GradesPanel getGradePanel() {
 		return gradePanel;
+	}
+
+	public Settings getSettings() {
+		return this.settings;
+	}
+
+	public void setSettings(Settings s) {
+		this.settings = s;
+		this.saveFilePath = s.getSavePath();
+		this.saveTimer = s.getSaveTimer();
 	}
 }
