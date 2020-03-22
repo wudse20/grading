@@ -1,24 +1,38 @@
 package com.te3.main.objects;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import com.te3.main.exceptions.IllegalNameException;
 
 public class Student {
 	private String name;
-    private String comment;
 
-	private ArrayList<Task> tasks;
-	
-	private short completedTasks;
-	private short numOfTasks;
+    private ArrayList<Course> courses;
 	
 	public Student() {}
 	
 	public Student(String name) throws IllegalNameException {
 		this.setName(name);
-		this.setTasks(new ArrayList<Task>());
-		this.setComment("");
+		this.setCourses(new ArrayList<Course>());
+	}
+
+	public Student(String name, ArrayList<Course> courses) throws IllegalNameException {
+	    this.setName(name);
+	    this.setCourses(courses);
+    }
+
+    /**
+	 * Adds a new course to the student<br><br>
+	 * if c = {@code null} then it will return without doing anything.
+	 *
+	 * @param c the new course
+	 * */
+    public void addCourse(Course c) {
+		if (c == null)
+			return;
+
+		this.courses.add(c);
 	}
 
 	public String getName() {
@@ -32,69 +46,19 @@ public class Student {
 			this.name = name;
 		}
 	}
-	
-	/**
-	 * Adds a task to the student's tasks.
-	 * 
-	 * @param t the task if {@code null} then it dosen't do anything.
-	 */
-	public void addTask(Task t) {
-		if (t != null) {
-			this.tasks.add(t);
-		}
-	}
 
-	public String getComment() {
-	    if (this.comment == null)
-	        return "";
-
-		return comment;
-	}
-
-	public void setComment(String comment) {
-		this.comment = comment;
-	}
-
-	public short getCompletedTasks() {
-		this.completedTasks = 0;
-		
-		for (int i = 0; i < tasks.size(); i++) {
-			if (tasks.get(i).isGraded()) {
-				this.completedTasks++;
-			}
-		}
-		
-		return this.completedTasks;
-	}
-
-    public ArrayList<Task> getTasks() {
-        if (this.tasks == null)
-            return new ArrayList<Task>();
-        return tasks;
+	public void setCourses(ArrayList<Course> courses) {
+	    this.courses = courses;
     }
 
-    public void setTasks(ArrayList<Task> tasks) {
-        this.tasks = tasks;
-    }
-
-	/**
-	 * Overrides the students amount of completed tasks
-	 * @param completedTasks override
-	 */
-	public void setCompletedTasks(short completedTasks) {
-		this.completedTasks = completedTasks;
-	}
-
-	public short getNumOfTasks() {
-		if (tasks == null)
-			return 0;
-
-		this.numOfTasks = (short) this.tasks.size();
-		return numOfTasks;
-	}
-
-	public void setNumOfTasks(short numOfTasks) {
-		this.numOfTasks = numOfTasks;
+    public ArrayList<Course> getCourses() {
+		try {
+			ArrayList<Course> clone = new ArrayList<Course>();
+			clone.addAll(this.courses);
+			return clone;
+		} catch (NullPointerException e) {
+			return new ArrayList<Course>();
+		}
 	}
 
 	@Override

@@ -1,5 +1,6 @@
 package com.te3.main.objects;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import com.te3.main.exceptions.IllegalNameException;
@@ -13,13 +14,9 @@ public class Course {
 	public Course() {}
 	
 	public Course(String name, ArrayList<Criteria> courseCriteria) throws IllegalNameException {
-		try {
-			setName(name);
-		} catch (IllegalNameException e) {
-			throw new IllegalNameException(e.getMessage());
-		}
-		setCourseCriteria(courseCriteria);
-		setCourseTasks(new ArrayList<Task>());
+	    this.setName(name);
+		this.setCourseCriteria(courseCriteria);
+		this.setCourseTasks(new ArrayList<Task>());
 	}
 	
 	public Course(String name, ArrayList<Criteria> courseCriteria, ArrayList<Task> courseTasks) throws IllegalNameException {
@@ -30,6 +27,21 @@ public class Course {
 		}
 		setCourseCriteria(courseCriteria);
 		setCourseTasks(courseTasks);
+	}
+
+	/**
+	 * Adds a new course
+	 *
+	 * @param t the new task
+	 * @return {@code true} -> if successful <br>
+	 *     	   {@code false} -> if unsuccessful
+	 */
+	public boolean addTask(Task t) {
+		if (t == null)
+			return false;
+
+		this.courseTasks.add(t);
+		return true;
 	}
 
 	public String getName() {
@@ -64,7 +76,13 @@ public class Course {
 	}
 
 	public ArrayList<Task> getCourseTasks() {
-		return courseTasks;
+		try {
+			ArrayList<Task> clone = new ArrayList<Task>();
+			clone.addAll(this.courseTasks);
+			return clone;
+		} catch (NullPointerException e) {
+			return new ArrayList<Task>();
+		}
 	}
 
 	public void setCourseTasks(ArrayList<Task> courseTasks) {

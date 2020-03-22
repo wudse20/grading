@@ -46,7 +46,6 @@ public class ButtonPanel extends JPanel {
 	JButton btnSaveToFile = new JButton("Spara till fil"); // Ska vi döpa om denna?
 	JButton btnPrint = new JButton("Skriv ut");
 	JButton btnHelp = new JButton("?");
-	JButton btnTemp = new JButton("Temp");
 
 	JLabel lblSpacer1 = new JLabel("  ");
 
@@ -57,22 +56,8 @@ public class ButtonPanel extends JPanel {
 	 */
 	public ButtonPanel(MainFrame mf) {
 		this.mf = mf;
-		this.setProperites();
+		this.setProperties();
 		this.addComponents();
-
-		btnTemp.addActionListener((e) -> {
-			new ListUpdateChooser<Task>(mf, mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex())
-					.getCourses().get(mf.getCurrentlySelectedAssingmentIndex()).getCourseTasks(), Task.class).setVisible(true);
-//			new AssignmentFrame(mf).setVisible(true);
-//			new ListUpdateChooser<SchoolClass>(mf, mf.getMainData().getClasses(), SchoolClass.class).setVisible(true);
-//			new SchoolClassFrame(mf).setVisible(true);
-//			new ListUpdateChooser<Course>(mf,
-//					mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getCourses(), Course.class)
-//							.setVisible(true);
-//			new CourseFrame(mf, mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getCourses()
-//					.get(mf.getCurrentlySelectedCourseIndex())).setVisible(true);
-//			new CourseFrame(mf).setVisible(true);
-		});
 	}
 
 	/**
@@ -162,12 +147,9 @@ public class ButtonPanel extends JPanel {
 
 		SchoolClass sc = mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex());
 
-		Task t = mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getCourses()
-				.get(mf.getCurrentlySelectedCourseIndex()).getCourseTasks()
-				.get(mf.getCurrentlySelectedAssingmentIndex());
+		Task t = mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getStudents().get(mf.getCurrentlySelectedStudentIndex()).getCourses().get(mf.getCurrentlySelectedCourseIndex()).getCourseTasks().get(mf.getCurrentlySelectedAssingmentIndex());
 
-		Course co = mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getCourses()
-				.get(mf.getCurrentlySelectedCourseIndex());
+		Course co = mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getStudents().get(mf.getCurrentlySelectedStudentIndex()).getCourses().get(mf.getCurrentlySelectedCourseIndex());
 
 		ArrayList<Criteria> c;
 
@@ -182,8 +164,7 @@ public class ButtonPanel extends JPanel {
 			printView.append("\nUppgift:\t" + t.getName());
 			c = t.getCriteria();
 		} else {
-			c = mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getCourses()
-					.get(mf.getCurrentlySelectedCourseIndex()).getCourseCriteria();
+			c = co.getCourseCriteria();
 		}
 
 		printView.append("\n\nKunskapskrav:\n");
@@ -204,12 +185,9 @@ public class ButtonPanel extends JPanel {
 
 		SchoolClass sc = mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex());
 
-		Task t = mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getCourses()
-				.get(mf.getCurrentlySelectedCourseIndex()).getCourseTasks()
-				.get(mf.getCurrentlySelectedAssingmentIndex());
+		Task t = mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getStudents().get(mf.getCurrentlySelectedStudentIndex()).getCourses().get(mf.getCurrentlySelectedCourseIndex()).getCourseTasks().get(mf.getCurrentlySelectedAssingmentIndex());
 
-		Course co = mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getCourses()
-				.get(mf.getCurrentlySelectedCourseIndex());
+		Course co = mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getStudents().get(mf.getCurrentlySelectedStudentIndex()).getCourses().get(mf.getCurrentlySelectedCourseIndex());
 
 		ArrayList<Criteria> c;
 
@@ -223,8 +201,7 @@ public class ButtonPanel extends JPanel {
 			printView.append(String.format("%-20s%s", "Uppgift:", t.getName()) + "\n");
 			c = t.getCriteria();
 		} else {
-			c = mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getCourses()
-					.get(mf.getCurrentlySelectedCourseIndex()).getCourseCriteria();
+			c = co.getCourseCriteria();
 		}
 
 		printView.append("\nKunskapskrav:\n");
@@ -299,13 +276,12 @@ public class ButtonPanel extends JPanel {
 		this.add(btnSaveToFile);
 		this.add(btnSaveAs);
 		this.add(btnSave);
-		this.add(btnTemp);
 	}
 
 	/**
 	 * Sets the properties.
 	 */
-	private void setProperites() {
+	private void setProperties() {
 		this.setLayout(layout);
 
 		btnHelp.addActionListener((e) -> {

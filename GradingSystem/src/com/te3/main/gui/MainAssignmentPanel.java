@@ -45,7 +45,7 @@ public class MainAssignmentPanel extends JPanel {
     public MainAssignmentPanel(MainFrame mf) {
         this.mf = mf;
 
-        this.courseCriteria = mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getCourses()
+        this.courseCriteria = mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getStudents().get(0).getCourses()
                 .get(mf.getCurrentlySelectedCourseIndex()).getCourseCriteria();
         this.addedCriteria = new ArrayList<Criteria>();
 
@@ -145,14 +145,14 @@ public class MainAssignmentPanel extends JPanel {
      *         else it will return the rest of the course criteria.
      * */
     private ArrayList<Criteria> getRestOfCourseCriteria() {
-        ArrayList<Criteria> allCourseCriteira = mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getCourses().get(mf.getCurrentlySelectedCourseIndex()).getCourseCriteria();
+        ArrayList<Criteria> allCourseCriteria = mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getStudents().get(0).getCourses().get(mf.getCurrentlySelectedCourseIndex()).getCourseCriteria();
         ArrayList<Criteria> rest = new ArrayList<Criteria>();
 
-        if (allCourseCriteira.size() == addedCriteria.size()) {
+        if (allCourseCriteria.size() == addedCriteria.size()) {
             return new ArrayList<Criteria>();
         }
 
-        for (Criteria c : allCourseCriteira) {
+        for (Criteria c : allCourseCriteria) {
             if (!(addedCriteria.contains(c))) {
                 rest.add(c);
             }

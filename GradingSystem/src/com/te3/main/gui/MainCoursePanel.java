@@ -70,7 +70,7 @@ public class MainCoursePanel extends JPanel implements DocumentListener {
 
 	BorderLayout pClassesLayout = new BorderLayout();
 	BorderLayout pCriteriaLayout = new BorderLayout();
-	BorderLayout pLablesLayout = new BorderLayout();
+	BorderLayout pLabelsLayout = new BorderLayout();
 
 	FlowLayout pNewCriteriaLayout = new FlowLayout(FlowLayout.LEFT);
 
@@ -91,7 +91,8 @@ public class MainCoursePanel extends JPanel implements DocumentListener {
 	}
 
 	/**
-	 * For editing.
+	 * TODO: FIXA
+	 * For editing. Temp broken
 	 * 
 	 * @param mf the instance of the MainFrame
 	 * @param c the course that's being edited
@@ -101,17 +102,19 @@ public class MainCoursePanel extends JPanel implements DocumentListener {
 		this.c = c;
 		
 		ArrayList<SchoolClass> al = mf.getMainData().getClasses();
-		
-		for (int i = 0; i < al.size(); i++) {
-			SchoolClass sc = al.get(i);
-			
-			if (sc.getCourses().contains(c)) {
-				addedClasses.add(sc);
-			} else {
-				notAddedClasses.add(sc);
-			}
-		}
-		
+
+//		for (int i = 0; i < al.size(); i++) {
+//			SchoolClass sc = al.get(i);
+//
+//			for (int j = 0; j < sc.getStudents().size(); j++) {
+//				if (sc.getCourses().contains(c)) {
+//					addedClasses.add(sc);
+//				} else {
+//					notAddedClasses.add(sc);
+//				}
+//			}
+//		}
+
 		criteria = c.getCourseCriteria();
 		
 		this.setLayout(layout);
@@ -241,7 +244,7 @@ public class MainCoursePanel extends JPanel implements DocumentListener {
 	}
 
 	private void addComponents() {
-		pLables.setLayout(pLablesLayout);
+		pLables.setLayout(pLabelsLayout);
 		pLables.add(lblNotAddedClasses, BorderLayout.LINE_START);
 		pLables.add(lblAddedClasses, BorderLayout.LINE_END);
 

@@ -1,6 +1,7 @@
 package com.te3.main.objects;
 
 import com.te3.main.enums.Grade;
+import com.te3.main.exceptions.IllegalInputException;
 import com.te3.main.exceptions.IllegalNameException;
 
 import java.util.ArrayList;
@@ -8,6 +9,7 @@ import java.util.ArrayList;
 public class Task {
 	
 	private String name;
+	private String comment;
 	private boolean isGraded;
 	private ArrayList<Criteria> criteria = new ArrayList<Criteria>();
 	/**
@@ -17,12 +19,22 @@ public class Task {
 	
 	public Task() {}
 	
-	public Task(String initName, ArrayList<Criteria> criteria) throws IllegalNameException {
-		setName(initName);
-		setGraded(false);
-		setCriteria(criteria);
+	public Task(String name, ArrayList<Criteria> criteria) throws IllegalNameException, IllegalInputException {
+		this.setName(name);
+		this.setGraded(false);
+		this.setCriteria(criteria);
+		this.setComment("");
 	}
-	
+
+
+	public void addCriteria(Criteria criteria) {
+		this.criteria.add(criteria);
+	}
+
+	public void removeCriteria(Criteria deleteGrade) {
+		criteria.remove(deleteGrade);
+	}
+
 	public String getName() {
 		return name;
 	}
@@ -62,19 +74,22 @@ public class Task {
 		return criteria;
 	}
 
-	//src don't match byte kolla upp det senare.
 	public void setCriteria(ArrayList<Criteria> criteria) {
 		this.criteria = criteria;
 	}
 
-	public void addCriteria(Criteria criteria) {
-		this.criteria.add(criteria);
+	public String getComment() {
+		return this.comment;
 	}
-	
-	public void removeCriteria(Criteria deleteGrade) {
-		criteria.remove(deleteGrade);
+
+	public void setComment(String comment) throws IllegalInputException {
+		if (comment.length() < 0 || comment.length() > 50) {
+			throw new IllegalInputException("Kommentaren måste vara mellan noll och femtio tecken lång");
+		} else {
+			this.comment = comment;
+		}
 	}
-	
+
 	@Override
 	public String toString() {
 		return this.name;

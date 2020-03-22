@@ -41,7 +41,6 @@ public class GradesPanel extends JPanel {
 
 	JLabel lblName = new JLabel();
 	JLabel lblAssingment = new JLabel();
-	JLabel lblGradedAsignments = new JLabel();
 	JLabel lblGrades = new JLabel();
 	JLabel lblSpacer1 = new JLabel(" ");
 	JLabel lblSpacer2 = new JLabel("    ");
@@ -59,10 +58,8 @@ public class GradesPanel extends JPanel {
 		this.mf = mf;
 		this.setLayout(layout);
 
-		criteria = mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getCourses()
-				.get(mf.getCurrentlySelectedCourseIndex()).getCourseCriteria();
-		tasks = mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getCourses()
-				.get(mf.getCurrentlySelectedCourseIndex()).getCourseTasks();
+		criteria = mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getStudents().get(0).getCourses().get(mf.getCurrentlySelectedCourseIndex()).getCourseCriteria();
+		tasks = mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getStudents().get(0).getCourses().get(mf.getCurrentlySelectedCourseIndex()).getCourseTasks();
 
 		updateGUI(state);
 
@@ -120,12 +117,10 @@ public class GradesPanel extends JPanel {
 	 */
 	private void updateInfo(Student s, Task t, ArrayList<Criteria> al, State st) {
 		lblName.setText(s.getName());
-		lblGradedAsignments.setText("(" + s.getCompletedTasks() + "/" + s.getNumOfTasks() + ")");
 		lblGrades.setText(countGrades(al));
 		lblAssingment.setText(t.getName());
 
 		lblName.setFont(new Font(lblName.getFont().getName(), Font.BOLD, 20));
-		lblGradedAsignments.setFont(new Font(lblName.getFont().getName(), Font.PLAIN, 20));
 		lblGrades.setFont(new Font(lblName.getFont().getName(), Font.PLAIN, 20));
 		lblAssingment.setFont(new Font(lblAssingment.getFont().getName(), Font.PLAIN, 20));
 
@@ -135,11 +130,9 @@ public class GradesPanel extends JPanel {
 		if (st.equals(State.SINGLE_STUDENT_ASSIGNMENT)) {
 			panelInfo2.add(lblName);
 			panelInfo2.add(lblAssingment);
-			panelInfo2.add(lblGradedAsignments);
 			panelInfo2.add(lblGrades);
 		} else if (st.equals(State.SINGLE_STUDENT_GENERALIZED)) {
 			panelInfo2.add(lblName);
-			panelInfo2.add(lblGradedAsignments);
 			panelInfo2.add(lblGrades);
 		}
 
@@ -225,12 +218,10 @@ public class GradesPanel extends JPanel {
 		panel.add(panelCriteria);
 
 		updateInfo(
-				mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getStudents()
-						.get(mf.getCurrentlySelectedStudentIndex()),
-				mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getStudents()
-						.get(mf.getCurrentlySelectedStudentIndex()).getTasks()
-						.get(mf.getCurrentlySelectedAssingmentIndex()),
-				criteria, this.state);
+				mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getStudents().get(mf.getCurrentlySelectedStudentIndex()),
+				tasks.get(mf.getCurrentlySelectedAssingmentIndex()),
+				criteria, this.state
+		);
 	}
 
 	private void btnClicked(Grade g, Criteria c) {

@@ -2,6 +2,7 @@ package com.te3.main.gui;
 
 import java.awt.Container;
 import java.awt.Dimension;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import javax.swing.BoxLayout;
@@ -117,85 +118,28 @@ public class MainFrame extends JFrame {
 
 		if (debug) {
 			ArrayList<SchoolClass> classes = new ArrayList<SchoolClass>();
-			ArrayList<Course> courses = new ArrayList<Course>();
-			ArrayList<Course> coursesB = new ArrayList<Course>();
-			ArrayList<Student> studentsA = new ArrayList<Student>();
-			ArrayList<Student> studentsB = new ArrayList<Student>();
-			ArrayList<Criteria> courseCriteria = new ArrayList<Criteria>();
-
-			Course teknik = null;
-//			Course teknikB = null;
-			
-			try {
-				courseCriteria.add(new Criteria("Mekanik"));
-//				courseCriteria.add(new Criteria("Genus"));
-//				courseCriteria.add(new Criteria("CAD"));
-//				courseCriteria.add(new Criteria("Teknikhistoria"));
-//				courseCriteria.add(new Criteria("Programmering"));
-//				courseCriteria.add(new Criteria("Fjäsk"));
-//				courseCriteria.add(new Criteria("Glass"));
-			} catch (IllegalNameException e) {
-				e.printStackTrace();
-			}
-			
-			try {
-				teknik = new Course("Teknik", courseCriteria);
-//				teknikB = new Course("Teknik", courseCriteria);
-			} catch (IllegalNameException e) {
-				e.printStackTrace();
-			}
-			
-			try {
-				studentsA.add(new Student("Jon W"));
-				studentsA.add(new Student("Adam G"));
-
-//				studentsB.add(new Student("Anton S"));
-//				studentsB.add(new Student("Liza H"));
-				
-				for (int i = 0; i < studentsA.size(); i++) {
-					studentsA.get(i).addTask(new Task("Vattenhallen", teknik.getCourseCriteria()));
-//					studentsA.get(i).addTask(new Task("Teknikhisotira", teknik.getCourseCriteria()));
-//					studentsB.get(i).addTask(new Task("Vattenhallen", teknikB.getCourseCriteria()));
-//					studentsB.get(i).addTask(new Task("Teknikhisotira", teknikB.getCourseCriteria()));
-				}
-			} catch (IllegalNameException e) {
-				e.printStackTrace();
-			}
+			ArrayList<Student> students = new ArrayList<Student>();
+			ArrayList<Criteria> criteria = new ArrayList<Criteria>();
+			ArrayList<Criteria> criteria2 = new ArrayList<Criteria>();
+			ArrayList<Task> tasks = new ArrayList<Task>();
 
 			try {
-				classes.add(new SchoolClass("TE3A", courses, studentsA));
-//				classes.add(new SchoolClass("TE3B", coursesB, studentsB));
-			} catch (IllegalNameException e) {
+				students.add(new Student("Anton"));
+
+				criteria.add(new Criteria("Problemlösning"));
+				criteria.add(new Criteria("Fjäsk"));
+
+				criteria2.add(new Criteria("Problemlösning"));
+				criteria2.add(new Criteria("Fjäsk"));
+
+				tasks.add(new Task("Lego robot", criteria2));
+
+				students.get(0).addCourse(new Course("Teknik", criteria, tasks));
+
+				classes.add(new SchoolClass("TE3B", students));
+			} catch (IllegalNameException | IllegalInputException e) {
 				e.printStackTrace();
 			}
-
-			ArrayList<Criteria> c = new ArrayList<Criteria>();
-
-			try {
-				c.add(new Criteria("Mekanik"));
-//				c.add(new Criteria("CAD"));
-//				c.add(new Criteria("Fjäsk"));
-			} catch (IllegalNameException e) {
-				e.printStackTrace();
-			}
-
-			c.get(0).setGrade(Grade.C);
-//			c.get(1).setGrade(Grade.E);
-//			c.get(2).setGrade(Grade.A);
-
-			try {
-				teknik.addCourseTask(new Task("Vattenhallen", teknik.getCourseCriteria()));
-				teknik.addCourseTask(new Task("Teknikhistoria", c));
-
-//				teknikB.addCourseTask(new Task("Vattenhallen", teknik.getCourseCriteria()));
-//				teknikB.addCourseTask(new Task("Teknikhistoria", c));
-			} catch (IllegalNameException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
-			courses.add(teknik);
-//			coursesB.add(teknikB);
 
 			return new Data(classes);
 		} else {
@@ -235,12 +179,11 @@ public class MainFrame extends JFrame {
 				new ListUpdateChooser<SchoolClass>(this, mainData.getClasses(), (Class<SchoolClass>) clazz)
 						.setVisible(true);
 			} else if (clazz.equals(Course.class)) {
-				new ListUpdateChooser<Course>(this, mainData.getClasses().get(currentlySelectedClassIndex).getCourses(),
+				new ListUpdateChooser<Course>(this, mainData.getClasses().get(currentlySelectedClassIndex).getStudents().get(0).getCourses(),
 						(Class<Course>) clazz).setVisible(true);
 			} else if (clazz.equals(Task.class)) {
 				new ListUpdateChooser<Task>(this,
-						mainData.getClasses().get(currentlySelectedClassIndex).getCourses()
-								.get(currentlySelectedCourseIndex).getCourseTasks(),
+						mainData.getClasses().get(currentlySelectedClassIndex).getStudents().get(0).getCourses().get(currentlySelectedCourseIndex).getCourseTasks(),
 						(Class<Task>) clazz).setVisible(true);
 			}
 		}

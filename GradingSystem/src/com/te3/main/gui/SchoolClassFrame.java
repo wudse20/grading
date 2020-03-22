@@ -41,7 +41,7 @@ public class SchoolClassFrame extends JFrame {
 
 	AddControllPanel acp = new AddControllPanel();
 
-	EditControllPanel ecp = new EditControllPanel();
+	EditControlPanel ecp = new EditControlPanel();
 
 	JPanel panel = new JPanel();
 

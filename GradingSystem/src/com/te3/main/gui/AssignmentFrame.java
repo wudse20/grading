@@ -2,7 +2,6 @@ package com.te3.main.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -11,7 +10,6 @@ import javax.swing.JPanel;
 
 import com.te3.main.exceptions.IllegalInputException;
 import com.te3.main.exceptions.IllegalNameException;
-import com.te3.main.objects.Student;
 import com.te3.main.objects.Task;
 
 public class AssignmentFrame extends JFrame {
@@ -34,7 +32,7 @@ public class AssignmentFrame extends JFrame {
 	NamePanel np = new NamePanel();
 	MainAssignmentPanel map;
 	AddControllPanel acp = new AddControllPanel();
-	EditControllPanel ecp = new EditControllPanel();
+	EditControlPanel ecp = new EditControlPanel();
 
 	MainFrame mf;
 
@@ -153,19 +151,11 @@ public class AssignmentFrame extends JFrame {
 			throw new IllegalInputException("Du måste ha minst ett kunskapskrav i uppgiften.");
 		}
 
-		Task t = new Task(np.getLastInput(), map.getAddedCriteria());
-
-		mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getCourses()
-				.get(mf.getCurrentlySelectedCourseIndex()).getCourseTasks().add(t);
-
-		ArrayList<Student> al = new ArrayList<Student>();
-
-		// Adds the task to the students
-		for (int i = 0; i < al.size(); i++) {
-			Student s = al.get(i);
-			s.addTask(t);
+		for (var i = 0; i < mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getStudents().size(); i++) {
+			mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getStudents().get(i).getCourses()
+					.get(mf.getCurrentlySelectedCourseIndex()).addCourseTask(new Task(np.getLastInput(), map.getAddedCriteria()));
 		}
-		
+
 		mf.save(mf.getSaveFilePath());
 	}
 
@@ -178,24 +168,14 @@ public class AssignmentFrame extends JFrame {
 			throw new IllegalInputException("Du måste ha minst ett kunskapskrav i uppgiften.");
 		}
 
-		ArrayList<Student> al = mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getStudents();
-		
 		// Removes the task
-		mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getCourses()
-				.get(mf.getCurrentlySelectedCourseIndex()).getCourseTasks()
-				.get(mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getCourses()
-						.get(mf.getCurrentlySelectedCourseIndex()).getCourseTasks().indexOf(this.t));
+		for (int i = 0; i < mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getStudents().size(); i++) {
+			var newList = mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getStudents().get(i).getCourses();
+			newList.remove(this.t);
+			mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getStudents().get(i).setCourses(newList);
 
-		// Adds the new task
-		Task t = new Task(np.getLastInput(), map.getAddedCriteria());
-		
-		mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getCourses()
-				.get(mf.getCurrentlySelectedCourseIndex()).getCourseTasks()
-				.add(t);
-		
-		for (int i = 0; i < al.size(); i++) {
-			al.get(i).getTasks().remove(al.get(i).getTasks().indexOf(this.t));
-			al.get(i).addTask(t);
+			mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getStudents().get(i).getCourses()
+					.get(mf.getCurrentlySelectedCourseIndex()).addCourseTask(new Task(np.getLastInput(), map.getAddedCriteria()));
 		}
 		
 		mf.save(mf.getSaveFilePath());
