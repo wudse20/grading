@@ -7,16 +7,16 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class NamePanel extends JPanel {
-	
+
 	/** Default */
 	private static final long serialVersionUID = 1L;
 
 	private String lastInput;
-	
+
 	FlowLayout layout = new FlowLayout(FlowLayout.LEFT);
 
 	JLabel lblName = new JLabel("Namn:");
-	
+
 	JTextField txfName = new JTextField(12);
 
 	public NamePanel() {
@@ -24,7 +24,7 @@ public class NamePanel extends JPanel {
 		this.add(lblName);
 		this.add(txfName);
 	}
-	
+
 	public String getLastInput() {
 		this.lastInput = txfName.getText();
 		return lastInput;

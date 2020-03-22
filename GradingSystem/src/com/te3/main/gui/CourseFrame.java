@@ -155,9 +155,9 @@ public class CourseFrame extends JFrame {
 
 			for (var i = 0; i < al2.size(); i++) {
 				for (var j = 0; j < al2.get(i).getStudents().size(); j++) {
-						Course c = new Course(np.getLastInput(), mcp.getCriteria());
-						al2.get(i).getStudents().get(j).addCourse(c);
-					}
+					Course c = new Course(np.getLastInput(), mcp.getCriteria());
+					al2.get(i).getStudents().get(j).addCourse(c);
+				}
 			}
 
 			mf.saveData(mf.getSaveFilePath());
@@ -214,7 +214,9 @@ public class CourseFrame extends JFrame {
 				if (al2.contains(sc)) {
 					for (int j = 0; j < al.get(i).getStudents().size(); j++) {
 						al.get(i).getStudents().get(j).addCourse(new Course(np.getLastInput(), mcp.getCriteria()));
-						al.get(i).getStudents().get(j).getCourses().get(al.get(i).getStudents().get(j).getCourses().size() - 1).setCourseTasks(c.getCourseTasks());
+						al.get(i).getStudents().get(j).getCourses()
+								.get(al.get(i).getStudents().get(j).getCourses().size() - 1)
+								.setCourseTasks(c.getCourseTasks());
 					}
 				}
 			}

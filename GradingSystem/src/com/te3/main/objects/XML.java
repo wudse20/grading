@@ -16,13 +16,14 @@ import java.io.IOException;
  */
 public class XML<E> {
 
-	public XML() {}
+	public XML() {
+	}
 
 	/**
 	 * Writes an XML-file of object
 	 * 
 	 * @param fileLocation The path to the file
-	 * @param obj the object
+	 * @param obj          the object
 	 */
 	public void write(String fileLocation, E obj) {
 		try {

@@ -151,14 +151,17 @@ public class AssignmentFrame extends JFrame {
 			throw new IllegalInputException("Du måste ha minst ett kunskapskrav i uppgiften.");
 		}
 
-		for (var i = 0; i < mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getStudents().size(); i++) {
+		for (var i = 0; i < mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getStudents()
+				.size(); i++) {
 			mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getStudents().get(i).getCourses()
-					.get(mf.getCurrentlySelectedCourseIndex()).addCourseTask(new Task(np.getLastInput(), map.getAddedCriteria()));
+					.get(mf.getCurrentlySelectedCourseIndex())
+					.addCourseTask(new Task(np.getLastInput(), map.getAddedCriteria()));
 		}
 
 		mf.saveData(mf.getSaveFilePath());
 	}
 
+	@SuppressWarnings("unlikely-arg-type")
 	private void updateAssignment() throws IllegalNameException, IllegalInputException {
 		if (np.getLastInput().length() < 3) {
 			throw new IllegalNameException("För kort namn!");
@@ -169,15 +172,19 @@ public class AssignmentFrame extends JFrame {
 		}
 
 		// Removes the task
-		for (int i = 0; i < mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getStudents().size(); i++) {
-			var newList = mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getStudents().get(i).getCourses();
+		for (int i = 0; i < mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getStudents()
+				.size(); i++) {
+			var newList = mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getStudents().get(i)
+					.getCourses();
 			newList.remove(this.t);
-			mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getStudents().get(i).setCourses(newList);
+			mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getStudents().get(i)
+					.setCourses(newList);
 
 			mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getStudents().get(i).getCourses()
-					.get(mf.getCurrentlySelectedCourseIndex()).addCourseTask(new Task(np.getLastInput(), map.getAddedCriteria()));
+					.get(mf.getCurrentlySelectedCourseIndex())
+					.addCourseTask(new Task(np.getLastInput(), map.getAddedCriteria()));
 		}
-		
+
 		mf.saveData(mf.getSaveFilePath());
 	}
 

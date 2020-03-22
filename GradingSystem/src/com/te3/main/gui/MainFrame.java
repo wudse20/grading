@@ -12,14 +12,14 @@ import javax.swing.Timer;
 import com.te3.main.enums.State;
 import com.te3.main.exceptions.IllegalInputException;
 import com.te3.main.exceptions.IllegalNameException;
-import com.te3.main.objects.Data;
-import com.te3.main.objects.Settings;
 import com.te3.main.objects.Course;
 import com.te3.main.objects.Criteria;
-import com.te3.main.objects.XML;
+import com.te3.main.objects.Data;
 import com.te3.main.objects.SchoolClass;
-import com.te3.main.objects.Task;
+import com.te3.main.objects.Settings;
 import com.te3.main.objects.Student;
+import com.te3.main.objects.Task;
+import com.te3.main.objects.XML;
 
 /**
  * The mainframe of the program.
@@ -198,11 +198,13 @@ public class MainFrame extends JFrame {
 				new ListUpdateChooser<SchoolClass>(this, mainData.getClasses(), (Class<SchoolClass>) clazz)
 						.setVisible(true);
 			} else if (clazz.equals(Course.class)) {
-				new ListUpdateChooser<Course>(this, mainData.getClasses().get(currentlySelectedClassIndex).getStudents().get(0).getCourses(),
+				new ListUpdateChooser<Course>(this,
+						mainData.getClasses().get(currentlySelectedClassIndex).getStudents().get(0).getCourses(),
 						(Class<Course>) clazz).setVisible(true);
 			} else if (clazz.equals(Task.class)) {
 				new ListUpdateChooser<Task>(this,
-						mainData.getClasses().get(currentlySelectedClassIndex).getStudents().get(0).getCourses().get(currentlySelectedCourseIndex).getCourseTasks(),
+						mainData.getClasses().get(currentlySelectedClassIndex).getStudents().get(0).getCourses()
+								.get(currentlySelectedCourseIndex).getCourseTasks(),
 						(Class<Task>) clazz).setVisible(true);
 			}
 		}

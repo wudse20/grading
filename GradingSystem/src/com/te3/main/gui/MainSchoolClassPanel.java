@@ -27,9 +27,9 @@ public class MainSchoolClassPanel extends JPanel implements DocumentListener {
 	private static final long serialVersionUID = -6445745910257748976L;
 
 	private ArrayList<Student> students = new ArrayList<Student>();
-	
+
 	SchoolClass sc;
-	
+
 	MainFrame mf;
 
 	JTextField txfName = new JTextField(24);
@@ -62,7 +62,7 @@ public class MainSchoolClassPanel extends JPanel implements DocumentListener {
 		this.setProperties();
 		this.addComponents();
 	}
-	
+
 	/**
 	 * For editing
 	 * 
@@ -101,7 +101,7 @@ public class MainSchoolClassPanel extends JPanel implements DocumentListener {
 		});
 
 		listStudents.getSelectionModel().addListSelectionListener((e) -> {
-			//Since it's called twice
+			// Since it's called twice
 			try {
 				students.remove(listStudents.getSelectedIndex());
 				updateJList();
@@ -111,13 +111,15 @@ public class MainSchoolClassPanel extends JPanel implements DocumentListener {
 		});
 
 		txfName.getDocument().addDocumentListener(this);
-		txfName.addKeyListener(new KeyListener() {		
+		txfName.addKeyListener(new KeyListener() {
 			@Override
-			public void keyTyped(KeyEvent e) {}
-			
+			public void keyTyped(KeyEvent e) {
+			}
+
 			@Override
-			public void keyReleased(KeyEvent e) {}
-			
+			public void keyReleased(KeyEvent e) {
+			}
+
 			@Override
 			public void keyPressed(KeyEvent e) {
 				if (e.getKeyCode() == 10) {
@@ -179,7 +181,7 @@ public class MainSchoolClassPanel extends JPanel implements DocumentListener {
 	public ArrayList<Student> getStudents() {
 		return this.students;
 	}
-	
+
 	@Override
 	public void insertUpdate(DocumentEvent e) {
 		txfName.setBackground(Color.white);

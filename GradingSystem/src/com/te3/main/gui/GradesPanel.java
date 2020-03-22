@@ -58,8 +58,10 @@ public class GradesPanel extends JPanel {
 		this.mf = mf;
 		this.setLayout(layout);
 
-		criteria = mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getStudents().get(0).getCourses().get(mf.getCurrentlySelectedCourseIndex()).getCourseCriteria();
-		tasks = mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getStudents().get(0).getCourses().get(mf.getCurrentlySelectedCourseIndex()).getCourseTasks();
+		criteria = mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getStudents().get(0)
+				.getCourses().get(mf.getCurrentlySelectedCourseIndex()).getCourseCriteria();
+		tasks = mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getStudents().get(0).getCourses()
+				.get(mf.getCurrentlySelectedCourseIndex()).getCourseTasks();
 
 		updateGUI(state);
 
@@ -217,10 +219,9 @@ public class GradesPanel extends JPanel {
 		criteria.forEach(Criteria::updateGUI);
 
 		updateInfo(
-				mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getStudents().get(mf.getCurrentlySelectedStudentIndex()),
-				tasks.get(mf.getCurrentlySelectedAssignmentIndex()),
-				criteria, this.state
-		);
+				mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getStudents()
+						.get(mf.getCurrentlySelectedStudentIndex()),
+				tasks.get(mf.getCurrentlySelectedAssignmentIndex()), criteria, this.state);
 
 		this.revalidate();
 		this.repaint();

@@ -10,7 +10,6 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.event.ListSelectionEvent;
@@ -21,9 +20,6 @@ import com.te3.main.objects.SchoolClass;
 import com.te3.main.objects.Task;
 
 /**
- * TODO: do the whole class generic
- * 
- * 
  * @author Anton Skorup
  *
  * @param <E> The type
@@ -39,7 +35,7 @@ public class ListUpdateChooser<E> extends JFrame implements ListSelectionListene
 	JList<E> listObjects = new JList<E>();
 
 	ArrayList<E> al;
-	
+
 	JScrollPane scrObjects = new JScrollPane(listObjects);
 
 	JButton btnHelp = new JButton("?");

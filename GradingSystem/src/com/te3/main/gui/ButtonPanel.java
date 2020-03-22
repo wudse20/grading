@@ -146,9 +146,12 @@ public class ButtonPanel extends JPanel {
 
 		SchoolClass sc = mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex());
 
-		Task t = mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getStudents().get(mf.getCurrentlySelectedStudentIndex()).getCourses().get(mf.getCurrentlySelectedCourseIndex()).getCourseTasks().get(mf.getCurrentlySelectedAssignmentIndex());
+		Task t = mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getStudents()
+				.get(mf.getCurrentlySelectedStudentIndex()).getCourses().get(mf.getCurrentlySelectedCourseIndex())
+				.getCourseTasks().get(mf.getCurrentlySelectedAssignmentIndex());
 
-		Course co = mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getStudents().get(mf.getCurrentlySelectedStudentIndex()).getCourses().get(mf.getCurrentlySelectedCourseIndex());
+		Course co = mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getStudents()
+				.get(mf.getCurrentlySelectedStudentIndex()).getCourses().get(mf.getCurrentlySelectedCourseIndex());
 
 		ArrayList<Criteria> c;
 
@@ -184,9 +187,12 @@ public class ButtonPanel extends JPanel {
 
 		SchoolClass sc = mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex());
 
-		Task t = mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getStudents().get(mf.getCurrentlySelectedStudentIndex()).getCourses().get(mf.getCurrentlySelectedCourseIndex()).getCourseTasks().get(mf.getCurrentlySelectedAssignmentIndex());
+		Task t = mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getStudents()
+				.get(mf.getCurrentlySelectedStudentIndex()).getCourses().get(mf.getCurrentlySelectedCourseIndex())
+				.getCourseTasks().get(mf.getCurrentlySelectedAssignmentIndex());
 
-		Course co = mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getStudents().get(mf.getCurrentlySelectedStudentIndex()).getCourses().get(mf.getCurrentlySelectedCourseIndex());
+		Course co = mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getStudents()
+				.get(mf.getCurrentlySelectedStudentIndex()).getCourses().get(mf.getCurrentlySelectedCourseIndex());
 
 		ArrayList<Criteria> c;
 

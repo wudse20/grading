@@ -36,7 +36,7 @@ public class MainCoursePanel extends JPanel implements DocumentListener {
 	private int selectedIndexAddedClasses = -1;
 	private int selectedIndexNotAddedClasses = -1;
 	private int selectedIndexCriteria = -1;
-	
+
 	@SuppressWarnings("unused")
 	private Course c;
 
@@ -94,12 +94,12 @@ public class MainCoursePanel extends JPanel implements DocumentListener {
 	 * For editing.
 	 * 
 	 * @param mf the instance of the MainFrame
-	 * @param c the course that's being edited
+	 * @param c  the course that's being edited
 	 */
 	public MainCoursePanel(MainFrame mf, Course c) {
 		this.mf = mf;
 		this.c = c;
-		
+
 		ArrayList<SchoolClass> al = mf.getMainData().getClasses();
 
 		for (int i = 0; i < al.size(); i++) {
@@ -113,14 +113,14 @@ public class MainCoursePanel extends JPanel implements DocumentListener {
 		}
 
 		criteria = c.getCourseCriteria();
-		
+
 		this.setLayout(layout);
 		this.refreshClasses();
 		this.refreshCriteria();
 		this.setProperties();
 		this.addComponents();
 	}
-	
+
 	private void copyArrayLists() {
 		ArrayList<SchoolClass> al = mf.getMainData().getClasses();
 
@@ -136,7 +136,7 @@ public class MainCoursePanel extends JPanel implements DocumentListener {
 
 		listAddedClasses.getSelectionModel().addListSelectionListener((e) -> {
 			selectedIndexAddedClasses = listAddedClasses.getSelectedIndex();
-			
+
 			if (selectedIndexAddedClasses != -1) {
 				classesSelected((byte) 1, selectedIndexAddedClasses);
 			}
@@ -144,7 +144,7 @@ public class MainCoursePanel extends JPanel implements DocumentListener {
 
 		listNotAddedClasses.getSelectionModel().addListSelectionListener((e) -> {
 			selectedIndexNotAddedClasses = listNotAddedClasses.getSelectedIndex();
-			
+
 			if (selectedIndexNotAddedClasses != -1) {
 				classesSelected((byte) 0, selectedIndexNotAddedClasses);
 			}
@@ -152,7 +152,7 @@ public class MainCoursePanel extends JPanel implements DocumentListener {
 
 		listCriteria.getSelectionModel().addListSelectionListener((e) -> {
 			selectedIndexCriteria = listCriteria.getSelectedIndex();
-			
+
 			if (selectedIndexCriteria != -1) {
 				removeCriteria(selectedIndexCriteria);
 			}
@@ -163,15 +163,17 @@ public class MainCoursePanel extends JPanel implements DocumentListener {
 		});
 
 		txfCriteria.getDocument().addDocumentListener(this);
-		
+
 		txfCriteria.addKeyListener(new KeyListener() {
-			
+
 			@Override
-			public void keyTyped(KeyEvent e) {}
-			
+			public void keyTyped(KeyEvent e) {
+			}
+
 			@Override
-			public void keyReleased(KeyEvent e) {}
-			
+			public void keyReleased(KeyEvent e) {
+			}
+
 			@Override
 			public void keyPressed(KeyEvent e) {
 				if (e.getKeyCode() == 10) {
@@ -272,7 +274,6 @@ public class MainCoursePanel extends JPanel implements DocumentListener {
 		return criteria;
 	}
 
-	
 	@Override
 	public void insertUpdate(DocumentEvent e) {
 		txfCriteria.setBackground(Color.white);

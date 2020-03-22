@@ -1,179 +1,195 @@
 package com.te3.main.gui;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+
 import com.te3.main.exceptions.IllegalInputException;
 import com.te3.main.objects.Settings;
 
-import javax.swing.*;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
-import java.awt.*;
-
 public class SettingsFrame extends JFrame {
-    private String savePath;
-    private String helpText = "För att ställa in hur ofta som <br>" +
-            "programmet kommer att autospara <br>" +
-            "skriv in intervallet i sekunder. <br>" +
-            "Detta måste vara mellan 60 och 3600 sekunder. <br><br>" +
-            "För att ställa in vart data skall sparas <br>" +
-            "klicka på knappen: <b>Ställ in plats för sparfil</b>" +
-            "och följ instruktionerna";
+	/** Generated */
+	private static final long serialVersionUID = 2812677933749486134L;
 
-    private MainFrame mf;
+	private String savePath;
+	private String helpText = "För att ställa in hur ofta som <br>" + "programmet kommer att autospara <br>"
+			+ "skriv in intervallet i sekunder. <br>" + "Detta måste vara mellan 60 och 3600 sekunder. <br><br>"
+			+ "För att ställa in vart data skall sparas <br>" + "klicka på knappen: <b>Ställ in plats för sparfil</b>"
+			+ "och följ instruktionerna";
 
-    private Thread threadSetSavePath;
+	private MainFrame mf;
 
-    BorderLayout layout = new BorderLayout();
-    BorderLayout pLayout = new BorderLayout();
-    FlowLayout pBtnsLayout = new FlowLayout(FlowLayout.RIGHT);
-    FlowLayout pTimerLayout = new FlowLayout(FlowLayout.LEFT);
-    FlowLayout pSavePathLayout = new FlowLayout(FlowLayout.LEFT);
-    BoxLayout pSettingsLayout;
+	private Thread threadSetSavePath;
 
-    Container cp = this.getContentPane();
+	BorderLayout layout = new BorderLayout();
+	BorderLayout pLayout = new BorderLayout();
+	FlowLayout pBtnsLayout = new FlowLayout(FlowLayout.RIGHT);
+	FlowLayout pTimerLayout = new FlowLayout(FlowLayout.LEFT);
+	FlowLayout pSavePathLayout = new FlowLayout(FlowLayout.LEFT);
+	BoxLayout pSettingsLayout;
 
-    JButton btnApply = new JButton("Verkställ");
-    JButton btnCancel = new JButton("Avbryt");
-    JButton btnHelp = new JButton("?");
-    JButton btnSetSavePath = new JButton("Ställ in plats för sparfil"); //Försök komma på bättre text för att knappen
+	Container cp = this.getContentPane();
 
-    JLabel lblSpacer = new JLabel(" ");
-    JLabel lblSpacer2 = new JLabel("     ");
-    JLabel lblSpacer3 = new JLabel("     ");
-    JLabel lblSpacer4 = new JLabel(" ");
-    JLabel lblSpacer5 = new JLabel(" ");
-    JLabel lblSpacer6 = new JLabel(" ");
-    JLabel lblInfo = new JLabel("Inställningar: ");
-    JLabel lblTimer = new JLabel("Sparintervall (s):");
+	JButton btnApply = new JButton("Verkställ");
+	JButton btnCancel = new JButton("Avbryt");
+	JButton btnHelp = new JButton("?");
+	JButton btnSetSavePath = new JButton("Ställ in plats för sparfil"); // Försök komma på bättre text för att knappen
 
-    JTextField txfSaveTimer;
+	JLabel lblSpacer = new JLabel(" ");
+	JLabel lblSpacer2 = new JLabel("     ");
+	JLabel lblSpacer3 = new JLabel("     ");
+	JLabel lblSpacer4 = new JLabel(" ");
+	JLabel lblSpacer5 = new JLabel(" ");
+	JLabel lblSpacer6 = new JLabel(" ");
+	JLabel lblInfo = new JLabel("Inställningar: ");
+	JLabel lblTimer = new JLabel("Sparintervall (s):");
 
-    JPanel panel = new JPanel();
-    JPanel pBtns = new JPanel();
-    JPanel pTimer = new JPanel();
-    JPanel pSavePath = new JPanel();
-    JPanel pSettings = new JPanel();
+	JTextField txfSaveTimer;
 
-    public SettingsFrame(MainFrame mf) {
-        super("Inställningar");
+	JPanel panel = new JPanel();
+	JPanel pBtns = new JPanel();
+	JPanel pTimer = new JPanel();
+	JPanel pSavePath = new JPanel();
+	JPanel pSettings = new JPanel();
 
-        this.mf = mf;
-        this.savePath = mf.getSaveFilePath();
+	public SettingsFrame(MainFrame mf) {
+		super("Inställningar");
 
-        this.setProperties();
-        this.addComponents();
-    }
+		this.mf = mf;
+		this.savePath = mf.getSaveFilePath();
 
-    private void addComponents() {
-        this.add(lblSpacer, BorderLayout.PAGE_START);
-        this.add(lblSpacer2, BorderLayout.LINE_START);
-        this.add(panel, BorderLayout.CENTER);
-        this.add(lblSpacer3, BorderLayout.LINE_END);
-        this.add(lblSpacer4, BorderLayout.PAGE_END);
-    }
+		this.setProperties();
+		this.addComponents();
+	}
 
-    private void setProperties() {
-        this.setLayout(layout);
-        this.setSize(new Dimension(400, 225));
-        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+	private void addComponents() {
+		this.add(lblSpacer, BorderLayout.PAGE_START);
+		this.add(lblSpacer2, BorderLayout.LINE_START);
+		this.add(panel, BorderLayout.CENTER);
+		this.add(lblSpacer3, BorderLayout.LINE_END);
+		this.add(lblSpacer4, BorderLayout.PAGE_END);
+	}
 
-        txfSaveTimer = new JTextField(12);
-        txfSaveTimer.setText(Integer.toString(mf.getSaveTimer()));
-        txfSaveTimer.getDocument().addDocumentListener(new DocumentListener() {
-            @Override
-            public void insertUpdate(DocumentEvent e) {
-                txfSaveTimer.setBackground(Color.WHITE);
-            }
+	private void setProperties() {
+		this.setLayout(layout);
+		this.setSize(new Dimension(400, 225));
+		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-            @Override
-            public void removeUpdate(DocumentEvent e) {
-                txfSaveTimer.setBackground(Color.WHITE);
-            }
+		txfSaveTimer = new JTextField(12);
+		txfSaveTimer.setText(Integer.toString(mf.getSaveTimer()));
+		txfSaveTimer.getDocument().addDocumentListener(new DocumentListener() {
+			@Override
+			public void insertUpdate(DocumentEvent e) {
+				txfSaveTimer.setBackground(Color.WHITE);
+			}
 
-            @Override
-            public void changedUpdate(DocumentEvent e) {}
-        });
+			@Override
+			public void removeUpdate(DocumentEvent e) {
+				txfSaveTimer.setBackground(Color.WHITE);
+			}
 
-        btnApply.addActionListener((e) -> applySettings());
-        btnCancel.addActionListener((e) -> this.dispose());
-        btnHelp.addActionListener((e) -> new HelpFrame("Inställningar", "<html><p>" + helpText + "</p></html>").setVisible(true));
-        btnSetSavePath.addActionListener((e) -> setSavePath());
+			@Override
+			public void changedUpdate(DocumentEvent e) {
+			}
+		});
 
-        pTimer.setLayout(pTimerLayout);
-        pTimer.add(lblTimer);
-        pTimer.add(txfSaveTimer);
+		btnApply.addActionListener((e) -> applySettings());
+		btnCancel.addActionListener((e) -> this.dispose());
+		btnHelp.addActionListener(
+				(e) -> new HelpFrame("Inställningar", "<html><p>" + helpText + "</p></html>").setVisible(true));
+		btnSetSavePath.addActionListener((e) -> setSavePath());
 
-        pSavePath.setLayout(pSavePathLayout);
-        pSavePath.add(btnSetSavePath);
+		pTimer.setLayout(pTimerLayout);
+		pTimer.add(lblTimer);
+		pTimer.add(txfSaveTimer);
 
-        pSettingsLayout = new BoxLayout(pSettings, BoxLayout.Y_AXIS);
-        pSettings.setLayout(pSettingsLayout);
-        pSettings.add(lblSpacer5);
-        pSettings.add(pTimer);
-        pSettings.add(pSavePath);
-        pSettings.add(lblSpacer6);
+		pSavePath.setLayout(pSavePathLayout);
+		pSavePath.add(btnSetSavePath);
 
-        pBtns.setLayout(pBtnsLayout);
-        pBtns.add(btnHelp);
-        pBtns.add(btnCancel);
-        pBtns.add(btnApply);
+		pSettingsLayout = new BoxLayout(pSettings, BoxLayout.Y_AXIS);
+		pSettings.setLayout(pSettingsLayout);
+		pSettings.add(lblSpacer5);
+		pSettings.add(pTimer);
+		pSettings.add(pSavePath);
+		pSettings.add(lblSpacer6);
 
-        panel.setLayout(pLayout);
-        panel.add(lblInfo, BorderLayout.PAGE_START);
-        panel.add(pSettings, BorderLayout.CENTER);
-        panel.add(pBtns, BorderLayout.PAGE_END);
-    }
+		pBtns.setLayout(pBtnsLayout);
+		pBtns.add(btnHelp);
+		pBtns.add(btnCancel);
+		pBtns.add(btnApply);
 
-    /**
-     * Not a setter
-     * */
-    private void setSavePath() {
-        FileSystemFrame fsf = new FileSystemFrame(this.savePath.substring(this.savePath.lastIndexOf('/') + 1, this.savePath.lastIndexOf('.')),"xml");
-        fsf.setVisible(true);
+		panel.setLayout(pLayout);
+		panel.add(lblInfo, BorderLayout.PAGE_START);
+		panel.add(pSettings, BorderLayout.CENTER);
+		panel.add(pBtns, BorderLayout.PAGE_END);
+	}
 
-        threadSetSavePath = new Thread(() -> setSavePathThread(fsf));
-        threadSetSavePath.start();
-    }
+	/**
+	 * Not a setter
+	 */
+	private void setSavePath() {
+		FileSystemFrame fsf = new FileSystemFrame(
+				this.savePath.substring(this.savePath.lastIndexOf('/') + 1, this.savePath.lastIndexOf('.')), "xml");
+		fsf.setVisible(true);
 
-    private void setSavePathThread(FileSystemFrame fsf) {
-        while (fsf.getExitCode() == -1) {
-            try {
-                threadSetSavePath.sleep(450);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
+		threadSetSavePath = new Thread(() -> setSavePathThread(fsf));
+		threadSetSavePath.start();
+	}
 
-        if (fsf.getExitCode() == 0) {
-            this.savePath = fsf.getFilePath();
-            System.out.println(this.savePath);
-        }
+	@SuppressWarnings("static-access")
+	private void setSavePathThread(FileSystemFrame fsf) {
+		while (fsf.getExitCode() == -1) {
+			try {
+				threadSetSavePath.sleep(450);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
 
-        fsf.close();
-    }
+		if (fsf.getExitCode() == 0) {
+			this.savePath = fsf.getFilePath();
+			System.out.println(this.savePath);
+		}
 
-    private void applySettings() {
-        Settings s = new Settings();
+		fsf.close();
+	}
 
-        try {
-            s.setSaveTimer(Integer.parseInt(txfSaveTimer.getText()));
-        } catch (IllegalInputException e) {
-            JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-            txfSaveTimer.setBackground(Color.PINK);
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Du måste skriva in ett heltal", "Error", JOptionPane.ERROR_MESSAGE);
-            txfSaveTimer.setBackground(Color.PINK);
-        }
+	private void applySettings() {
+		Settings s = new Settings();
 
-        try {
-            s.setSavePath(this.savePath);
-        } catch (IllegalInputException e) {
-            JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        }
+		try {
+			s.setSaveTimer(Integer.parseInt(txfSaveTimer.getText()));
+		} catch (IllegalInputException e) {
+			JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+			txfSaveTimer.setBackground(Color.PINK);
+		} catch (NumberFormatException e) {
+			JOptionPane.showMessageDialog(this, "Du måste skriva in ett heltal", "Error", JOptionPane.ERROR_MESSAGE);
+			txfSaveTimer.setBackground(Color.PINK);
+		}
 
-        mf.setSettings(s);
-        mf.saveSettings();
+		try {
+			s.setSavePath(this.savePath);
+		} catch (IllegalInputException e) {
+			JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+		}
 
-        JOptionPane.showMessageDialog(this, "Du har uppdaterat dina inställningar", "Uppdaterad", JOptionPane.INFORMATION_MESSAGE);
-        this.dispose();
-    }
+		mf.setSettings(s);
+		mf.saveSettings();
+
+		JOptionPane.showMessageDialog(this, "Du har uppdaterat dina inställningar", "Uppdaterad",
+				JOptionPane.INFORMATION_MESSAGE);
+		this.dispose();
+	}
 }

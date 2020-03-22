@@ -1,6 +1,5 @@
 package com.te3.main.objects;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import com.te3.main.exceptions.IllegalNameException;
@@ -11,15 +10,17 @@ public class Course {
 	private ArrayList<Criteria> courseCriteria;
 	private ArrayList<Task> courseTasks;
 
-	public Course() {}
-	
+	public Course() {
+	}
+
 	public Course(String name, ArrayList<Criteria> courseCriteria) throws IllegalNameException {
-	    this.setName(name);
+		this.setName(name);
 		this.setCourseCriteria(courseCriteria);
 		this.setCourseTasks(new ArrayList<Task>());
 	}
-	
-	public Course(String name, ArrayList<Criteria> courseCriteria, ArrayList<Task> courseTasks) throws IllegalNameException {
+
+	public Course(String name, ArrayList<Criteria> courseCriteria, ArrayList<Task> courseTasks)
+			throws IllegalNameException {
 		try {
 			setName(name);
 		} catch (IllegalNameException e) {
@@ -34,7 +35,7 @@ public class Course {
 	 *
 	 * @param t the new task
 	 * @return {@code true} -> if successful <br>
-	 *     	   {@code false} -> if unsuccessful
+	 *         {@code false} -> if unsuccessful
 	 */
 	public boolean addTask(Task t) {
 		if (t == null)
@@ -88,21 +89,21 @@ public class Course {
 	public void setCourseTasks(ArrayList<Task> courseTasks) {
 		this.courseTasks = courseTasks;
 	}
-	
+
 	public void addCourseTask(Task newTask) {
 		courseTasks.add(newTask);
 	}
-	
+
 	public void removeCourseTask(Task deletedTask) {
 		courseTasks.remove(deletedTask);
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		Course c = (Course) obj;
 		return (this.name.equals(c.name));
 	}
-	
+
 	@Override
 	public String toString() {
 		return this.name;
