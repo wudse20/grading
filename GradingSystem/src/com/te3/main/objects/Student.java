@@ -31,6 +31,8 @@ public class Student {
     public void addCourse(Course c) {
 		if (c == null)
 			return;
+		else if (this.courses == null)
+		    this.courses = new ArrayList<Course>();
 
 		this.courses.add(c);
 	}
@@ -48,7 +50,10 @@ public class Student {
 	}
 
 	public void setCourses(ArrayList<Course> courses) {
-	    this.courses = courses;
+	    if (courses == null)
+	        this.courses = new ArrayList<Course>();
+
+        this.courses = courses;
     }
 
     public ArrayList<Course> getCourses() {

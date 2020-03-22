@@ -105,7 +105,7 @@ public class CBPanel extends JPanel {
 			
 			System.out.println(i);
 			if (i != -1 && i < cbTask.getItemCount() - 2) {
-				mf.setCurrentlySelectedAssingmentIndex(cbTask.getSelectedIndex());
+				mf.setCurrentlySelectedAssignmentIndex(cbTask.getSelectedIndex());
 			} else {
 				System.out.println("Selected new or change");
 				mf.openAddEditGUI(Task.class, true); //Måste ändras ifall det är ny eller ändra.

@@ -147,7 +147,7 @@ public class ButtonPanel extends JPanel {
 
 		SchoolClass sc = mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex());
 
-		Task t = mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getStudents().get(mf.getCurrentlySelectedStudentIndex()).getCourses().get(mf.getCurrentlySelectedCourseIndex()).getCourseTasks().get(mf.getCurrentlySelectedAssingmentIndex());
+		Task t = mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getStudents().get(mf.getCurrentlySelectedStudentIndex()).getCourses().get(mf.getCurrentlySelectedCourseIndex()).getCourseTasks().get(mf.getCurrentlySelectedAssignmentIndex());
 
 		Course co = mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getStudents().get(mf.getCurrentlySelectedStudentIndex()).getCourses().get(mf.getCurrentlySelectedCourseIndex());
 
@@ -185,7 +185,7 @@ public class ButtonPanel extends JPanel {
 
 		SchoolClass sc = mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex());
 
-		Task t = mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getStudents().get(mf.getCurrentlySelectedStudentIndex()).getCourses().get(mf.getCurrentlySelectedCourseIndex()).getCourseTasks().get(mf.getCurrentlySelectedAssingmentIndex());
+		Task t = mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getStudents().get(mf.getCurrentlySelectedStudentIndex()).getCourses().get(mf.getCurrentlySelectedCourseIndex()).getCourseTasks().get(mf.getCurrentlySelectedAssignmentIndex());
 
 		Course co = mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getStudents().get(mf.getCurrentlySelectedStudentIndex()).getCourses().get(mf.getCurrentlySelectedCourseIndex());
 

@@ -34,7 +34,10 @@ public class Criteria {
 	
 	private GridLayout pCriteriaLayout = new GridLayout(2, 2);
 
-	public Criteria() {}
+	public Criteria() {
+		lblCriteria = new JLabel();
+		this.setProperties();
+	}
 
 	public Criteria(String name) throws IllegalNameException {
 		try {
@@ -45,11 +48,11 @@ public class Criteria {
 		
 		//Ville inte vara i setproperties av någon anledning.
 		lblCriteria = new JLabel(name);
-		this.setProperties(name);
+		this.setProperties();
 		this.updateGUI(grade);
 	}
 
-	private void setProperties(String name) {
+	private void setProperties() {
 		this.setGrade(Grade.F);
 
 		lblGrade = new JLabel();
@@ -78,7 +81,7 @@ public class Criteria {
 		pCriteria.add(pButtons);
 	}
 
-	public void updateGUI(Grade grade) {
+	private void updateGUI(Grade grade) {
 		switch (grade) {
 			case F:
 				for (int i = 0; i < gradeBtns.length; i++) {
@@ -122,7 +125,12 @@ public class Criteria {
 				break;
 		}
 
+		lblCriteria.setText(name);
 		lblGrade.setText(grade.toString());
+	}
+
+	public void updateGUI() {
+		this.updateGUI(grade);
 	}
 
 	public String getName() {
@@ -145,8 +153,18 @@ public class Criteria {
 	}
 
 	@Transient
+	public void setPanelCriteria(JPanel panelCriteria) {
+		this.pCriteria = panelCriteria;
+	}
+
+	@Transient
 	public JPanel getPanelCriteria() {
 		return pCriteria;
+	}
+
+	@Transient
+	public void setGradeBtns(JButton[] gradeBtns) {
+		this.gradeBtns = gradeBtns;
 	}
 
 	@Transient

@@ -38,7 +38,7 @@ public class MainFrame extends JFrame {
 	private int saveTimer = 300;
 	private int currentlySelectedClassIndex = 0;
 	private int currentlySelectedCourseIndex = 0;
-	private int currentlySelectedAssingmentIndex = 0;
+	private int currentlySelectedAssignmentIndex = 0;
 	private int currentlySelectedStudentIndex = 0;
 
 	private String saveFilePath;
@@ -266,12 +266,12 @@ public class MainFrame extends JFrame {
 		this.currentlySelectedCourseIndex = currentlySelectedCourseIndex;
 	}
 
-	public int getCurrentlySelectedAssingmentIndex() {
-		return currentlySelectedAssingmentIndex;
+	public int getCurrentlySelectedAssignmentIndex() {
+		return currentlySelectedAssignmentIndex;
 	}
 
-	public void setCurrentlySelectedAssingmentIndex(int currentlySelectedAssingmentIndex) {
-		this.currentlySelectedAssingmentIndex = currentlySelectedAssingmentIndex;
+	public void setCurrentlySelectedAssignmentIndex(int currentlySelectedAssignmentIndex) {
+		this.currentlySelectedAssignmentIndex = currentlySelectedAssignmentIndex;
 	}
 
 	public int getCurrentlySelectedStudentIndex() {

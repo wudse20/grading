@@ -91,7 +91,7 @@ public class GradesPanel extends JPanel {
 						if (!(displayedGrades.get(index).compare(c))) {
 							displayedGrades.remove(index);
 							displayedGrades.add(c);
-							displayedGrades.get(displayedGrades.indexOf(c)).updateGUI(c.getGrade());
+							displayedGrades.get(displayedGrades.indexOf(c)).updateGUI();
 						}
 					} else {
 						displayedGrades.add(c);
@@ -181,9 +181,6 @@ public class GradesPanel extends JPanel {
 		for (Component c : panelCriteria.getComponents())
 			panelCriteria.remove(c);
 
-		panelCriteria.revalidate();
-		panelCriteria.repaint();
-
 		pCriteriaLayout = new BoxLayout(panelCriteria, BoxLayout.Y_AXIS);
 		panelCriteria.setLayout(pCriteriaLayout);
 
@@ -217,16 +214,21 @@ public class GradesPanel extends JPanel {
 		panel.setLayout(pLayout);
 		panel.add(panelCriteria);
 
+		criteria.forEach(Criteria::updateGUI);
+
 		updateInfo(
 				mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getStudents().get(mf.getCurrentlySelectedStudentIndex()),
-				tasks.get(mf.getCurrentlySelectedAssingmentIndex()),
+				tasks.get(mf.getCurrentlySelectedAssignmentIndex()),
 				criteria, this.state
 		);
+
+		this.revalidate();
+		this.repaint();
 	}
 
 	private void btnClicked(Grade g, Criteria c) {
 		c.setGrade(g);
-		c.updateGUI(g);
+		c.updateGUI();
 		this.updateGUI(this.state);
 	}
 

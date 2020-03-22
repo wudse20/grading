@@ -151,17 +151,13 @@ public class CourseFrame extends JFrame {
 		}
 
 		try {
-			ArrayList<SchoolClass> al = mf.getMainData().getClasses();
 			ArrayList<SchoolClass> al2 = mcp.getAddedClasses();
 
-			for (int i = 0; i < al.size(); i++) {
-				SchoolClass sc = al.get(i);
-
-				if (al2.contains(sc)) {
-					for (int j = 0; j < al2.get(i).getStudents().size(); j++) {
-						al.get(i).getStudents().get(j).addCourse(new Course(np.getLastInput(), mcp.getCriteria()));
+			for (var i = 0; i < al2.size(); i++) {
+				for (var j = 0; j < al2.get(i).getStudents().size(); j++) {
+						Course c = new Course(np.getLastInput(), mcp.getCriteria());
+						al2.get(i).getStudents().get(j).addCourse(c);
 					}
-				}
 			}
 
 			mf.saveData(mf.getSaveFilePath());
