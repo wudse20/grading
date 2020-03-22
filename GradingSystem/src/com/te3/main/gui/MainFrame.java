@@ -87,9 +87,6 @@ public class MainFrame extends JFrame {
 		cp.add(btnPanel);
 	}
 
-	/**
-	 * Might throw null pointers for now nothing to worry about.
-	 * */
 	public void save(String filePath) {
 		XML<Data> xml = new XML<Data>();
 		xml.write(filePath, this.mainData);

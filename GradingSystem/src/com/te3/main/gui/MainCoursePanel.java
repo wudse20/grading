@@ -91,8 +91,7 @@ public class MainCoursePanel extends JPanel implements DocumentListener {
 	}
 
 	/**
-	 * TODO: FIXA
-	 * For editing. Temp broken
+	 * For editing.
 	 * 
 	 * @param mf the instance of the MainFrame
 	 * @param c the course that's being edited
@@ -103,17 +102,15 @@ public class MainCoursePanel extends JPanel implements DocumentListener {
 		
 		ArrayList<SchoolClass> al = mf.getMainData().getClasses();
 
-//		for (int i = 0; i < al.size(); i++) {
-//			SchoolClass sc = al.get(i);
-//
-//			for (int j = 0; j < sc.getStudents().size(); j++) {
-//				if (sc.getCourses().contains(c)) {
-//					addedClasses.add(sc);
-//				} else {
-//					notAddedClasses.add(sc);
-//				}
-//			}
-//		}
+		for (int i = 0; i < al.size(); i++) {
+			SchoolClass sc = al.get(i);
+
+			if (sc.getStudents().get(0).getCourses().contains(c)) {
+				addedClasses.add(sc);
+			} else {
+				notAddedClasses.add(sc);
+			}
+		}
 
 		criteria = c.getCourseCriteria();
 		
@@ -141,7 +138,7 @@ public class MainCoursePanel extends JPanel implements DocumentListener {
 			selectedIndexAddedClasses = listAddedClasses.getSelectedIndex();
 			
 			if (selectedIndexAddedClasses != -1) {
-				classesSelceted((byte) 1, selectedIndexAddedClasses);
+				classesSelected((byte) 1, selectedIndexAddedClasses);
 			}
 		});
 
@@ -149,7 +146,7 @@ public class MainCoursePanel extends JPanel implements DocumentListener {
 			selectedIndexNotAddedClasses = listNotAddedClasses.getSelectedIndex();
 			
 			if (selectedIndexNotAddedClasses != -1) {
-				classesSelceted((byte) 0, selectedIndexNotAddedClasses);
+				classesSelected((byte) 0, selectedIndexNotAddedClasses);
 			}
 		});
 
@@ -217,7 +214,7 @@ public class MainCoursePanel extends JPanel implements DocumentListener {
 	 *              <b>1</b>: removed
 	 * @param index the selected index
 	 */
-	private void classesSelceted(byte mode, int index) {
+	private void classesSelected(byte mode, int index) {
 		if (mode == 0) {
 			SchoolClass sc = notAddedClasses.get(index);
 			addedClasses.add(sc);
