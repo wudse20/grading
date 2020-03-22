@@ -74,7 +74,7 @@ public class Criteria {
 		
 		//The rest
 		pCriteria.setLayout(pCriteriaLayout);
-		pCriteria.setMaximumSize(new Dimension(640, 75));
+		pCriteria.setMaximumSize(new Dimension(640, 78));
 		
 		pCriteria.add(lblCriteria);
 		pCriteria.add(lblGrade);

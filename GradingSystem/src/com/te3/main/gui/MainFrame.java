@@ -2,6 +2,7 @@ package com.te3.main.gui;
 
 import java.awt.Container;
 import java.awt.Dimension;
+import java.io.File;
 import java.util.ArrayList;
 
 import javax.swing.BoxLayout;
@@ -35,7 +36,7 @@ public class MainFrame extends JFrame {
 	private Settings settings;
 
 	// in seconds
-	private int saveTimer = 300;
+	private int saveTimer;
 	private int currentlySelectedClassIndex = 0;
 	private int currentlySelectedCourseIndex = 0;
 	private int currentlySelectedAssignmentIndex = 0;
@@ -59,6 +60,15 @@ public class MainFrame extends JFrame {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setSize(new Dimension(1200, 600));
 
+		if (new File("./settings.xml").exists())
+			settings = loadSettings();
+		else
+			settings = new Settings("./saves.xml", 300);
+
+		this.saveFilePath = settings.getSavePath();
+
+		mainData = getSavedData();
+
 		Timer t = new Timer(saveTimer * 1000, (e) -> {
 			saveData(saveFilePath);
 		});
@@ -68,12 +78,6 @@ public class MainFrame extends JFrame {
 			saveSettings();
 			saveData(saveFilePath);
 		}));
-
-		settings = loadSettings();
-
-		this.saveFilePath = settings.getSavePath();
-
-		mainData = getSavedData();
 
 		t.start();
 
