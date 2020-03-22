@@ -164,7 +164,7 @@ public class CourseFrame extends JFrame {
 				}
 			}
 
-			mf.save(mf.getSaveFilePath());
+			mf.saveData(mf.getSaveFilePath());
 			JOptionPane.showMessageDialog(this, "Du har lagt till kursen: " + np.getLastInput(),
 					"Du har lagt till en kurs", JOptionPane.INFORMATION_MESSAGE);
 			this.dispose();

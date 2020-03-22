@@ -259,7 +259,7 @@ public class FileSystemFrame extends JFrame implements KeyListener, ListSelectio
 	}
 
 	/**
-	 * Tells the program that the save button is pressed
+	 * Tells the program that the saveData button is pressed
 	 * and that hides the GUI.
 	 * 
 	 * @throws IllegalNameException if the name isn't accepted
@@ -416,7 +416,7 @@ public class FileSystemFrame extends JFrame implements KeyListener, ListSelectio
 	/**
 	 * Gives the new file path.
 	 * 
-	 * @return the path with the filename and the type (i.e. ./saves/save.xml)
+	 * @return the path with the filename and the type (i.e. ./saves/saveData.xml)
 	 */
 	public String getFilePath() {
 		return path + "/" + fileName + fileType;

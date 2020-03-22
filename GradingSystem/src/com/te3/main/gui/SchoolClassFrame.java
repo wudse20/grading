@@ -125,7 +125,7 @@ public class SchoolClassFrame extends JFrame {
 			SchoolClass s = mf.getMainData().getClasses().get(index);
 			s.setName(np.getLastInput());
 			s.setStudents(mscp.getStudents());
-			mf.save(mf.getSaveFilePath());
+			mf.saveData(mf.getSaveFilePath());
 			this.dispose();
 		} catch (IllegalNameException e) {
 			JOptionPane.showMessageDialog(this, e.getMessage(), "Fel", JOptionPane.ERROR_MESSAGE);
@@ -150,7 +150,7 @@ public class SchoolClassFrame extends JFrame {
 			al.add(new SchoolClass(np.getLastInput(), mscp.getStudents()));
 			JOptionPane.showMessageDialog(this, "Klassen: " + np.getLastInput() + " är skapad.",
 					"Du har skapat en klass", JOptionPane.INFORMATION_MESSAGE);
-			mf.save(mf.getSaveFilePath());
+			mf.saveData(mf.getSaveFilePath());
 			this.dispose();
 		} catch (IllegalNameException e) {
 			JOptionPane.showMessageDialog(this, e.getMessage(), "Fel", JOptionPane.ERROR_MESSAGE);

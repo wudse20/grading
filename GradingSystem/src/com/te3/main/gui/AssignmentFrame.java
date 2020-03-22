@@ -156,7 +156,7 @@ public class AssignmentFrame extends JFrame {
 					.get(mf.getCurrentlySelectedCourseIndex()).addCourseTask(new Task(np.getLastInput(), map.getAddedCriteria()));
 		}
 
-		mf.save(mf.getSaveFilePath());
+		mf.saveData(mf.getSaveFilePath());
 	}
 
 	private void updateAssignment() throws IllegalNameException, IllegalInputException {
@@ -178,7 +178,7 @@ public class AssignmentFrame extends JFrame {
 					.get(mf.getCurrentlySelectedCourseIndex()).addCourseTask(new Task(np.getLastInput(), map.getAddedCriteria()));
 		}
 		
-		mf.save(mf.getSaveFilePath());
+		mf.saveData(mf.getSaveFilePath());
 	}
 
 }

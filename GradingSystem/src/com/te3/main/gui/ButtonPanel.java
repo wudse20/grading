@@ -256,7 +256,7 @@ public class ButtonPanel extends JPanel {
 		if (fsf.getExitCode() == 0) {
 			try {
 				mf.setSaveFilePath(fsf.getFilePath());
-				mf.save(mf.getSaveFilePath());
+				mf.saveData(mf.getSaveFilePath());
 				JOptionPane.showMessageDialog(mf, "Du har sparat", "Sparat", JOptionPane.INFORMATION_MESSAGE);
 			} catch (IllegalInputException e) {
 				e.printStackTrace();
@@ -289,7 +289,7 @@ public class ButtonPanel extends JPanel {
 		});
 
 		btnSave.addActionListener((e) -> {
-			mf.save(mf.getSaveFilePath());
+			mf.saveData(mf.getSaveFilePath());
 			JOptionPane.showMessageDialog(mf, "Du har sparat!", "Sparat", JOptionPane.INFORMATION_MESSAGE);
 		});
 

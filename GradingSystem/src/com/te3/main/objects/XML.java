@@ -45,19 +45,19 @@ public class XML<E> {
 	 */
 	@SuppressWarnings("unchecked")
 	public E read(String fileLocation) {
-		Object o = null;
+		E e = null;
 		try {
 			FileInputStream fis = new FileInputStream(new File(fileLocation));
 			XMLDecoder encoder = new XMLDecoder(fis);
 
-			o = (E) encoder.readObject();
+			e = (E) encoder.readObject();
 			fis.close();
 			encoder.close();
 
-			return (E) o;
-		} catch (IOException e) {
-			System.out.println(e.toString());
-			return (E) o;
+			return e;
+		} catch (IOException ex) {
+			System.out.println(ex.getMessage());
+			return e;
 		}
 	}
 }

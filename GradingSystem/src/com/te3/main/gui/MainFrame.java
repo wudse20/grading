@@ -2,24 +2,23 @@ package com.te3.main.gui;
 
 import java.awt.Container;
 import java.awt.Dimension;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.Timer;
 
-import com.te3.main.enums.Grade;
 import com.te3.main.enums.State;
 import com.te3.main.exceptions.IllegalInputException;
 import com.te3.main.exceptions.IllegalNameException;
+import com.te3.main.objects.Data;
+import com.te3.main.objects.Settings;
 import com.te3.main.objects.Course;
 import com.te3.main.objects.Criteria;
-import com.te3.main.objects.Data;
-import com.te3.main.objects.SchoolClass;
-import com.te3.main.objects.Student;
-import com.te3.main.objects.Task;
 import com.te3.main.objects.XML;
+import com.te3.main.objects.SchoolClass;
+import com.te3.main.objects.Task;
+import com.te3.main.objects.Student;
 
 /**
  * The mainframe of the program.
@@ -33,6 +32,8 @@ public class MainFrame extends JFrame {
 
 	private Data mainData;
 
+	private Settings settings;
+
 	// in seconds
 	private int saveTimer = 300;
 	private int currentlySelectedClassIndex = 0;
@@ -41,6 +42,7 @@ public class MainFrame extends JFrame {
 	private int currentlySelectedStudentIndex = 0;
 
 	private String saveFilePath;
+	private String settingsFilePath;
 
 	BoxLayout mainLayout;
 
@@ -58,16 +60,20 @@ public class MainFrame extends JFrame {
 		this.setSize(new Dimension(1200, 600));
 
 		Timer t = new Timer(saveTimer * 1000, (e) -> {
-			save(saveFilePath);
+			saveData(saveFilePath);
 		});
 
 		// Hooks in to the shutdown sequence and writes to the file and then exits.
 		Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-			save(saveFilePath);
+			saveSettings();
+			saveData(saveFilePath);
 		}));
 
+		settings = loadSettings();
+
+		this.saveFilePath = settings.getSavePath();
+
 		mainData = getSavedData();
-		this.saveFilePath = mainData.getSavePath();
 
 		t.start();
 
@@ -87,12 +93,24 @@ public class MainFrame extends JFrame {
 		cp.add(btnPanel);
 	}
 
-	public void save(String filePath) {
+	public Settings loadSettings() {
+		this.settingsFilePath = "./settings.xml";
+		XML<Settings> xml = new XML<Settings>();
+		return xml.read(this.settingsFilePath);
+	}
+
+	public void saveSettings() {
+		this.settingsFilePath = "./settings.xml";
+		XML<Settings> xml = new XML<Settings>();
+		xml.write(this.settingsFilePath, this.settings);
+	}
+
+	public void saveData(String filePath) {
 		XML<Data> xml = new XML<Data>();
 		xml.write(filePath, this.mainData);
 	}
 
-	public Data load(String filePath) {
+	public Data loadData(String filePath) {
 		XML<Data> xml = new XML<Data>();
 		Data d;
 		d = xml.read(filePath);
@@ -109,9 +127,8 @@ public class MainFrame extends JFrame {
 		// it create a new empty data object.
 		// change this boolean to false if you do not want to run the program with
 		// default predefined classes, courses, students and tasks.
-		// Kommenterat bort för att spar debug tid
 
-		boolean debug = true;
+		boolean debug = false;
 
 		if (debug) {
 			ArrayList<SchoolClass> classes = new ArrayList<SchoolClass>();
@@ -140,7 +157,7 @@ public class MainFrame extends JFrame {
 
 			return new Data(classes);
 		} else {
-			return load(saveFilePath);
+			return loadData(saveFilePath);
 		}
 	}
 
@@ -215,13 +232,18 @@ public class MainFrame extends JFrame {
 		}
 	}
 
+	public String getSettingsFilePath() {
+		this.settingsFilePath = "./settings.xml";
+		return settingsFilePath;
+	}
+
 	public String getSaveFilePath() {
 		return saveFilePath;
 	}
 
 	public void setSaveFilePath(String saveFilePath) throws IllegalInputException {
 		try {
-			mainData.setSavePath(saveFilePath);
+			settings.setSavePath(saveFilePath);
 			this.saveFilePath = saveFilePath;
 		} catch (IllegalInputException e) {
 			throw e;
