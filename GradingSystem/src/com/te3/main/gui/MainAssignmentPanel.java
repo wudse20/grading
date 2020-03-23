@@ -12,6 +12,12 @@ import javax.swing.JScrollPane;
 import com.te3.main.objects.Criteria;
 import com.te3.main.objects.Task;
 
+/**
+ * The class used to handle the assignemnts, <br>
+ * with GUI components.
+ *
+ * @Author Anton Skorup
+ * */
 public class MainAssignmentPanel extends JPanel {
 
 	/**

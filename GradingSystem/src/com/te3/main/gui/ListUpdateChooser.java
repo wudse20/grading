@@ -20,6 +20,8 @@ import com.te3.main.objects.SchoolClass;
 import com.te3.main.objects.Task;
 
 /**
+ * The list that shows all the different options before editing.
+ *
  * @author Anton Skorup
  *
  * @param <E> The type
@@ -58,6 +60,13 @@ public class ListUpdateChooser<E> extends JFrame implements ListSelectionListene
 
 	Class<E> clazz;
 
+	/**
+	 * Sets everything up for the GUI.
+	 *
+	 * @param mf The instance of the MainFrame
+	 * @param al the list of objects that're available to be edited.
+	 * @param clazz the class of the object being edited. ClassName.class
+	 * */
 	public ListUpdateChooser(MainFrame mf, ArrayList<E> al, Class<E> clazz) {
 		super("Uppdatera en kurs");
 		this.mf = mf;
@@ -78,7 +87,6 @@ public class ListUpdateChooser<E> extends JFrame implements ListSelectionListene
 
 		btnHelp.addActionListener((e) -> {
 			new HelpFrame("Uppdatera", "<html><p>" + helpText + "</html></p>").setVisible(true);
-			;
 		});
 
 		pButtons.setLayout(pLayout);

@@ -54,9 +54,10 @@ public class HelpFrame extends JFrame implements ActionListener {
 	}
 
 	/**
+	 * Sets up the HelpFrame
+	 *
 	 * @param title  the title of the window and the text<br>
-	 *               Must be HTML-tags.<br>
-	 *               .
+	 *               Must be HTML-tags.
 	 * @param info   the help info about the subject
 	 * @param height the height of the window
 	 */
@@ -67,6 +68,9 @@ public class HelpFrame extends JFrame implements ActionListener {
 		this.initialize();
 	}
 
+	/**
+	 * Initializes the GUI
+	 * */
 	private void initialize() {
 		this.setTitle(title);
 		this.setSize(new Dimension(400, height));
@@ -93,14 +97,23 @@ public class HelpFrame extends JFrame implements ActionListener {
 		this.add(lblSpacer4, BorderLayout.PAGE_END);
 	}
 
+	/**
+	 * A setter for the title
+	 * */
 	public void setTitle(String title) {
 		this.title = (title.trim().equals("")) ? "Too short title" : title;
 	}
 
+	/**
+	 * A setter for the info
+	 * */
 	public void setInfo(String info) {
 		this.info = (info.trim().equals("")) ? "Too short info" : info;
 	}
 
+	/**
+	 * A setter for the height
+	 * */
 	public void setHeight(int height) {
 		this.height = (height < 100) ? 100 : height;
 	}

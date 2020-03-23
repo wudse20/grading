@@ -21,6 +21,9 @@ import com.te3.main.exceptions.IllegalNameException;
 import com.te3.main.objects.SchoolClass;
 import com.te3.main.objects.Student;
 
+/**
+ * The class for maneging the classes
+ * */
 public class MainSchoolClassPanel extends JPanel implements DocumentListener {
 
 	/** Generated */
@@ -78,6 +81,9 @@ public class MainSchoolClassPanel extends JPanel implements DocumentListener {
 		this.addComponents();
 	}
 
+	/**
+	 * Adds the components
+	 * */
 	private void addComponents() {
 		pInput.add(lblName);
 		pInput.add(txfName);
@@ -91,6 +97,9 @@ public class MainSchoolClassPanel extends JPanel implements DocumentListener {
 		this.add(pStudents, BorderLayout.CENTER);
 	}
 
+	/**
+	 * Sets the properties
+	 * */
 	private void setProperties() {
 		this.setLayout(layout);
 		pInput.setLayout(pInputLayout);
@@ -173,11 +182,17 @@ public class MainSchoolClassPanel extends JPanel implements DocumentListener {
 		updateJList();
 	}
 
+	/**
+	 * Updates the JList
+	 * */
 	private void updateJList() {
 		Student[] students = new Student[this.students.size()];
 		listStudents.setListData(this.students.toArray(students));
 	}
 
+	/**
+	 * A getter for the students
+	 * */
 	public ArrayList<Student> getStudents() {
 		return this.students;
 	}

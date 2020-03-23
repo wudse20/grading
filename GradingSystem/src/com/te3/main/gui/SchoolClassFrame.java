@@ -12,11 +12,17 @@ import javax.swing.JPanel;
 import com.te3.main.exceptions.IllegalNameException;
 import com.te3.main.objects.SchoolClass;
 
+/**
+ * The frame for adding and editing SchoolClasses
+ *
+ * @Author Anton Skorup
+ * */
 public class SchoolClassFrame extends JFrame {
 
 	/** Generated */
 	private static final long serialVersionUID = 8791137725545409036L;
 
+	/** The help text of this frame */
 	private String helpInfo = "Skriv in namnet på klassen/gruppen i rutan: <b>Namn</b>. <br>"
 			+ "Namnet måste vara minst tre tecken långt. <br><br>"
 			+ "För att lägga till elever till klassen/gruppen<br>"
@@ -37,7 +43,7 @@ public class SchoolClassFrame extends JFrame {
 
 	MainSchoolClassPanel mscp;
 
-	AddControllPanel acp = new AddControllPanel();
+	AddControlPanel acp = new AddControlPanel();
 
 	EditControlPanel ecp = new EditControlPanel();
 
@@ -104,6 +110,9 @@ public class SchoolClassFrame extends JFrame {
 		});
 	}
 
+	/**
+	 * Updates the class
+	 * */
 	private void updateSchoolClass() {
 		int ans = JOptionPane.showConfirmDialog(this,
 				"Är du säker på att du vill uppdatera klassen: " + np.getLastInput() + "?", "Är du säker?",
@@ -157,6 +166,8 @@ public class SchoolClassFrame extends JFrame {
 	}
 
 	/**
+	 * Adds the components
+	 *
 	 * @param isEdit <br>
 	 *               if {@code true} then it's in edit mode. <br>
 	 *               if {@code false} then it's in add mode
@@ -173,6 +184,9 @@ public class SchoolClassFrame extends JFrame {
 		this.add(lblSpacer4, BorderLayout.PAGE_END);
 	}
 
+	/**
+	 * Sets the properties.
+	 * */
 	private void setProperties() {
 		this.setLayout(layout);
 		this.setSize(new Dimension(600, 600));

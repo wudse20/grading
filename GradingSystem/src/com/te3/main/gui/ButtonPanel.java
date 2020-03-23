@@ -31,16 +31,23 @@ public class ButtonPanel extends JPanel {
 	/** Default */
 	private static final long serialVersionUID = 1L;
 
+	/** The title in the help part of the GUI */
 	private String helpTitle = "Huvudvy (Placeholder)";
+
+	/** The help info och the GUI */
 	private String helpInfo = "<html>Detta är en mening. <br> Detta är en till mening. <br> Detta är en placeholder!</html>";
 
+	//Threads
 	Thread threadSaveToFile;
 	Thread threadSaveAs;
 
+	//MainFrames
 	MainFrame mf;
 
+	//Layouts
 	FlowLayout layout = new FlowLayout(FlowLayout.RIGHT);
 
+	//Buttons
 	JButton btnSave = new JButton("Spara");
 	JButton btnSaveAs = new JButton("Spara som");
 	JButton btnSaveToFile = new JButton("Spara till fil"); // Ska vi döpa om denna?
@@ -48,8 +55,10 @@ public class ButtonPanel extends JPanel {
 	JButton btnSettings = new JButton("Inställningar");
 	JButton btnHelp = new JButton("?");
 
+	//Labels
 	JLabel lblSpacer1 = new JLabel("  ");
 
+	//TextAreas
 	JTextArea printView = new JTextArea();
 
 	/**

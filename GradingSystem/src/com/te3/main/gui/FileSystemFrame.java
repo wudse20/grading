@@ -363,7 +363,7 @@ public class FileSystemFrame extends JFrame implements KeyListener, ListSelectio
 	}
 
 	/**
-	 * Kills the JFrame.
+	 * Kills the JFrame. This is a must, else it will run in the background.
 	 */
 	public void close() {
 		this.dispose();

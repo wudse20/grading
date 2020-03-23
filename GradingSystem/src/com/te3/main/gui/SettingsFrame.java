@@ -19,11 +19,18 @@ import javax.swing.event.DocumentListener;
 import com.te3.main.exceptions.IllegalInputException;
 import com.te3.main.objects.Settings;
 
+/**
+ * The frame that holds all the settings
+ *
+ * @Author Anton Skorup
+ * */
 public class SettingsFrame extends JFrame {
 	/** Generated */
 	private static final long serialVersionUID = 2812677933749486134L;
 
 	private String savePath;
+
+	/** The help text of this frame */
 	private String helpText = "För att ställa in hur ofta som <br>" + "programmet kommer att autospara <br>"
 			+ "skriv in intervallet i sekunder. <br>" + "Detta måste vara mellan 60 och 3600 sekunder. <br><br>"
 			+ "För att ställa in vart data skall sparas <br>" + "klicka på knappen: <b>Ställ in plats för sparfil</b>"
@@ -64,6 +71,11 @@ public class SettingsFrame extends JFrame {
 	JPanel pSavePath = new JPanel();
 	JPanel pSettings = new JPanel();
 
+	/**
+     * Sets everything up
+     *
+     * @param mf the instance of the MainFrame
+     * */
 	public SettingsFrame(MainFrame mf) {
 		super("Inställningar");
 
@@ -74,6 +86,9 @@ public class SettingsFrame extends JFrame {
 		this.addComponents();
 	}
 
+	/**
+     * Adds the components
+     * */
 	private void addComponents() {
 		this.add(lblSpacer, BorderLayout.PAGE_START);
 		this.add(lblSpacer2, BorderLayout.LINE_START);
@@ -82,6 +97,9 @@ public class SettingsFrame extends JFrame {
 		this.add(lblSpacer4, BorderLayout.PAGE_END);
 	}
 
+	/**
+     * Sets the properties
+     * */
 	private void setProperties() {
 		this.setLayout(layout);
 		this.setSize(new Dimension(400, 225));
@@ -148,6 +166,11 @@ public class SettingsFrame extends JFrame {
 		threadSetSavePath.start();
 	}
 
+	/**
+     * The thread method for settings the save path
+     *
+     * @param fsf the instance of the current FileSystemFrame
+     * */
 	@SuppressWarnings("static-access")
 	private void setSavePathThread(FileSystemFrame fsf) {
 		while (fsf.getExitCode() == -1) {
@@ -166,6 +189,9 @@ public class SettingsFrame extends JFrame {
 		fsf.close();
 	}
 
+	/**
+     * Applies the settings
+     * */
 	private void applySettings() {
 		Settings s = new Settings();
 

@@ -12,11 +12,17 @@ import com.te3.main.exceptions.IllegalInputException;
 import com.te3.main.exceptions.IllegalNameException;
 import com.te3.main.objects.Task;
 
+/**
+ * The class that holds the GUI for the assignments
+ *
+ * @Author Anton Skorup
+ * */
 public class AssignmentFrame extends JFrame {
 
 	/** Generated */
 	private static final long serialVersionUID = 1797348437376328717L;
 
+	/** The help text */
 	private String helpInfo = "PLACEHOLDER";
 
 	JLabel lblSpacer1 = new JLabel(" ");
@@ -31,7 +37,7 @@ public class AssignmentFrame extends JFrame {
 
 	NamePanel np = new NamePanel();
 	MainAssignmentPanel map;
-	AddControllPanel acp = new AddControllPanel();
+	AddControlPanel acp = new AddControlPanel();
 	EditControlPanel ecp = new EditControlPanel();
 
 	MainFrame mf;
@@ -161,6 +167,9 @@ public class AssignmentFrame extends JFrame {
 		mf.saveData(mf.getSaveFilePath());
 	}
 
+	/**
+	 * Updates the assignment
+	 * */
 	@SuppressWarnings("unlikely-arg-type")
 	private void updateAssignment() throws IllegalNameException, IllegalInputException {
 		if (np.getLastInput().length() < 3) {

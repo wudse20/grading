@@ -14,6 +14,12 @@ import com.te3.main.exceptions.IllegalNameException;
 import com.te3.main.objects.Course;
 import com.te3.main.objects.SchoolClass;
 
+/**
+ * The class that holds the Frame for
+ * managing courses
+ *
+ * @Author Anton Skorup
+ * */
 public class CourseFrame extends JFrame {
 
 	/** Default */
@@ -37,7 +43,7 @@ public class CourseFrame extends JFrame {
 
 	MainCoursePanel mcp;
 
-	AddControllPanel acp = new AddControllPanel();
+	AddControlPanel acp = new AddControlPanel();
 
 	EditControlPanel ecp = new EditControlPanel();
 

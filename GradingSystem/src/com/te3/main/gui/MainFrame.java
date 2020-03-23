@@ -31,11 +31,13 @@ public class MainFrame extends JFrame {
 	/** Default */
 	private static final long serialVersionUID = 1L;
 
+	/** The main data of the program */
 	private Data mainData;
 
+	/** The settings */
 	private Settings settings;
 
-	// in seconds
+	/**Timer in seconds*/
 	private int saveTimer;
 	private int currentlySelectedClassIndex = 0;
 	private int currentlySelectedCourseIndex = 0;
@@ -55,6 +57,12 @@ public class MainFrame extends JFrame {
 
 	private State s;
 
+	Timer t;
+
+	/**
+	 * Sets everything in the program up, <br>
+	 * that's needed.
+	 * */
 	public MainFrame() {
 		super("Betygssättning");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -70,11 +78,11 @@ public class MainFrame extends JFrame {
 
 		mainData = getSavedData();
 
-		Timer t = new Timer(saveTimer * 1000, (e) -> {
+		t = new Timer(saveTimer * 1000, (e) -> {
 			saveData(saveFilePath);
 		});
 
-		// Hooks in to the shutdown sequence and writes to the file and then exits.
+		// Hooks in to the shutdown sequence and writes to the files and then exits.
 		Runtime.getRuntime().addShutdownHook(new Thread(() -> {
 			saveSettings();
 			saveData(saveFilePath);
@@ -85,6 +93,9 @@ public class MainFrame extends JFrame {
 		initComponents();
 	}
 
+	/**
+	 * Initializes the components
+	 * */
 	private void initComponents() {
 		mainLayout = new BoxLayout(this.getContentPane(), BoxLayout.Y_AXIS);
 		this.setLayout(mainLayout);
@@ -98,23 +109,35 @@ public class MainFrame extends JFrame {
 		cp.add(btnPanel);
 	}
 
+	/**
+	 * Loads the settings into memory
+	 * */
 	public Settings loadSettings() {
 		this.settingsFilePath = "./settings.xml";
 		XML<Settings> xml = new XML<Settings>();
 		return xml.read(this.settingsFilePath);
 	}
 
+	/**
+	 * Saves the settings
+	 * */
 	public void saveSettings() {
 		this.settingsFilePath = "./settings.xml";
 		XML<Settings> xml = new XML<Settings>();
 		xml.write(this.settingsFilePath, this.settings);
 	}
 
+	/**
+	 * Saves the data
+	 * */
 	public void saveData(String filePath) {
 		XML<Data> xml = new XML<Data>();
 		xml.write(filePath, this.mainData);
 	}
 
+	/**
+	 * Loads the data in to memory
+	 * */
 	public Data loadData(String filePath) {
 		XML<Data> xml = new XML<Data>();
 		Data d;
@@ -127,6 +150,10 @@ public class MainFrame extends JFrame {
 		return d;
 	}
 
+	/**
+	 * Get's the saved data <br>
+	 * It will also create a debug student if needed.
+	 * */
 	private Data getSavedData() {
 		// should be able to find local stored data, and import it. for now we just have
 		// it create a new empty data object.
@@ -166,10 +193,18 @@ public class MainFrame extends JFrame {
 		}
 	}
 
+	/**
+	 * Updates the state of the GUI
+	 *
+	 * @param s the new state of the GUI
+	 * */
 	public void updateGradeState(State s) {
 		this.s = s;
 	}
 
+	/**
+	 * Updates the grade panel GUI
+	 * */
 	public void updateGUI() {
 		gradePanel.updateGUI(s);
 	}
@@ -210,41 +245,59 @@ public class MainFrame extends JFrame {
 		}
 	}
 
-	public void updateGradeGUI() {
-		gradePanel.updateGUI(gradePanel.getState());
-	}
-
-	public void updateState(State s) {
-		gradePanel.setState(s);
-	}
-
+	/**
+	 * Getter for the main data
+	 * */
 	public Data getMainData() {
 		return mainData;
 	}
 
+	/**
+	 * Setter for the main data
+	 * */
 	public void setMainData(Data mainData) {
 		this.mainData = mainData;
 	}
 
+	/**
+	 * Getter for the save timer
+	 * */
 	public int getSaveTimer() {
 		this.saveTimer = settings.getSaveTimer();
 		return this.saveTimer;
 	}
 
+	/**
+	 * Sets the new value and restarts the timer.
+	 * */
 	public void setSaveTimer(int saveTimer) throws IllegalInputException {
 		settings.setSaveTimer(saveTimer);
 		this.saveTimer = saveTimer;
+		t.stop();
+		t.setDelay(saveTimer * 1000);
+		t.start();
 	}
 
+	/**
+	 * A setter for the settings save file path
+	 * */
 	public String getSettingsFilePath() {
 		this.settingsFilePath = "./settings.xml";
 		return settingsFilePath;
 	}
 
+	/**
+	 * A getter for the save file path
+	 * */
 	public String getSaveFilePath() {
 		return saveFilePath;
 	}
 
+	/**
+	 * Sets the save file path
+	 *
+	 * @throws if the file path isn't accepted.
+	 * */
 	public void setSaveFilePath(String saveFilePath) throws IllegalInputException {
 		try {
 			settings.setSavePath(saveFilePath);
@@ -254,46 +307,79 @@ public class MainFrame extends JFrame {
 		}
 	}
 
+	/**
+	 * A getter for the currently selected class index
+	 * */
 	public int getCurrentlySelectedClassIndex() {
 		return currentlySelectedClassIndex;
 	}
 
+	/**
+	 * A setter for the currently selected class index
+	 * */
 	public void setCurrentlySelectedClassIndex(int currentlySelectedClassIndex) {
 		this.currentlySelectedClassIndex = currentlySelectedClassIndex;
 	}
 
+	/**
+	 * A getter for the currently selected course index.
+	 * */
 	public int getCurrentlySelectedCourseIndex() {
 		return currentlySelectedCourseIndex;
 	}
 
+	/**
+	 * A setter for the currently selected course index.
+	 * */
 	public void setCurrentlySelectedCourseIndex(int currentlySelectedCourseIndex) {
 		this.currentlySelectedCourseIndex = currentlySelectedCourseIndex;
 	}
 
+	/**
+	 * A getter for the currently selected assignment index.
+	 * */
 	public int getCurrentlySelectedAssignmentIndex() {
 		return currentlySelectedAssignmentIndex;
 	}
 
+	/**
+	 * A setter for the currently selected assignment index
+	 * */
 	public void setCurrentlySelectedAssignmentIndex(int currentlySelectedAssignmentIndex) {
 		this.currentlySelectedAssignmentIndex = currentlySelectedAssignmentIndex;
 	}
 
+	/**
+	 * A getter for the currently selected student index.
+	 * */
 	public int getCurrentlySelectedStudentIndex() {
 		return currentlySelectedStudentIndex;
 	}
 
+	/**
+	 * A setter for the currently selected student index.
+	 * */
 	public void setCurrentlySelectedStudentIndex(int currentlySelectedStudentIndex) {
 		this.currentlySelectedStudentIndex = currentlySelectedStudentIndex;
 	}
 
+	/**
+	 * A getter for the grade panel
+	 * */
 	public GradesPanel getGradePanel() {
 		return gradePanel;
 	}
 
+	/**
+	 * A getter for the settings
+	 * */
 	public Settings getSettings() {
 		return this.settings;
 	}
 
+	/**
+	 * A setter for the settings.
+	 * */
 	public void setSettings(Settings s) {
 		this.settings = s;
 		this.saveFilePath = s.getSavePath();

@@ -15,6 +15,13 @@ import com.te3.main.objects.Criteria;
 import com.te3.main.objects.Student;
 import com.te3.main.objects.Task;
 
+/**
+ * The panel that holds all the <br>
+ * different criteria and the text at <br>
+ * the left of the GUI.
+ *
+ * @Author Anton Skorup
+ * */
 public class GradesPanel extends JPanel {
 
 	/** Default */
@@ -227,6 +234,12 @@ public class GradesPanel extends JPanel {
 		this.repaint();
 	}
 
+	/**
+	 * Called when a criteria button is pressed.
+	 *
+	 * @param g the new grade
+	 * @param c the new criteria
+	 * */
 	private void btnClicked(Grade g, Criteria c) {
 		c.setGrade(g);
 		c.updateGUI();

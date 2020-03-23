@@ -121,15 +121,25 @@ public class MainCoursePanel extends JPanel implements DocumentListener {
 		this.addComponents();
 	}
 
+	/**
+	 * Clones the ArrayList
+	 * */
 	private void copyArrayLists() {
 		ArrayList<SchoolClass> al = mf.getMainData().getClasses();
 
 		for (int i = 0; i < al.size(); i++) {
 			SchoolClass sc = al.get(i);
-			notAddedClasses.add(sc);
+			try {
+				notAddedClasses.add(new SchoolClass(sc.getName(), sc.getStudents()));
+			} catch (IllegalNameException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
+	/**
+	 * Sets the properties.
+	 * */
 	private void setProperties() {
 		listAddedClasses.setPreferredSize(new Dimension(250, 100));
 		listNotAddedClasses.setPreferredSize(new Dimension(250, 100));
@@ -183,11 +193,17 @@ public class MainCoursePanel extends JPanel implements DocumentListener {
 		});
 	}
 
+	/**
+	 * Removes a criteria.
+	 * */
 	private void removeCriteria(int index) {
 		criteria.remove(index);
 		refreshCriteria();
 	}
 
+	/**
+	 * Adds a criteria
+	 * */
 	private void addCriteria() {
 		try {
 			Criteria c = new Criteria(txfCriteria.getText());
@@ -230,6 +246,9 @@ public class MainCoursePanel extends JPanel implements DocumentListener {
 		refreshClasses();
 	}
 
+	/**
+	 * Refreshes the class GUI
+	 * */
 	private void refreshClasses() {
 		SchoolClass[] arrAdded = new SchoolClass[addedClasses.size()];
 		SchoolClass[] arrNotAdded = new SchoolClass[notAddedClasses.size()];
@@ -237,11 +256,18 @@ public class MainCoursePanel extends JPanel implements DocumentListener {
 		listAddedClasses.setListData(addedClasses.toArray(arrAdded));
 	}
 
+	/**
+	 * Refreshes the criteria GUI
+	 * */
 	private void refreshCriteria() {
 		Criteria[] arrCriteria = new Criteria[criteria.size()];
 		listCriteria.setListData(criteria.toArray(arrCriteria));
 	}
 
+
+	/**
+	 * Adds the components
+	 * */
 	private void addComponents() {
 		pLables.setLayout(pLabelsLayout);
 		pLables.add(lblNotAddedClasses, BorderLayout.LINE_START);
@@ -266,10 +292,16 @@ public class MainCoursePanel extends JPanel implements DocumentListener {
 		this.add(pCriteria);
 	}
 
+	/**
+	 * Getter for the added classes
+	 * */
 	public ArrayList<SchoolClass> getAddedClasses() {
 		return addedClasses;
 	}
 
+	/**
+	 * Getter for the criteria
+	 * */
 	public ArrayList<Criteria> getCriteria() {
 		return criteria;
 	}

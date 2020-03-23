@@ -6,6 +6,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+/**
+ * The panel used for getting a name input <br>
+ * for the editing and adding frames.
+ *
+ * @Author Anton Skorup
+ * */
 public class NamePanel extends JPanel {
 
 	/** Default */
@@ -19,17 +25,26 @@ public class NamePanel extends JPanel {
 
 	JTextField txfName = new JTextField(12);
 
+	/**
+	 * Sets everything up
+	 * */
 	public NamePanel() {
 		this.setLayout(layout);
 		this.add(lblName);
 		this.add(txfName);
 	}
 
+	/**
+	 * Gets the last input
+	 * */
 	public String getLastInput() {
 		this.lastInput = txfName.getText();
 		return lastInput;
 	}
 
+	/**
+	 * Sets the last input
+	 * */
 	public void setLastInput(String lastInput) {
 		this.lastInput = lastInput;
 		txfName.setText(this.lastInput);
