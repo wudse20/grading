@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.util.ArrayList;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -17,6 +18,8 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
 import com.te3.main.exceptions.IllegalInputException;
+import com.te3.main.objects.Data;
+import com.te3.main.objects.SchoolClass;
 import com.te3.main.objects.Settings;
 
 /**
@@ -44,7 +47,7 @@ public class SettingsFrame extends JFrame {
 	BorderLayout pLayout = new BorderLayout();
 	FlowLayout pBtnsLayout = new FlowLayout(FlowLayout.RIGHT);
 	FlowLayout pTimerLayout = new FlowLayout(FlowLayout.LEFT);
-	FlowLayout pSavePathLayout = new FlowLayout(FlowLayout.LEFT);
+	FlowLayout pSettingBtnsLayout = new FlowLayout(FlowLayout.LEFT);
 	BoxLayout pSettingsLayout;
 
 	Container cp = this.getContentPane();
@@ -53,6 +56,7 @@ public class SettingsFrame extends JFrame {
 	JButton btnCancel = new JButton("Avbryt");
 	JButton btnHelp = new JButton("?");
 	JButton btnSetSavePath = new JButton("Ställ in plats för sparfil"); // Försök komma på bättre text för att knappen
+	JButton btnDeletData = new JButton("Rensa all data");
 
 	JLabel lblSpacer = new JLabel(" ");
 	JLabel lblSpacer2 = new JLabel("     ");
@@ -68,7 +72,7 @@ public class SettingsFrame extends JFrame {
 	JPanel panel = new JPanel();
 	JPanel pBtns = new JPanel();
 	JPanel pTimer = new JPanel();
-	JPanel pSavePath = new JPanel();
+	JPanel pSettingBtns = new JPanel();
 	JPanel pSettings = new JPanel();
 
 	/**
@@ -128,19 +132,21 @@ public class SettingsFrame extends JFrame {
 		btnHelp.addActionListener(
 				(e) -> new HelpFrame("Inställningar", "<html><p>" + helpText + "</p></html>").setVisible(true));
 		btnSetSavePath.addActionListener((e) -> setSavePath());
+		btnDeletData.addActionListener((e) -> deleteData());
 
 		pTimer.setLayout(pTimerLayout);
 		pTimer.add(lblTimer);
 		pTimer.add(txfSaveTimer);
 
-		pSavePath.setLayout(pSavePathLayout);
-		pSavePath.add(btnSetSavePath);
+		pSettingBtns.setLayout(pSettingBtnsLayout);
+		pSettingBtns.add(btnSetSavePath);
+		pSettingBtns.add(btnDeletData);
 
 		pSettingsLayout = new BoxLayout(pSettings, BoxLayout.Y_AXIS);
 		pSettings.setLayout(pSettingsLayout);
 		pSettings.add(lblSpacer5);
 		pSettings.add(pTimer);
-		pSettings.add(pSavePath);
+		pSettings.add(pSettingBtns);
 		pSettings.add(lblSpacer6);
 
 		pBtns.setLayout(pBtnsLayout);
@@ -217,5 +223,19 @@ public class SettingsFrame extends JFrame {
 		JOptionPane.showMessageDialog(this, "Du har uppdaterat dina inställningar", "Uppdaterad",
 				JOptionPane.INFORMATION_MESSAGE);
 		this.dispose();
+	}
+
+	/**
+	 * Deletes all the data
+	 * */
+	private void deleteData() {
+		int prompt = JOptionPane.showConfirmDialog(this,"Är du säker på att du vill tabort all data", "Är du säker?", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+
+		if (prompt == JOptionPane.YES_OPTION) {
+			mf.setMainData(new Data(new ArrayList<SchoolClass>()));
+			mf.saveData(mf.getSaveFilePath());
+			mf.updateGUI();
+			JOptionPane.showMessageDialog(this, "All data är raderad!", "Raderingen lyckades", JOptionPane.INFORMATION_MESSAGE);
+		}
 	}
 }
