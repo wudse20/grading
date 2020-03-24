@@ -1,9 +1,9 @@
 package com.te3.main.gui;
 
-import java.awt.Container;
-import java.awt.Dimension;
+import java.awt.*;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.concurrent.Flow;
 
 import javax.swing.*;
 
@@ -45,16 +45,17 @@ public class MainFrame extends JFrame {
 	private String saveFilePath;
 	private String settingsFilePath;
 
-	BoxLayout layout;
+	BoxLayout pLayout;
 
-	JPanel panel = new JPanel();
 	CBPanel cbPanel;
 	GradesPanel gradePanel;
 	ButtonPanel btnPanel;
 
 	Container cp = this.getContentPane();
 
-	JLabel lblBackground = new JLabel();
+	JPanel panel = new JPanel();
+
+	JLabel lblBackground = new JLabel(new ImageIcon("./src/images/yoda.jpg"));
 
 	private State s;
 
@@ -68,6 +69,9 @@ public class MainFrame extends JFrame {
 		super("Betygssättning");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setSize(new Dimension(1200, 600));
+
+		lblBackground.setMinimumSize(new Dimension(this.getWidth(), this.getHeight()));
+		this.setContentPane(lblBackground);
 
 		if (new File("./settings.xml").exists())
 			settings = loadSettings();
@@ -98,28 +102,24 @@ public class MainFrame extends JFrame {
 	 * Initializes the components
 	 * */
 	private void initComponents() {
-		lblBackground.setMaximumSize(new Dimension(this.getWidth(), this.getHeight()));
-
-        if (new File("./yoda.png").exists())
-            System.out.println("HA");
-        else
-            System.out.println("fans");
-
-		lblBackground.setIcon(new ImageIcon("yoda.png"));
-
-		layout = new BoxLayout(panel, BoxLayout.Y_AXIS);
+		pLayout = new BoxLayout(panel, BoxLayout.Y_AXIS);
 
 		cbPanel = new CBPanel(mainData, this);
 		gradePanel = new GradesPanel(this);
 		btnPanel = new ButtonPanel(this);
 
-		panel.setLayout(layout);
+		panel.setLayout(pLayout);
+		panel.setOpaque(false);
 		panel.add(cbPanel);
 		panel.add(gradePanel);
 		panel.add(btnPanel);
 
-		cp.add(lblBackground);
-//		cp.add(panel);
+		cbPanel.setOpaque(false);
+		gradePanel.setOpaque(false);
+		btnPanel.setOpaque(false);
+
+		this.add(panel);
+		panel.setBounds(0, 0, this.getWidth() - 15, this.getHeight());
 	}
 
 	/**
@@ -173,7 +173,7 @@ public class MainFrame extends JFrame {
 		// change this boolean to false if you do not want to run the program with
 		// default predefined classes, courses, students and tasks.
 
-		boolean debug = false;
+		boolean debug = true;
 
 		if (debug) {
 			ArrayList<SchoolClass> classes = new ArrayList<SchoolClass>();
@@ -187,9 +187,26 @@ public class MainFrame extends JFrame {
 
 				criteria.add(new Criteria("Problemlösning"));
 				criteria.add(new Criteria("Fjäsk"));
+				criteria.add(new Criteria("test"));
+				criteria.add(new Criteria("test"));
+				criteria.add(new Criteria("test"));
+				criteria.add(new Criteria("test"));
+				criteria.add(new Criteria("test"));
+				criteria.add(new Criteria("test"));
+				criteria.add(new Criteria("test"));
+				criteria.add(new Criteria("test"));
+				criteria.add(new Criteria("test"));
 
 				criteria2.add(new Criteria("Problemlösning"));
 				criteria2.add(new Criteria("Fjäsk"));
+				criteria2.add(new Criteria("Test"));
+				criteria2.add(new Criteria("Test"));
+				criteria2.add(new Criteria("Test"));
+				criteria2.add(new Criteria("Test"));
+				criteria2.add(new Criteria("Test"));
+				criteria2.add(new Criteria("Test"));
+				criteria2.add(new Criteria("Test"));
+				criteria2.add(new Criteria("Test"));
 
 				tasks.add(new Task("Lego robot", criteria2));
 

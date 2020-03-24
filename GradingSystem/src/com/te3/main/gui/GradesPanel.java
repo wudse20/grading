@@ -1,9 +1,6 @@
 package com.te3.main.gui;
 
-import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.FlowLayout;
-import java.awt.Font;
+import java.awt.*;
 
 import java.util.ArrayList;
 
@@ -47,13 +44,13 @@ public class GradesPanel extends JPanel {
 	JScrollPane scroll = new JScrollPane(panel);
 
 	JLabel lblName = new JLabel();
-	JLabel lbjAssignment = new JLabel();
+	JLabel lblAssignment = new JLabel();
 	JLabel lblGrades = new JLabel();
 	JLabel lblSpacer1 = new JLabel(" ");
 	JLabel lblSpacer2 = new JLabel("    ");
 	JLabel lblSpacer3 = new JLabel("    ");
 	JLabel lblSpacer4 = new JLabel(" ");
-	JLabel lblSpacer6 = new JLabel("    ");
+	JLabel lblSpacer5 = new JLabel("    ");
 
 	MainFrame mf;
 
@@ -75,10 +72,14 @@ public class GradesPanel extends JPanel {
 
 		scroll.setBorder(BorderFactory.createEmptyBorder());
 
+		panelInfo.setBackground(new Color(0, 0, 0, 0));
+		panel.setBackground(new Color(0, 0, 0, 0));
+		scroll.setBackground(new Color(0, 0, 0, 0));
+
 		this.add(lblSpacer1, BorderLayout.PAGE_START);
 		this.add(panelInfo, BorderLayout.LINE_START);
 		this.add(scroll, BorderLayout.CENTER);
-		this.add(lblSpacer6, BorderLayout.LINE_END);
+		this.add(lblSpacer5, BorderLayout.LINE_END);
 	}
 
 	/**
@@ -128,18 +129,18 @@ public class GradesPanel extends JPanel {
 	private void updateInfo(Student s, Task t, ArrayList<Criteria> al, State st) {
 		lblName.setText(s.getName());
 		lblGrades.setText(countGrades(al));
-		lbjAssignment.setText(t.getName());
+		lblAssignment.setText(t.getName());
 
 		lblName.setFont(new Font(lblName.getFont().getName(), Font.BOLD, 20));
 		lblGrades.setFont(new Font(lblName.getFont().getName(), Font.PLAIN, 20));
-		lbjAssignment.setFont(new Font(lbjAssignment.getFont().getName(), Font.PLAIN, 20));
+		lblAssignment.setFont(new Font(lblAssignment.getFont().getName(), Font.PLAIN, 20));
 
 		panelInfo.setLayout(pInfoLayout);
 		panelInfo2.setLayout(pInfoLayout2);
 
 		if (st.equals(State.SINGLE_STUDENT_ASSIGNMENT)) {
 			panelInfo2.add(lblName);
-			panelInfo2.add(lbjAssignment);
+			panelInfo2.add(lblAssignment);
 			panelInfo2.add(lblGrades);
 		} else if (st.equals(State.SINGLE_STUDENT_GENERALIZED)) {
 			panelInfo2.add(lblName);

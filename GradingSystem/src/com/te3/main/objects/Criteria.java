@@ -77,6 +77,9 @@ public class Criteria {
 		pCriteria.add(lblCriteria);
 		pCriteria.add(lblGrade);
 		pCriteria.add(pButtons);
+
+		pButtons.setBackground(new Color(0, 0, 0, 0));
+		pCriteria.setBackground(new Color(0, 0, 0, 0));
 	}
 
 	private void updateGUI(Grade grade) {
