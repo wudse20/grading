@@ -5,9 +5,7 @@ import java.awt.Dimension;
 import java.io.File;
 import java.util.ArrayList;
 
-import javax.swing.BoxLayout;
-import javax.swing.JFrame;
-import javax.swing.Timer;
+import javax.swing.*;
 
 import com.te3.main.enums.State;
 import com.te3.main.exceptions.IllegalInputException;
@@ -47,13 +45,16 @@ public class MainFrame extends JFrame {
 	private String saveFilePath;
 	private String settingsFilePath;
 
-	BoxLayout mainLayout;
+	BoxLayout layout;
 
+	JPanel panel = new JPanel();
 	CBPanel cbPanel;
 	GradesPanel gradePanel;
 	ButtonPanel btnPanel;
 
 	Container cp = this.getContentPane();
+
+	JLabel lblBackground = new JLabel();
 
 	private State s;
 
@@ -97,16 +98,28 @@ public class MainFrame extends JFrame {
 	 * Initializes the components
 	 * */
 	private void initComponents() {
-		mainLayout = new BoxLayout(this.getContentPane(), BoxLayout.Y_AXIS);
-		this.setLayout(mainLayout);
+		lblBackground.setMaximumSize(new Dimension(this.getWidth(), this.getHeight()));
+
+        if (new File("./yoda.png").exists())
+            System.out.println("HA");
+        else
+            System.out.println("fans");
+
+		lblBackground.setIcon(new ImageIcon("yoda.png"));
+
+		layout = new BoxLayout(panel, BoxLayout.Y_AXIS);
 
 		cbPanel = new CBPanel(mainData, this);
 		gradePanel = new GradesPanel(this);
 		btnPanel = new ButtonPanel(this);
 
-		cp.add(cbPanel);
-		cp.add(gradePanel);
-		cp.add(btnPanel);
+		panel.setLayout(layout);
+		panel.add(cbPanel);
+		panel.add(gradePanel);
+		panel.add(btnPanel);
+
+		cp.add(lblBackground);
+//		cp.add(panel);
 	}
 
 	/**
