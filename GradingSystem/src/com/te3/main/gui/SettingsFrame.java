@@ -7,13 +7,7 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.util.ArrayList;
 
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
@@ -69,6 +63,8 @@ public class SettingsFrame extends JFrame {
 
 	JTextField txfSaveTimer;
 
+	JCheckBox cBoxShouldShowBabyYoda = new JCheckBox("Baby Yoda som bakgrund");
+
 	JPanel panel = new JPanel();
 	JPanel pBtns = new JPanel();
 	JPanel pTimer = new JPanel();
@@ -109,6 +105,8 @@ public class SettingsFrame extends JFrame {
 		this.setSize(new Dimension(400, 225));
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
+		cBoxShouldShowBabyYoda.setSelected(mf.shouldShowBabyYoda());
+
 		txfSaveTimer = new JTextField(12);
 		txfSaveTimer.setText(Integer.toString(mf.getSaveTimer()));
 		txfSaveTimer.getDocument().addDocumentListener(new DocumentListener() {
@@ -146,6 +144,7 @@ public class SettingsFrame extends JFrame {
 		pSettings.setLayout(pSettingsLayout);
 		pSettings.add(lblSpacer5);
 		pSettings.add(pTimer);
+		pSettings.add(cBoxShouldShowBabyYoda);
 		pSettings.add(pSettingBtns);
 		pSettings.add(lblSpacer6);
 
@@ -217,11 +216,18 @@ public class SettingsFrame extends JFrame {
 			JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 		}
 
+		mf.setShouldShowBabyYoda(cBoxShouldShowBabyYoda.isSelected());
+		mf.setBabyYoda(cBoxShouldShowBabyYoda.isSelected());
+
+		s.setShouldShowYoda(cBoxShouldShowBabyYoda.isSelected());
+
 		mf.setSettings(s);
 		mf.saveSettings();
+		mf.repaint();
 
 		JOptionPane.showMessageDialog(this, "Du har uppdaterat dina inställningar", "Uppdaterad",
 				JOptionPane.INFORMATION_MESSAGE);
+
 		this.dispose();
 	}
 

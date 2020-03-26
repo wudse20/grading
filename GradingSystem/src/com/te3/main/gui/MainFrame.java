@@ -45,6 +45,8 @@ public class MainFrame extends JFrame {
 	private String saveFilePath;
 	private String settingsFilePath;
 
+	private boolean shouldShowBabyYoda;
+
 	BoxLayout pLayout;
 
 	CBPanel cbPanel;
@@ -55,7 +57,7 @@ public class MainFrame extends JFrame {
 
 	JPanel panel = new JPanel();
 
-	JLabel lblBackground = new JLabel(new ImageIcon("./src/images/yoda.jpg"));
+	JLabel lblBackground;
 
 	private State s;
 
@@ -70,16 +72,19 @@ public class MainFrame extends JFrame {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setSize(new Dimension(1200, 600));
 
+        lblBackground = new JLabel((shouldShowBabyYoda) ? new ImageIcon("./src/images/yoda.jpg") : null);
+
 		lblBackground.setMinimumSize(new Dimension(this.getWidth(), this.getHeight()));
 		this.setContentPane(lblBackground);
 
 		if (new File("./settings.xml").exists())
 			settings = loadSettings();
 		else
-			settings = new Settings("./saves.xml", 300);
+			settings = new Settings("./saves.xml", 300, false);
 
 		this.saveFilePath = settings.getSavePath();
 		this.saveTimer = settings.getSaveTimer();
+		this.shouldShowBabyYoda = settings.isShouldShowYoda();
 
 		mainData = getSavedData();
 
@@ -114,12 +119,38 @@ public class MainFrame extends JFrame {
 		panel.add(gradePanel);
 		panel.add(btnPanel);
 
-		cbPanel.setOpaque(false);
-		gradePanel.setOpaque(false);
-		btnPanel.setOpaque(false);
+        setBabyYoda(shouldShowBabyYoda);
 
-		this.add(panel);
+        this.add(panel);
 		panel.setBounds(0, 0, this.getWidth() - 15, this.getHeight());
+	}
+
+
+    /**
+     * Set up for Baby Yoda
+     *
+     * @param shouldShowBabyYoda if {@code true} -> shows Baby yoda, else not
+     */
+    public void setBabyYoda(boolean shouldShowBabyYoda) {
+        if (shouldShowBabyYoda) {
+            cbPanel.setBackground(new Color(0, 0, 0, 0));
+            gradePanel.setBackground(new Color(0, 0, 0, 0));
+            btnPanel.setBackground(new Color(0, 0, 0, 0));
+        } else {
+            Color c = new JPanel().getBackground();
+            cbPanel.setBackground(c);
+            gradePanel.setBackground(c);
+            btnPanel.setBackground(c);
+        }
+
+        gradePanel.yoda(shouldShowBabyYoda);
+        cbPanel.yoda(shouldShowBabyYoda);
+
+        lblBackground.setIcon((shouldShowBabyYoda) ? new ImageIcon("./src/images/yoda.jpg") : null);
+
+        cbPanel.repaint();
+        gradePanel.repaint();
+        this.repaint();
 	}
 
 	/**
@@ -414,5 +445,17 @@ public class MainFrame extends JFrame {
 		this.settings = s;
 		this.saveFilePath = s.getSavePath();
 		this.saveTimer = s.getSaveTimer();
+		this.shouldShowBabyYoda = s.isShouldShowYoda();
+	}
+
+	/**
+     * A getter for should show baby yoda
+     * */
+    public boolean shouldShowBabyYoda() {
+	    return this.shouldShowBabyYoda;
+    }
+
+    public void setShouldShowBabyYoda(boolean shouldShowBabyYoda) {
+        this.shouldShowBabyYoda = shouldShowBabyYoda;
 	}
 }

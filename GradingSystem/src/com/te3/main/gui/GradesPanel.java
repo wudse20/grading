@@ -72,14 +72,30 @@ public class GradesPanel extends JPanel {
 
 		scroll.setBorder(BorderFactory.createEmptyBorder());
 
-		panelInfo.setBackground(new Color(0, 0, 0, 0));
-		panel.setBackground(new Color(0, 0, 0, 0));
-		scroll.setBackground(new Color(0, 0, 0, 0));
+		yoda(mf.shouldShowBabyYoda());
 
 		this.add(lblSpacer1, BorderLayout.PAGE_START);
 		this.add(panelInfo, BorderLayout.LINE_START);
 		this.add(scroll, BorderLayout.CENTER);
 		this.add(lblSpacer5, BorderLayout.LINE_END);
+	}
+
+	/**
+	 * Method for handeling the background
+	 *
+	 * @parma shouldShowBabyYoda if {@code true} -> setup for baby yoda else set up for ordinary mode.
+	 * */
+	public void yoda(boolean shouldShowBabyYoda) {
+		if (mf.shouldShowBabyYoda()) {
+			panelInfo.setBackground(new Color(0, 0, 0, 0));
+			panel.setBackground(new Color(0, 0, 0, 0));
+			scroll.setBackground(new Color(0, 0, 0, 0));
+		} else {
+			Color c = new JPanel().getBackground();
+			panelInfo.setBackground(c);
+			panel.setBackground(c);
+			scroll.setBackground(c);
+		}
 	}
 
 	/**

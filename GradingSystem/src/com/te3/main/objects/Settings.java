@@ -3,16 +3,19 @@ package com.te3.main.objects;
 import com.te3.main.exceptions.IllegalInputException;
 
 public class Settings {
-	String savePath;
+	private String savePath;
 
-	int saveTimer;
+	private int saveTimer;
+
+	private boolean shouldShowYoda;
 
 	public Settings() {
 	}
 
-	public Settings(String savePath, int saveTimer) {
+	public Settings(String savePath, int saveTimer, boolean shouldShowYoda) {
 		this.savePath = savePath;
 		this.saveTimer = saveTimer;
+		this.shouldShowYoda = shouldShowYoda;
 	}
 
 	public String getSavePath() {
@@ -39,5 +42,13 @@ public class Settings {
 		} else {
 			this.saveTimer = saveTimer;
 		}
+	}
+
+	public boolean isShouldShowYoda() {
+		return shouldShowYoda;
+	}
+
+	public void setShouldShowYoda(boolean shouldShowYoda) {
+		this.shouldShowYoda = shouldShowYoda;
 	}
 }

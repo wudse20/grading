@@ -72,14 +72,13 @@ public class Criteria {
 
 		// The rest
 		pCriteria.setLayout(pCriteriaLayout);
+		pButtons.setBackground(new Color(0, 0, 0, 0));
+		pCriteria.setBackground(new Color(0, 0, 0, 0));
 		pCriteria.setMaximumSize(new Dimension(640, 78));
 
 		pCriteria.add(lblCriteria);
 		pCriteria.add(lblGrade);
 		pCriteria.add(pButtons);
-
-		pButtons.setBackground(new Color(0, 0, 0, 0));
-		pCriteria.setBackground(new Color(0, 0, 0, 0));
 	}
 
 	private void updateGUI(Grade grade) {
