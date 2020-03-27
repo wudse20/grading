@@ -86,15 +86,16 @@ public class GradesPanel extends JPanel {
 	 * @parma shouldShowBabyYoda if {@code true} -> setup for baby yoda else set up for ordinary mode.
 	 * */
 	public void yoda(boolean shouldShowBabyYoda) {
+		panel.setBackground(new JPanel().getBackground());
+		
 		if (mf.shouldShowBabyYoda()) {
-			panelInfo.setBackground(new Color(0, 0, 0, 0));
-			panel.setBackground(new Color(0, 0, 0, 0));
-			scroll.setBackground(new Color(0, 0, 0, 0));
+			panelInfo.setOpaque(false);;
+			panel.setOpaque(false);
+			scroll.setOpaque(false);
 		} else {
-			Color c = new JPanel().getBackground();
-			panelInfo.setBackground(c);
-			panel.setBackground(c);
-			scroll.setBackground(c);
+			panelInfo.setOpaque(true);
+			panel.setOpaque(true);
+			scroll.setOpaque(true);
 		}
 	}
 

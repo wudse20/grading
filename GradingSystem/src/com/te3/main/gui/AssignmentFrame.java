@@ -16,7 +16,7 @@ import com.te3.main.objects.Task;
  * The class that holds the GUI for the assignments
  *
  * @Author Anton Skorup
- * */
+ */
 public class AssignmentFrame extends JFrame {
 
 	/** Generated */
@@ -169,7 +169,7 @@ public class AssignmentFrame extends JFrame {
 
 	/**
 	 * Updates the assignment
-	 * */
+	 */
 	@SuppressWarnings("unlikely-arg-type")
 	private void updateAssignment() throws IllegalNameException, IllegalInputException {
 		if (np.getLastInput().length() < 3) {

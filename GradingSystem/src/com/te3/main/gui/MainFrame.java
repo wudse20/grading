@@ -133,14 +133,13 @@ public class MainFrame extends JFrame {
      */
     public void setBabyYoda(boolean shouldShowBabyYoda) {
         if (shouldShowBabyYoda) {
-            cbPanel.setBackground(new Color(0, 0, 0, 0));
-            gradePanel.setBackground(new Color(0, 0, 0, 0));
-            btnPanel.setBackground(new Color(0, 0, 0, 0));
+            cbPanel.setOpaque(false);
+            gradePanel.setOpaque(false);
+            btnPanel.setOpaque(false);
         } else {
-            Color c = new JPanel().getBackground();
-            cbPanel.setBackground(c);
-            gradePanel.setBackground(c);
-            btnPanel.setBackground(c);
+            cbPanel.setOpaque(true);
+            gradePanel.setOpaque(true);
+            btnPanel.setOpaque(true);
         }
 
         gradePanel.yoda(shouldShowBabyYoda);

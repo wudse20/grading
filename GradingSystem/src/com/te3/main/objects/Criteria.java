@@ -72,8 +72,8 @@ public class Criteria {
 
 		// The rest
 		pCriteria.setLayout(pCriteriaLayout);
-		pButtons.setBackground(new Color(0, 0, 0, 0));
-		pCriteria.setBackground(new Color(0, 0, 0, 0));
+		pButtons.setOpaque(false);
+		pCriteria.setOpaque(false);
 		pCriteria.setMaximumSize(new Dimension(640, 78));
 
 		pCriteria.add(lblCriteria);
