@@ -2,6 +2,9 @@ package com.te3.main.objects;
 
 import com.te3.main.exceptions.IllegalInputException;
 
+/**
+ * The object used to store all the settings.
+ */
 public class Settings {
 	private String savePath;
 

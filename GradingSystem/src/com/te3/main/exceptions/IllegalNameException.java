@@ -2,8 +2,6 @@ package com.te3.main.exceptions;
 
 /**
  * Used when a name isn't accepted.
- * 
- * @author Anton Skorup
  */
 public class IllegalNameException extends Exception 
 {

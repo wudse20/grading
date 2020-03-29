@@ -14,6 +14,9 @@ import javax.swing.JPanel;
 import com.te3.main.enums.Grade;
 import com.te3.main.exceptions.IllegalNameException;
 
+/**
+ * A criteria
+ * */
 public class Criteria {
 
 	private String name;

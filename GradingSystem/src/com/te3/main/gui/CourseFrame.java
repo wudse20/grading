@@ -16,9 +16,7 @@ import com.te3.main.objects.SchoolClass;
 
 /**
  * The class that holds the Frame for
- * managing courses
- *
- * @Author Anton Skorup
+ * managing courses.
  * */
 public class CourseFrame extends JFrame {
 

@@ -10,8 +10,7 @@ import java.io.IOException;
 
 /**
  * XML de-/encoder
- * 
- * @author Anton Skorup
+ *
  * @param <E> The data type of the object, that is to be saved.
  */
 public class XML<E> {

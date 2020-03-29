@@ -22,8 +22,6 @@ import com.te3.main.objects.Task;
 /**
  * The list that shows all the different options before editing.
  *
- * @author Anton Skorup
- *
  * @param <E> The type
  */
 public class ListUpdateChooser<E> extends JFrame implements ListSelectionListener {

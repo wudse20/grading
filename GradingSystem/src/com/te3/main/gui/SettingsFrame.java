@@ -18,8 +18,6 @@ import com.te3.main.objects.Settings;
 
 /**
  * The frame that holds all the settings
- *
- * @Author Anton Skorup
  * */
 public class SettingsFrame extends JFrame {
 	/** Generated */

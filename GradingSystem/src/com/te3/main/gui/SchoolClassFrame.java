@@ -14,8 +14,6 @@ import com.te3.main.objects.SchoolClass;
 
 /**
  * The frame for adding and editing SchoolClasses
- *
- * @Author Anton Skorup
  * */
 public class SchoolClassFrame extends JFrame {
 

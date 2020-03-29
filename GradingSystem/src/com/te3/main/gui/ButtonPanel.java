@@ -23,8 +23,6 @@ import com.te3.main.objects.Task;
 
 /**
  * The panel with the buttons on the bottom of the GUI.
- * 
- * @author Anton Skorup
  */
 public class ButtonPanel extends JPanel {
 
@@ -65,7 +63,10 @@ public class ButtonPanel extends JPanel {
 	 * @param mf the instance of the MainFrame
 	 */
 	public ButtonPanel(MainFrame mf) {
+		//Stores the instance
 		this.mf = mf;
+
+		//Adds the components and sets the properties of the components
 		this.setProperties();
 		this.addComponents();
 	}
@@ -74,22 +75,20 @@ public class ButtonPanel extends JPanel {
 	 * @param st the state of the data shown.
 	 */
 	private void saveToFile(State st) {
+		//Gets the student.
 		Student s = mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getStudents()
 				.get(mf.getCurrentlySelectedStudentIndex());
 
+		//Creates a new FileSystemFrame
 		FileSystemFrame fsf = new FileSystemFrame(s.getName(), "txt");
+
+		//Sets the frame visible
 		fsf.setVisible(true);
 
-		/*
-		 * Kom inte på något bättre just nu Måste verkligen fixas, riktigt kass lösning.
-		 * Vill inte ha den i fsf, eftersom vill att den ska gå och använda över allt.
-		 * Den kör bara 20ggr på 9s det är ju inga problem med performance. Det är enda
-		 * lösnigen jag kommer på. Den borde inte lagga ner något.
-		 * 
-		 * Hjälp mig gärna!
-		 */
+		//Creates the thread
 		threadSaveToFile = new Thread(() -> saveToFileThread(fsf, st));
 
+		//starts the thread
 		threadSaveToFile.start();
 	}
 
@@ -101,6 +100,7 @@ public class ButtonPanel extends JPanel {
 	 */
 	@SuppressWarnings("static-access")
 	private void saveToFileThread(FileSystemFrame fsf, State st) {
+		//keeps the window open while the user is doing it's things.
 		while (fsf.getExitCode() == -1) {
 			try {
 				threadSaveToFile.sleep(450);
@@ -109,19 +109,24 @@ public class ButtonPanel extends JPanel {
 			}
 		}
 
+		//If the user chooses to save to file.
 		if (fsf.getExitCode() == 0) {
+			//Formats the text
 			formatTextFile(st);
+
+			//Gets the text
 			String text = printView.getText();
 
+			//Tries the save it to a file then closes the frame
 			try {
 				BufferedWriter w = new BufferedWriter(new FileWriter(fsf.getFilePath(), true));
 				w.append(text);
 				w.close();
 				JOptionPane.showMessageDialog(mf, "Du har sparat till en fil!", "Sparat",
 						JOptionPane.INFORMATION_MESSAGE);
-				fsf.close();
 			} catch (IOException e) {
 				System.out.println(e.getMessage());
+			} finally {
 				fsf.close();
 			}
 		} else {
@@ -135,8 +140,10 @@ public class ButtonPanel extends JPanel {
 	 * @param st the State of the panel
 	 */
 	private void print(State st) {
+		//Formats the text
 		formatTextPrint(st);
 
+		//Tries to print
 		try {
 			printView.print();
 		} catch (PrinterException e) {
@@ -150,6 +157,7 @@ public class ButtonPanel extends JPanel {
 	 * @param st the current state of the panel
 	 */
 	private void formatTextPrint(State st) {
+		//Gets the necessary info
 		Student s = mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getStudents()
 				.get(mf.getCurrentlySelectedStudentIndex());
 
@@ -164,13 +172,16 @@ public class ButtonPanel extends JPanel {
 
 		ArrayList<Criteria> c;
 
+		//resets the settings of the print view
 		printView.setText("");
 		printView.setTabSize(15);
 
+		//adds all the info
 		printView.append("Namn:\t" + s.getName());
 		printView.append("\nKlass:\t" + sc.getName());
 		printView.append("\nKurs:\t" + co.getName());
 
+		//Adds info and stores the criteria based on state of the window.
 		if (st.equals(State.SINGLE_STUDENT_ASSIGNMENT)) {
 			printView.append("\nUppgift:\t" + t.getName());
 			c = t.getCriteria();
@@ -178,6 +189,7 @@ public class ButtonPanel extends JPanel {
 			c = co.getCourseCriteria();
 		}
 
+		//Adds more text
 		printView.append("\n\nKunskapskrav:\n");
 		for (int i = 0; i < c.size(); i++) {
 			Criteria cr = c.get(i);
@@ -191,6 +203,7 @@ public class ButtonPanel extends JPanel {
 	 * @param st the state of informations shown
 	 */
 	private void formatTextFile(State st) {
+		//Gets the necessary info
 		Student s = mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getStudents()
 				.get(mf.getCurrentlySelectedStudentIndex());
 
@@ -203,14 +216,18 @@ public class ButtonPanel extends JPanel {
 		Course co = mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getStudents()
 				.get(mf.getCurrentlySelectedStudentIndex()).getCourses().get(mf.getCurrentlySelectedCourseIndex());
 
+		//Creates list for criteria
 		ArrayList<Criteria> c;
 
+		//Setup
 		printView.setText("");
 
+		//adds text
 		printView.append(String.format("%-20s%s", "Namn:", s.getName()) + "\n");
 		printView.append(String.format("%-20s%s", "Klass:", sc.getName()) + "\n");
 		printView.append(String.format("%-20s%s", "Kurs:", co.getName()) + "\n");
 
+		//Adds text and sets up criteria based on the state of the panel
 		if (st.equals(State.SINGLE_STUDENT_ASSIGNMENT)) {
 			printView.append(String.format("%-20s%s", "Uppgift:", t.getName()) + "\n");
 			c = t.getCriteria();
@@ -233,19 +250,16 @@ public class ButtonPanel extends JPanel {
 	 * @param path the new path that should be saved at
 	 */
 	public void saveAs(String path) {
+		//Creates a new FileSystemFrame
 		FileSystemFrame fsf = new FileSystemFrame("saves", "xml");
+
+		//Shows the frame
 		fsf.setVisible(true);
 
-		/*
-		 * Kom inte på något bättre just nu Måste verkligen fixas, riktigt kass lösning.
-		 * Vill inte ha den i fsf, eftersom vill att den ska gå och använda över allt.
-		 * Den kör bara 20ggr på 9s det är ju inga problem med performance. Det är enda
-		 * lösnigen jag kommer på. Den borde inte lagga ner något.
-		 * 
-		 * Hjälp mig gärna!
-		 */
+		//Creates a thread
 		threadSaveAs = new Thread(() -> saveAsThread(fsf));
 
+		//Starts the thread
 		threadSaveAs.start();
 	}
 
@@ -256,6 +270,7 @@ public class ButtonPanel extends JPanel {
 	 */
 	@SuppressWarnings("static-access")
 	private void saveAsThread(FileSystemFrame fsf) {
+		//Waits for the user to do the input
 		while (fsf.getExitCode() == -1) {
 			try {
 				threadSaveAs.sleep(450);
@@ -264,6 +279,7 @@ public class ButtonPanel extends JPanel {
 			}
 		}
 
+		//Saves the data and set's the path
 		if (fsf.getExitCode() == 0) {
 			try {
 				mf.setSaveFilePath(fsf.getFilePath());
@@ -274,10 +290,12 @@ public class ButtonPanel extends JPanel {
 			}
 		}
 
+		//Closes the FileSystemFrame
 		fsf.close();
 	}
 
 	private void settings() {
+		//Shows the settings frame
 		new SettingsFrame(mf).setVisible(true);
 	}
 
@@ -300,6 +318,7 @@ public class ButtonPanel extends JPanel {
 	private void setProperties() {
 		this.setLayout(layout);
 
+		//Adds action listeners
 		btnHelp.addActionListener((e) -> new HelpFrame(helpTitle, helpInfo, 500).setVisible(true));
 
 		btnSave.addActionListener((e) -> {

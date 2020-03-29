@@ -2,6 +2,9 @@ package com.te3.main.objects;
 
 import java.util.ArrayList;
 
+/**
+ * The object that holds all the data in the program
+ * */
 public class Data {
 
 	private ArrayList<SchoolClass> classes = new ArrayList<SchoolClass>();

@@ -26,8 +26,6 @@ import com.te3.main.objects.SchoolClass;
 
 /**
  * The main part of the CourseFrame GUI.
- * 
- * @author Anton Skorup
  */
 public class MainCoursePanel extends JPanel implements DocumentListener {
 	/** Default */

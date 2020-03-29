@@ -35,8 +35,6 @@ import com.te3.main.exceptions.UnsucessfulFolderCreationException;
 
 /**
  * The frame that's used when saving a file.
- * 
- * @author Anton Skorup
  */
 public class FileSystemFrame extends JFrame implements KeyListener, ListSelectionListener {
 

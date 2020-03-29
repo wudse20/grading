@@ -9,8 +9,6 @@ import javax.swing.JTextField;
 /**
  * The panel used for getting a name input <br>
  * for the editing and adding frames.
- *
- * @Author Anton Skorup
  * */
 public class NamePanel extends JPanel {
 

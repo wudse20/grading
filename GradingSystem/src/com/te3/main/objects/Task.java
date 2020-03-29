@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import com.te3.main.exceptions.IllegalInputException;
 import com.te3.main.exceptions.IllegalNameException;
 
+/**
+ * A task
+ * */
 public class Task {
 
 	private String name;

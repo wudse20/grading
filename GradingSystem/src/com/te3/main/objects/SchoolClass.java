@@ -4,6 +4,9 @@ import java.util.ArrayList;
 
 import com.te3.main.exceptions.IllegalNameException;
 
+/**
+ * A school class
+ * */
 public class SchoolClass {
 
 	private String name;

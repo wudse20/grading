@@ -23,8 +23,6 @@ import com.te3.main.objects.XML;
 
 /**
  * The mainframe of the program.
- * 
- * @author Anton Skorup, Jon Westring
  */
 public class MainFrame extends JFrame implements ComponentListener {
 

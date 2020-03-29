@@ -16,8 +16,6 @@ import com.te3.main.objects.Task;
  * The panel that holds all the <br>
  * different criteria and the text at <br>
  * the left of the GUI.
- *
- * @Author Anton Skorup
  * */
 public class GradesPanel extends JPanel {
 

@@ -8,8 +8,6 @@ import javax.swing.JPanel;
 /**
  * The button panel att the bottom <br>
  * of the editing GUI:s.
- *
- * @Author Anton Skorup
  * */
 public class EditControlPanel extends JPanel {
 
