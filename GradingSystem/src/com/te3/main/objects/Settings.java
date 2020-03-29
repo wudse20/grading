@@ -7,6 +7,7 @@ import com.te3.main.exceptions.IllegalInputException;
  */
 public class Settings {
 	private String savePath;
+	private String currentYoda;
 
 	private int saveTimer;
 
@@ -15,10 +16,11 @@ public class Settings {
 	public Settings() {
 	}
 
-	public Settings(String savePath, int saveTimer, boolean shouldShowYoda) {
+	public Settings(String savePath, int saveTimer, boolean shouldShowYoda, String currentYoda) {
 		this.savePath = savePath;
 		this.saveTimer = saveTimer;
 		this.shouldShowYoda = shouldShowYoda;
+		this.currentYoda = currentYoda;
 	}
 
 	public String getSavePath() {
@@ -45,6 +47,14 @@ public class Settings {
 		} else {
 			this.saveTimer = saveTimer;
 		}
+	}
+
+	public String getCurrentYoda() {
+		return currentYoda;
+	}
+
+	public void setCurrentYoda(String currentYoda) {
+		this.currentYoda = currentYoda;
 	}
 
 	public boolean isShouldShowYoda() {

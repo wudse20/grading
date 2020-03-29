@@ -46,6 +46,8 @@ public class MainFrame extends JFrame implements ComponentListener {
 	private int currentlySelectedAssignmentIndex = 0;
 	private int currentlySelectedStudentIndex = 0;
 
+	/** The currently selected yoda */
+	private String currentYoda;
 	private String saveFilePath;
 	private String settingsFilePath;
 
@@ -76,7 +78,7 @@ public class MainFrame extends JFrame implements ComponentListener {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setSize(new Dimension(1200, 600));
 
-        lblBackground = new JLabel((shouldShowBabyYoda) ? new ImageIcon("./src/images/yoda.jpg") : null);
+        lblBackground = new JLabel((shouldShowBabyYoda) ? new ImageIcon("./src/images/" + currentYoda) : null);
 
 		lblBackground.setMinimumSize(new Dimension(this.getWidth(), this.getHeight()));
 		this.setContentPane(lblBackground);
@@ -84,11 +86,12 @@ public class MainFrame extends JFrame implements ComponentListener {
 		if (new File("./settings.xml").exists())
 			settings = loadSettings();
 		else
-			settings = new Settings("./saves.xml", 300, false);
+			settings = new Settings("./saves.xml", 300, false, "yoda1.jpg");
 
 		this.saveFilePath = settings.getSavePath();
 		this.saveTimer = settings.getSaveTimer();
 		this.shouldShowBabyYoda = settings.isShouldShowYoda();
+		this.currentYoda = settings.getCurrentYoda();
 
 		mainData = getSavedData();
 
@@ -151,7 +154,7 @@ public class MainFrame extends JFrame implements ComponentListener {
         gradePanel.yoda(shouldShowBabyYoda);
         cbPanel.yoda(shouldShowBabyYoda);
 
-        lblBackground.setIcon((shouldShowBabyYoda) ? new ImageIcon("./src/images/yoda.jpg") : null);
+        lblBackground.setIcon((shouldShowBabyYoda) ? new ImageIcon("./src/images/" + currentYoda) : null);
 
         cbPanel.repaint();
         gradePanel.repaint();
@@ -464,6 +467,24 @@ public class MainFrame extends JFrame implements ComponentListener {
         this.shouldShowBabyYoda = shouldShowBabyYoda;
 	}
 
+	/**
+	 * A getter for current yoda.
+	 *
+	 * @return the current yoda.
+	 * */
+	public String getCurrentYoda() {
+		return currentYoda;
+	}
+
+	/**
+	 * A setter for current yoda.
+	 *
+	 * @param currentYoda the current yoda
+	 * */
+	public void setCurrentYoda(String currentYoda) {
+		this.currentYoda = currentYoda;
+	}
+
 	@Override
 	public void componentResized(ComponentEvent e) {
 		panel.setBounds(0, 0, this.getWidth() - 15, this.getHeight() - btnPanel.getHeight());
@@ -478,7 +499,7 @@ public class MainFrame extends JFrame implements ComponentListener {
 			BufferedImage img = null;
 
 			try {
-				img = ImageIO.read(new File("./src/images/yoda.jpg"));
+				img = ImageIO.read(new File("./src/images/" + currentYoda));
 			} catch (IOException ex) {
 				ex.printStackTrace();
 			}

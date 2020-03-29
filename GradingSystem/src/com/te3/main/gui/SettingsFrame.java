@@ -1,11 +1,8 @@
 package com.te3.main.gui;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Container;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
+import java.awt.*;
 import java.util.ArrayList;
+import java.util.concurrent.Flow;
 
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
@@ -31,6 +28,8 @@ public class SettingsFrame extends JFrame {
 			+ "För att ställa in vart data skall sparas <br>" + "klicka på knappen: <b>Ställ in plats för sparfil</b>"
 			+ "och följ instruktionerna";
 
+	private String currentYoda;
+
 	private MainFrame mf;
 
 	private Thread threadSetSavePath;
@@ -42,6 +41,8 @@ public class SettingsFrame extends JFrame {
 	FlowLayout pTimerLayout = new FlowLayout(FlowLayout.LEFT);
 	FlowLayout pSettingBtnsLayout = new FlowLayout(FlowLayout.LEFT);
 	FlowLayout pCheckBoxLayout = new FlowLayout(FlowLayout.LEFT);
+	FlowLayout pYodaBtnsLayout = new FlowLayout(FlowLayout.LEFT);
+	FlowLayout pChoseYodaLayout = new FlowLayout(FlowLayout.LEFT);
 
 	BoxLayout pSettingsLayout;
 
@@ -52,6 +53,10 @@ public class SettingsFrame extends JFrame {
 	JButton btnHelp = new JButton("?");
 	JButton btnSetSavePath = new JButton("Ställ in plats för sparfil"); // Försök komma på bättre text för att knappen
 	JButton btnDeletData = new JButton("Rensa all data");
+	JButton btnYoda1 = new JButton();
+	JButton btnYoda2 = new JButton();
+	JButton btnYoda3 = new JButton();
+	JButton btnYoda4 = new JButton();
 
 	JLabel lblSpacer = new JLabel(" ");
 	JLabel lblSpacer2 = new JLabel("     ");
@@ -61,6 +66,7 @@ public class SettingsFrame extends JFrame {
 	JLabel lblSpacer6 = new JLabel(" ");
 	JLabel lblInfo = new JLabel("Inställningar: ");
 	JLabel lblTimer = new JLabel("Sparintervall (s):");
+	JLabel lblChoseYoda = new JLabel("Välj Yoda:");
 
 	JTextField txfSaveTimer;
 
@@ -72,6 +78,8 @@ public class SettingsFrame extends JFrame {
 	JPanel pSettingBtns = new JPanel();
 	JPanel pSettings = new JPanel();
 	JPanel pCheckBox = new JPanel();
+	JPanel pChoseYoda = new JPanel();
+	JPanel pYodaBtns = new JPanel();
 
 	/**
      * Sets everything up
@@ -83,6 +91,7 @@ public class SettingsFrame extends JFrame {
 
 		this.mf = mf;
 		this.savePath = mf.getSaveFilePath();
+		this.currentYoda = mf.getCurrentYoda();
 
 		this.setProperties();
 		this.addComponents();
@@ -104,10 +113,17 @@ public class SettingsFrame extends JFrame {
      * */
 	private void setProperties() {
 		this.setLayout(layout);
-		this.setSize(new Dimension(400, 260));
+		this.setSize(new Dimension(472, 400));
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
 		cBoxShouldShowBabyYoda.setSelected(mf.shouldShowBabyYoda());
+		setYodaBtnStatus(mf.shouldShowBabyYoda());
+		setYodaBtnSize(100, 100);
+
+		btnYoda1.setIcon(new ImageIcon("./src/images/yoda1.jpg"));
+		btnYoda2.setIcon(new ImageIcon("./src/images/yoda2.jpg"));
+		btnYoda3.setIcon(new ImageIcon("./src/images/yoda3.jpg"));
+		btnYoda4.setIcon(new ImageIcon("./src/images/yoda4.jpg"));
 
 		txfSaveTimer = new JTextField(12);
 		txfSaveTimer.setText(Integer.toString(mf.getSaveTimer()));
@@ -133,6 +149,11 @@ public class SettingsFrame extends JFrame {
 				(e) -> new HelpFrame("Inställningar", "<html><p>" + helpText + "</p></html>").setVisible(true));
 		btnSetSavePath.addActionListener((e) -> setSavePath());
 		btnDeletData.addActionListener((e) -> deleteData());
+		cBoxShouldShowBabyYoda.addActionListener((e) -> setYodaBtnStatus(cBoxShouldShowBabyYoda.isSelected()));
+		btnYoda1.addActionListener((e) -> currentYoda = "yoda1.jpg");
+		btnYoda2.addActionListener((e) -> currentYoda = "yoda2.jpg");
+		btnYoda3.addActionListener((e) -> currentYoda = "yoda3.jpg");
+		btnYoda4.addActionListener((e) -> currentYoda = "yoda4.jpg");
 
 		pTimer.setLayout(pTimerLayout);
 		pTimer.add(lblTimer);
@@ -145,11 +166,22 @@ public class SettingsFrame extends JFrame {
 		pCheckBox.setLayout(pCheckBoxLayout);
 		pCheckBox.add(cBoxShouldShowBabyYoda);
 
+		pChoseYoda.setLayout(pChoseYodaLayout);
+		pChoseYoda.add(lblChoseYoda);
+
+		pYodaBtns.setLayout(pYodaBtnsLayout);
+		pYodaBtns.add(btnYoda1);
+		pYodaBtns.add(btnYoda2);
+		pYodaBtns.add(btnYoda3);
+		pYodaBtns.add(btnYoda4);
+
 		pSettingsLayout = new BoxLayout(pSettings, BoxLayout.Y_AXIS);
 		pSettings.setLayout(pSettingsLayout);
 		pSettings.add(lblSpacer5);
 		pSettings.add(pTimer);
 		pSettings.add(pCheckBox);
+		pSettings.add(pChoseYoda);
+		pSettings.add(pYodaBtns);
 		pSettings.add(pSettingBtns);
 		pSettings.add(lblSpacer6);
 
@@ -162,6 +194,33 @@ public class SettingsFrame extends JFrame {
 		panel.add(lblInfo, BorderLayout.PAGE_START);
 		panel.add(pSettings, BorderLayout.CENTER);
 		panel.add(pBtns, BorderLayout.PAGE_END);
+	}
+
+	/**
+	 * Sets the size of the yoda buttons.
+	 *
+	 * @param width the width of the image
+	 * @param height the height of the image
+	 */
+	private void setYodaBtnSize(int width, int height) {
+		//Sets the size of the button
+		btnYoda1.setPreferredSize(new Dimension(width, height));
+		btnYoda2.setPreferredSize(new Dimension(width, height));
+		btnYoda3.setPreferredSize(new Dimension(width, height));
+		btnYoda4.setPreferredSize(new Dimension(width, height));
+
+	}
+
+	/**
+	 * Sets the status of the yoda buttons.
+	 *
+	 * @param isActivated if the buttons are activated or not.
+	 * */
+	private void setYodaBtnStatus(boolean isActivated) {
+		btnYoda1.setEnabled(isActivated);
+		btnYoda2.setEnabled(isActivated);
+		btnYoda3.setEnabled(isActivated);
+		btnYoda4.setEnabled(isActivated);
 	}
 
 	/**
@@ -225,6 +284,9 @@ public class SettingsFrame extends JFrame {
 		mf.setBabyYoda(cBoxShouldShowBabyYoda.isSelected());
 
 		s.setShouldShowYoda(cBoxShouldShowBabyYoda.isSelected());
+
+		mf.setCurrentYoda(currentYoda);
+		s.setCurrentYoda(currentYoda);
 
 		mf.setSettings(s);
 		mf.saveSettings();
