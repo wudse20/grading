@@ -216,6 +216,15 @@ public class GradesPanel extends JPanel {
 			// Adds the action listeners
 			JButton[] gradeBtns = criteria.get(i).getGradeBtns();
 
+			//Removes old action listeners
+			for (var j = 0; j < gradeBtns.length; j++) {
+				try {
+					gradeBtns[j].removeActionListener(gradeBtns[j].getActionListeners()[0]);
+				} catch (IndexOutOfBoundsException e) {
+					System.out.println("Skipped gradebtn -> IndexOutOfBounds no action listeners attached");
+				}
+			}
+
 			// Since it needs to be final or effectively final in lambda
 			final int i2 = i;
 
@@ -263,6 +272,7 @@ public class GradesPanel extends JPanel {
 		c.setGrade(g);
 		c.updateGUI();
 		this.updateGUI(this.state);
+		System.out.println(c.toString());
 	}
 
 	/**
