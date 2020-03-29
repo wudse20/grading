@@ -7,5 +7,11 @@ public enum State {
 	/** A generalized view for all the criteria. */
 	SINGLE_STUDENT_GENERALIZED,
 	/** A view for all the assignments displaying the highest grade */
-	SINGLE_STUDENT_ASSIGNMENT;
+	SINGLE_STUDENT_ASSIGNMENT,
+	/** A view when no student is selected*/
+	COURSE_NO_STUDENT,
+	/** A view when only a SchoolClass is selected*/
+	SCHOOLCLASS_NO_COURSE,
+	/** A view when nothing is selected */
+	NOTHING_SELECTED;
 }
