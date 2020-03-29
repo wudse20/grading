@@ -3,10 +3,14 @@ package com.te3.main.gui;
 import java.awt.*;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
+import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
+import java.nio.Buffer;
 import java.util.ArrayList;
 import java.util.concurrent.Flow;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
 import com.te3.main.enums.State;
@@ -463,7 +467,25 @@ public class MainFrame extends JFrame implements ComponentListener {
 	@Override
 	public void componentResized(ComponentEvent e) {
 		panel.setBounds(0, 0, this.getWidth() - 15, this.getHeight() - btnPanel.getHeight());
-		lblBackground.setPreferredSize(new Dimension(this.getWidth(), this.getHeight()));
+
+		/*
+		 * Scales the background image to the size of
+		 * the JFrame. To save on performance it only
+		 * dose the calculations while the background
+		 * is selected.
+		 * */
+		if (shouldShowBabyYoda) {
+			BufferedImage img = null;
+
+			try {
+				img = ImageIO.read(new File("./src/images/yoda.jpg"));
+			} catch (IOException ex) {
+				ex.printStackTrace();
+			}
+
+			Image scaleImg = img.getScaledInstance(this.getWidth(), this.getHeight(), Image.SCALE_FAST);
+			lblBackground.setIcon(new ImageIcon(scaleImg));
+		}
 	}
 
 	@Override
