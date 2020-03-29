@@ -1,6 +1,8 @@
 package com.te3.main.gui;
 
 import java.awt.*;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.concurrent.Flow;
@@ -24,7 +26,7 @@ import com.te3.main.objects.XML;
  * 
  * @author Anton Skorup, Jon Westring
  */
-public class MainFrame extends JFrame {
+public class MainFrame extends JFrame implements ComponentListener {
 
 	/** Default */
 	private static final long serialVersionUID = 1L;
@@ -97,6 +99,8 @@ public class MainFrame extends JFrame {
 			saveSettings();
 			saveData(saveFilePath);
 		}));
+
+		this.addComponentListener(this);
 
 		t.start();
 
@@ -456,5 +460,26 @@ public class MainFrame extends JFrame {
 
     public void setShouldShowBabyYoda(boolean shouldShowBabyYoda) {
         this.shouldShowBabyYoda = shouldShowBabyYoda;
+	}
+
+	@Override
+	public void componentResized(ComponentEvent e) {
+		panel.setBounds(0, 0, this.getWidth() - 15, this.getHeight() - btnPanel.getHeight());
+		lblBackground.setPreferredSize(new Dimension(this.getWidth(), this.getHeight()));
+	}
+
+	@Override
+	public void componentMoved(ComponentEvent e) {
+
+	}
+
+	@Override
+	public void componentShown(ComponentEvent e) {
+
+	}
+
+	@Override
+	public void componentHidden(ComponentEvent e) {
+
 	}
 }

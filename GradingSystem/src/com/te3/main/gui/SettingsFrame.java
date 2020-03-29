@@ -39,9 +39,12 @@ public class SettingsFrame extends JFrame {
 
 	BorderLayout layout = new BorderLayout();
 	BorderLayout pLayout = new BorderLayout();
+
 	FlowLayout pBtnsLayout = new FlowLayout(FlowLayout.RIGHT);
 	FlowLayout pTimerLayout = new FlowLayout(FlowLayout.LEFT);
 	FlowLayout pSettingBtnsLayout = new FlowLayout(FlowLayout.LEFT);
+	FlowLayout pCheckBoxLayout = new FlowLayout(FlowLayout.LEFT);
+
 	BoxLayout pSettingsLayout;
 
 	Container cp = this.getContentPane();
@@ -70,6 +73,7 @@ public class SettingsFrame extends JFrame {
 	JPanel pTimer = new JPanel();
 	JPanel pSettingBtns = new JPanel();
 	JPanel pSettings = new JPanel();
+	JPanel pCheckBox = new JPanel();
 
 	/**
      * Sets everything up
@@ -102,7 +106,7 @@ public class SettingsFrame extends JFrame {
      * */
 	private void setProperties() {
 		this.setLayout(layout);
-		this.setSize(new Dimension(400, 225));
+		this.setSize(new Dimension(400, 260));
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
 		cBoxShouldShowBabyYoda.setSelected(mf.shouldShowBabyYoda());
@@ -140,11 +144,14 @@ public class SettingsFrame extends JFrame {
 		pSettingBtns.add(btnSetSavePath);
 		pSettingBtns.add(btnDeletData);
 
+		pCheckBox.setLayout(pCheckBoxLayout);
+		pCheckBox.add(cBoxShouldShowBabyYoda);
+
 		pSettingsLayout = new BoxLayout(pSettings, BoxLayout.Y_AXIS);
 		pSettings.setLayout(pSettingsLayout);
 		pSettings.add(lblSpacer5);
 		pSettings.add(pTimer);
-		pSettings.add(cBoxShouldShowBabyYoda);
+		pSettings.add(pCheckBox);
 		pSettings.add(pSettingBtns);
 		pSettings.add(lblSpacer6);
 
