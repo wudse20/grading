@@ -77,7 +77,7 @@ public class CBPanel extends JPanel {
 				mf.setCurrentlySelectedClassIndex(i);
 			} else {
 				System.out.println("Selected new or change");
-				mf.openAddEditGUI(SchoolClass.class, true);
+				mf.openAddEditGUI(SchoolClass.class, false);
 			}
 		});
 		cbCourse.addActionListener((e) -> {

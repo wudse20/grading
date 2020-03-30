@@ -224,7 +224,7 @@ public class MainFrame extends JFrame implements ComponentListener {
 		// change this boolean to false if you do not want to run the program with
 		// default predefined classes, courses, students and tasks.
 
-		boolean debug = true;
+		boolean debug = false;
 
 		if (debug) {
 			ArrayList<SchoolClass> classes = new ArrayList<SchoolClass>();
@@ -238,11 +238,13 @@ public class MainFrame extends JFrame implements ComponentListener {
 
 				criteria.add(new Criteria("Problemlösning"));
 				criteria.add(new Criteria("Fjäsk"));
-				criteria.add(new Criteria("test"));
+				criteria.add(new Criteria("Test"));
+				criteria.add(new Criteria("Test 2"));
 
 				criteria2.add(new Criteria("Problemlösning"));
 				criteria2.add(new Criteria("Fjäsk"));
 				criteria2.add(new Criteria("Test"));
+				criteria2.add(new Criteria("Test 2"));
 
 				tasks.add(new Task("Lego robot", criteria2));
 

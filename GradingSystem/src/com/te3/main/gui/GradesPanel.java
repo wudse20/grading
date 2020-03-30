@@ -36,6 +36,8 @@ public class GradesPanel extends JPanel {
 	JPanel panelInfo = new JPanel();
 	JPanel panelInfo2 = new JPanel();
 
+	GraphPanel gp;
+
 	//Layouts
 	BorderLayout layout = new BorderLayout();
 	BorderLayout pInfoLayout = new BorderLayout();
@@ -211,8 +213,36 @@ public class GradesPanel extends JPanel {
 	 * @param criteria the current criteria
 	 * @param st the current state of the panel.
 	 */
-
 	private void updateSidebar(Student s, Task t, ArrayList<Criteria> criteria, State st) {
+		//The count of grades
+		short f = 0, e = 0, c = 0, a = 0;
+
+		//Adds one in each variable for each grade value
+		for (Criteria c1 : criteria) {
+			switch (c1.getGrade()) {
+				case F:
+					f++;
+					break;
+				case E:
+					e++;
+					break;
+				case C:
+					c++;
+					break;
+				case A:
+					a++;
+					break;
+			}
+		}
+
+		//Loops through and removes old components
+		for (Component comp : panelInfo2.getComponents()) {
+			panelInfo2.remove(comp);
+		}
+
+		//Creates the graph panel
+		gp = new GraphPanel(f, e, c, a);
+
 		//Sets the text
 		lblName.setText(s.getName());
 		lblGrades.setText(countGrades(criteria));
@@ -232,9 +262,11 @@ public class GradesPanel extends JPanel {
 			panelInfo2.add(lblName);
 			panelInfo2.add(lblAssignment);
 			panelInfo2.add(lblGrades);
+			panelInfo2.add(gp);
 		} else if (st.equals(State.CLASS_COURSE_STUDENT)) {
 			panelInfo2.add(lblName);
 			panelInfo2.add(lblGrades);
+			panelInfo2.add(gp);
 		}
 
 		//Adds everything.
@@ -245,7 +277,7 @@ public class GradesPanel extends JPanel {
 	}
 
 	/**
-	 * Counts the grades.
+	 * Counts the grades and returns a string representation.
 	 * 
 	 * @param criteria the current criteria
 	 * @return a string representation of the number of grades at each level.
@@ -359,6 +391,9 @@ public class GradesPanel extends JPanel {
 
 		//Updates the GUI
 		c.updateGUI();
+
+		//Repaints the graph
+		gp.repaint();
 
 		//Updates the state
 		this.update(this.state);
