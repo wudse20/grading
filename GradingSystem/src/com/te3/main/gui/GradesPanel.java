@@ -141,6 +141,7 @@ public class GradesPanel extends JPanel {
 		students = classes.get(mf.getCurrentlySelectedClassIndex()).getStudents();
 		courses = students.get(0).getCourses();
 		tasks = courses.get(mf.getCurrentlySelectedCourseIndex()).getCourseTasks();
+		criteria = tasks.get(mf.getCurrentlySelectedAssignmentIndex()).getCriteria();
 	}
 
 	/**
