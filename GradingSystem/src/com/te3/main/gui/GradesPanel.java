@@ -137,11 +137,19 @@ public class GradesPanel extends JPanel {
 	 * Grabs the needed information from the MainFrame's data object.
 	 */
 	private void grabInfo() {
-		classes = mf.getMainData().getClasses();
-		students = classes.get(mf.getCurrentlySelectedClassIndex()).getStudents();
-		courses = students.get(0).getCourses();
-		tasks = courses.get(mf.getCurrentlySelectedCourseIndex()).getCourseTasks();
-		criteria = tasks.get(mf.getCurrentlySelectedAssignmentIndex()).getCriteria();
+		if (this.state.equals(State.CLASS_COURSE_STUDENT_TASK) || this.state.equals(State.CLASS_COURSE_STUDENT)) {
+			classes = mf.getMainData().getClasses();
+			students = classes.get(mf.getCurrentlySelectedClassIndex()).getStudents();
+			courses = students.get(0).getCourses();
+			tasks = courses.get(mf.getCurrentlySelectedCourseIndex()).getCourseTasks();
+			criteria = tasks.get(mf.getCurrentlySelectedAssignmentIndex()).getCriteria();
+		} else {
+			classes = null;
+			students = null;
+			courses = null;
+			tasks = null;
+			criteria = null;
+		}
 	}
 
 	/**
