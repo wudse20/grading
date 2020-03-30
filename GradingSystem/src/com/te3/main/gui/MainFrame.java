@@ -6,9 +6,7 @@ import java.awt.event.ComponentListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.nio.Buffer;
 import java.util.ArrayList;
-import java.util.concurrent.Flow;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -241,24 +239,9 @@ public class MainFrame extends JFrame implements ComponentListener {
 				criteria.add(new Criteria("Problemlösning"));
 				criteria.add(new Criteria("Fjäsk"));
 				criteria.add(new Criteria("test"));
-				criteria.add(new Criteria("test"));
-				criteria.add(new Criteria("test"));
-				criteria.add(new Criteria("test"));
-				criteria.add(new Criteria("test"));
-				criteria.add(new Criteria("test"));
-				criteria.add(new Criteria("test"));
-				criteria.add(new Criteria("test"));
-				criteria.add(new Criteria("test"));
 
 				criteria2.add(new Criteria("Problemlösning"));
 				criteria2.add(new Criteria("Fjäsk"));
-				criteria2.add(new Criteria("Test"));
-				criteria2.add(new Criteria("Test"));
-				criteria2.add(new Criteria("Test"));
-				criteria2.add(new Criteria("Test"));
-				criteria2.add(new Criteria("Test"));
-				criteria2.add(new Criteria("Test"));
-				criteria2.add(new Criteria("Test"));
 				criteria2.add(new Criteria("Test"));
 
 				tasks.add(new Task("Lego robot", criteria2));
@@ -286,10 +269,10 @@ public class MainFrame extends JFrame implements ComponentListener {
 	}
 
 	/**
-	 * Updates the grade panel GUI
+	 * Updates the grade panel GUI and information
 	 * */
-	public void updateGUI() {
-		gradePanel.updateGUI(s);
+	public void updateGradeInfo() {
+		gradePanel.updateInfo(s);
 	}
 
 	/**

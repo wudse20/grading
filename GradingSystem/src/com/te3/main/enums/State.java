@@ -5,13 +5,13 @@ package com.te3.main.enums;
  */
 public enum State {
 	/** A generalized view for all the criteria. */
-	SINGLE_STUDENT_GENERALIZED,
+	CLASS_COURSE_STUDENT_TASK,
 	/** A view for all the assignments displaying the highest grade */
-	SINGLE_STUDENT_ASSIGNMENT,
+	CLASS_COURSE_STUDENT,
 	/** A view when no student is selected*/
-	COURSE_NO_STUDENT,
+	CLASS_COURSE,
 	/** A view when only a SchoolClass is selected*/
-	SCHOOLCLASS_NO_COURSE,
+	CLASS,
 	/** A view when nothing is selected */
-	NOTHING_SELECTED;
+	NOTHING_SELECTED
 }

@@ -182,7 +182,7 @@ public class ButtonPanel extends JPanel {
 		printView.append("\nKurs:\t" + co.getName());
 
 		//Adds info and stores the criteria based on state of the window.
-		if (st.equals(State.SINGLE_STUDENT_ASSIGNMENT)) {
+		if (st.equals(State.CLASS_COURSE_STUDENT)) {
 			printView.append("\nUppgift:\t" + t.getName());
 			c = t.getCriteria();
 		} else {
@@ -228,7 +228,7 @@ public class ButtonPanel extends JPanel {
 		printView.append(String.format("%-20s%s", "Kurs:", co.getName()) + "\n");
 
 		//Adds text and sets up criteria based on the state of the panel
-		if (st.equals(State.SINGLE_STUDENT_ASSIGNMENT)) {
+		if (st.equals(State.CLASS_COURSE_STUDENT)) {
 			printView.append(String.format("%-20s%s", "Uppgift:", t.getName()) + "\n");
 			c = t.getCriteria();
 		} else {

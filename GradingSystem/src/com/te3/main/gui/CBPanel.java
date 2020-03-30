@@ -16,7 +16,7 @@ import com.te3.main.objects.Task;
  *	Du behöver fixa en metod i MainFrame för att uppdatera din panel.
  *	Du behöver även uppdatera GUI:t och sätta vilket stadie panelen är i
  *	m.h.a. updateGradeState(state), där state är enumet State. Samt kalla
- *	updateGUI i mainframe. Vid uppdatering.
+ *	updateInfo i mainframe. Vid uppdatering.
  */
 public class CBPanel extends JPanel {
 	/** Default */

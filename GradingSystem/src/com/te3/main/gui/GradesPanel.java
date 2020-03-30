@@ -8,9 +8,7 @@ import javax.swing.*;
 
 import com.te3.main.enums.Grade;
 import com.te3.main.enums.State;
-import com.te3.main.objects.Criteria;
-import com.te3.main.objects.Student;
-import com.te3.main.objects.Task;
+import com.te3.main.objects.*;
 
 /**
  * The panel that holds all the <br>
@@ -22,15 +20,23 @@ public class GradesPanel extends JPanel {
 	/** Default */
 	private static final long serialVersionUID = 1L;
 
+	//State
 	private State state;
-	private ArrayList<Criteria> criteria;
-	private ArrayList<Task> tasks;
 
+	//ArrayLists
+	private ArrayList<SchoolClass> classes;
+	private ArrayList<Course> courses;
+	private ArrayList<Student> students;
+	private ArrayList<Task> tasks;
+	private ArrayList<Criteria> criteria;
+
+	//Panels
 	JPanel panel = new JPanel();
 	JPanel panelCriteria = new JPanel();
 	JPanel panelInfo = new JPanel();
 	JPanel panelInfo2 = new JPanel();
 
+	//Layouts
 	BorderLayout layout = new BorderLayout();
 	BorderLayout pInfoLayout = new BorderLayout();
 
@@ -39,8 +45,10 @@ public class GradesPanel extends JPanel {
 
 	FlowLayout pLayout = new FlowLayout(FlowLayout.LEFT);
 
+	//ScrollPanes
 	JScrollPane scroll = new JScrollPane(panel);
 
+	//Labels
 	JLabel lblName = new JLabel();
 	JLabel lblAssignment = new JLabel();
 	JLabel lblGrades = new JLabel();
@@ -50,32 +58,20 @@ public class GradesPanel extends JPanel {
 	JLabel lblSpacer4 = new JLabel(" ");
 	JLabel lblSpacer5 = new JLabel("    ");
 
+	//Instances
 	MainFrame mf;
 
 	/**
 	 * @param mf the instance of the MainFrame.
 	 */
 	public GradesPanel(MainFrame mf) {
-		this.state = State.SINGLE_STUDENT_ASSIGNMENT;
+		this.state = State.CLASS_COURSE_STUDENT_TASK;
 		this.mf = mf;
 		this.setLayout(layout);
 
-		criteria = mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getStudents().get(0)
-				.getCourses().get(mf.getCurrentlySelectedCourseIndex()).getCourseCriteria();
-
-		tasks = mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getStudents().get(0).getCourses()
-				.get(mf.getCurrentlySelectedCourseIndex()).getCourseTasks();
-
-		updateGUI(state);
-
+		updateInfo(state);
 		scroll.setBorder(BorderFactory.createEmptyBorder());
-
 		yoda(mf.shouldShowBabyYoda());
-
-		this.add(lblSpacer1, BorderLayout.PAGE_START);
-		this.add(panelInfo, BorderLayout.LINE_START);
-		this.add(scroll, BorderLayout.CENTER);
-		this.add(lblSpacer5, BorderLayout.LINE_END);
 	}
 
 	/**
@@ -98,12 +94,16 @@ public class GradesPanel extends JPanel {
 	}
 
 	/**
-	 * Updates the gui based on the state.
+	 * Updates the gui based on the state <br>
+	 * and the information.
 	 * 
 	 * @param s the state of the program
 	 */
-	public void updateGUI(State s) {
-		if (s.equals(State.SINGLE_STUDENT_ASSIGNMENT)) {
+	public void updateInfo(State s) {
+		this.addComponents(s);
+		this.grabInfo();
+
+		if (s.equals(State.CLASS_COURSE_STUDENT)) {
 			displayCriteria(criteria);
 		} else {
 			ArrayList<Criteria> displayedGrades = new ArrayList<Criteria>();
@@ -134,6 +134,35 @@ public class GradesPanel extends JPanel {
 	}
 
 	/**
+	 * Grabs the needed information from the MainFrame's data object.
+	 */
+	private void grabInfo() {
+		classes = mf.getMainData().getClasses();
+		students = classes.get(mf.getCurrentlySelectedClassIndex()).getStudents();
+		courses = students.get(0).getCourses();
+		tasks = courses.get(mf.getCurrentlySelectedCourseIndex()).getCourseTasks();
+	}
+
+	/**
+	 * Adds the components, after removing them
+	 *
+	 * @param s The current state of the components
+	 */
+	private void addComponents(State s) {
+		//Removes the components
+		for (Component c : this.getComponents())
+			this.remove(c);
+
+		//Adds the components, when they are needed.
+		if (s.equals(State.CLASS_COURSE_STUDENT_TASK) || s.equals(State.CLASS_COURSE_STUDENT)) {
+			this.add(lblSpacer1, BorderLayout.PAGE_START);
+			this.add(panelInfo, BorderLayout.LINE_START);
+			this.add(scroll, BorderLayout.CENTER);
+			this.add(lblSpacer5, BorderLayout.LINE_END);
+		}
+	}
+
+	/**
 	 * Updates the info in the top hand left corner.
 	 * 
 	 * @param s  the current student
@@ -141,7 +170,7 @@ public class GradesPanel extends JPanel {
 	 * @param al the current criteria
 	 * @param st the current state of the panel.
 	 */
-	private void updateInfo(Student s, Task t, ArrayList<Criteria> al, State st) {
+	private void updateSidebar(Student s, Task t, ArrayList<Criteria> al, State st) {
 		lblName.setText(s.getName());
 		lblGrades.setText(countGrades(al));
 		lblAssignment.setText(t.getName());
@@ -153,11 +182,11 @@ public class GradesPanel extends JPanel {
 		panelInfo.setLayout(pInfoLayout);
 		panelInfo2.setLayout(pInfoLayout2);
 
-		if (st.equals(State.SINGLE_STUDENT_ASSIGNMENT)) {
+		if (st.equals(State.CLASS_COURSE_STUDENT)) {
 			panelInfo2.add(lblName);
 			panelInfo2.add(lblAssignment);
 			panelInfo2.add(lblGrades);
-		} else if (st.equals(State.SINGLE_STUDENT_GENERALIZED)) {
+		} else if (st.equals(State.CLASS_COURSE_STUDENT_TASK)) {
 			panelInfo2.add(lblName);
 			panelInfo2.add(lblGrades);
 		}
@@ -251,10 +280,7 @@ public class GradesPanel extends JPanel {
 
 		criteria.forEach(Criteria::updateGUI);
 
-		updateInfo(
-				mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getStudents()
-						.get(mf.getCurrentlySelectedStudentIndex()),
-				tasks.get(mf.getCurrentlySelectedAssignmentIndex()), criteria, this.state);
+		updateSidebar(students.get(mf.getCurrentlySelectedStudentIndex()), tasks.get(mf.getCurrentlySelectedAssignmentIndex()), criteria, this.state);
 
 		this.revalidate();
 		this.repaint();
@@ -269,7 +295,7 @@ public class GradesPanel extends JPanel {
 	private void btnClicked(Grade g, Criteria c) {
 		c.setGrade(g);
 		c.updateGUI();
-		this.updateGUI(this.state);
+		this.updateInfo(this.state);
 		System.out.println(c.toString());
 	}
 
