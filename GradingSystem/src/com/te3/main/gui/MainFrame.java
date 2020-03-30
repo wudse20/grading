@@ -63,7 +63,7 @@ public class MainFrame extends JFrame implements ComponentListener {
 
 	JPanel panel = new JPanel();
 
-	JLabel lblBackground;
+	JLabel lblBackground = new JLabel();
 
 	private State s;
 
@@ -78,9 +78,6 @@ public class MainFrame extends JFrame implements ComponentListener {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setSize(new Dimension(1200, 600));
 
-        lblBackground = new JLabel((shouldShowBabyYoda) ? new ImageIcon("./src/images/" + currentYoda) : null);
-
-		lblBackground.setMinimumSize(new Dimension(this.getWidth(), this.getHeight()));
 		this.setContentPane(lblBackground);
 
 		if (new File("./settings.xml").exists())
@@ -154,7 +151,24 @@ public class MainFrame extends JFrame implements ComponentListener {
         gradePanel.yoda(shouldShowBabyYoda);
         cbPanel.yoda(shouldShowBabyYoda);
 
-        lblBackground.setIcon((shouldShowBabyYoda) ? new ImageIcon("./src/images/" + currentYoda) : null);
+		/*
+		 * Scales the background image to the size of
+		 * the JFrame. To save on performance it only
+		 * dose the calculations while the background
+		 * is selected.
+		 * */
+		if (shouldShowBabyYoda) {
+			BufferedImage img = null;
+
+			try {
+				img = ImageIO.read(new File("./src/images/" + currentYoda));
+			} catch (IOException ex) {
+				ex.printStackTrace();
+			}
+
+			Image scaleImg = img.getScaledInstance(this.getWidth(), this.getHeight(), Image.SCALE_FAST);
+			lblBackground.setIcon(new ImageIcon(scaleImg));
+		}
 
         cbPanel.repaint();
         gradePanel.repaint();

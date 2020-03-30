@@ -321,13 +321,13 @@ public class SettingsFrame extends JFrame {
 			JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 		}
 
+		mf.setCurrentYoda(currentYoda);
+		s.setCurrentYoda(currentYoda);
+
 		mf.setShouldShowBabyYoda(cBoxShouldShowBabyYoda.isSelected());
 		mf.setBabyYoda(cBoxShouldShowBabyYoda.isSelected());
 
 		s.setShouldShowYoda(cBoxShouldShowBabyYoda.isSelected());
-
-		mf.setCurrentYoda(currentYoda);
-		s.setCurrentYoda(currentYoda);
 
 		mf.setSettings(s);
 		mf.saveSettings();
