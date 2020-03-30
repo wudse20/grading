@@ -271,8 +271,8 @@ public class MainFrame extends JFrame implements ComponentListener {
 	/**
 	 * Updates the grade panel GUI and information
 	 * */
-	public void updateGradeInfo() {
-		gradePanel.updateInfo(s);
+	public void updateGradePanel() {
+		gradePanel.update(s);
 	}
 
 	/**

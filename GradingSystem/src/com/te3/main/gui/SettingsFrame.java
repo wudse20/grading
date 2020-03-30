@@ -348,7 +348,7 @@ public class SettingsFrame extends JFrame {
 		if (prompt == JOptionPane.YES_OPTION) {
 			mf.setMainData(new Data(new ArrayList<SchoolClass>()));
 			mf.saveData(mf.getSaveFilePath());
-			mf.updateGradeInfo();
+			mf.updateGradePanel();
 			JOptionPane.showMessageDialog(this, "All data är raderad!", "Raderingen lyckades", JOptionPane.INFORMATION_MESSAGE);
 		}
 	}

@@ -69,7 +69,7 @@ public class GradesPanel extends JPanel {
 		this.mf = mf;
 		this.setLayout(layout);
 
-		updateInfo(state);
+		update(state);
 		scroll.setBorder(BorderFactory.createEmptyBorder());
 		yoda(mf.shouldShowBabyYoda());
 	}
@@ -99,7 +99,7 @@ public class GradesPanel extends JPanel {
 	 * 
 	 * @param s the state of the program
 	 */
-	public void updateInfo(State s) {
+	public void update(State s) {
 		this.addComponents(s);
 		this.grabInfo();
 
@@ -137,11 +137,19 @@ public class GradesPanel extends JPanel {
 	 * Grabs the needed information from the MainFrame's data object.
 	 */
 	private void grabInfo() {
-		classes = mf.getMainData().getClasses();
-		students = classes.get(mf.getCurrentlySelectedClassIndex()).getStudents();
-		courses = students.get(0).getCourses();
-		tasks = courses.get(mf.getCurrentlySelectedCourseIndex()).getCourseTasks();
-		criteria = tasks.get(mf.getCurrentlySelectedAssignmentIndex()).getCriteria();
+		if (this.state.equals(State.CLASS_COURSE_STUDENT_TASK) || this.state.equals(State.CLASS_COURSE_STUDENT)) {
+			classes = mf.getMainData().getClasses();
+			students = classes.get(mf.getCurrentlySelectedClassIndex()).getStudents();
+			courses = students.get(0).getCourses();
+			tasks = courses.get(mf.getCurrentlySelectedCourseIndex()).getCourseTasks();
+			criteria = tasks.get(mf.getCurrentlySelectedAssignmentIndex()).getCriteria();
+		} else {
+			classes = null;
+			students = null;
+			courses = null;
+			tasks = null;
+			criteria = null;
+		}
 	}
 
 	/**
@@ -296,7 +304,7 @@ public class GradesPanel extends JPanel {
 	private void btnClicked(Grade g, Criteria c) {
 		c.setGrade(g);
 		c.updateGUI();
-		this.updateInfo(this.state);
+		this.update(this.state);
 		System.out.println(c.toString());
 	}
 
