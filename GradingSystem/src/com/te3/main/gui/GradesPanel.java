@@ -191,11 +191,11 @@ public class GradesPanel extends JPanel {
 		panelInfo.setLayout(pInfoLayout);
 		panelInfo2.setLayout(pInfoLayout2);
 
-		if (st.equals(State.CLASS_COURSE_STUDENT)) {
+		if (st.equals(State.CLASS_COURSE_STUDENT_TASK)) {
 			panelInfo2.add(lblName);
 			panelInfo2.add(lblAssignment);
 			panelInfo2.add(lblGrades);
-		} else if (st.equals(State.CLASS_COURSE_STUDENT_TASK)) {
+		} else if (st.equals(State.CLASS_COURSE_STUDENT)) {
 			panelInfo2.add(lblName);
 			panelInfo2.add(lblGrades);
 		}
