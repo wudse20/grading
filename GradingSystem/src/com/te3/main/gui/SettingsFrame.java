@@ -2,7 +2,6 @@ package com.te3.main.gui;
 
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.concurrent.Flow;
 
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
@@ -52,7 +51,8 @@ public class SettingsFrame extends JFrame {
 	JButton btnCancel = new JButton("Avbryt");
 	JButton btnHelp = new JButton("?");
 	JButton btnSetSavePath = new JButton("Ställ in plats för sparfil"); // Försök komma på bättre text för att knappen
-	JButton btnDeletData = new JButton("Rensa all data");
+	JButton banDeleteData = new JButton("Rensa all data");
+
 	JButton btnYoda1 = new JButton();
 	JButton btnYoda2 = new JButton();
 	JButton btnYoda3 = new JButton();
@@ -113,17 +113,15 @@ public class SettingsFrame extends JFrame {
      * */
 	private void setProperties() {
 		this.setLayout(layout);
-		this.setSize(new Dimension(472, 400));
+		this.setSize(new Dimension(472, 350));
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+		currentYoda = mf.getCurrentYoda();
 
 		cBoxShouldShowBabyYoda.setSelected(mf.shouldShowBabyYoda());
 		setYodaBtnStatus(mf.shouldShowBabyYoda());
-		setYodaBtnSize(100, 100);
-
-		btnYoda1.setIcon(new ImageIcon("./src/images/yoda1.jpg"));
-		btnYoda2.setIcon(new ImageIcon("./src/images/yoda2.jpg"));
-		btnYoda3.setIcon(new ImageIcon("./src/images/yoda3.jpg"));
-		btnYoda4.setIcon(new ImageIcon("./src/images/yoda4.jpg"));
+		setYodaBtnSize(100, 56);
+		setYodaBtnIcons();
 
 		txfSaveTimer = new JTextField(12);
 		txfSaveTimer.setText(Integer.toString(mf.getSaveTimer()));
@@ -148,12 +146,28 @@ public class SettingsFrame extends JFrame {
 		btnHelp.addActionListener(
 				(e) -> new HelpFrame("Inställningar", "<html><p>" + helpText + "</p></html>").setVisible(true));
 		btnSetSavePath.addActionListener((e) -> setSavePath());
-		btnDeletData.addActionListener((e) -> deleteData());
+		banDeleteData.addActionListener((e) -> deleteData());
 		cBoxShouldShowBabyYoda.addActionListener((e) -> setYodaBtnStatus(cBoxShouldShowBabyYoda.isSelected()));
-		btnYoda1.addActionListener((e) -> currentYoda = "yoda1.jpg");
-		btnYoda2.addActionListener((e) -> currentYoda = "yoda2.jpg");
-		btnYoda3.addActionListener((e) -> currentYoda = "yoda3.jpg");
-		btnYoda4.addActionListener((e) -> currentYoda = "yoda4.jpg");
+
+		btnYoda1.addActionListener((e) -> {
+			currentYoda = "yoda1.jpg";
+			setYodaBtnIcons();
+		});
+
+		btnYoda2.addActionListener((e) -> {
+			currentYoda = "yoda2.jpg";
+			setYodaBtnIcons();
+		});
+
+		btnYoda3.addActionListener((e) -> {
+			currentYoda = "yoda3.jpg";
+			setYodaBtnIcons();
+		});
+
+		btnYoda4.addActionListener((e) -> {
+			currentYoda = "yoda4.jpg";
+			setYodaBtnIcons();
+		});
 
 		pTimer.setLayout(pTimerLayout);
 		pTimer.add(lblTimer);
@@ -161,7 +175,7 @@ public class SettingsFrame extends JFrame {
 
 		pSettingBtns.setLayout(pSettingBtnsLayout);
 		pSettingBtns.add(btnSetSavePath);
-		pSettingBtns.add(btnDeletData);
+		pSettingBtns.add(banDeleteData);
 
 		pCheckBox.setLayout(pCheckBoxLayout);
 		pCheckBox.add(cBoxShouldShowBabyYoda);
@@ -196,6 +210,34 @@ public class SettingsFrame extends JFrame {
 		panel.add(pBtns, BorderLayout.PAGE_END);
 	}
 
+
+	/**
+	 * Sets the icons of the Yoda buttons
+	 * */
+	private void setYodaBtnIcons() {
+		if (currentYoda.indexOf('1') != -1) {
+			btnYoda1.setIcon(new ImageIcon("./src/images/thumbnails/tYoda1Selected.jpg"));
+			btnYoda2.setIcon(new ImageIcon("./src/images/thumbnails/tYoda2.jpg"));
+			btnYoda3.setIcon(new ImageIcon("./src/images/thumbnails/tYoda3.jpg"));
+			btnYoda4.setIcon(new ImageIcon("./src/images/thumbnails/tYoda4.jpg"));
+		} else if (currentYoda.indexOf('2') != -1) {
+			btnYoda1.setIcon(new ImageIcon("./src/images/thumbnails/tYoda1.jpg"));
+			btnYoda2.setIcon(new ImageIcon("./src/images/thumbnails/tYoda2Selected.jpg"));
+			btnYoda3.setIcon(new ImageIcon("./src/images/thumbnails/tYoda3.jpg"));
+			btnYoda4.setIcon(new ImageIcon("./src/images/thumbnails/tYoda4.jpg"));
+		} else if (currentYoda.indexOf('3') != -1) {
+			btnYoda1.setIcon(new ImageIcon("./src/images/thumbnails/tYoda1.jpg"));
+			btnYoda2.setIcon(new ImageIcon("./src/images/thumbnails/tYoda2.jpg"));
+			btnYoda3.setIcon(new ImageIcon("./src/images/thumbnails/tYoda3Selected.jpg"));
+			btnYoda4.setIcon(new ImageIcon("./src/images/thumbnails/tYoda4.jpg"));
+		} else if (currentYoda.indexOf('4') != -1) {
+			btnYoda1.setIcon(new ImageIcon("./src/images/thumbnails/tYoda1.jpg"));
+			btnYoda2.setIcon(new ImageIcon("./src/images/thumbnails/tYoda2.jpg"));
+			btnYoda3.setIcon(new ImageIcon("./src/images/thumbnails/tYoda3.jpg"));
+			btnYoda4.setIcon(new ImageIcon("./src/images/thumbnails/tYoda4Selected.jpg"));
+		}
+	}
+
 	/**
 	 * Sets the size of the yoda buttons.
 	 *
@@ -208,7 +250,6 @@ public class SettingsFrame extends JFrame {
 		btnYoda2.setPreferredSize(new Dimension(width, height));
 		btnYoda3.setPreferredSize(new Dimension(width, height));
 		btnYoda4.setPreferredSize(new Dimension(width, height));
-
 	}
 
 	/**
