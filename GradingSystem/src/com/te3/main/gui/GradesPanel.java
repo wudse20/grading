@@ -65,12 +65,20 @@ public class GradesPanel extends JPanel {
 	 * @param mf the instance of the MainFrame.
 	 */
 	public GradesPanel(MainFrame mf) {
-		this.state = State.CLASS_COURSE_STUDENT_TASK;
+		//Sets the needed values
+		this.state = State.CLASS_COURSE_STUDENT_TASK; //Get from cbPanel
 		this.mf = mf;
+
+		//Sets the layout
 		this.setLayout(layout);
 
+		//Updates the gui and information
 		update(state);
+
+		//Some properties
 		scroll.setBorder(BorderFactory.createEmptyBorder());
+
+		//Fixes stuff for yoda.
 		yoda(mf.shouldShowBabyYoda());
 	}
 
@@ -80,10 +88,9 @@ public class GradesPanel extends JPanel {
 	 * @parma shouldShowBabyYoda if {@code true} -> setup for baby yoda else set up for ordinary mode.
 	 * */
 	public void yoda(boolean shouldShowBabyYoda) {
-		panel.setBackground(new JPanel().getBackground());
-		
-		if (mf.shouldShowBabyYoda()) {
-			panelInfo.setOpaque(false);;
+		//Reacts to the parameter
+		if (shouldShowBabyYoda) {
+			panelInfo.setOpaque(false);
 			panel.setOpaque(false);
 			scroll.setOpaque(false);
 		} else {
@@ -100,31 +107,50 @@ public class GradesPanel extends JPanel {
 	 * @param s the state of the program
 	 */
 	public void update(State s) {
+		//Adds components
 		this.addComponents(s);
+
+		//Grabs the needed information.
 		this.grabInfo();
 
+		//Calculates which grades should be shown, based on the state.
 		if (s.equals(State.CLASS_COURSE_STUDENT_TASK)) {
 			displayCriteria(criteria);
 		} else if (s.equals(State.CLASS_COURSE_STUDENT)) {
+			//An ArrayList with the highest grade in each criteria.
 			ArrayList<Criteria> displayedGrades = new ArrayList<Criteria>();
 
+			//Loops through all the tasks.
 			for (int i = 0; i < tasks.size(); i++) {
+				//Loops through all the criteria in each task.
 				for (var j = 0; j < tasks.get(i).getCriteria().size(); j++) {
+					//Stores the criteria
 					Criteria c = tasks.get(i).getCriteria().get(j);
+
+					//Stores the index in the list
 					int index = displayedGrades.indexOf(c);
 
+					//If it's in the list, displayed grades
 					if (index != -1) {
+						//If it's higher
 						if (!(displayedGrades.get(index).compare(c))) {
+							//Removes the lower grade
 							displayedGrades.remove(index);
+
+							//Adds the new one
 							displayedGrades.add(c);
+
+							//Updates the gui of the criteria.
 							displayedGrades.get(displayedGrades.indexOf(c)).updateGUI();
 						}
 					} else {
+						//Adds it
 						displayedGrades.add(c);
 					}
 				}
 			}
 
+			//Displays the criteria
 			displayCriteria(displayedGrades);
 		}
 
@@ -137,12 +163,18 @@ public class GradesPanel extends JPanel {
 	 * Grabs the needed information from the MainFrame's data object.
 	 */
 	private void grabInfo() {
-		if (this.state.equals(State.CLASS_COURSE_STUDENT_TASK) || this.state.equals(State.CLASS_COURSE_STUDENT)) {
+		//Grabs the info if it needs it, else sets it to null to prevent a NullPointerException
+		if (this.state.equals(State.CLASS_COURSE_STUDENT_TASK)) {
 			classes = mf.getMainData().getClasses();
 			students = classes.get(mf.getCurrentlySelectedClassIndex()).getStudents();
 			courses = students.get(0).getCourses();
 			tasks = courses.get(mf.getCurrentlySelectedCourseIndex()).getCourseTasks();
 			criteria = tasks.get(mf.getCurrentlySelectedAssignmentIndex()).getCriteria();
+		}else if (this.state.equals(State.CLASS_COURSE_STUDENT)) {
+			classes = mf.getMainData().getClasses();
+			students = classes.get(mf.getCurrentlySelectedClassIndex()).getStudents();
+			courses = students.get(0).getCourses();
+			tasks = courses.get(mf.getCurrentlySelectedCourseIndex()).getCourseTasks();
 		} else {
 			classes = null;
 			students = null;
@@ -180,17 +212,21 @@ public class GradesPanel extends JPanel {
 	 * @param st the current state of the panel.
 	 */
 	private void updateSidebar(Student s, Task t, ArrayList<Criteria> al, State st) {
+		//Sets the text
 		lblName.setText(s.getName());
 		lblGrades.setText(countGrades(al));
 		lblAssignment.setText(t.getName());
 
+		//Sets the font
 		lblName.setFont(new Font(lblName.getFont().getName(), Font.BOLD, 20));
 		lblGrades.setFont(new Font(lblName.getFont().getName(), Font.PLAIN, 20));
 		lblAssignment.setFont(new Font(lblAssignment.getFont().getName(), Font.PLAIN, 20));
 
+		//Sets the layout
 		panelInfo.setLayout(pInfoLayout);
 		panelInfo2.setLayout(pInfoLayout2);
 
+		//Adds the components, based on state
 		if (st.equals(State.CLASS_COURSE_STUDENT_TASK)) {
 			panelInfo2.add(lblName);
 			panelInfo2.add(lblAssignment);
@@ -200,6 +236,7 @@ public class GradesPanel extends JPanel {
 			panelInfo2.add(lblGrades);
 		}
 
+		//Adds everything.
 		panelInfo.add(lblSpacer2, BorderLayout.LINE_START);
 		panelInfo.add(panelInfo2, BorderLayout.CENTER);
 		panelInfo.add(lblSpacer3, BorderLayout.LINE_END);
@@ -209,13 +246,15 @@ public class GradesPanel extends JPanel {
 	/**
 	 * Counts the grades.
 	 * 
-	 * @param al the current criteria
+	 * @param criteria the current criteria
 	 * @return a string representation of the number of grades at each level.
 	 */
-	private String countGrades(ArrayList<Criteria> al) {
-		int f = 0, e = 0, c = 0, a = 0;
+	private String countGrades(ArrayList<Criteria> criteria) {
+		//The count of grades
+		short f = 0, e = 0, c = 0, a = 0;
 
-		for (Criteria c1 : al) {
+		//Adds one in each variable for each grade value
+		for (Criteria c1 : criteria) {
 			switch (c1.getGrade()) {
 				case F:
 					f++;
@@ -232,6 +271,7 @@ public class GradesPanel extends JPanel {
 			}
 		}
 
+		//Returns a formatted string.
 		return "F: " + f + ", E: " + e + ", C: " + c + ", A: " + a;
 	}
 
@@ -245,15 +285,18 @@ public class GradesPanel extends JPanel {
 		for (Component c : panelCriteria.getComponents())
 			panelCriteria.remove(c);
 
+		//Sets the layout
 		pCriteriaLayout = new BoxLayout(panelCriteria, BoxLayout.Y_AXIS);
 		panelCriteria.setLayout(pCriteriaLayout);
 
+		//Loops through the criteria.
 		for (var i = 0; i < criteria.size(); i++) {
 			// Adds the action listeners
 			JButton[] gradeBtns = criteria.get(i).getGradeBtns();
 
 			//Removes old action listeners
 			for (var j = 0; j < gradeBtns.length; j++) {
+				//If it's null print message to the console.
 				try {
 					gradeBtns[j].removeActionListener(gradeBtns[j].getActionListeners()[0]);
 				} catch (IndexOutOfBoundsException e) {
@@ -264,6 +307,7 @@ public class GradesPanel extends JPanel {
 			// Since it needs to be final or effectively final in lambda
 			final int i2 = i;
 
+			//Adds the action listeners
 			gradeBtns[0].addActionListener((e) -> {
 				btnClicked(Grade.F, criteria.get(i2));
 			});
@@ -284,13 +328,19 @@ public class GradesPanel extends JPanel {
 			panelCriteria.add(criteria.get(i).getPanelCriteria());
 		}
 
+		//Sets the layout
 		panel.setLayout(pLayout);
+
+		//Adds the components
 		panel.add(panelCriteria);
 
+		//Updates the GUI for every criteria.
 		criteria.forEach(Criteria::updateGUI);
 
+		//Updates the sidebar.
 		updateSidebar(students.get(mf.getCurrentlySelectedStudentIndex()), tasks.get(mf.getCurrentlySelectedAssignmentIndex()), criteria, this.state);
 
+		//Updates the panel.
 		this.revalidate();
 		this.repaint();
 	}
@@ -302,13 +352,22 @@ public class GradesPanel extends JPanel {
 	 * @param c the new criteria
 	 * */
 	private void btnClicked(Grade g, Criteria c) {
+		//Sets the grade
 		c.setGrade(g);
+
+		//Updates the GUI
 		c.updateGUI();
+
+		//Updates the state
 		this.update(this.state);
+
+		//Prints debug message
 		System.out.println(c.toString());
 	}
 
 	/**
+	 * A getter for the state.
+	 *
 	 * @return the current state
 	 */
 	public State getState() {
