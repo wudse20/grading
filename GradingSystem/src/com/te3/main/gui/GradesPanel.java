@@ -103,9 +103,9 @@ public class GradesPanel extends JPanel {
 		this.addComponents(s);
 		this.grabInfo();
 
-		if (s.equals(State.CLASS_COURSE_STUDENT)) {
+		if (s.equals(State.CLASS_COURSE_STUDENT_TASK)) {
 			displayCriteria(criteria);
-		} else {
+		} else if (s.equals(State.CLASS_COURSE_STUDENT)) {
 			ArrayList<Criteria> displayedGrades = new ArrayList<Criteria>();
 
 			for (int i = 0; i < tasks.size(); i++) {
