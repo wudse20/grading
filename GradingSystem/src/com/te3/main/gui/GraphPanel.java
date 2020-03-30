@@ -75,7 +75,7 @@ public class GraphPanel extends JPanel {
         //Draws the E-pillar
 
         //Sets the color
-        g.setColor(new Color(189, 124, 4));
+        g.setColor(Color.YELLOW);
 
         if (e != 0) {
             //Draws the line
@@ -85,7 +85,7 @@ public class GraphPanel extends JPanel {
         //Draws the C-Pillar
 
         //Sets the color
-        g.setColor(new Color(172, 194, 74));
+        g.setColor(new Color(189, 124, 4));
 
         if (c != 0) {
             //Draws the line
@@ -112,34 +112,22 @@ public class GraphPanel extends JPanel {
         g.setFont(new Font("TimesRoman", Font.BOLD, 12));
 
         //Sets color
-        g.setColor(Color.RED);
+        g.setColor(Color.BLACK);
 
         //Draws letter F
         g.drawString("F", (MARGIN_LEFT + GRAPH_AXIS_PILLAR_MARGIN) - letterDiffX, MARGIN_TOP + HEIGHT + letterDiffY);
 
-        //Sets the color
-        g.setColor(new Color(189, 124, 4));
-
         //Draws letter E
         g.drawString("E", (MARGIN_LEFT + GRAPH_AXIS_PILLAR_MARGIN) * 2 - letterDiffX, MARGIN_TOP + HEIGHT + letterDiffY);
 
-        //Sets the color
-        g.setColor(new Color(172, 194, 74));
-
         //Draws letter C
         g.drawString("C", (MARGIN_LEFT + GRAPH_AXIS_PILLAR_MARGIN) * 3 - letterDiffX, MARGIN_TOP + HEIGHT + letterDiffY);
-
-        //Sets the colour
-        g.setColor(Color.GREEN);
 
         //Draws letter A
         g.drawString("A", (MARGIN_LEFT + GRAPH_AXIS_PILLAR_MARGIN) * 4 - letterDiffX, MARGIN_TOP + HEIGHT + letterDiffY);
 
         //Sets line width
         g.setStroke(new BasicStroke(2.25f));
-
-        //Sets the color
-        g.setColor(Color.black);
 
         //Draws X-Axis
         g.drawLine(MARGIN_LEFT, HEIGHT + MARGIN_TOP, WIDTH + MARGIN_LEFT, HEIGHT + MARGIN_TOP);
