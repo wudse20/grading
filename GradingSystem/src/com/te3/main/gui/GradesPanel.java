@@ -69,7 +69,7 @@ public class GradesPanel extends JPanel {
 		this.mf = mf;
 		this.setLayout(layout);
 
-		updateInfo(state);
+		update(state);
 		scroll.setBorder(BorderFactory.createEmptyBorder());
 		yoda(mf.shouldShowBabyYoda());
 	}
@@ -99,7 +99,7 @@ public class GradesPanel extends JPanel {
 	 * 
 	 * @param s the state of the program
 	 */
-	public void updateInfo(State s) {
+	public void update(State s) {
 		this.addComponents(s);
 		this.grabInfo();
 
@@ -167,12 +167,12 @@ public class GradesPanel extends JPanel {
 	 * 
 	 * @param s  the current student
 	 * @param t  the current task
-	 * @param al the current criteria
+	 * @param criteria the current criteria
 	 * @param st the current state of the panel.
 	 */
-	private void updateSidebar(Student s, Task t, ArrayList<Criteria> al, State st) {
+	private void updateSidebar(Student s, Task t, ArrayList<Criteria> criteria, State st) {
 		lblName.setText(s.getName());
-		lblGrades.setText(countGrades(al));
+		lblGrades.setText(countGrades(criteria));
 		lblAssignment.setText(t.getName());
 
 		lblName.setFont(new Font(lblName.getFont().getName(), Font.BOLD, 20));
@@ -200,13 +200,13 @@ public class GradesPanel extends JPanel {
 	/**
 	 * Counts the grades.
 	 * 
-	 * @param al the current criteria
+	 * @param criteria the current criteria
 	 * @return a string representation of the number of grades at each level.
 	 */
-	private String countGrades(ArrayList<Criteria> al) {
+	private String countGrades(ArrayList<Criteria> criteria) {
 		int f = 0, e = 0, c = 0, a = 0;
 
-		for (Criteria c1 : al) {
+		for (Criteria c1 : criteria) {
 			switch (c1.getGrade()) {
 				case F:
 					f++;
@@ -248,7 +248,7 @@ public class GradesPanel extends JPanel {
 				try {
 					gradeBtns[j].removeActionListener(gradeBtns[j].getActionListeners()[0]);
 				} catch (IndexOutOfBoundsException e) {
-					System.out.println("Skipped gradebtn -> IndexOutOfBounds no action listeners attached");
+					System.out.println("Skipped gradebtn -> IndexOutOfBounds: no action listeners attached");
 				}
 			}
 
@@ -295,7 +295,7 @@ public class GradesPanel extends JPanel {
 	private void btnClicked(Grade g, Criteria c) {
 		c.setGrade(g);
 		c.updateGUI();
-		this.updateInfo(this.state);
+		this.update(this.state);
 		System.out.println(c.toString());
 	}
 
