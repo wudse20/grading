@@ -2,7 +2,10 @@ package com.te3.main.gui;
 
 import java.awt.*;
 
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.ArrayList;
+import java.util.concurrent.Flow;
 
 import javax.swing.*;
 
@@ -15,10 +18,13 @@ import com.te3.main.objects.*;
  * different criteria and the text at <br>
  * the left of the GUI.
  * */
-public class GradesPanel extends JPanel {
+public class GradesPanel extends JPanel implements KeyListener {
 
 	/** Default */
 	private static final long serialVersionUID = 1L;
+
+	//Integers
+	private int keyCount = 0;
 
 	//State
 	private State state;
@@ -32,6 +38,8 @@ public class GradesPanel extends JPanel {
 
 	//Panels
 	JPanel panel = new JPanel();
+	JPanel pComment = new JPanel();
+	JPanel pCommentButtons = new JPanel();
 	JPanel panelCriteria = new JPanel();
 	JPanel panelInfo = new JPanel();
 	JPanel panelInfo2 = new JPanel();
@@ -41,14 +49,20 @@ public class GradesPanel extends JPanel {
 	//Layouts
 	BorderLayout layout = new BorderLayout();
 	BorderLayout pInfoLayout = new BorderLayout();
+	BorderLayout pCommentLayout = new BorderLayout();
 
 	BoxLayout pInfoLayout2 = new BoxLayout(panelInfo2, BoxLayout.Y_AXIS);
 	BoxLayout pCriteriaLayout;
 
 	FlowLayout pLayout = new FlowLayout(FlowLayout.LEFT);
+	FlowLayout pCommentButtonsLayout = new FlowLayout(FlowLayout.CENTER);
+
+	//TextAreas
+	JTextArea txaComment = new JTextArea();
 
 	//ScrollPanes
 	JScrollPane scroll = new JScrollPane(panel);
+	JScrollPane scrollComment = new JScrollPane(txaComment);
 
 	//Labels
 	JLabel lblName = new JLabel();
@@ -59,6 +73,12 @@ public class GradesPanel extends JPanel {
 	JLabel lblSpacer3 = new JLabel("    ");
 	JLabel lblSpacer4 = new JLabel(" ");
 	JLabel lblSpacer5 = new JLabel("    ");
+	JLabel lblSpacer6 = new JLabel("    ");
+	JLabel lblSpacer7 = new JLabel(" ");
+
+	//Buttons
+	JButton btnClearComment = new JButton("Rensa kommentar");
+	JButton btnSaveComment = new JButton("Spara");
 
 	//Instances
 	MainFrame mf;
@@ -82,6 +102,56 @@ public class GradesPanel extends JPanel {
 
 		//Fixes stuff for yoda.
 		yoda(mf.shouldShowBabyYoda());
+	}
+
+	/**
+	 * Sets properties
+	 */
+	private void setProperties() {
+		//As long as tasks aren't null.
+		if (tasks != null) {
+			//Stores the task:
+			Task t = tasks.get(mf.getCurrentlySelectedAssignmentIndex());
+
+			//Clears textBox
+			txaComment.setText("");
+
+			//Sets the comment
+			txaComment.setText(t.getComment());
+
+			//Adds actionListeners
+			btnClearComment.addActionListener(e -> txaComment.setText(""));
+			btnSaveComment.addActionListener(e -> saveComment(t, true));
+
+			//Adds key listener
+			txaComment.addKeyListener(this);
+
+			//Sets the properties of the pCommentButtons panel
+			pCommentButtons.setLayout(pCommentButtonsLayout);
+			pCommentButtons.add(btnSaveComment);
+			pCommentButtons.add(btnClearComment);
+
+			//Sets the properties of the pComment panel
+			pComment.setLayout(pCommentLayout);
+			pComment.add(lblSpacer5, BorderLayout.LINE_START);
+			pComment.add(scrollComment, BorderLayout.CENTER);
+			pComment.add(lblSpacer6, BorderLayout.LINE_END);
+			pComment.add(pCommentButtons, BorderLayout.PAGE_END);
+		}
+	}
+
+	/**
+	 * Saves the comment
+	 *
+	 * @param t the current task
+	 * @param isSaveBtnPressed if the save is requested by the user.
+	 */
+	private void saveComment(Task t, boolean isSaveBtnPressed) {
+		t.setComment(txaComment.getText());
+		mf.saveData(mf.getSaveFilePath());
+
+		if (isSaveBtnPressed)
+			JOptionPane.showMessageDialog(this, "Du har sparat din kommentar", "Sparat!", JOptionPane.INFORMATION_MESSAGE);
 	}
 
 	/**
@@ -114,6 +184,9 @@ public class GradesPanel extends JPanel {
 
 		//Grabs the needed information.
 		this.grabInfo();
+
+		//Sets some properties
+		this.setProperties();
 
 		//Calculates which grades should be shown, based on the state.
 		if (s.equals(State.CLASS_COURSE_STUDENT_TASK)) {
@@ -197,7 +270,13 @@ public class GradesPanel extends JPanel {
 			this.remove(c);
 
 		//Adds the components, when they are needed.
-		if (s.equals(State.CLASS_COURSE_STUDENT_TASK) || s.equals(State.CLASS_COURSE_STUDENT)) {
+		if (s.equals(State.CLASS_COURSE_STUDENT_TASK)) {
+			this.add(lblSpacer1, BorderLayout.PAGE_START);
+			this.add(panelInfo, BorderLayout.LINE_START);
+			this.add(scroll, BorderLayout.CENTER);
+			this.add(pComment, BorderLayout.LINE_END);
+			this.add(lblSpacer7, BorderLayout.PAGE_END);
+		} else if (s.equals(State.CLASS_COURSE_STUDENT)) {
 			this.add(lblSpacer1, BorderLayout.PAGE_START);
 			this.add(panelInfo, BorderLayout.LINE_START);
 			this.add(scroll, BorderLayout.CENTER);
@@ -419,4 +498,16 @@ public class GradesPanel extends JPanel {
 	public void setState(State state) {
 		this.state = state;
 	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		if (++keyCount % 50 == 0)
+			saveComment(tasks.get(mf.getCurrentlySelectedAssignmentIndex()), false);
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {}
 }

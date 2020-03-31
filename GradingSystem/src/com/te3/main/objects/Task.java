@@ -62,12 +62,8 @@ public class Task {
 		return this.comment;
 	}
 
-	public void setComment(String comment) throws IllegalInputException {
-		if (comment.length() < 0 || comment.length() > 50) {
-			throw new IllegalInputException("Kommentaren måste vara mellan noll och femtio tecken lång");
-		} else {
-			this.comment = comment;
-		}
+	public void setComment(String comment) {
+		this.comment = comment;
 	}
 
 	@Override
