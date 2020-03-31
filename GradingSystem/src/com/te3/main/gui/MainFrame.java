@@ -236,25 +236,22 @@ public class MainFrame extends JFrame implements ComponentListener {
 			try {
 				students.add(new Student("Anton"));
 
-				criteria.add(new Criteria("Problemlösning"));
-				criteria.add(new Criteria("Fjäsk"));
-				criteria.add(new Criteria("Test"));
-				criteria.add(new Criteria("Test 2"));
+				criteria.add(new Criteria("Datasäkerhet"));
+				criteria.add(new Criteria("Nätverket"));
+				criteria.add(new Criteria("Åtgärda Fel"));
+				criteria.add(new Criteria("Resultat"));
+				criteria.add(new Criteria("Installeringar"));
+				criteria.add(new Criteria("Dokumentation"));
+				criteria.add(new Criteria("Förmåga"));
 
 				criteria2.add(new Criteria("Datasäkerhet"));
-				criteria2.add(new Criteria("Nätverkets Uppbyggnad"));
+				criteria2.add(new Criteria("Nätverket"));
 				criteria2.add(new Criteria("Åtgärda Fel"));
 				criteria2.add(new Criteria("Resultat"));
 				criteria2.add(new Criteria("Installeringar"));
-				criteria2.add(new Criteria(""));
-				criteria2.add(new Criteria("Test 2"));
-				criteria2.add(new Criteria("Test 2"));
-				criteria2.add(new Criteria("Test 2"));
-				criteria2.add(new Criteria("Test 2"));
-				criteria2.add(new Criteria("Test 2"));
-				criteria2.add(new Criteria("Test 2"));
-				criteria2.add(new Criteria("Test 2"));
-				criteria2.add(new Criteria("Test 2"));
+				criteria2.add(new Criteria("Dokumentation"));
+				criteria2.add(new Criteria("Förmåga"));
+
 
 				tasks.add(new Task("Något jätteprov", criteria2));
 

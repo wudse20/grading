@@ -171,6 +171,8 @@ public class CourseFrame extends JFrame {
 		} catch (IllegalNameException e) {
 			JOptionPane.showMessageDialog(this, e.getMessage(), "Fel", JOptionPane.ERROR_MESSAGE);
 		}
+
+		mf.updateGradePanel();
 	}
 
 	/**
@@ -230,5 +232,7 @@ public class CourseFrame extends JFrame {
 			JOptionPane.showMessageDialog(this, e.getMessage(), "Fel", JOptionPane.ERROR_MESSAGE);
 			return;
 		}
+
+		mf.updateGradePanel();
 	}
 }

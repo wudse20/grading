@@ -136,6 +136,8 @@ public class SchoolClassFrame extends JFrame {
 			JOptionPane.showMessageDialog(this, e.getMessage(), "Fel", JOptionPane.ERROR_MESSAGE);
 			return;
 		}
+
+		mf.updateGradePanel();
 	}
 
 	/**
@@ -161,6 +163,8 @@ public class SchoolClassFrame extends JFrame {
 			JOptionPane.showMessageDialog(this, e.getMessage(), "Fel", JOptionPane.ERROR_MESSAGE);
 			return;
 		}
+
+		mf.updateGradePanel();
 	}
 
 	/**
