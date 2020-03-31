@@ -56,7 +56,7 @@ public class GraphPanel extends JPanel {
         int cHeight = (int) ((c / criteriaTotal) * HEIGHT);
         int aHeight = (int) ((a / criteriaTotal) * HEIGHT);
 
-        //When more than 10 Graph brakes. Fix
+        //When than height less than 20 Graph brakes.
         fHeight = (fHeight < 20) ? 20 : fHeight;
         eHeight = (eHeight < 20) ? 20 : eHeight;
         cHeight = (cHeight < 20) ? 20 : cHeight;
