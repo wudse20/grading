@@ -11,7 +11,7 @@ public class GraphPanel extends JPanel {
     private final int WIDTH = 182;
 
     /** The height of the graph */
-    private final int HEIGHT = 125;
+    private final int HEIGHT = 200;
 
     /** The left margin of the graph */
     private final int MARGIN_LEFT = 5;
@@ -55,6 +55,12 @@ public class GraphPanel extends JPanel {
         int eHeight = (int) ((e / criteriaTotal) * HEIGHT);
         int cHeight = (int) ((c / criteriaTotal) * HEIGHT);
         int aHeight = (int) ((a / criteriaTotal) * HEIGHT);
+
+        //When more than 10 Graph brakes. Fix
+        fHeight = (fHeight < 20) ? 20 : fHeight;
+        eHeight = (eHeight < 20) ? 20 : eHeight;
+        cHeight = (cHeight < 20) ? 20 : cHeight;
+        aHeight = (aHeight < 20) ? 20 : aHeight;
 
         //Sets the line width
         g.setStroke(new BasicStroke(20));

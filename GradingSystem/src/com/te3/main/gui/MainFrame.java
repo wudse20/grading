@@ -245,6 +245,16 @@ public class MainFrame extends JFrame implements ComponentListener {
 				criteria2.add(new Criteria("Fjäsk"));
 				criteria2.add(new Criteria("Test"));
 				criteria2.add(new Criteria("Test 2"));
+				criteria2.add(new Criteria("Test 2"));
+				criteria2.add(new Criteria("Test 2"));
+				criteria2.add(new Criteria("Test 2"));
+				criteria2.add(new Criteria("Test 2"));
+				criteria2.add(new Criteria("Test 2"));
+				criteria2.add(new Criteria("Test 2"));
+				criteria2.add(new Criteria("Test 2"));
+				criteria2.add(new Criteria("Test 2"));
+				criteria2.add(new Criteria("Test 2"));
+				criteria2.add(new Criteria("Test 2"));
 
 				tasks.add(new Task("Lego robot", criteria2));
 
