@@ -21,15 +21,18 @@ import com.te3.main.exceptions.IllegalNameException;
 import com.te3.main.objects.SchoolClass;
 import com.te3.main.objects.Student;
 
+/**
+ * The class for maneging the classes.
+ * */
 public class MainSchoolClassPanel extends JPanel implements DocumentListener {
 
 	/** Generated */
 	private static final long serialVersionUID = -6445745910257748976L;
 
 	private ArrayList<Student> students = new ArrayList<Student>();
-	
+
 	SchoolClass sc;
-	
+
 	MainFrame mf;
 
 	JTextField txfName = new JTextField(24);
@@ -62,7 +65,7 @@ public class MainSchoolClassPanel extends JPanel implements DocumentListener {
 		this.setProperties();
 		this.addComponents();
 	}
-	
+
 	/**
 	 * For editing
 	 * 
@@ -78,6 +81,9 @@ public class MainSchoolClassPanel extends JPanel implements DocumentListener {
 		this.addComponents();
 	}
 
+	/**
+	 * Adds the components
+	 * */
 	private void addComponents() {
 		pInput.add(lblName);
 		pInput.add(txfName);
@@ -91,6 +97,9 @@ public class MainSchoolClassPanel extends JPanel implements DocumentListener {
 		this.add(pStudents, BorderLayout.CENTER);
 	}
 
+	/**
+	 * Sets the properties
+	 * */
 	private void setProperties() {
 		this.setLayout(layout);
 		pInput.setLayout(pInputLayout);
@@ -101,7 +110,7 @@ public class MainSchoolClassPanel extends JPanel implements DocumentListener {
 		});
 
 		listStudents.getSelectionModel().addListSelectionListener((e) -> {
-			//Since it's called twice
+			// Since it's called twice
 			try {
 				students.remove(listStudents.getSelectedIndex());
 				updateJList();
@@ -111,13 +120,15 @@ public class MainSchoolClassPanel extends JPanel implements DocumentListener {
 		});
 
 		txfName.getDocument().addDocumentListener(this);
-		txfName.addKeyListener(new KeyListener() {		
+		txfName.addKeyListener(new KeyListener() {
 			@Override
-			public void keyTyped(KeyEvent e) {}
-			
+			public void keyTyped(KeyEvent e) {
+			}
+
 			@Override
-			public void keyReleased(KeyEvent e) {}
-			
+			public void keyReleased(KeyEvent e) {
+			}
+
 			@Override
 			public void keyPressed(KeyEvent e) {
 				if (e.getKeyCode() == 10) {
@@ -171,15 +182,21 @@ public class MainSchoolClassPanel extends JPanel implements DocumentListener {
 		updateJList();
 	}
 
+	/**
+	 * Updates the JList
+	 * */
 	private void updateJList() {
 		Student[] students = new Student[this.students.size()];
 		listStudents.setListData(this.students.toArray(students));
 	}
 
+	/**
+	 * A getter for the students
+	 * */
 	public ArrayList<Student> getStudents() {
 		return this.students;
 	}
-	
+
 	@Override
 	public void insertUpdate(DocumentEvent e) {
 		txfName.setBackground(Color.white);

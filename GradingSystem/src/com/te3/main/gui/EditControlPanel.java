@@ -5,7 +5,11 @@ import java.awt.FlowLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-public class EditControllPanel extends JPanel {
+/**
+ * The button panel att the bottom <br>
+ * of the editing GUI:s.
+ * */
+public class EditControlPanel extends JPanel {
 
 	/** Generated */
 	private static final long serialVersionUID = -7606289199305316004L;
@@ -16,21 +20,33 @@ public class EditControllPanel extends JPanel {
 	JButton btnCancel = new JButton("Avbryt");
 	JButton btnUpdate = new JButton("Uppdatera");
 
-	public EditControllPanel() {
+	/**
+	 * Sets everything up
+	 * */
+	public EditControlPanel() {
 		this.setLayout(layout);
 		this.add(btnHelp);
 		this.add(btnCancel);
 		this.add(btnUpdate);
 	}
 
+	/**
+	 * The getter for the update button
+	 * */
 	public JButton getBtnUpdate() {
 		return this.btnUpdate;
 	}
 
+	/**
+	 * The getter for the cancel button
+	 * */
 	public JButton getBtnCancel() {
 		return this.btnCancel;
 	}
 
+	/**
+	 * The getter for the help button
+	 * */
 	public JButton getBtnHelp() {
 		return this.btnHelp;
 	}

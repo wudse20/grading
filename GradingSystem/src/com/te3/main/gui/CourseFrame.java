@@ -14,6 +14,10 @@ import com.te3.main.exceptions.IllegalNameException;
 import com.te3.main.objects.Course;
 import com.te3.main.objects.SchoolClass;
 
+/**
+ * The class that holds the Frame for
+ * managing courses.
+ * */
 public class CourseFrame extends JFrame {
 
 	/** Default */
@@ -37,9 +41,9 @@ public class CourseFrame extends JFrame {
 
 	MainCoursePanel mcp;
 
-	AddControllPanel acp = new AddControllPanel();
+	AddControlPanel acp = new AddControlPanel();
 
-	EditControllPanel ecp = new EditControllPanel();
+	EditControlPanel ecp = new EditControlPanel();
 
 	Container cp = this.getContentPane();
 
@@ -151,18 +155,16 @@ public class CourseFrame extends JFrame {
 		}
 
 		try {
-			ArrayList<SchoolClass> al = mf.getMainData().getClasses();
 			ArrayList<SchoolClass> al2 = mcp.getAddedClasses();
 
-			for (int i = 0; i < al.size(); i++) {
-				SchoolClass sc = al.get(i);
-
-				if (al2.contains(sc)) {
-					al.get(i).getCourses().add(new Course(np.getLastInput(), mcp.getCriteria()));
+			for (var i = 0; i < al2.size(); i++) {
+				for (var j = 0; j < al2.get(i).getStudents().size(); j++) {
+					Course c = new Course(np.getLastInput(), mcp.getCriteria());
+					al2.get(i).getStudents().get(j).addCourse(c);
 				}
 			}
 
-			mf.save(mf.getSaveFilePath());
+			mf.saveData(mf.getSaveFilePath());
 			JOptionPane.showMessageDialog(this, "Du har lagt till kursen: " + np.getLastInput(),
 					"Du har lagt till en kurs", JOptionPane.INFORMATION_MESSAGE);
 			this.dispose();
@@ -198,9 +200,11 @@ public class CourseFrame extends JFrame {
 
 		try {
 			for (int i = 0; i < mf.getMainData().getClasses().size(); i++) {
-				int index = mf.getMainData().getClasses().get(i).getCourses().indexOf(c);
-				if (index != -1) {
-					mf.getMainData().getClasses().get(i).getCourses().remove(index);
+				for (int j = 0; j < mf.getMainData().getClasses().get(i).getStudents().size(); j++) {
+					int index = mf.getMainData().getClasses().get(i).getStudents().get(j).getCourses().indexOf(c);
+					if (index != -1) {
+						mf.getMainData().getClasses().get(i).getStudents().get(j).getCourses().remove(index);
+					}
 				}
 			}
 
@@ -212,8 +216,12 @@ public class CourseFrame extends JFrame {
 				SchoolClass sc = al.get(i);
 
 				if (al2.contains(sc)) {
-					al.get(i).getCourses().add(new Course(np.getLastInput(), mcp.getCriteria()));
-					al.get(i).getCourses().get(al.get(i).getCourses().size() - 1).setCourseTasks(c.getCourseTasks());
+					for (int j = 0; j < al.get(i).getStudents().size(); j++) {
+						al.get(i).getStudents().get(j).addCourse(new Course(np.getLastInput(), mcp.getCriteria()));
+						al.get(i).getStudents().get(j).getCourses()
+								.get(al.get(i).getStudents().get(j).getCourses().size() - 1)
+								.setCourseTasks(c.getCourseTasks());
+					}
 				}
 			}
 

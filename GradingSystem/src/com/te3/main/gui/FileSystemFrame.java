@@ -35,17 +35,19 @@ import com.te3.main.exceptions.UnsucessfulFolderCreationException;
 
 /**
  * The frame that's used when saving a file.
- * 
- * @author Anton Skorup
  */
 public class FileSystemFrame extends JFrame implements KeyListener, ListSelectionListener {
 
 	/** Default */
 	private static final long serialVersionUID = 1L;
 
-	/** <b>-1</b>: still running <br><b>0</b>: new file <br><b>1</b>: canceled */
+	/**
+	 * <b>-1</b>: still running <br>
+	 * <b>0</b>: new file <br>
+	 * <b>1</b>: canceled
+	 */
 	private byte exitCode;
-	
+
 	private String path;
 	private String fileName;
 	private String fileType;
@@ -88,43 +90,44 @@ public class FileSystemFrame extends JFrame implements KeyListener, ListSelectio
 	JLabel lblSpacer7 = new JLabel("                      ");
 
 	JLabel lblInfo = new JLabel("Filer:");
-	
+
 	JScrollPane scr;
 
 	/**
-	 * @param name the file name
-	 * @param fileType the file type
+	 * @param name     the file name
+	 * @param fileType the file type<br>
+	 *                 Ex: xml <br>
+	 *                 NOT: .xml
 	 */
 	public FileSystemFrame(String name, String fileType) {
 		super("Filsystem");
 
-		//Setup for att the variables.
+		// Setup for att the variables.
 		this.path = "./";
 		this.exitCode = -1;
-		
+
 		try {
 			this.setFileType(fileType);
 		} catch (IllegalNameException e) {
 			e.printStackTrace();
 			this.fileType = "txt";
 		}
-		
+
 		try {
 			this.setFileName(name);
 		} catch (IllegalNameException e) {
 			this.fileName = "";
 		}
-		
-		//Methods for GUI setup
+
+		// Methods for GUI setup
 		this.setProperties();
 		this.addComponents();
 	}
 
-	
 	/**
 	 * Adds everything to the frame, and the different panels.
 	 */
-	private void addComponents() {		
+	private void addComponents() {
 		pHeader.add(lblInfo);
 		pHeader.add(lblSpacer7);
 		pHeader.add(txfPath);
@@ -155,28 +158,28 @@ public class FileSystemFrame extends JFrame implements KeyListener, ListSelectio
 	 * Sets all the properties.
 	 */
 	private void setProperties() {
-		//Everything to do with the frame
+		// Everything to do with the frame
 		this.setLayout(layout);
 		this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		this.setSize(new Dimension(500, 400));
-		
-		//Refreshes the files in the window.
+
+		// Refreshes the files in the window.
 		this.refreshTable(this.path);
 
-		//Sets all the panel layouts.
+		// Sets all the panel layouts.
 		pInput.setLayout(pInputLayout);
 		pWindow.setLayout(pWindowLayout);
 		pBtn.setLayout(pBtnLayout);
 		pFiles.setLayout(pFilesLayout);
 		pHeader.setLayout(pHeaderLayout);
-		
-		//Sets upp the scrpane.
+
+		// Sets upp the scrpane.
 		scr = new JScrollPane(files);
 
-		//Sets text in the name txtbox.
+		// Sets text in the name txtbox.
 		txfName.setText(fileName);
 
-		//Adds listeners
+		// Adds listeners
 		txfPath.addKeyListener(this);
 		txfPath.getDocument().addDocumentListener(new DocumentListener() {
 
@@ -194,9 +197,9 @@ public class FileSystemFrame extends JFrame implements KeyListener, ListSelectio
 			public void changedUpdate(DocumentEvent e) {
 			}
 		});
-		
+
 		txfName.getDocument().addDocumentListener(new DocumentListener() {
-			
+
 			@Override
 			public void removeUpdate(DocumentEvent e) {
 				txfName.setBackground(Color.WHITE);
@@ -213,13 +216,15 @@ public class FileSystemFrame extends JFrame implements KeyListener, ListSelectio
 		});
 
 		txfName.addKeyListener(new KeyListener() {
-			
+
 			@Override
-			public void keyTyped(KeyEvent e) {}
-			
+			public void keyTyped(KeyEvent e) {
+			}
+
 			@Override
-			public void keyReleased(KeyEvent e) {}
-			
+			public void keyReleased(KeyEvent e) {
+			}
+
 			@Override
 			public void keyPressed(KeyEvent e) {
 				if (e.getKeyCode() == 10) {
@@ -232,7 +237,7 @@ public class FileSystemFrame extends JFrame implements KeyListener, ListSelectio
 				}
 			}
 		});
-		
+
 		files.getSelectionModel().addListSelectionListener(this);
 
 		btnNewFolder.addActionListener((e) -> {
@@ -242,12 +247,12 @@ public class FileSystemFrame extends JFrame implements KeyListener, ListSelectio
 				JOptionPane.showMessageDialog(this, ex.getMessage(), "Fel", JOptionPane.ERROR_MESSAGE);
 			}
 		});
-		
+
 		btnCancel.addActionListener((e) -> {
 			this.setVisible(false);
 			this.exitCode = 1;
 		});
-		
+
 		btnSave.addActionListener((e) -> {
 			try {
 				this.save();
@@ -259,8 +264,7 @@ public class FileSystemFrame extends JFrame implements KeyListener, ListSelectio
 	}
 
 	/**
-	 * Tells the program that the save button is pressed
-	 * and that hides the GUI.
+	 * Tells the program that the saveData button is pressed and that hides the GUI.
 	 * 
 	 * @throws IllegalNameException if the name isn't accepted
 	 */
@@ -272,7 +276,7 @@ public class FileSystemFrame extends JFrame implements KeyListener, ListSelectio
 		} else if (fileName.indexOf('/') != -1) {
 			throw new IllegalNameException("Du får inte ha några snedsträck, /, i namnet.");
 		}
-		
+
 		this.setFileName(txfName.getText());
 		this.exitCode = 0;
 		this.setVisible(false);
@@ -282,7 +286,7 @@ public class FileSystemFrame extends JFrame implements KeyListener, ListSelectio
 	 * Creates a new folder.
 	 * 
 	 * @param path the path of the new folder.
-	 * @throws IllegalNameException If the name isn't accepted
+	 * @throws IllegalNameException               If the name isn't accepted
 	 * @throws UnsucessfulFolderCreationException if the folder creation would fail.
 	 */
 	private void createNewFolder(String path) throws IllegalNameException, UnsucessfulFolderCreationException {
@@ -295,10 +299,10 @@ public class FileSystemFrame extends JFrame implements KeyListener, ListSelectio
 		}
 
 		File file = new File(path);
-		
+
 		if (file.exists())
 			throw new IllegalNameException("Mappen finns redan!");
-		
+
 		boolean sucess = file.mkdir();
 
 		if (sucess) {
@@ -310,8 +314,7 @@ public class FileSystemFrame extends JFrame implements KeyListener, ListSelectio
 	}
 
 	/**
-	 * Updates the part of the program with the files 
-	 * to a set directory.
+	 * Updates the part of the program with the files to a set directory.
 	 * 
 	 * @param path the path that should be displayed
 	 */
@@ -346,7 +349,7 @@ public class FileSystemFrame extends JFrame implements KeyListener, ListSelectio
 
 		String selected = content.get(selectedIndex);
 
-		//If there isn't a dot then it's a folder and then we can open that.
+		// If there isn't a dot then it's a folder and then we can open that.
 		if (selected.indexOf('.') == -1) {
 			try {
 				this.setPath(this.path + "/" + selected);
@@ -358,12 +361,12 @@ public class FileSystemFrame extends JFrame implements KeyListener, ListSelectio
 	}
 
 	/**
-	 * Kills the JFrame.
+	 * Kills the JFrame. This is a must, else it will run in the background.
 	 */
 	public void close() {
 		this.dispose();
 	}
-	
+
 	/**
 	 * Gives the directory that's currently selected.
 	 * 
@@ -416,7 +419,7 @@ public class FileSystemFrame extends JFrame implements KeyListener, ListSelectio
 	/**
 	 * Gives the new file path.
 	 * 
-	 * @return the path with the filename and the type (i.e. ./saves/save.xml)
+	 * @return the path with the filename and the type (i.e. ./saves/saveData.xml)
 	 */
 	public String getFilePath() {
 		return path + "/" + fileName + fileType;
@@ -446,7 +449,11 @@ public class FileSystemFrame extends JFrame implements KeyListener, ListSelectio
 		}
 	}
 
-	/** <b>-1</b>: still running <br><b> 0</b>: new file <br><b>1</b>: canceled */
+	/**
+	 * <b>-1</b>: still running <br>
+	 * <b> 0</b>: new file <br>
+	 * <b>1</b>: canceled
+	 */
 	public byte getExitCode() {
 		return exitCode;
 	}

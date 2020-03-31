@@ -10,19 +10,19 @@ import java.io.IOException;
 
 /**
  * XML de-/encoder
- * 
- * @author Anton Skorup
+ *
  * @param <E> The data type of the object, that is to be saved.
  */
 public class XML<E> {
 
-	public XML() {}
+	public XML() {
+	}
 
 	/**
 	 * Writes an XML-file of object
 	 * 
 	 * @param fileLocation The path to the file
-	 * @param obj the object
+	 * @param obj          the object
 	 */
 	public void write(String fileLocation, E obj) {
 		try {
@@ -45,19 +45,19 @@ public class XML<E> {
 	 */
 	@SuppressWarnings("unchecked")
 	public E read(String fileLocation) {
-		Object o = null;
+		E e = null;
 		try {
 			FileInputStream fis = new FileInputStream(new File(fileLocation));
 			XMLDecoder encoder = new XMLDecoder(fis);
 
-			o = (E) encoder.readObject();
+			e = (E) encoder.readObject();
 			fis.close();
 			encoder.close();
 
-			return (E) o;
-		} catch (IOException e) {
-			System.out.println(e.toString());
-			return (E) o;
+			return e;
+		} catch (IOException ex) {
+			System.out.println(ex.getMessage());
+			return e;
 		}
 	}
 }

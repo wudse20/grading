@@ -2,62 +2,79 @@ package com.te3.main.objects;
 
 import java.util.ArrayList;
 
+import com.te3.main.exceptions.IllegalInputException;
+import com.te3.main.exceptions.IllegalNameException;
+
+/**
+ * A task
+ * */
 public class Task {
-	
+
 	private String name;
-	private boolean isGraded;
+	private String comment;
 	private ArrayList<Criteria> criteria = new ArrayList<Criteria>();
-	private ArrayList<Student> students = new ArrayList<Student>();
-	
-	public Task() {}
-	
-	public Task(String initName, ArrayList<Criteria> criteria, ArrayList<Student> students) {
-		setName(initName);
-		setGraded(false);
-		setCriteria(criteria);
-		setStudents(students);
+
+	public Task() {
 	}
-	
+
+	public Task(String name, ArrayList<Criteria> criteria) throws IllegalNameException, IllegalInputException {
+		this.setName(name);
+		this.setCriteria(criteria);
+		this.setComment("");
+	}
+
+	public void addCriteria(Criteria criteria) {
+		this.criteria.add(criteria);
+	}
+
+	public void removeCriteria(Criteria deleteGrade) {
+		criteria.remove(deleteGrade);
+	}
+
 	public String getName() {
 		return name;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public boolean isGraded() {
-		return isGraded;
-	}
-
-	public void setGraded(boolean isGraded) {
-		this.isGraded = isGraded;
+	/**
+	 * Sets the name of the assignment
+	 *
+	 * @param name the new name
+	 * @throws IllegalNameException if the name is less then 3 characters and it's
+	 *                              being trimmed in this test.
+	 */
+	public void setName(String name) throws IllegalNameException {
+		if (name.trim().length() < 3) {
+			throw new IllegalNameException("För kort namn!");
+		} else {
+			this.name = name;
+		}
 	}
 
 	public ArrayList<Criteria> getCriteria() {
 		return criteria;
 	}
 
-	public void setCriteria(ArrayList<Criteria> taskGrades) {
-		this.criteria = taskGrades;
-	}
-	
-	public ArrayList<Student> getStudents() {
-		return students;
+	public void setCriteria(ArrayList<Criteria> criteria) {
+		this.criteria = criteria;
 	}
 
-	public void setStudents(ArrayList<Student> students) {
-		this.students = students;
+	public String getComment() {
+		return this.comment;
 	}
 
-	public void addTaskGrade(Criteria newGrade) {
-		criteria.add(newGrade);
+	public void setComment(String comment) throws IllegalInputException {
+		if (comment.length() < 0 || comment.length() > 50) {
+			throw new IllegalInputException("Kommentaren måste vara mellan noll och femtio tecken lång");
+		} else {
+			this.comment = comment;
+		}
 	}
-	
-	public void removeTaskGrade(Criteria deleteGrade) {
-		criteria.remove(deleteGrade);
+
+	@Override
+	public String toString() {
+		return this.name;
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		Task t = (Task) obj;

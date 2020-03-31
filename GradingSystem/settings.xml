@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="13.0.2" class="java.beans.XMLDecoder">
+ <object class="com.te3.main.objects.Settings">
+  <void property="currentYoda">
+   <string>yoda1.jpg</string>
+  </void>
+  <void property="savePath">
+   <string>./saves.xml</string>
+  </void>
+  <void property="saveTimer">
+   <int>300</int>
+  </void>
+ </object>
+</java>

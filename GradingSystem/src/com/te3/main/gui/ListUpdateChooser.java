@@ -10,7 +10,6 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.event.ListSelectionEvent;
@@ -21,10 +20,7 @@ import com.te3.main.objects.SchoolClass;
 import com.te3.main.objects.Task;
 
 /**
- * TODO: do the whole class generic
- * 
- * 
- * @author Anton Skorup
+ * The list that shows all the different options before editing.
  *
  * @param <E> The type
  */
@@ -37,6 +33,8 @@ public class ListUpdateChooser<E> extends JFrame implements ListSelectionListene
 			+ "ändra något med, genom att klicka på det.";
 
 	JList<E> listObjects = new JList<E>();
+
+	ArrayList<E> al;
 
 	JScrollPane scrObjects = new JScrollPane(listObjects);
 
@@ -60,9 +58,17 @@ public class ListUpdateChooser<E> extends JFrame implements ListSelectionListene
 
 	Class<E> clazz;
 
+	/**
+	 * Sets everything up for the GUI.
+	 *
+	 * @param mf The instance of the MainFrame
+	 * @param al the list of objects that're available to be edited.
+	 * @param clazz the class of the object being edited. ClassName.class
+	 * */
 	public ListUpdateChooser(MainFrame mf, ArrayList<E> al, Class<E> clazz) {
 		super("Uppdatera en kurs");
 		this.mf = mf;
+		this.al = al;
 		this.setSize(new Dimension(400, 300));
 		this.clazz = clazz;
 		this.setLabelText();
@@ -79,7 +85,6 @@ public class ListUpdateChooser<E> extends JFrame implements ListSelectionListene
 
 		btnHelp.addActionListener((e) -> {
 			new HelpFrame("Uppdatera", "<html><p>" + helpText + "</html></p>").setVisible(true);
-			;
 		});
 
 		pButtons.setLayout(pLayout);
@@ -113,14 +118,11 @@ public class ListUpdateChooser<E> extends JFrame implements ListSelectionListene
 
 	private void selection(int index) {
 		if (clazz.equals(Course.class)) {
-			new CourseFrame(mf,
-					mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getCourses().get(index))
-							.setVisible(true);
+			new CourseFrame(mf, (Course) al.get(index)).setVisible(true);
 		} else if (clazz.equals(SchoolClass.class)) {
-			new SchoolClassFrame(mf, mf.getMainData().getClasses().get(index)).setVisible(true);
+			new SchoolClassFrame(mf, (SchoolClass) al.get(index)).setVisible(true);
 		} else if (clazz.equals(Task.class)) {
-			JOptionPane.showMessageDialog(this, "Not yet implemented", "Not yet implemented",
-					JOptionPane.INFORMATION_MESSAGE);
+			new AssignmentFrame(mf, (Task) al.get(index)).setVisible(true);
 		}
 	}
 

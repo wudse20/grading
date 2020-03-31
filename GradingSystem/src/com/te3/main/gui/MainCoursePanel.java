@@ -26,8 +26,6 @@ import com.te3.main.objects.SchoolClass;
 
 /**
  * The main part of the CourseFrame GUI.
- * 
- * @author Anton Skorup
  */
 public class MainCoursePanel extends JPanel implements DocumentListener {
 	/** Default */
@@ -36,7 +34,7 @@ public class MainCoursePanel extends JPanel implements DocumentListener {
 	private int selectedIndexAddedClasses = -1;
 	private int selectedIndexNotAddedClasses = -1;
 	private int selectedIndexCriteria = -1;
-	
+
 	@SuppressWarnings("unused")
 	private Course c;
 
@@ -70,7 +68,7 @@ public class MainCoursePanel extends JPanel implements DocumentListener {
 
 	BorderLayout pClassesLayout = new BorderLayout();
 	BorderLayout pCriteriaLayout = new BorderLayout();
-	BorderLayout pLablesLayout = new BorderLayout();
+	BorderLayout pLabelsLayout = new BorderLayout();
 
 	FlowLayout pNewCriteriaLayout = new FlowLayout(FlowLayout.LEFT);
 
@@ -94,65 +92,75 @@ public class MainCoursePanel extends JPanel implements DocumentListener {
 	 * For editing.
 	 * 
 	 * @param mf the instance of the MainFrame
-	 * @param c the course that's being edited
+	 * @param c  the course that's being edited
 	 */
 	public MainCoursePanel(MainFrame mf, Course c) {
 		this.mf = mf;
 		this.c = c;
-		
+
 		ArrayList<SchoolClass> al = mf.getMainData().getClasses();
-		
+
 		for (int i = 0; i < al.size(); i++) {
 			SchoolClass sc = al.get(i);
-			
-			if (sc.getCourses().contains(c)) {
+
+			if (sc.getStudents().get(0).getCourses().contains(c)) {
 				addedClasses.add(sc);
 			} else {
 				notAddedClasses.add(sc);
 			}
 		}
-		
+
 		criteria = c.getCourseCriteria();
-		
+
 		this.setLayout(layout);
 		this.refreshClasses();
 		this.refreshCriteria();
 		this.setProperties();
 		this.addComponents();
 	}
-	
+
+	/**
+	 * Clones the ArrayList
+	 * */
 	private void copyArrayLists() {
 		ArrayList<SchoolClass> al = mf.getMainData().getClasses();
 
 		for (int i = 0; i < al.size(); i++) {
 			SchoolClass sc = al.get(i);
-			notAddedClasses.add(sc);
+			try {
+				notAddedClasses.add(new SchoolClass(sc.getName(), sc.getStudents()));
+			} catch (IllegalNameException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
+	/**
+	 * Sets the properties.
+	 * */
 	private void setProperties() {
 		listAddedClasses.setPreferredSize(new Dimension(250, 100));
 		listNotAddedClasses.setPreferredSize(new Dimension(250, 100));
 
 		listAddedClasses.getSelectionModel().addListSelectionListener((e) -> {
 			selectedIndexAddedClasses = listAddedClasses.getSelectedIndex();
-			
+
 			if (selectedIndexAddedClasses != -1) {
-				classesSelceted((byte) 1, selectedIndexAddedClasses);
+				classesSelected((byte) 1, selectedIndexAddedClasses);
 			}
 		});
 
 		listNotAddedClasses.getSelectionModel().addListSelectionListener((e) -> {
 			selectedIndexNotAddedClasses = listNotAddedClasses.getSelectedIndex();
-			
+
 			if (selectedIndexNotAddedClasses != -1) {
-				classesSelceted((byte) 0, selectedIndexNotAddedClasses);
+				classesSelected((byte) 0, selectedIndexNotAddedClasses);
 			}
 		});
 
 		listCriteria.getSelectionModel().addListSelectionListener((e) -> {
 			selectedIndexCriteria = listCriteria.getSelectedIndex();
-			
+
 			if (selectedIndexCriteria != -1) {
 				removeCriteria(selectedIndexCriteria);
 			}
@@ -163,15 +171,17 @@ public class MainCoursePanel extends JPanel implements DocumentListener {
 		});
 
 		txfCriteria.getDocument().addDocumentListener(this);
-		
+
 		txfCriteria.addKeyListener(new KeyListener() {
-			
+
 			@Override
-			public void keyTyped(KeyEvent e) {}
-			
+			public void keyTyped(KeyEvent e) {
+			}
+
 			@Override
-			public void keyReleased(KeyEvent e) {}
-			
+			public void keyReleased(KeyEvent e) {
+			}
+
 			@Override
 			public void keyPressed(KeyEvent e) {
 				if (e.getKeyCode() == 10) {
@@ -181,14 +191,20 @@ public class MainCoursePanel extends JPanel implements DocumentListener {
 		});
 	}
 
+	/**
+	 * Removes a criteria.
+	 * */
 	private void removeCriteria(int index) {
 		criteria.remove(index);
 		refreshCriteria();
 	}
 
+	/**
+	 * Adds a criteria
+	 * */
 	private void addCriteria() {
 		try {
-			Criteria c = new Criteria(txfCriteria.getText(), mf);
+			Criteria c = new Criteria(txfCriteria.getText());
 
 			if (criteria.contains(c)) {
 				JOptionPane.showMessageDialog(this, "Du har redan lagt till detta kunskapskravet!", "Fel",
@@ -214,7 +230,7 @@ public class MainCoursePanel extends JPanel implements DocumentListener {
 	 *              <b>1</b>: removed
 	 * @param index the selected index
 	 */
-	private void classesSelceted(byte mode, int index) {
+	private void classesSelected(byte mode, int index) {
 		if (mode == 0) {
 			SchoolClass sc = notAddedClasses.get(index);
 			addedClasses.add(sc);
@@ -228,6 +244,9 @@ public class MainCoursePanel extends JPanel implements DocumentListener {
 		refreshClasses();
 	}
 
+	/**
+	 * Refreshes the class GUI
+	 * */
 	private void refreshClasses() {
 		SchoolClass[] arrAdded = new SchoolClass[addedClasses.size()];
 		SchoolClass[] arrNotAdded = new SchoolClass[notAddedClasses.size()];
@@ -235,13 +254,20 @@ public class MainCoursePanel extends JPanel implements DocumentListener {
 		listAddedClasses.setListData(addedClasses.toArray(arrAdded));
 	}
 
+	/**
+	 * Refreshes the criteria GUI
+	 * */
 	private void refreshCriteria() {
 		Criteria[] arrCriteria = new Criteria[criteria.size()];
 		listCriteria.setListData(criteria.toArray(arrCriteria));
 	}
 
+
+	/**
+	 * Adds the components
+	 * */
 	private void addComponents() {
-		pLables.setLayout(pLablesLayout);
+		pLables.setLayout(pLabelsLayout);
 		pLables.add(lblNotAddedClasses, BorderLayout.LINE_START);
 		pLables.add(lblAddedClasses, BorderLayout.LINE_END);
 
@@ -264,15 +290,20 @@ public class MainCoursePanel extends JPanel implements DocumentListener {
 		this.add(pCriteria);
 	}
 
+	/**
+	 * Getter for the added classes
+	 * */
 	public ArrayList<SchoolClass> getAddedClasses() {
 		return addedClasses;
 	}
 
+	/**
+	 * Getter for the criteria
+	 * */
 	public ArrayList<Criteria> getCriteria() {
 		return criteria;
 	}
 
-	
 	@Override
 	public void insertUpdate(DocumentEvent e) {
 		txfCriteria.setBackground(Color.white);

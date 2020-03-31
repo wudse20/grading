@@ -12,21 +12,23 @@ import javax.swing.JPanel;
 import com.te3.main.exceptions.IllegalNameException;
 import com.te3.main.objects.SchoolClass;
 
+/**
+ * The frame for adding and editing SchoolClasses
+ * */
 public class SchoolClassFrame extends JFrame {
 
 	/** Generated */
 	private static final long serialVersionUID = 8791137725545409036L;
 
+	/** The help text of this frame */
 	private String helpInfo = "Skriv in namnet på klassen/gruppen i rutan: <b>Namn</b>. <br>"
 			+ "Namnet måste vara minst tre tecken långt. <br><br>"
 			+ "För att lägga till elever till klassen/gruppen<br>"
 			+ "är det bara att skriva in namnet på eleven i rutan <b>Elev</b>.<br>"
-			+ "Namnet måste vara minst 3 tecken långt, <br>"
-			+ "för att det ska vara accepterat. <br>"
+			+ "Namnet måste vara minst 3 tecken långt, <br>" + "för att det ska vara accepterat. <br>"
 			+ "Du kan även lägga in flera namn samtidigt. <br>"
 			+ "Det är bara att spearera dem, med kommatecken, ',',<br>"
-			+ "notera att dessa namnen även behöver vara minst <br>"
-			+ "tre tecken långa för att accepteras.<br>"
+			+ "notera att dessa namnen även behöver vara minst <br>" + "tre tecken långa för att accepteras.<br>"
 			+ "Du lägger till namnen genom att antigen<br>"
 			+ "trycka på <b>lägg till</b> eller trycka på enter i rutan.<br><br>"
 			+ "För att skapa/uppdatera klassen klicka på <b>lägg till</b> eller <b>uppdatera</b>.";
@@ -39,9 +41,9 @@ public class SchoolClassFrame extends JFrame {
 
 	MainSchoolClassPanel mscp;
 
-	AddControllPanel acp = new AddControllPanel();
+	AddControlPanel acp = new AddControlPanel();
 
-	EditControllPanel ecp = new EditControllPanel();
+	EditControlPanel ecp = new EditControlPanel();
 
 	JPanel panel = new JPanel();
 
@@ -106,6 +108,9 @@ public class SchoolClassFrame extends JFrame {
 		});
 	}
 
+	/**
+	 * Updates the class
+	 * */
 	private void updateSchoolClass() {
 		int ans = JOptionPane.showConfirmDialog(this,
 				"Är du säker på att du vill uppdatera klassen: " + np.getLastInput() + "?", "Är du säker?",
@@ -125,7 +130,7 @@ public class SchoolClassFrame extends JFrame {
 			SchoolClass s = mf.getMainData().getClasses().get(index);
 			s.setName(np.getLastInput());
 			s.setStudents(mscp.getStudents());
-			mf.save(mf.getSaveFilePath());
+			mf.saveData(mf.getSaveFilePath());
 			this.dispose();
 		} catch (IllegalNameException e) {
 			JOptionPane.showMessageDialog(this, e.getMessage(), "Fel", JOptionPane.ERROR_MESSAGE);
@@ -150,7 +155,7 @@ public class SchoolClassFrame extends JFrame {
 			al.add(new SchoolClass(np.getLastInput(), mscp.getStudents()));
 			JOptionPane.showMessageDialog(this, "Klassen: " + np.getLastInput() + " är skapad.",
 					"Du har skapat en klass", JOptionPane.INFORMATION_MESSAGE);
-			mf.save(mf.getSaveFilePath());
+			mf.saveData(mf.getSaveFilePath());
 			this.dispose();
 		} catch (IllegalNameException e) {
 			JOptionPane.showMessageDialog(this, e.getMessage(), "Fel", JOptionPane.ERROR_MESSAGE);
@@ -159,6 +164,8 @@ public class SchoolClassFrame extends JFrame {
 	}
 
 	/**
+	 * Adds the components
+	 *
 	 * @param isEdit <br>
 	 *               if {@code true} then it's in edit mode. <br>
 	 *               if {@code false} then it's in add mode
@@ -175,6 +182,9 @@ public class SchoolClassFrame extends JFrame {
 		this.add(lblSpacer4, BorderLayout.PAGE_END);
 	}
 
+	/**
+	 * Sets the properties.
+	 * */
 	private void setProperties() {
 		this.setLayout(layout);
 		this.setSize(new Dimension(600, 600));

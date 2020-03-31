@@ -1,7 +1,6 @@
 package com.te3.main.gui;
 
-import java.awt.Dimension;
-import java.awt.GridLayout;
+import java.awt.*;
 import java.util.ArrayList;
 
 import javax.swing.JComboBox;
@@ -16,8 +15,7 @@ import com.te3.main.objects.Task;
 /**
  *	Du behöver fixa en metod i MainFrame för att uppdatera din panel.
  *	Du behöver även uppdatera GUI:t och sätta vilket stadie panelen är i
- *	m.h.a. updateGradeState(state), där state är enumet State. Samt kalla
- *	updateGUI i mainframe. Vid uppdatering.
+ *	m.h.a. mf.updateGradeState(State), med rätt state. Sedan mf.updateGradePanel()
  */
 public class CBPanel extends JPanel {
 	/** Default */
@@ -66,6 +64,8 @@ public class CBPanel extends JPanel {
 		cbCourse 	= new JComboBox<String>();
 		cbStudent 	= new JComboBox<String>();
 		cbTask 		= new JComboBox<String>();
+
+		yoda(mf.shouldShowBabyYoda());
 		
 		cbClass.addActionListener((e) -> {
 			System.out.println(cbClass.getSelectedItem().toString());
@@ -77,7 +77,7 @@ public class CBPanel extends JPanel {
 				mf.setCurrentlySelectedClassIndex(i);
 			} else {
 				System.out.println("Selected new or change");
-				mf.openEditPanel(SchoolClass.class, true);
+				mf.openAddEditGUI(SchoolClass.class, false);
 			}
 		});
 		cbCourse.addActionListener((e) -> {
@@ -90,7 +90,7 @@ public class CBPanel extends JPanel {
 				mf.setCurrentlySelectedCourseIndex(i);
 			} else {
 				System.out.println("Selected new or change");
-				mf.openEditPanel(Course.class, true);
+				mf.openAddEditGUI(Course.class, true);
 			}
 		});
 		cbStudent.addActionListener((e) -> {
@@ -121,7 +121,25 @@ public class CBPanel extends JPanel {
 		this.add(cbStudent);
 		this.add(cbTask);
 	}
-	
+
+
+	/**
+	 * @param shouldShowBabyYoda if {@code true} -> set up for baby yoda, else setup for default.
+	 */
+	public void yoda(boolean shouldShowBabyYoda) {
+		if (shouldShowBabyYoda) {
+			lblClass.setForeground(Color.white);
+			lblCourse.setForeground(Color.white);
+			lblStudent.setForeground(Color.white);
+			lblTask.setForeground(Color.white);
+		} else {
+			lblClass.setForeground(Color.black);
+			lblCourse.setForeground(Color.black);
+			lblStudent.setForeground(Color.black);
+			lblTask.setForeground(Color.black);
+		}
+	}
+
 	/**
 	 * Completely updates the entire combobox panel with new information.
 	 * @param newData the new information to be parsed and updated with.

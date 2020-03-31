@@ -2,12 +2,16 @@ package com.te3.main.enums;
 
 /**
  * An enum for the different states of this panel.
- * 
- * @author Anton Skorup
  */
 public enum State {
 	/** A generalized view for all the criteria. */
-	SINGLE_STUDENT_GENERALIZED,
+	CLASS_COURSE_STUDENT_TASK,
 	/** A view for all the assignments displaying the highest grade */
-	SINGLE_STUDENT_ASSIGNMENT;
+	CLASS_COURSE_STUDENT,
+	/** A view when no student is selected*/
+	CLASS_COURSE,
+	/** A view when only a SchoolClass is selected*/
+	CLASS,
+	/** A view when nothing is selected */
+	NOTHING_SELECTED
 }
