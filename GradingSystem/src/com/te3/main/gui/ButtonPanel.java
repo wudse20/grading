@@ -195,6 +195,11 @@ public class ButtonPanel extends JPanel {
 			Criteria cr = c.get(i);
 			printView.append(cr.getName() + ":\t" + cr.getGrade().toString() + "\n");
 		}
+
+		//Adds the comment if it exists:
+		if (t.getComment().trim().length() != 0 && mf.getGradePanel().getState().equals(State.CLASS_COURSE_STUDENT_TASK)) {
+			printView.append("\n\nKommentar:\n" + t.getComment());
+		}
 	}
 
 	/**
@@ -242,6 +247,10 @@ public class ButtonPanel extends JPanel {
 			printView.append(String.format("%-20s%-1s", cr.getName() + ":", cr.getGrade().toString()) + "\n");
 		}
 
+		//Adds the comment if it exists:
+		if (t.getComment().trim().length() != 0 && mf.getGradePanel().getState().equals(State.CLASS_COURSE_STUDENT_TASK)) {
+			printView.append("\n\nKommentar:\n" + t.getComment());
+		}
 	}
 
 	/**
