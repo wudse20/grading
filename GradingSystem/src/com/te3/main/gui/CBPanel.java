@@ -98,17 +98,21 @@ public class CBPanel extends JPanel {
 			System.out.println(cbStudent.getSelectedIndex());
 			mf.setCurrentlySelectedStudentIndex(cbStudent.getSelectedIndex());
 		});
+		
 		cbTask.addActionListener((e) -> {
-			System.out.println(cbTask.getSelectedItem().toString());
+			//System.out.println(cbTask.getSelectedItem().toString());
 			
 			int i = cbTask.getSelectedIndex();
+			int itmCount = cbTask.getItemCount();
 			
-			System.out.println(i);
-			if (i != -1 && i < cbTask.getItemCount() - 2) {
+			if (i != -1 && i < itmCount - 2) {
 				mf.setCurrentlySelectedAssingmentIndex(cbTask.getSelectedIndex());
-			} else {
-				System.out.println("Selected new or change");
-				mf.openEditPanel(Task.class, true); //Måste ändras ifall det är ny eller ändra.
+			} else if (i == itmCount - 1) {
+				//System.out.println("Selected len -1");
+				mf.openEditPanel(Task.class, false);
+			} else if (i == itmCount - 2) {
+				//System.out.println("Selected len -2");
+				mf.openEditPanel(Task.class, true);
 			}
 		});
 		
