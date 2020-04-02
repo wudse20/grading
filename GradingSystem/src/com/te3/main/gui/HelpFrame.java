@@ -19,16 +19,24 @@ public class HelpFrame extends JFrame implements ActionListener {
 
 	/** Default */
 	private static final long serialVersionUID = 1L;
+
+	//Strings
 	private String title, info;
+
+	//Integers
 	private int height;
 
+	//Containers
 	Container cp = this.getContentPane();
 
+	//Layouts
 	BorderLayout layout = new BorderLayout();
 	BorderLayout pContentLayout = new BorderLayout();
 
+	//Buttons
 	JButton btnOk = new JButton("Ok");
 
+	//Labels
 	JLabel lblInfo = new JLabel();
 	JLabel lblTitle = new JLabel();
 	JLabel lblSpacer1 = new JLabel(" ");
@@ -36,6 +44,7 @@ public class HelpFrame extends JFrame implements ActionListener {
 	JLabel lblSpacer3 = new JLabel("     ");
 	JLabel lblSpacer4 = new JLabel(" ");
 
+	//Panels
 	JPanel pContent = new JPanel();
 
 	/**
@@ -45,6 +54,7 @@ public class HelpFrame extends JFrame implements ActionListener {
 	 * @param info  the help info about the subject
 	 */
 	public HelpFrame(String title, String info) {
+		//Sets properties
 		this.setTitle(title);
 		this.setInfo(info);
 		this.setHeight(300);
@@ -60,6 +70,7 @@ public class HelpFrame extends JFrame implements ActionListener {
 	 * @param height the height of the window
 	 */
 	public HelpFrame(String title, String info, int height) {
+		//Sets some properties
 		this.setTitle(title);
 		this.setInfo(info);
 		this.setHeight(height);
@@ -70,6 +81,7 @@ public class HelpFrame extends JFrame implements ActionListener {
 	 * Initializes the GUI
 	 * */
 	private void initialize() {
+		//Sets some properties
 		this.setTitle(title);
 		this.setSize(new Dimension(400, height));
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -80,19 +92,21 @@ public class HelpFrame extends JFrame implements ActionListener {
 
 		lblInfo.setText(info);
 
+		//Sets action command and adds an action listener
 		btnOk.setActionCommand("OK");
 		btnOk.addActionListener(this);
 
+		//Adds the components
 		pContent.setLayout(pContentLayout);
 		pContent.add(lblTitle, BorderLayout.PAGE_START);
 		pContent.add(lblInfo, BorderLayout.CENTER);
 		pContent.add(btnOk, BorderLayout.PAGE_END);
 
-		this.add(lblSpacer1, BorderLayout.PAGE_START);
-		this.add(lblSpacer2, BorderLayout.LINE_START);
-		this.add(pContent, BorderLayout.CENTER);
-		this.add(lblSpacer3, BorderLayout.LINE_END);
-		this.add(lblSpacer4, BorderLayout.PAGE_END);
+		cp.add(lblSpacer1, BorderLayout.PAGE_START);
+		cp.add(lblSpacer2, BorderLayout.LINE_START);
+		cp.add(pContent, BorderLayout.CENTER);
+		cp.add(lblSpacer3, BorderLayout.LINE_END);
+		cp.add(lblSpacer4, BorderLayout.PAGE_END);
 	}
 
 	/**
@@ -118,6 +132,7 @@ public class HelpFrame extends JFrame implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		//Shuts down the frame on button press with action command: OK
 		if (e.getActionCommand().equals("OK")) {
 			this.dispose();
 		}

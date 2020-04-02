@@ -31,7 +31,7 @@ import javax.swing.event.ListSelectionListener;
 
 import com.te3.main.exceptions.IllegalInputException;
 import com.te3.main.exceptions.IllegalNameException;
-import com.te3.main.exceptions.UnsucessfulFolderCreationException;
+import com.te3.main.exceptions.UnsuccessfulFolderCreationException;
 
 /**
  * The frame that's used when saving a file.
@@ -48,16 +48,21 @@ public class FileSystemFrame extends JFrame implements KeyListener, ListSelectio
 	 */
 	private byte exitCode;
 
+	//Strings
 	private String path;
 	private String fileName;
 	private String fileType;
 
+	/** The content of the folder */
 	private ArrayList<String> content;
 
+	//Paths
 	Path p;
 
+	//Containers
 	Container cp = this.getContentPane();
 
+	//Layouts
 	BorderLayout layout = new BorderLayout();
 	BorderLayout pWindowLayout = new BorderLayout();
 	BorderLayout pInputLayout = new BorderLayout();
@@ -66,21 +71,26 @@ public class FileSystemFrame extends JFrame implements KeyListener, ListSelectio
 	FlowLayout pBtnLayout = new FlowLayout(FlowLayout.RIGHT);
 	FlowLayout pHeaderLayout = new FlowLayout(FlowLayout.LEFT);
 
+	//Panels
 	JPanel pWindow = new JPanel();
 	JPanel pInput = new JPanel();
 	JPanel pBtn = new JPanel();
 	JPanel pFiles = new JPanel();
 	JPanel pHeader = new JPanel();
 
+	//Lists
 	JList<Object> files = new JList<Object>();
 
+	//Text Fields
 	JTextField txfName = new JTextField(12);
 	JTextField txfPath = new JTextField(15);
 
+	//Buttons
 	JButton btnSave = new JButton("Spara");
 	JButton btnCancel = new JButton("Avbryt");
 	JButton btnNewFolder = new JButton("Ny Mapp");
 
+	//Labels
 	JLabel lblSpacer1 = new JLabel(" ");
 	JLabel lblSpacer2 = new JLabel("    ");
 	JLabel lblSpacer3 = new JLabel("    ");
@@ -91,6 +101,7 @@ public class FileSystemFrame extends JFrame implements KeyListener, ListSelectio
 
 	JLabel lblInfo = new JLabel("Filer:");
 
+	//Scroll panes
 	JScrollPane scr;
 
 	/**
@@ -106,6 +117,7 @@ public class FileSystemFrame extends JFrame implements KeyListener, ListSelectio
 		this.path = "./";
 		this.exitCode = -1;
 
+		//Sets the file path
 		try {
 			this.setFileType(fileType);
 		} catch (IllegalNameException e) {
@@ -113,6 +125,7 @@ public class FileSystemFrame extends JFrame implements KeyListener, ListSelectio
 			this.fileType = "txt";
 		}
 
+		//Sets the file name
 		try {
 			this.setFileName(name);
 		} catch (IllegalNameException e) {
@@ -173,10 +186,10 @@ public class FileSystemFrame extends JFrame implements KeyListener, ListSelectio
 		pFiles.setLayout(pFilesLayout);
 		pHeader.setLayout(pHeaderLayout);
 
-		// Sets upp the scrpane.
+		// Set up for the scroll pane.
 		scr = new JScrollPane(files);
 
-		// Sets text in the name txtbox.
+		// Sets text in the name text box.
 		txfName.setText(fileName);
 
 		// Adds listeners
@@ -243,7 +256,7 @@ public class FileSystemFrame extends JFrame implements KeyListener, ListSelectio
 		btnNewFolder.addActionListener((e) -> {
 			try {
 				createNewFolder(JOptionPane.showInputDialog(this, "Vad ska mappen heta?"));
-			} catch (IllegalNameException | UnsucessfulFolderCreationException ex) {
+			} catch (IllegalNameException | UnsuccessfulFolderCreationException ex) {
 				JOptionPane.showMessageDialog(this, ex.getMessage(), "Fel", JOptionPane.ERROR_MESSAGE);
 			}
 		});
@@ -269,6 +282,7 @@ public class FileSystemFrame extends JFrame implements KeyListener, ListSelectio
 	 * @throws IllegalNameException if the name isn't accepted
 	 */
 	private void save() throws IllegalNameException {
+		// Checks for all the inputs that wouldn't work
 		if (fileName.trim().equals("")) {
 			throw new IllegalNameException("Du måste skriva något i rutan");
 		} else if (fileName.indexOf('.') != -1) {
@@ -277,8 +291,11 @@ public class FileSystemFrame extends JFrame implements KeyListener, ListSelectio
 			throw new IllegalNameException("Du får inte ha några snedsträck, /, i namnet.");
 		}
 
+		//Sets some variables up
 		this.setFileName(txfName.getText());
 		this.exitCode = 0;
+
+		//Hides the frame
 		this.setVisible(false);
 	}
 
@@ -287,9 +304,10 @@ public class FileSystemFrame extends JFrame implements KeyListener, ListSelectio
 	 * 
 	 * @param path the path of the new folder.
 	 * @throws IllegalNameException               If the name isn't accepted
-	 * @throws UnsucessfulFolderCreationException if the folder creation would fail.
+	 * @throws UnsuccessfulFolderCreationException if the folder creation would fail.
 	 */
-	private void createNewFolder(String path) throws IllegalNameException, UnsucessfulFolderCreationException {
+	private void createNewFolder(String path) throws IllegalNameException, UnsuccessfulFolderCreationException {
+		// Checks for all the inputs that wouldn't work
 		if (path.trim().equals("")) {
 			throw new IllegalNameException("Du måste skriva något i rutan");
 		} else if (path.indexOf('.') != -1) {
@@ -298,18 +316,22 @@ public class FileSystemFrame extends JFrame implements KeyListener, ListSelectio
 			throw new IllegalNameException("Du får inte ha några snedsträck, /, i namnet.");
 		}
 
+		//Creates the file
 		File file = new File(path);
 
+		//Checks if the folder exists
 		if (file.exists())
 			throw new IllegalNameException("Mappen finns redan!");
 
-		boolean sucess = file.mkdir();
+		//Stores if it was successful in it's creation of the folder
+		boolean success = file.mkdir();
 
-		if (sucess) {
+		//Acts on the folder creation
+		if (success) {
 			refreshTable(this.path);
 			JOptionPane.showMessageDialog(this, "Mappen skapades", "Information", JOptionPane.INFORMATION_MESSAGE);
 		} else {
-			throw new UnsucessfulFolderCreationException("Mappen skapades inte! Något gick fel!");
+			throw new UnsuccessfulFolderCreationException("Mappen skapades inte! Något gick fel!");
 		}
 	}
 
@@ -319,21 +341,32 @@ public class FileSystemFrame extends JFrame implements KeyListener, ListSelectio
 	 * @param path the path that should be displayed
 	 */
 	private void refreshTable(String path) {
+		//Store the path
 		p = Paths.get(path);
 
+		//Stores the content in the file
 		String[] orgContent = p.toFile().list();
+
+		//Defines the list.
 		content = new ArrayList<String>();
+
+		//Defines a comparator for ordering the list in alphabetical order
 		Comparator<String> c = String.CASE_INSENSITIVE_ORDER.thenComparing(Comparator.naturalOrder());
 
+		//Adds the content to a list
 		for (int i = 0; i < orgContent.length; i++) {
 			if (orgContent[i].indexOf('.') != 0) {
 				content.add(orgContent[i]);
 			}
 		}
 
+		//Sorts the list
 		content.sort(c);
+
+		//Sets the list data
 		files.setListData(content.toArray());
 
+		//Sets the file path to the text field
 		txfPath.setText(path);
 	}
 
@@ -464,6 +497,7 @@ public class FileSystemFrame extends JFrame implements KeyListener, ListSelectio
 
 	@Override
 	public void keyPressed(KeyEvent e) {
+		//If enter key pressed then set the new path
 		if (e.getKeyCode() == 10) {
 			try {
 				setPath(txfPath.getText());

@@ -14,8 +14,10 @@ public class EditControlPanel extends JPanel {
 	/** Generated */
 	private static final long serialVersionUID = -7606289199305316004L;
 
+	//Layout
 	FlowLayout layout = new FlowLayout(FlowLayout.RIGHT);
 
+	//Buttons
 	JButton btnHelp = new JButton("?");
 	JButton btnCancel = new JButton("Avbryt");
 	JButton btnUpdate = new JButton("Uppdatera");

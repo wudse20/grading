@@ -33,10 +33,13 @@ public class CourseFrame extends JFrame {
 			+ "minst tre tecken långt. Skulle du vilja ta bort <br>"
 			+ "ett kunskapskrav behöver du bara klicka på det<br>" + "i <b>kunskapskravs</b>-rutan.";
 
+	//Instances
 	Course c;
 
 	MainFrame mf;
 
+
+	//Panels
 	NamePanel np = new NamePanel();
 
 	MainCoursePanel mcp;
@@ -45,17 +48,20 @@ public class CourseFrame extends JFrame {
 
 	EditControlPanel ecp = new EditControlPanel();
 
+	JPanel panel = new JPanel();
+
+	//Containers
 	Container cp = this.getContentPane();
 
+	//Layouts
 	BorderLayout layout = new BorderLayout();
 	BorderLayout pLayout = new BorderLayout();
 
+	//Labels
 	JLabel lblSpacer1 = new JLabel(" ");
 	JLabel lblSpacer2 = new JLabel("      ");
 	JLabel lblSpacer3 = new JLabel("      ");
 	JLabel lblSpacer4 = new JLabel(" ");
-
-	JPanel panel = new JPanel();
 
 	/**
 	 * For adding.
@@ -63,26 +69,23 @@ public class CourseFrame extends JFrame {
 	 * @param mf The instance of the MainFrame.
 	 */
 	public CourseFrame(MainFrame mf) {
+		//Sets some properties
 		super("Lägg till en kurs");
 		this.mf = mf;
 		this.setLayout(layout);
 		this.setSize(new Dimension(600, 600));
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
+		//Creates the MainCoursePanel
 		mcp = new MainCoursePanel(mf);
 
-		acp.getBtnAdd().addActionListener((e) -> {
-			newCourse();
-		});
+		//Adds action listeners
+		acp.getBtnAdd().addActionListener((e) -> newCourse());
+		acp.getBtnCancel().addActionListener((e) -> dispose());
 
-		acp.getBtnCancel().addActionListener((e) -> {
-			dispose();
-		});
+		acp.getBtnHelp().addActionListener((e) -> new HelpFrame("Lägg till kurs", "<html><p>" + helpInfo + "</p></html>", 500).setVisible(true));
 
-		acp.getBtnHelp().addActionListener((e) -> {
-			new HelpFrame("Lägg till kurs", "<html><p>" + helpInfo + "</p></html>", 500).setVisible(true);
-		});
-
+		//Adds the components
 		panel.setLayout(pLayout);
 		panel.add(np, BorderLayout.PAGE_START);
 		panel.add(mcp, BorderLayout.CENTER);
@@ -102,6 +105,7 @@ public class CourseFrame extends JFrame {
 	 * @param c  the course that's being updated.
 	 */
 	public CourseFrame(MainFrame mf, Course c) {
+		//Sets some properties
 		super("Uppdatera en kurs");
 		this.mf = mf;
 		this.c = c;
@@ -109,21 +113,16 @@ public class CourseFrame extends JFrame {
 		this.setSize(new Dimension(600, 600));
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
+		//Panel setup
 		mcp = new MainCoursePanel(mf, c);
 		np.setLastInput(c.getName());
 
-		ecp.getBtnUpdate().addActionListener((e) -> {
-			updateCourse();
-		});
+		//Adds the action listener
+		ecp.getBtnUpdate().addActionListener((e) -> updateCourse());
+		ecp.getBtnCancel().addActionListener((e) -> dispose());
+		ecp.getBtnHelp().addActionListener((e) -> new HelpFrame("Lägg till kurs", "<html><p>" + helpInfo + "</p></html>", 500).setVisible(true));
 
-		ecp.getBtnCancel().addActionListener((e) -> {
-			dispose();
-		});
-
-		ecp.getBtnHelp().addActionListener((e) -> {
-			new HelpFrame("Lägg till kurs", "<html><p>" + helpInfo + "</p></html>", 500).setVisible(true);
-		});
-
+		//Adds components
 		panel.setLayout(pLayout);
 		panel.add(np, BorderLayout.PAGE_START);
 		panel.add(mcp, BorderLayout.CENTER);
@@ -143,6 +142,7 @@ public class CourseFrame extends JFrame {
 	 * Adds a new course to the main data.
 	 */
 	private void newCourse() {
+		//Some cases that will break it, so it handles them
 		if (mcp.getAddedClasses().size() == 0) {
 			JOptionPane.showMessageDialog(this, "Du måste välja minst en klass!", "Fel", JOptionPane.ERROR_MESSAGE);
 			return;
@@ -155,6 +155,7 @@ public class CourseFrame extends JFrame {
 		}
 
 		try {
+			//Adds the courses to the new classes
 			ArrayList<SchoolClass> al2 = mcp.getAddedClasses();
 
 			for (var i = 0; i < al2.size(); i++) {
@@ -164,15 +165,25 @@ public class CourseFrame extends JFrame {
 				}
 			}
 
+			//Saves the data
 			mf.saveData(mf.getSaveFilePath());
+
+			//Message
 			JOptionPane.showMessageDialog(this, "Du har lagt till kursen: " + np.getLastInput(),
 					"Du har lagt till en kurs", JOptionPane.INFORMATION_MESSAGE);
+
+			//Updates the grade panel
+			mf.updateGradePanel();
+
+			//Disposes the frame
 			this.dispose();
 		} catch (IllegalNameException e) {
+			//sends error message
 			JOptionPane.showMessageDialog(this, e.getMessage(), "Fel", JOptionPane.ERROR_MESSAGE);
-		}
 
-		mf.updateGradePanel();
+			//returns
+			return;
+		}
 	}
 
 	/**
@@ -182,6 +193,7 @@ public class CourseFrame extends JFrame {
 	 * Updates a course.
 	 */
 	private void updateCourse() {
+		//Control message
 		int ans = JOptionPane.showConfirmDialog(this,
 				"Är du säker på att du vill uppdatera kursen: " + np.getLastInput() + "?", "Är du säker?",
 				JOptionPane.YES_NO_OPTION);
@@ -189,6 +201,7 @@ public class CourseFrame extends JFrame {
 		if (ans == JOptionPane.NO_OPTION)
 			return;
 
+		//Checking for illegal inputs.
 		if (mcp.getAddedClasses().size() == 0) {
 			JOptionPane.showMessageDialog(this, "Du måste välja minst en klass!", "Fel", JOptionPane.ERROR_MESSAGE);
 			return;
@@ -200,7 +213,9 @@ public class CourseFrame extends JFrame {
 			return;
 		}
 
+		//Loops through the list and updates the courses
 		try {
+			//Removes the old courses
 			for (int i = 0; i < mf.getMainData().getClasses().size(); i++) {
 				for (int j = 0; j < mf.getMainData().getClasses().get(i).getStudents().size(); j++) {
 					int index = mf.getMainData().getClasses().get(i).getStudents().get(j).getCourses().indexOf(c);
@@ -227,12 +242,24 @@ public class CourseFrame extends JFrame {
 				}
 			}
 
+			//Saves the data
+			mf.saveData(mf.getSaveFilePath());
+
+			//Message
+			JOptionPane.showMessageDialog(this, "Du har uppdaterat kursen: " + np.getLastInput(),
+					"Du har uppdaterat en kurs", JOptionPane.INFORMATION_MESSAGE);
+
+			//Updates the grade panel.
+			mf.updateGradePanel();
+
+			//Closes the frame
 			this.dispose();
 		} catch (IllegalNameException e) {
+			//Sends error message
 			JOptionPane.showMessageDialog(this, e.getMessage(), "Fel", JOptionPane.ERROR_MESSAGE);
+
+			//returns
 			return;
 		}
-
-		mf.updateGradePanel();
 	}
 }
