@@ -22,10 +22,19 @@ public class SettingsFrame extends JFrame {
 	private String savePath;
 
 	/** The help text of this frame */
-	private String helpText = "För att ställa in hur ofta som <br>" + "programmet kommer att autospara <br>"
-			+ "skriv in intervallet i sekunder. <br>" + "Detta måste vara mellan 60 och 3600 sekunder. <br><br>"
-			+ "För att ställa in vart data skall sparas <br>" + "klicka på knappen: <b>Ställ in plats för sparfil</b>"
-			+ "och följ instruktionerna";
+	private String helpText =
+			"För att ställa in hur ofta som <br>"
+			+ "programmet kommer att autospara <br>"
+			+ "skriv in intervallet i sekunder. <br>"
+			+ "Det måste vara mellan 60 och 3600 sekunder. <br><br>"
+			+ "För att sätta på bakgrundsbilden klicka på rutan <b>Baby Yoda som bakgrund</b>"
+			+ "<br><br> För att välja bakgrundsbild klicka på den bilden du vill ha. <br><br>"
+			+ "För att ställa in vart data skall sparas <br>"
+			+ "klicka på knappen: <b>Ställ in plats för sparfil</b>"
+			+ " och följ instruktionerna <br><br>"
+			+ "För att radera all data tryck på knappen <b>Rensa all data</b><br><br>"
+			+ "För att applicera inställningarna tryck på <b>verkställ</b><br>"
+			+ "För att avbryta tryck på <b>avbryt</b>";
 
 	private String currentYoda;
 
@@ -144,7 +153,7 @@ public class SettingsFrame extends JFrame {
 		btnApply.addActionListener((e) -> applySettings());
 		btnCancel.addActionListener((e) -> this.dispose());
 		btnHelp.addActionListener(
-				(e) -> new HelpFrame("Inställningar", "<html><p>" + helpText + "</p></html>").setVisible(true));
+				(e) -> new HelpFrame("Inställningar", "<html><p>" + helpText + "</p></html>", 500).setVisible(true));
 		btnSetSavePath.addActionListener((e) -> setSavePath());
 		banDeleteData.addActionListener((e) -> deleteData());
 		cBoxShouldShowBabyYoda.addActionListener((e) -> setYodaBtnStatus(cBoxShouldShowBabyYoda.isSelected()));
@@ -215,6 +224,8 @@ public class SettingsFrame extends JFrame {
 	 * Sets the icons of the Yoda buttons
 	 * */
 	private void setYodaBtnIcons() {
+		//If the number is in the string then it acts based on that
+		//and makes the buttons look the correct way.
 		if (currentYoda.indexOf('1') != -1) {
 			btnYoda1.setIcon(new ImageIcon("./src/images/thumbnails/tYoda1Selected.jpg"));
 			btnYoda2.setIcon(new ImageIcon("./src/images/thumbnails/tYoda2.jpg"));
