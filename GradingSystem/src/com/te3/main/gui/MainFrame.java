@@ -3,6 +3,8 @@ package com.te3.main.gui;
 import java.awt.*;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowStateListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -26,7 +28,7 @@ import com.te3.main.objects.XML;
 /**
  * The mainframe of the program.
  */
-public class MainFrame extends JFrame implements ComponentListener {
+public class MainFrame extends JFrame implements ComponentListener, WindowStateListener {
 
 	/** Default */
 	private static final long serialVersionUID = 1L;
@@ -101,6 +103,7 @@ public class MainFrame extends JFrame implements ComponentListener {
 		}));
 
 		this.addComponentListener(this);
+		this.addWindowStateListener(this);
 
 		t.start();
 
@@ -321,6 +324,32 @@ public class MainFrame extends JFrame implements ComponentListener {
 	}
 
 	/**
+	 * Resizes the frame to the correct size, with the background and everything.
+	 */
+	private void resizeFrame() {
+		panel.setBounds(0, 0, this.getWidth() - 15, this.getHeight() - btnPanel.getHeight());
+
+		/*
+		 * Scales the background image to the size of
+		 * the JFrame. To save on performance it only
+		 * dose the calculations while the background
+		 * is selected.
+		 * */
+		if (shouldShowBabyYoda) {
+			BufferedImage img = null;
+
+			try {
+				img = ImageIO.read(new File("./src/images/" + currentYoda));
+			} catch (IOException ex) {
+				ex.printStackTrace();
+			}
+
+			Image scaleImg = img.getScaledInstance(this.getWidth(), this.getHeight(), Image.SCALE_FAST);
+			lblBackground.setIcon(new ImageIcon(scaleImg));
+		}
+	}
+
+	/**
 	 * Getter for the main data
 	 * */
 	public Data getMainData() {
@@ -493,26 +522,7 @@ public class MainFrame extends JFrame implements ComponentListener {
 
 	@Override
 	public void componentResized(ComponentEvent e) {
-		panel.setBounds(0, 0, this.getWidth() - 15, this.getHeight() - btnPanel.getHeight());
-
-		/*
-		 * Scales the background image to the size of
-		 * the JFrame. To save on performance it only
-		 * dose the calculations while the background
-		 * is selected.
-		 * */
-		if (shouldShowBabyYoda) {
-			BufferedImage img = null;
-
-			try {
-				img = ImageIO.read(new File("./src/images/" + currentYoda));
-			} catch (IOException ex) {
-				ex.printStackTrace();
-			}
-
-			Image scaleImg = img.getScaledInstance(this.getWidth(), this.getHeight(), Image.SCALE_FAST);
-			lblBackground.setIcon(new ImageIcon(scaleImg));
-		}
+		resizeFrame();
 	}
 
 	@Override
@@ -528,5 +538,10 @@ public class MainFrame extends JFrame implements ComponentListener {
 	@Override
 	public void componentHidden(ComponentEvent e) {
 
+	}
+
+	@Override
+	public void windowStateChanged(WindowEvent e) {
+		resizeFrame();
 	}
 }
