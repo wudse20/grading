@@ -7,6 +7,7 @@ import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
+import com.te3.main.easteregg.GUI.GameFrame;
 import com.te3.main.exceptions.IllegalInputException;
 import com.te3.main.objects.Data;
 import com.te3.main.objects.SchoolClass;
@@ -39,6 +40,10 @@ public class SettingsFrame extends JFrame {
 	private String currentYoda;
 
 	private MainFrame mf;
+
+	private boolean isEasterEggOpened = false;
+
+	private int yodaClickCount = 0;
 
 	private Thread threadSetSavePath;
 
@@ -161,6 +166,18 @@ public class SettingsFrame extends JFrame {
 		btnYoda1.addActionListener((e) -> {
 			currentYoda = "yoda1.jpg";
 			setYodaBtnIcons();
+
+			//Increments the count
+			yodaClickCount++;
+
+			//Opens the easter egg if it should else it resets the counter.
+			if (yodaClickCount > 3 && !isEasterEggOpened) {
+				isEasterEggOpened = true;
+				yodaClickCount = 0;
+				new GameFrame(this).setVisible(true);
+			} else if (yodaClickCount > 3 && isEasterEggOpened) {
+				yodaClickCount = 0;
+			}
 		});
 
 		btnYoda2.addActionListener((e) -> {
@@ -362,5 +379,14 @@ public class SettingsFrame extends JFrame {
 			mf.updateGradePanel();
 			JOptionPane.showMessageDialog(this, "All data är raderad!", "Raderingen lyckades", JOptionPane.INFORMATION_MESSAGE);
 		}
+	}
+
+	/**
+	 * A setter for isEasterEggOpened
+	 *
+	 * @param isEasterEggOpened if the easter egg is opened or not.
+	 */
+	public void setEasterEggOpened(boolean isEasterEggOpened) {
+		this.isEasterEggOpened = isEasterEggOpened;
 	}
 }
