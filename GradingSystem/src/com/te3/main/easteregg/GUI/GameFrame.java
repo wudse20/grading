@@ -11,7 +11,10 @@ import java.awt.event.WindowListener;
  * The class that holds the main frame
  */
 public class GameFrame extends JFrame implements WindowListener {
+    //Panels
     GamePanel gp = new GamePanel();
+
+    //Instances
     SettingsFrame sf;
 
     public GameFrame(SettingsFrame sf) {
@@ -40,7 +43,10 @@ public class GameFrame extends JFrame implements WindowListener {
 
     @Override
     public void windowClosing(WindowEvent e) {
+        //Tells the program that the easter egg is closed
         sf.setEasterEggOpened(false);
+
+        //Closes the easter egg
         this.dispose();
     }
 

@@ -20,6 +20,7 @@ public class SettingsFrame extends JFrame {
 	/** Generated */
 	private static final long serialVersionUID = 2812677933749486134L;
 
+	/** The path of the save file */
 	private String savePath;
 
 	/** The help text of this frame */
@@ -37,16 +38,22 @@ public class SettingsFrame extends JFrame {
 			+ "För att applicera inställningarna tryck på <b>verkställ</b><br>"
 			+ "För att avbryta tryck på <b>avbryt</b>";
 
+	/** The current yoda */
 	private String currentYoda;
 
+	//Instance
 	private MainFrame mf;
 
+	/** If the easter egg is opened or not. */
 	private boolean isEasterEggOpened = false;
 
+	/** The amount of times that yoda is pressed */
 	private int yodaClickCount = 0;
 
+	//Threads
 	private Thread threadSetSavePath;
 
+	//Layouts
 	BorderLayout layout = new BorderLayout();
 	BorderLayout pLayout = new BorderLayout();
 
@@ -59,8 +66,10 @@ public class SettingsFrame extends JFrame {
 
 	BoxLayout pSettingsLayout;
 
+	//Container
 	Container cp = this.getContentPane();
 
+	//Buttons
 	JButton btnApply = new JButton("Verkställ");
 	JButton btnCancel = new JButton("Avbryt");
 	JButton btnHelp = new JButton("?");
@@ -72,6 +81,7 @@ public class SettingsFrame extends JFrame {
 	JButton btnYoda3 = new JButton();
 	JButton btnYoda4 = new JButton();
 
+	//Lables
 	JLabel lblSpacer = new JLabel(" ");
 	JLabel lblSpacer2 = new JLabel("     ");
 	JLabel lblSpacer3 = new JLabel("     ");
@@ -82,10 +92,13 @@ public class SettingsFrame extends JFrame {
 	JLabel lblTimer = new JLabel("Sparintervall (s):");
 	JLabel lblChoseYoda = new JLabel("Välj Yoda:");
 
+	//Text fields
 	JTextField txfSaveTimer;
 
+	//Check boxes
 	JCheckBox cBoxShouldShowBabyYoda = new JCheckBox("Baby Yoda som bakgrund");
 
+	//Panels
 	JPanel panel = new JPanel();
 	JPanel pBtns = new JPanel();
 	JPanel pTimer = new JPanel();
@@ -101,13 +114,18 @@ public class SettingsFrame extends JFrame {
      * @param mf the instance of the MainFrame
      * */
 	public SettingsFrame(MainFrame mf) {
+		//Calls the super constructor
 		super("Inställningar");
 
+		//Saves the necessary information
 		this.mf = mf;
 		this.savePath = mf.getSaveFilePath();
 		this.currentYoda = mf.getCurrentYoda();
 
+		//Sets the properties
 		this.setProperties();
+
+		//Adds the components
 		this.addComponents();
 	}
 
@@ -115,23 +133,30 @@ public class SettingsFrame extends JFrame {
      * Adds the components
      * */
 	private void addComponents() {
-		this.add(lblSpacer, BorderLayout.PAGE_START);
-		this.add(lblSpacer2, BorderLayout.LINE_START);
-		this.add(panel, BorderLayout.CENTER);
-		this.add(lblSpacer3, BorderLayout.LINE_END);
-		this.add(lblSpacer4, BorderLayout.PAGE_END);
+		cp.add(lblSpacer, BorderLayout.PAGE_START);
+		cp.add(lblSpacer2, BorderLayout.LINE_START);
+		cp.add(panel, BorderLayout.CENTER);
+		cp.add(lblSpacer3, BorderLayout.LINE_END);
+		cp.add(lblSpacer4, BorderLayout.PAGE_END);
 	}
 
 	/**
      * Sets the properties
      * */
 	private void setProperties() {
+		//Sets the layout
 		this.setLayout(layout);
+
+		//Sets the size
 		this.setSize(new Dimension(472, 350));
+
+		//Sets the closing operation
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
+		//Sets the current yoda
 		currentYoda = mf.getCurrentYoda();
 
+		//Some properties
 		cBoxShouldShowBabyYoda.setSelected(mf.shouldShowBabyYoda());
 		setYodaBtnStatus(mf.shouldShowBabyYoda());
 		setYodaBtnSize(100, 56);
@@ -139,14 +164,18 @@ public class SettingsFrame extends JFrame {
 
 		txfSaveTimer = new JTextField(12);
 		txfSaveTimer.setText(Integer.toString(mf.getSaveTimer()));
+
+		//Adds listeners
 		txfSaveTimer.getDocument().addDocumentListener(new DocumentListener() {
 			@Override
 			public void insertUpdate(DocumentEvent e) {
+				//Sets the color to white
 				txfSaveTimer.setBackground(Color.WHITE);
 			}
 
 			@Override
 			public void removeUpdate(DocumentEvent e) {
+				//Sets the color to white
 				txfSaveTimer.setBackground(Color.WHITE);
 			}
 
@@ -164,7 +193,10 @@ public class SettingsFrame extends JFrame {
 		cBoxShouldShowBabyYoda.addActionListener((e) -> setYodaBtnStatus(cBoxShouldShowBabyYoda.isSelected()));
 
 		btnYoda1.addActionListener((e) -> {
+			//Sets the current yoda
 			currentYoda = "yoda1.jpg";
+
+			//Sets the button icons
 			setYodaBtnIcons();
 
 			//Increments the count
@@ -181,20 +213,34 @@ public class SettingsFrame extends JFrame {
 		});
 
 		btnYoda2.addActionListener((e) -> {
+			//Sets the current yoda
 			currentYoda = "yoda2.jpg";
+
+			//Sets the button icons
 			setYodaBtnIcons();
 		});
 
 		btnYoda3.addActionListener((e) -> {
+			//Sets the current yoda
 			currentYoda = "yoda3.jpg";
+
+			//Sets the button icons
 			setYodaBtnIcons();
 		});
 
 		btnYoda4.addActionListener((e) -> {
+			//Sets the current yoda
 			currentYoda = "yoda4.jpg";
+
+			//Adds the button icons
 			setYodaBtnIcons();
 		});
 
+		/*
+		 * Adds components and sets
+		 * layout to all the different
+		 * panels of this GUI
+		 * */
 		pTimer.setLayout(pTimerLayout);
 		pTimer.add(lblTimer);
 		pTimer.add(txfSaveTimer);
@@ -296,10 +342,14 @@ public class SettingsFrame extends JFrame {
 	 * Not a setter
 	 */
 	private void setSavePath() {
+		//Creates a new FileSystemFrame
 		FileSystemFrame fsf = new FileSystemFrame(
 				this.savePath.substring(this.savePath.lastIndexOf('/') + 1, this.savePath.lastIndexOf('.')), "xml");
+
+		//Displays the FileSystemFrame
 		fsf.setVisible(true);
 
+		//Defines and start the thread
 		threadSetSavePath = new Thread(() -> setSavePathThread(fsf));
 		threadSetSavePath.start();
 	}
@@ -311,7 +361,9 @@ public class SettingsFrame extends JFrame {
      * */
 	@SuppressWarnings("static-access")
 	private void setSavePathThread(FileSystemFrame fsf) {
+		//Waiting for user input
 		while (fsf.getExitCode() == -1) {
+			//Sleeping to save on performance
 			try {
 				threadSetSavePath.sleep(450);
 			} catch (InterruptedException e) {
@@ -319,11 +371,13 @@ public class SettingsFrame extends JFrame {
 			}
 		}
 
+		//Acts on the users input
 		if (fsf.getExitCode() == 0) {
 			this.savePath = fsf.getFilePath();
 			System.out.println(this.savePath);
 		}
 
+		//Closes the FileSystemFrame
 		fsf.close();
 	}
 
@@ -331,8 +385,10 @@ public class SettingsFrame extends JFrame {
      * Applies the settings
      * */
 	private void applySettings() {
+		//Creates a new settings object
 		Settings s = new Settings();
 
+		//Sets the timer or sends an error message to the user
 		try {
 			s.setSaveTimer(Integer.parseInt(txfSaveTimer.getText()));
 		} catch (IllegalInputException e) {
@@ -343,27 +399,35 @@ public class SettingsFrame extends JFrame {
 			txfSaveTimer.setBackground(Color.PINK);
 		}
 
+		//Sets the save path or sends an error message to the user.
 		try {
 			s.setSavePath(this.savePath);
 		} catch (IllegalInputException e) {
 			JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 		}
 
+		//Sets the current yoda
 		mf.setCurrentYoda(currentYoda);
 		s.setCurrentYoda(currentYoda);
 
+		//Sets if baby yoda should be shown or not
 		mf.setShouldShowBabyYoda(cBoxShouldShowBabyYoda.isSelected());
 		mf.setBabyYoda(cBoxShouldShowBabyYoda.isSelected());
 
 		s.setShouldShowYoda(cBoxShouldShowBabyYoda.isSelected());
 
+		//Sets the settings and save them
 		mf.setSettings(s);
 		mf.saveSettings();
+
+		//Repaint
 		mf.repaint();
 
+		//Message to user
 		JOptionPane.showMessageDialog(this, "Du har uppdaterat dina inställningar", "Uppdaterad",
 				JOptionPane.INFORMATION_MESSAGE);
 
+		//Closes this frame
 		this.dispose();
 	}
 
@@ -371,8 +435,10 @@ public class SettingsFrame extends JFrame {
 	 * Deletes all the data
 	 * */
 	private void deleteData() {
+		//Ask user if the user wants to delete all data
 		int prompt = JOptionPane.showConfirmDialog(this,"Är du säker på att du vill tabort all data", "Är du säker?", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 
+		//If yes then deletes
 		if (prompt == JOptionPane.YES_OPTION) {
 			mf.setMainData(new Data(new ArrayList<SchoolClass>()));
 			mf.saveData(mf.getSaveFilePath());
