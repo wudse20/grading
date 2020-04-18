@@ -7,7 +7,7 @@ import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
-import com.te3.main.easteregg.GUI.GameFrame;
+import com.te3.main.gui.easteregg.GUI.GameFrame;
 import com.te3.main.exceptions.IllegalInputException;
 import com.te3.main.objects.Data;
 import com.te3.main.objects.SchoolClass;

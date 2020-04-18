@@ -1,4 +1,4 @@
-package com.te3.main.easteregg.GUI;
+package com.te3.main.gui.easteregg.GUI;
 
 import com.te3.main.gui.SettingsFrame;
 

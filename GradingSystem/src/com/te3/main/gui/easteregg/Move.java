@@ -1,4 +1,4 @@
-package com.te3.main.easteregg;
+package com.te3.main.gui.easteregg;
 
 /**
  * The enum used for the different moves

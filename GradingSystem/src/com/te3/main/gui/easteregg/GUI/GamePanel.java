@@ -1,6 +1,6 @@
-package com.te3.main.easteregg.GUI;
+package com.te3.main.gui.easteregg.GUI;
 
-import com.te3.main.easteregg.Move;
+import com.te3.main.gui.easteregg.Move;
 
 import javax.swing.*;
 import java.awt.*;
