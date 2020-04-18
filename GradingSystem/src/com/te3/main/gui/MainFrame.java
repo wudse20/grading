@@ -227,7 +227,7 @@ public class MainFrame extends JFrame implements ComponentListener, WindowStateL
 		// change this boolean to false if you do not want to run the program with
 		// default predefined classes, courses, students and tasks.
 
-		boolean debug = false;
+		boolean debug = true;
 
 		if (debug) {
 			ArrayList<SchoolClass> classes = new ArrayList<SchoolClass>();

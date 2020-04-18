@@ -7,6 +7,7 @@ import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
+import com.te3.main.enums.State;
 import com.te3.main.gui.easteregg.GUI.GameFrame;
 import com.te3.main.exceptions.IllegalInputException;
 import com.te3.main.objects.Data;
@@ -440,9 +441,10 @@ public class SettingsFrame extends JFrame {
 
 		//If yes then deletes
 		if (prompt == JOptionPane.YES_OPTION) {
+			mf.updateGradeState(State.NOTHING_SELECTED);
+			mf.updateGradePanel();
 			mf.setMainData(new Data(new ArrayList<SchoolClass>()));
 			mf.saveData(mf.getSaveFilePath());
-			mf.updateGradePanel();
 			JOptionPane.showMessageDialog(this, "All data är raderad!", "Raderingen lyckades", JOptionPane.INFORMATION_MESSAGE);
 		}
 	}
