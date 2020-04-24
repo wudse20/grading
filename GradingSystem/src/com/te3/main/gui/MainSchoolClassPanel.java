@@ -29,27 +29,36 @@ public class MainSchoolClassPanel extends JPanel implements DocumentListener {
 	/** Generated */
 	private static final long serialVersionUID = -6445745910257748976L;
 
+	/** The students */
 	private ArrayList<Student> students = new ArrayList<Student>();
 
+	//Instances
 	SchoolClass sc;
 
 	MainFrame mf;
 
+	//TextFields
 	JTextField txfName = new JTextField(24);
 
+	//Buttons
 	JButton btnAddName = new JButton("Lägg till");
 
+	//Lables
 	JLabel lblStudents = new JLabel("Elever:");
 	JLabel lblName = new JLabel("Elev:");
 	JLabel lblSpacer = new JLabel(" ");
 
+	//JList
 	JList<Student> listStudents = new JList<Student>();
 
+	//ScrollPane
 	JScrollPane scrStudents = new JScrollPane(listStudents);
 
+	//Panels
 	JPanel pInput = new JPanel();
 	JPanel pStudents = new JPanel();
 
+	//Layouts
 	BorderLayout layout = new BorderLayout();
 	BorderLayout pStudentsLayout = new BorderLayout();
 
@@ -61,8 +70,13 @@ public class MainSchoolClassPanel extends JPanel implements DocumentListener {
 	 * @param mf the instance of the mainframe
 	 */
 	public MainSchoolClassPanel(MainFrame mf) {
+		//Stores the instance
 		this.mf = mf;
+
+		//Sets the properties
 		this.setProperties();
+
+		//Adds the components
 		this.addComponents();
 	}
 
@@ -73,11 +87,18 @@ public class MainSchoolClassPanel extends JPanel implements DocumentListener {
 	 * @param sc the school class that's being updated
 	 */
 	public MainSchoolClassPanel(MainFrame mf, SchoolClass sc) {
+		//Stores the instances
 		this.mf = mf;
 		this.sc = sc;
 		this.students = this.sc.getStudents();
+
+		//Updates the JList
 		this.updateJList();
+
+		//Sets the properties
 		this.setProperties();
+
+		//Adds the components
 		this.addComponents();
 	}
 
@@ -101,10 +122,12 @@ public class MainSchoolClassPanel extends JPanel implements DocumentListener {
 	 * Sets the properties
 	 * */
 	private void setProperties() {
+		//Sets layouts
 		this.setLayout(layout);
 		pInput.setLayout(pInputLayout);
 		pStudents.setLayout(pStudentsLayout);
 
+		//Adds listeners
 		btnAddName.addActionListener((e) -> {
 			addStudents(txfName.getText());
 		});
@@ -144,7 +167,8 @@ public class MainSchoolClassPanel extends JPanel implements DocumentListener {
 	 * @param name takes a single name or names in the format of csv
 	 */
 	private void addStudents(String name) {
-		if (name.length() == 0) {
+		//If the name is to short then it throws an error
+		if (name.trim().length() == 0) {
 			txfName.setBackground(Color.pink);
 			JOptionPane.showMessageDialog(this, "Du måste skriva något i rutan", "Fel", JOptionPane.ERROR_MESSAGE);
 			return;
@@ -152,8 +176,12 @@ public class MainSchoolClassPanel extends JPanel implements DocumentListener {
 
 		// If it's in format of csv or not
 		if (name.indexOf(',') != -1) {
+			//Splits the string by the comma
 			String[] names = name.split(",");
 
+			//Loops through the names and adds the students to the class
+			//Also detects if something is wrong with a name then it will
+			//tell the user that and remove all the added students.
 			for (int i = 0; i < names.length; i++) {
 				try {
 					students.add(new Student(names[i].trim()));
@@ -163,22 +191,30 @@ public class MainSchoolClassPanel extends JPanel implements DocumentListener {
 						students.remove((students.size() - 1));
 
 					JOptionPane.showMessageDialog(this,
-							"Fel vid namn nr: " + (i + 1) + ", meddelande: " + e.getMessage(), "Fel",
+							"Fel vid namn nr: " + (i + 1) + ", Medelande: " + e.getMessage(), "Fel",
 							JOptionPane.ERROR_MESSAGE);
 
+					//Returns
 					return;
 				}
 			}
 		} else {
 			try {
+				//Adds a student
 				students.add(new Student(name));
 			} catch (IllegalNameException e) {
+				//Shows the error message to the user
 				JOptionPane.showMessageDialog(this, e.getMessage(), "Fel", JOptionPane.ERROR_MESSAGE);
+
+				//Returns
 				return;
 			}
 		}
 
+		//Clears the text box
 		txfName.setText("");
+
+		//Updates the JList
 		updateJList();
 	}
 
@@ -186,6 +222,7 @@ public class MainSchoolClassPanel extends JPanel implements DocumentListener {
 	 * Updates the JList
 	 * */
 	private void updateJList() {
+		//Gets the students and adds them
 		Student[] students = new Student[this.students.size()];
 		listStudents.setListData(this.students.toArray(students));
 	}

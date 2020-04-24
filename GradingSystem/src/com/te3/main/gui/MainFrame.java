@@ -51,22 +51,26 @@ public class MainFrame extends JFrame implements ComponentListener, WindowStateL
 	private String saveFilePath;
 	private String settingsFilePath;
 
+	/** If baby yoda is shown or not */
 	private boolean shouldShowBabyYoda;
 
+	//Layout
 	BoxLayout pLayout;
 
+	//Panels
 	CBPanel cbPanel;
 	GradesPanel gradePanel;
 	ButtonPanel btnPanel;
 
-	Container cp = this.getContentPane();
-
 	JPanel panel = new JPanel();
 
+	//Lables
 	JLabel lblBackground = new JLabel();
 
+	/** The state of the program */
 	private State s;
 
+	/** The timer for the auto save function */
 	Timer t;
 
 	/**
@@ -74,39 +78,58 @@ public class MainFrame extends JFrame implements ComponentListener, WindowStateL
 	 * that's needed.
 	 * */
 	public MainFrame() {
+		//Sets the title through the super constructor
 		super("Betygssättning");
+
+		//Sets the default close operation
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+		//Sets the size
 		this.setSize(new Dimension(1200, 600));
 
+		//Sets the content pane
 		this.setContentPane(lblBackground);
 
+		/*
+		 * If it can find the settings file
+		 * it will load it in to memory, else
+		 * it will create the new settings with
+		 * the default values.
+		 * */
 		if (new File("./settings.xml").exists())
 			settings = loadSettings();
 		else
 			settings = new Settings("./saves.xml", 300, false, "yoda1.jpg");
 
+		//Loads the settings to the variables from the settings object
 		this.saveFilePath = settings.getSavePath();
 		this.saveTimer = settings.getSaveTimer();
 		this.shouldShowBabyYoda = settings.isShouldShowYoda();
 		this.currentYoda = settings.getCurrentYoda();
 
+		//Gets the saved data
 		mainData = getSavedData();
 
-		t = new Timer(saveTimer * 1000, (e) -> {
-			saveData(saveFilePath);
-		});
+		//Tells the timer to auto save based on the save timer
+		t = new Timer(saveTimer * 1000, (e) -> saveData(saveFilePath));
 
 		// Hooks in to the shutdown sequence and writes to the files and then exits.
 		Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+			//Saves the settings
 			saveSettings();
+
+			//Saves the data
 			saveData(saveFilePath);
 		}));
 
+		//Adds listeners
 		this.addComponentListener(this);
 		this.addWindowStateListener(this);
 
+		//Starts the timer
 		t.start();
 
+		//Initializes the components
 		initComponents();
 	}
 
@@ -114,31 +137,44 @@ public class MainFrame extends JFrame implements ComponentListener, WindowStateL
 	 * Initializes the components
 	 * */
 	private void initComponents() {
+		//Initializes the layout
 		pLayout = new BoxLayout(panel, BoxLayout.Y_AXIS);
 
+		//Initializes the panels
 		cbPanel = new CBPanel(mainData, this);
 		gradePanel = new GradesPanel(this);
 		btnPanel = new ButtonPanel(this);
 
+		//Sets the layout
 		panel.setLayout(pLayout);
+
+		//Makes the panel transparent
 		panel.setOpaque(false);
+
+		//Adds the components
 		panel.add(cbPanel);
 		panel.add(gradePanel);
 		panel.add(btnPanel);
 
-        setBabyYoda(shouldShowBabyYoda);
+		//sets baby yoda up
+        this.setBabyYoda(shouldShowBabyYoda);
 
+        //Adds the panel
         this.add(panel);
+
+        //Sets the panels bounds
 		panel.setBounds(0, 0, this.getWidth() - 15, this.getHeight());
 	}
 
 
     /**
-     * Set up for Baby Yoda
+     * Set up for Baby Yoda. Not a setter
      *
      * @param shouldShowBabyYoda if {@code true} -> shows Baby yoda, else not
      */
     public void setBabyYoda(boolean shouldShowBabyYoda) {
+    	//Sets the different components to be transparent or opaque based on
+		//if baby yoda should be shown or not.
         if (shouldShowBabyYoda) {
             cbPanel.setOpaque(false);
             gradePanel.setOpaque(false);
@@ -149,6 +185,7 @@ public class MainFrame extends JFrame implements ComponentListener, WindowStateL
             btnPanel.setOpaque(true);
         }
 
+        //Tells the panels to handle baby yoda
         gradePanel.yoda(shouldShowBabyYoda);
         cbPanel.yoda(shouldShowBabyYoda);
 
@@ -171,6 +208,7 @@ public class MainFrame extends JFrame implements ComponentListener, WindowStateL
 			lblBackground.setIcon(new ImageIcon(scaleImg));
 		}
 
+		//Repaints everything
         cbPanel.repaint();
         gradePanel.repaint();
         this.repaint();

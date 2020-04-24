@@ -22,8 +22,6 @@ public class GamePanel extends JPanel implements KeyListener, MouseListener, Mou
     private int space;
     /** The side of the button squares */
     private int squareSideLength;
-    /** The counter for color change to lower the amount of blinking */
-    private int colorChangeCount = 0;
 
     /**
      * Constructor

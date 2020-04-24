@@ -33,10 +33,12 @@ public class SchoolClassFrame extends JFrame {
 			+ "trycka på <b>lägg till</b> eller trycka på enter i rutan.<br><br>"
 			+ "För att skapa/uppdatera klassen klicka på <b>lägg till</b> eller <b>uppdatera</b>.";
 
+	//Instances
 	MainFrame mf;
 
 	SchoolClass sc;
 
+	//Panels
 	NamePanel np = new NamePanel();
 
 	MainSchoolClassPanel mscp;
@@ -47,9 +49,11 @@ public class SchoolClassFrame extends JFrame {
 
 	JPanel panel = new JPanel();
 
+	//Layouts
 	BorderLayout layout = new BorderLayout();
 	BorderLayout pLayout = new BorderLayout();
 
+	//Lables
 	JLabel lblSpacer1 = new JLabel(" ");
 	JLabel lblSpacer2 = new JLabel("     ");
 	JLabel lblSpacer3 = new JLabel("     ");
@@ -61,12 +65,22 @@ public class SchoolClassFrame extends JFrame {
 	 * @param mf the instance of the mainframe
 	 */
 	public SchoolClassFrame(MainFrame mf) {
+		//Sets the title through the super constructor
 		super("Skapa en ny klass");
+
+		//Stores the instance of the main frame
 		this.mf = mf;
+
+		//Initializes the main school class panel
 		this.mscp = new MainSchoolClassPanel(mf);
+
+		//Sets the properties
 		this.setProperties();
+
+		//Adds the components
 		this.addComponents(false);
 
+		//Adds action listener
 		acp.getBtnAdd().addActionListener((e) -> {
 			addSchoolClass();
 		});
@@ -76,7 +90,7 @@ public class SchoolClassFrame extends JFrame {
 		});
 
 		acp.getBtnHelp().addActionListener((e) -> {
-			new HelpFrame("Klasser", "<html><p>" + helpInfo + "</p></html>", 500).setVisible(true);
+			new HelpFrame("Skapa en klass", "<html><p>" + helpInfo + "</p></html>", 500).setVisible(true);
 		});
 	}
 
@@ -87,14 +101,26 @@ public class SchoolClassFrame extends JFrame {
 	 * @param sc the schoolclass to be updated
 	 */
 	public SchoolClassFrame(MainFrame mf, SchoolClass sc) {
+		//Calls the super constructor and sets the title of the fram
 		super("Uppdatera en klass");
+
+		//Stores the instances
 		this.mf = mf;
 		this.sc = sc;
+
+		//Initializes the MainSchoolClassPanel
 		this.mscp = new MainSchoolClassPanel(mf, this.sc);
+
+		//Sets properties
 		this.setProperties();
+
+		//Adds components
 		this.addComponents(true);
+
+		//Sets the name to the text field with the name
 		np.setLastInput(sc.getName());
 
+		//Adds listeners
 		ecp.getBtnUpdate().addActionListener((e) -> {
 			updateSchoolClass();
 		});
@@ -104,7 +130,7 @@ public class SchoolClassFrame extends JFrame {
 		});
 
 		ecp.getBtnHelp().addActionListener((e) -> {
-			new HelpFrame("Klasser", "<html><p>" + helpInfo + "</p></html>", 500).setVisible(true);
+			new HelpFrame("Uppdatera en klass", "<html><p>" + helpInfo + "</p></html>", 500).setVisible(true);
 		});
 	}
 
@@ -112,6 +138,7 @@ public class SchoolClassFrame extends JFrame {
 	 * Updates the class
 	 * */
 	private void updateSchoolClass() {
+		//Confirmation message
 		int ans = JOptionPane.showConfirmDialog(this,
 				"Är du säker på att du vill uppdatera klassen: " + np.getLastInput() + "?", "Är du säker?",
 				JOptionPane.YES_NO_OPTION);
@@ -119,24 +146,37 @@ public class SchoolClassFrame extends JFrame {
 		if (ans == JOptionPane.NO_OPTION)
 			return;
 
+		//Handles errors
 		if (mscp.getStudents().size() == 0) {
 			JOptionPane.showMessageDialog(this, "Du måste lägga till minst en elev", "Fel", JOptionPane.ERROR_MESSAGE);
 			return;
 		}
 
+		//Gets teh index of the school class
 		int index = mf.getMainData().getClasses().indexOf(sc);
 
 		try {
+			//Store the instance of the school class
 			SchoolClass s = mf.getMainData().getClasses().get(index);
+
+			//Sets the name
 			s.setName(np.getLastInput());
+
+			//Sets the students
 			s.setStudents(mscp.getStudents());
+
+			//Saves the data
 			mf.saveData(mf.getSaveFilePath());
+
+			//Disposes this frame
 			this.dispose();
 		} catch (IllegalNameException e) {
+			//Sends error message
 			JOptionPane.showMessageDialog(this, e.getMessage(), "Fel", JOptionPane.ERROR_MESSAGE);
 			return;
 		}
 
+		//Updates the grade panel
 		mf.updateGradePanel();
 	}
 
@@ -146,24 +186,37 @@ public class SchoolClassFrame extends JFrame {
 	 * Adds a new class
 	 */
 	private void addSchoolClass() {
+		//Stores the instance of the classes
 		ArrayList<SchoolClass> al = mf.getMainData().getClasses();
 
+		//Handles errors
 		if (mscp.getStudents().size() == 0) {
 			JOptionPane.showMessageDialog(this, "Du måste lägga till minst en elev", "Fel", JOptionPane.ERROR_MESSAGE);
 			return;
 		}
 
 		try {
+			//Adds a school class
 			al.add(new SchoolClass(np.getLastInput(), mscp.getStudents()));
+
+			//Sends a message
 			JOptionPane.showMessageDialog(this, "Klassen: " + np.getLastInput() + " är skapad.",
 					"Du har skapat en klass", JOptionPane.INFORMATION_MESSAGE);
+
+			//Saves the data
 			mf.saveData(mf.getSaveFilePath());
+
+			//Disposes the frame
 			this.dispose();
 		} catch (IllegalNameException e) {
+			//Shows a message to the user
 			JOptionPane.showMessageDialog(this, e.getMessage(), "Fel", JOptionPane.ERROR_MESSAGE);
+
+			//returns
 			return;
 		}
 
+		//Updates the grade panel
 		mf.updateGradePanel();
 	}
 
