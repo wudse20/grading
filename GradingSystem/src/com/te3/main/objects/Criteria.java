@@ -192,7 +192,7 @@ public class Criteria {
 	/**
 	 * Checks if two criteria are the same.
 	 * 
-	 * @param c the other criteria
+	 * @param obj the other criteria
 	 * @return <b>true</b> if the same name, else <b>false</b>
 	 */
 	@Override
