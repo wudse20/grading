@@ -10,33 +10,64 @@ import com.te3.main.exceptions.IllegalNameException;
  * */
 public class Task {
 
+    /** The name of the task */
 	private String name;
+
+	/** The comment of the task */
 	private String comment;
+
+	/** The criteria */
 	private ArrayList<Criteria> criteria = new ArrayList<Criteria>();
 
+	/**
+     * Used for saving.
+     * */
 	public Task() {
 	}
 
-	public Task(String name, ArrayList<Criteria> criteria) throws IllegalNameException, IllegalInputException {
+    /**
+     * Creates a Task with a name and <br>
+     * a list of criteria
+     *
+     * @param name the name of the course
+     * @param criteria the criteria
+     * @throws IllegalNameException if the name isn't accepted
+     */
+	public Task(String name, ArrayList<Criteria> criteria) throws IllegalNameException {
 		this.setName(name);
 		this.setCriteria(criteria);
 		this.setComment("");
 	}
 
+    /**
+     * Adds a criteria
+     *
+     * @param criteria the new criteira
+     */
 	public void addCriteria(Criteria criteria) {
 		this.criteria.add(criteria);
 	}
 
+    /**
+     * Removes a criteria
+     *
+     * @param deleteGrade the criteria to be deleted
+     */
 	public void removeCriteria(Criteria deleteGrade) {
 		criteria.remove(deleteGrade);
 	}
 
+    /**
+     * A getter for the name
+     *
+     * @return the name
+     */
 	public String getName() {
 		return name;
 	}
 
 	/**
-	 * Sets the name of the assignment
+	 * A setter for the name
 	 *
 	 * @param name the new name
 	 * @throws IllegalNameException if the name is less then 3 characters and it's
@@ -50,18 +81,38 @@ public class Task {
 		}
 	}
 
+    /**
+     * A getter for the criteria
+     *
+     * @return the criteria
+     */
 	public ArrayList<Criteria> getCriteria() {
 		return criteria;
 	}
 
+    /**
+     * A setter for the criteria
+     *
+     * @param criteria the new criteria
+     */
 	public void setCriteria(ArrayList<Criteria> criteria) {
 		this.criteria = criteria;
 	}
 
+    /**
+     * A getter for the comment
+     *
+     * @return the comment
+     */
 	public String getComment() {
 		return this.comment;
 	}
 
+    /**
+     * A setter for the comment
+     *
+     * @param comment the comment
+     */
 	public void setComment(String comment) {
 		this.comment = comment;
 	}
