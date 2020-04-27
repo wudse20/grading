@@ -299,7 +299,7 @@ public class MainFrame extends JFrame implements ComponentListener, WindowStateL
 				students.get(0).addCourse(new Course("Dator- och nätverksteknik", criteria, tasks));
 
 				classes.add(new SchoolClass("TE3B", students));
-			} catch (IllegalNameException | IllegalInputException e) {
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 

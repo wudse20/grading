@@ -81,7 +81,10 @@ public class CBPanel extends JPanel {
 		
 		//class combobox
 		cbClass.addActionListener((e) -> {
-			if (checkInitTime(e.getWhen())) return;
+			if (checkInitTime(e.getWhen()) || !e.getActionCommand().equals("comboBoxChanged")) return;
+			
+			//;
+			System.out.println(e.getActionCommand());
 			
 			int i = cbClass.getSelectedIndex();
 			int itmCount = cbClass.getItemCount();
@@ -95,12 +98,11 @@ public class CBPanel extends JPanel {
 			}
 			
 			this.refreshData(mf.getMainData());
-			mf.updateGradePanel();
 		});
 		
 		//course combobox
 		cbCourse.addActionListener((e) -> {
-			if (checkInitTime(e.getWhen())) return;
+			if (checkInitTime(e.getWhen()) || !e.getActionCommand().equals("comboBoxChanged")) return;
 			
 			int i = cbCourse.getSelectedIndex();
 			int itmCount = cbCourse.getItemCount();
@@ -114,19 +116,18 @@ public class CBPanel extends JPanel {
 			}
 			
 			this.refreshData(mf.getMainData());
-			mf.updateGradePanel();
 		});
 		
 		//student combobox
 		cbStudent.addActionListener((e) -> {
-			if (checkInitTime(e.getWhen())) return;
+			if (checkInitTime(e.getWhen()) || !e.getActionCommand().equals("comboBoxChanged")) return;
 			
 			mf.setCurrentlySelectedStudentIndex(cbStudent.getSelectedIndex());
 		});
 		
 		//task combobox
 		cbTask.addActionListener((e) -> {
-			if (checkInitTime(e.getWhen())) return;
+			if (checkInitTime(e.getWhen()) || !e.getActionCommand().equals("comboBoxChanged")) return;
 			
 			int i = cbTask.getSelectedIndex();
 			int itmCount = cbTask.getItemCount();
