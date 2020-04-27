@@ -7,6 +7,7 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import com.te3.main.enums.State;
 import com.te3.main.objects.Course;
 import com.te3.main.objects.Data;
 import com.te3.main.objects.SchoolClass;
@@ -20,6 +21,8 @@ import com.te3.main.objects.Task;
 public class CBPanel extends JPanel {
 	/** Default */
 	private static final long serialVersionUID = 1L;
+	
+	long initTime = System.currentTimeMillis();
 
 	GridLayout mainLayout;
 	
@@ -46,6 +49,15 @@ public class CBPanel extends JPanel {
 		return new Dimension(super.getMaximumSize().width, super.getPreferredSize().height);
 	}
 	
+	private boolean checkInitTime(long compareTime) {
+		System.out.println(compareTime - (initTime + 3000));
+		if (compareTime > (initTime + 3000)) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+	
 	private void initComponents() {
 		mainLayout 	= new GridLayout(2, 4);
 		this.setLayout(mainLayout);
@@ -67,49 +79,73 @@ public class CBPanel extends JPanel {
 
 		yoda(mf.shouldShowBabyYoda());
 		
+		//class combobox
 		cbClass.addActionListener((e) -> {
-			System.out.println(cbClass.getSelectedItem().toString());
+			if (checkInitTime(e.getWhen())) return;
 			
 			int i = cbClass.getSelectedIndex();
+			int itmCount = cbClass.getItemCount();
 			
-			System.out.println(i);
-			if (i != -1 && i < cbClass.getItemCount() - 2) {
+			if (i != -1 && i < itmCount - 2) {
 				mf.setCurrentlySelectedClassIndex(i);
-			} else {
-				System.out.println("Selected new or change");
+			} else if (i == itmCount - 1) {
 				mf.openAddEditGUI(SchoolClass.class, false);
+			} else if (i == itmCount - 2) {
+				mf.openAddEditGUI(SchoolClass.class, true);
 			}
+			
+			this.refreshData(mf.getMainData());
+			mf.updateGradePanel();
 		});
+		
+		//course combobox
 		cbCourse.addActionListener((e) -> {
-			System.out.println(cbCourse.getSelectedItem().toString());
+			if (checkInitTime(e.getWhen())) return;
 			
 			int i = cbCourse.getSelectedIndex();
+			int itmCount = cbCourse.getItemCount();
 			
-			System.out.println(i);
-			if (i != -1 && i < cbCourse.getItemCount() - 2) {
+			if (i != -1 && i < itmCount - 2) {
 				mf.setCurrentlySelectedCourseIndex(i);
-			} else {
-				System.out.println("Selected new or change");
+			} else if (i == itmCount - 1) {
+				mf.openAddEditGUI(Course.class, false);
+			} else if (i == itmCount - 2) {
 				mf.openAddEditGUI(Course.class, true);
 			}
+			
+			this.refreshData(mf.getMainData());
+			mf.updateGradePanel();
 		});
+		
+		//student combobox
 		cbStudent.addActionListener((e) -> {
-			System.out.println(cbStudent.getSelectedItem().toString());
-			System.out.println(cbStudent.getSelectedIndex());
+			if (checkInitTime(e.getWhen())) return;
+			
 			mf.setCurrentlySelectedStudentIndex(cbStudent.getSelectedIndex());
 		});
+		
+		//task combobox
 		cbTask.addActionListener((e) -> {
-			System.out.println(cbTask.getSelectedItem().toString());
+			if (checkInitTime(e.getWhen())) return;
 			
 			int i = cbTask.getSelectedIndex();
+			int itmCount = cbTask.getItemCount();
 			
-			System.out.println(i);
-			if (i != -1 && i < cbTask.getItemCount() - 2) {
+			if (i != -1 && i < itmCount - 2) {
+				mf.updateGradeState(State.CLASS_COURSE_STUDENT_TASK);
 				mf.setCurrentlySelectedAssignmentIndex(cbTask.getSelectedIndex());
-			} else {
-				System.out.println("Selected new or change");
-				mf.openAddEditGUI(Task.class, true); //Måste ändras ifall det är ny eller ändra.
+				mf.updateGradePanel();
+			} else if (i == 0) {
+				mf.updateGradeState(State.CLASS_COURSE_STUDENT);
+				mf.setCurrentlySelectedAssignmentIndex(cbTask.getSelectedIndex());
+				mf.updateGradePanel();
+			} else if (i == itmCount - 1) {
+				mf.openAddEditGUI(Task.class, false);
+			} else if (i == itmCount - 2) {
+				mf.openAddEditGUI(Task.class, true);
 			}
+			
+			this.refreshData(mf.getMainData());
 		});
 		
 		this.add(cbClass);
@@ -140,13 +176,14 @@ public class CBPanel extends JPanel {
 	 * Completely updates the entire combobox panel with new information.
 	 * @param newData the new information to be parsed and updated with.
 	 */
-	private void refreshData(Data newData) {
+	public void refreshData(Data newData) {
 		cbClass.removeAllItems();
 		cbCourse.removeAllItems();
 		cbStudent.removeAllItems();
 		cbTask.removeAllItems();
 		
 		Data localData = newData;
+		
 		ArrayList<SchoolClass> dataClasses = localData.getClasses();
 //		Sorry att jag pajjade detta, du får gå på klassen som är vald.
 //		ArrayList<Course> dataCourses = localData.getCourses();
