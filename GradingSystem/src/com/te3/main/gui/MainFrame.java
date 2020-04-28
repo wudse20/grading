@@ -41,14 +41,26 @@ public class MainFrame extends JFrame implements ComponentListener, WindowStateL
 
 	/**Timer in seconds*/
 	private int saveTimer;
+
+	/** The index of the currently selected class */
 	private int currentlySelectedClassIndex = 0;
+
+	/** The index of the currently selected course */
 	private int currentlySelectedCourseIndex = 0;
+
+	/** The index of the currently selected assignment*/
 	private int currentlySelectedAssignmentIndex = 0;
+
+	/** The index of the currently selected student*/
 	private int currentlySelectedStudentIndex = 0;
 
 	/** The currently selected yoda */
 	private String currentYoda;
+
+	/** The path for the save file */
 	private String saveFilePath;
+
+	/** The path for the settings file */
 	private String settingsFilePath;
 
 	/** If baby yoda is shown or not */
