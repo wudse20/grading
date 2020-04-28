@@ -2,13 +2,16 @@
 <java version="13.0.2" class="java.beans.XMLDecoder">
  <object class="com.te3.main.objects.Settings">
   <void property="currentYoda">
-   <string>yoda3.jpg</string>
+   <string>yoda1.jpg</string>
   </void>
   <void property="savePath">
    <string>./saves.xml</string>
   </void>
   <void property="saveTimer">
    <int>300</int>
+  </void>
+  <void property="shouldShowYoda">
+   <boolean>true</boolean>
   </void>
  </object>
 </java>
