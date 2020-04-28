@@ -320,6 +320,7 @@ public class MainFrame extends JFrame implements ComponentListener, WindowStateL
 	public void updateGradeState(State s) {
 		this.s = s;
 		gradePanel.update(s);
+		this.cbPanel.handleNewState();
 	}
 	
 	public State getGradeState() {
@@ -367,6 +368,9 @@ public class MainFrame extends JFrame implements ComponentListener, WindowStateL
 						(Class<Task>) clazz).setVisible(true);
 			}
 		}
+		
+		//Update the CB Panel with the new data
+		cbPanel.refreshData(this.mainData);
 	}
 
 	/**

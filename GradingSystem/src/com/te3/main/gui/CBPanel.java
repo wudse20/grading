@@ -8,10 +8,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import com.te3.main.enums.State;
-import com.te3.main.objects.Course;
-import com.te3.main.objects.Data;
-import com.te3.main.objects.SchoolClass;
-import com.te3.main.objects.Task;
+import com.te3.main.objects.*;
 
 /**
  *	Du behöver fixa en metod i MainFrame för att uppdatera din panel.
@@ -40,6 +37,7 @@ public class CBPanel extends JPanel {
 	
 	public CBPanel(Data importedData, MainFrame mf) {
 		this.mf = mf;
+		
 		initComponents();
 		refreshData(importedData);
 	}
@@ -56,6 +54,16 @@ public class CBPanel extends JPanel {
 		} else {
 			return true;
 		}
+	}
+	
+	/**
+	 * Method to override the init time when we set the index using a function, as to not open a bunch of unnecessary windows
+	 * @param overrideCombobox The combobox which we set the index of
+	 * @param theIndex The index to set the combobox to
+	 */
+	private void overrideInitTime(JComboBox<String> overrideCombobox, int theIndex) {
+		initTime = System.currentTimeMillis();
+		overrideCombobox.setSelectedIndex(theIndex);
 	}
 	
 	private void initComponents() {
@@ -90,16 +98,17 @@ public class CBPanel extends JPanel {
 			System.out.println(i);
 			System.out.println(itmCount);
 			
-			if (i != -1 && i < itmCount - 2) {
-				mf.setCurrentlySelectedClassIndex(i);
+			if (i == 0) {
+				mf.updateGradeState(State.NOTHING_SELECTED);
+			} else if (i != -1 && i < itmCount - 2) {
+				mf.updateGradeState(State.CLASS);
+				mf.setCurrentlySelectedClassIndex(i-1);
 			} else if (i == itmCount - 1) {
 				mf.openAddEditGUI(SchoolClass.class, false);
 				
 			} else if (i == itmCount - 2) {
 				mf.openAddEditGUI(SchoolClass.class, true);
 			}
-			
-			//this.refreshData(mf.getMainData());
 		});
 		
 		//course combobox
@@ -113,15 +122,13 @@ public class CBPanel extends JPanel {
 			if (i == 0) { 
 				mf.updateGradeState(State.NOTHING_SELECTED);
 			} else if (i != -1 && i < itmCount - 2) {
-				mf.updateGradeState(State.CLASS);
-				mf.setCurrentlySelectedCourseIndex(i);
+				mf.setCurrentlySelectedCourseIndex(i-1);
+				mf.updateGradeState(State.CLASS_COURSE);
 			} else if (i == itmCount - 1) {
 				mf.openAddEditGUI(Course.class, false);
 			} else if (i == itmCount - 2) {
 				mf.openAddEditGUI(Course.class, true);
 			}
-			
-			//this.refreshData(mf.getMainData());
 		});
 		
 		//student combobox
@@ -140,19 +147,17 @@ public class CBPanel extends JPanel {
 			int i = cbTask.getSelectedIndex();
 			int itmCount = cbTask.getItemCount();
 			
-			if (i != -1 && i < itmCount - 2) {
-				mf.updateGradeState(State.CLASS_COURSE_STUDENT_TASK);
-				mf.setCurrentlySelectedAssignmentIndex(cbTask.getSelectedIndex());
-			} else if (i == 0) {
+			if (i == 0) {
+				mf.setCurrentlySelectedAssignmentIndex(i);
 				mf.updateGradeState(State.CLASS_COURSE_STUDENT);
-				mf.setCurrentlySelectedAssignmentIndex(cbTask.getSelectedIndex());
+			} else if (i != -1 && i < itmCount - 2) {
+				mf.setCurrentlySelectedAssignmentIndex(i-1);
+				mf.updateGradeState(State.CLASS_COURSE_STUDENT_TASK);
 			} else if (i == itmCount - 1) {
 				mf.openAddEditGUI(Task.class, false);
 			} else if (i == itmCount - 2) {
 				mf.openAddEditGUI(Task.class, true);
 			}
-			
-			//this.refreshData(mf.getMainData());
 		});
 		
 		this.add(cbClass);
@@ -185,6 +190,20 @@ public class CBPanel extends JPanel {
 	public void handleNewState() {
 		State curState = mf.getGradeState();
 		System.out.println(curState.toString());
+		
+		if (curState == State.NOTHING_SELECTED) {
+			cbCourse.setEnabled(false);
+			cbStudent.setEnabled(false);
+			cbTask.setEnabled(false);
+		} else if (curState == State.CLASS) {
+			cbCourse.setEnabled(true);
+			cbStudent.setEnabled(false);
+			cbTask.setEnabled(false);
+		} else {
+			cbCourse.setEnabled(true);
+			cbStudent.setEnabled(true);
+			cbTask.setEnabled(true);
+		}
 	}
 	
 	/**
@@ -192,6 +211,8 @@ public class CBPanel extends JPanel {
 	 * @param newData the new information to be parsed and updated with.
 	 */
 	public void refreshData(Data newData) {
+		initTime = System.currentTimeMillis();
+		
 		System.out.println("Refreshing Data combobox data");
 		cbClass.removeAllItems();
 		cbCourse.removeAllItems();
@@ -201,18 +222,21 @@ public class CBPanel extends JPanel {
 		Data localData = newData;
 		
 		ArrayList<SchoolClass> dataClasses = localData.getClasses();
-//		Sorry att jag pajjade detta, du får gå på klassen som är vald.
-//		ArrayList<Course> dataCourses = localData.getCourses();
+		ArrayList<Student> dataStudents = dataClasses.get(0).getStudents();
+		ArrayList<Course> dataCourses = dataStudents.get(0).getCourses();
+		ArrayList<Task> dataTasks = dataCourses.get(0).getCourseTasks();
 		
 		System.out.println("Adding default combobox items...");
 		
 		cbClass.addItem("Klass");
 		cbCourse.addItem("Kurs");
-		cbStudent.addItem("Samlad vy");
+		
 		cbTask.addItem("Samlad vy");
 		
 		dataClasses.forEach((n) -> cbClass.addItem(n.getName()));
-//		dataCourses.forEach((n) -> cbCourse.addItem(n.getName()));
+		dataCourses.forEach((n) -> cbCourse.addItem(n.getName()));
+		dataStudents.forEach((n) -> cbStudent.addItem(n.getName()));
+		dataTasks.forEach((n) -> cbTask.addItem(n.getName()));
 		
 		System.out.println("Adding change items...");
 		
