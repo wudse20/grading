@@ -24,7 +24,7 @@ public class HelpFrame extends JFrame implements ActionListener {
 	private String title, info;
 
 	//Integers
-	private int height;
+	private int height, width;
 
 	//Containers
 	Container cp = this.getContentPane();
@@ -58,6 +58,7 @@ public class HelpFrame extends JFrame implements ActionListener {
 		this.setTitle(title);
 		this.setInfo(info);
 		this.setHeight(300);
+		this.setWidth(400);
 		this.initialize();
 	}
 
@@ -74,6 +75,24 @@ public class HelpFrame extends JFrame implements ActionListener {
 		this.setTitle(title);
 		this.setInfo(info);
 		this.setHeight(height);
+		this.setWidth(400);
+		this.initialize();
+	}
+
+	/**
+	 * Sets up the HelpFrame
+	 *
+	 * @param title  the title of the window and the text<br>
+	 *               Must be HTML-tags.
+	 * @param info   the help info about the subject
+	 * @param height the height of the window
+	 */
+	public HelpFrame(String title, String info, int height, int width) {
+		//Sets some properties
+		this.setTitle(title);
+		this.setInfo(info);
+		this.setHeight(height);
+		this.setWidth(width);
 		this.initialize();
 	}
 
@@ -83,7 +102,7 @@ public class HelpFrame extends JFrame implements ActionListener {
 	private void initialize() {
 		//Sets some properties
 		this.setTitle(title);
-		this.setSize(new Dimension(400, height));
+		this.setSize(new Dimension(width, height));
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.setLayout(layout);
 
@@ -111,6 +130,8 @@ public class HelpFrame extends JFrame implements ActionListener {
 
 	/**
 	 * A setter for the title
+	 *
+	 * @param title the title of the frame
 	 * */
 	public void setTitle(String title) {
 		this.title = (title.trim().equals("")) ? "Too short title" : title;
@@ -118,6 +139,8 @@ public class HelpFrame extends JFrame implements ActionListener {
 
 	/**
 	 * A setter for the info
+	 *
+	 * @param info the main body of the frame
 	 * */
 	public void setInfo(String info) {
 		this.info = (info.trim().equals("")) ? "Too short info" : info;
@@ -125,9 +148,20 @@ public class HelpFrame extends JFrame implements ActionListener {
 
 	/**
 	 * A setter for the height
+	 *
+	 * @param height the height of the frame can't be less then 100.
 	 * */
 	public void setHeight(int height) {
 		this.height = (height < 100) ? 100 : height;
+	}
+
+	/**
+	 * A setter for the width
+	 *
+	 * @param width the width of teh frame, can't be less then 100.
+	 * */
+	public void setWidth(int width) {
+		this.width = (width < 100) ? 100 : width;
 	}
 
 	@Override
@@ -137,4 +171,5 @@ public class HelpFrame extends JFrame implements ActionListener {
 			this.dispose();
 		}
 	}
+
 }
