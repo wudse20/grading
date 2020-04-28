@@ -136,9 +136,6 @@ public class CourseFrame extends JFrame {
 	}
 
 	/**
-	 * TODO: Update CBPanel.<br>
-	 * <br>
-	 * 
 	 * Adds a new course to the main data.
 	 */
 	private void newCourse() {
@@ -175,6 +172,9 @@ public class CourseFrame extends JFrame {
 			//Updates the grade panel
 			mf.updateGradePanel();
 
+			//Updates CBPanel
+			mf.cbPanel.refreshData(mf.getMainData());
+
 			//Disposes the frame
 			this.dispose();
 		} catch (IllegalNameException e) {
@@ -187,9 +187,6 @@ public class CourseFrame extends JFrame {
 	}
 
 	/**
-	 * TODO: Update CBPanel. <br>
-	 * <br>
-	 * 
 	 * Updates a course.
 	 */
 	private void updateCourse() {
@@ -251,6 +248,9 @@ public class CourseFrame extends JFrame {
 
 			//Updates the grade panel.
 			mf.updateGradePanel();
+
+			//Updates CBPanel
+			mf.cbPanel.refreshData(mf.getMainData());
 
 			//Closes the frame
 			this.dispose();

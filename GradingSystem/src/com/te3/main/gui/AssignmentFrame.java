@@ -207,7 +207,12 @@ public class AssignmentFrame extends JFrame {
 
 		//Saves the progress
 		mf.saveData(mf.getSaveFilePath());
+
+		//Updates GradePanel
 		mf.updateGradePanel();
+
+		//Updates CBPanel
+		mf.cbPanel.refreshData(mf.getMainData());
 	}
 
 	/**
@@ -244,7 +249,12 @@ public class AssignmentFrame extends JFrame {
 
 		//Saves the task
 		mf.saveData(mf.getSaveFilePath());
+
+		//Updates GradePanel
 		mf.updateGradePanel();
+
+		//Updates CBPanel
+		mf.cbPanel.refreshData(mf.getMainData());
 	}
 
 }

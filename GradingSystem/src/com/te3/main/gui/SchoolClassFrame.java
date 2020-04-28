@@ -181,8 +181,6 @@ public class SchoolClassFrame extends JFrame {
 	}
 
 	/**
-	 * TODO: update CBpanel
-	 * 
 	 * Adds a new class
 	 */
 	private void addSchoolClass() {
@@ -218,6 +216,9 @@ public class SchoolClassFrame extends JFrame {
 
 		//Updates the grade panel
 		mf.updateGradePanel();
+
+		//Updates CBPanel
+		mf.cbPanel.refreshData(mf.getMainData());
 	}
 
 	/**
