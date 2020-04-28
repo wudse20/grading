@@ -30,10 +30,44 @@ public class ButtonPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 
 	/** The title in the help part of the GUI */
-	private String helpTitle = "Huvudvy (Placeholder)";
+	private String helpTitle = "Betygsättning";
 
-	/** The help info och the GUI */
-	private String helpInfo = "<html>Detta är en mening. <br> Detta är en till mening. <br> Detta är en placeholder!</html>";
+	/** The help text of this part of the program */
+	private String helpText =
+			"<br><b>Klasser/Grupper:</b><br>" +
+			"För att skapa en klass: välj <b>NY</b> i listan med klasser. <br>" +
+			"För att uppdatera en klass: välj <b>UPPDATERA</b> i listan med klasser. <br>" +
+			"För att välja en klass: välj den önskade klassen i listan med klasser. <br><br>" +
+			"<b>Kurser:</b><br>" +
+			"För att skapa en kurs: välj <b>NY</b> i listan med kurser. <br>" +
+			"För att uppdatera en kurs: välj <b>UPPDATERA</b> i listan med kurser. <br>" +
+			"För att välja en kurs: välj den önskade kurser i listan med kurser. <br><br>" +
+			"<b>Elever:</b><br>" +
+			"För att välja en elev: välj den önskade eleven i listan med elever. <br><br>" +
+			"<b>Uppgifter:</b><br>" +
+			"För att se elevens högst uppnådda resultat i varje kriterie: välj samlad vy <br>" +
+			"För att se elevens resultat på en viss uppgift: välj den önskade uppgiften i listan. <br><br>" +
+			"<b>Kommentar:</b><br>" +
+			"Du kan lämna en kommentar på varje uppgift. Detta gör du genom <br>" +
+			"att skriva in den i rutan till höger. <b>OBS! Den syns bara om en uppgift är vald</b><br>" +
+			"Kommentaren kommer att spara sig själv var 50:de knapp tryck, för att spara:<br>" +
+			"Tryck på spara under rutan. <br>" +
+			"Trycker du på rensa kommentar kommer den att tömmas. <br>" +
+			"<b>DET GÅR INTE ATT FÅ OGJORT!</b><br><br>" +
+			"<b>Spara/Spara som:</b><br>" +
+			"Spara: Sparar nuvarande framstegen <br>" +
+			"Spara som: Sparar nuvarande framstegen till en ny fil och uppdaterar standard filen som allt sparas till. <br><br>" +
+			"<b>Spara till fil:</b><br>" +
+			"Sparar ner till en fil som man kan skicka till eleven. <br>" +
+			"<b>Detta sparar inte nuvarande framsteg!</b> <br><br>" +
+			"<b>Skriv ut:</b><br>" +
+			"Skriver ut ett papper med alla resultat, efter hur programet är inställt. <br><br>" +
+			"<b>Inställningar:</b><br>" +
+			"Några olika inställningar som man kan göra i sitt program. <br>" +
+			"Skulle det bli tråkigt att sätta betyg tryck tre gånger på <br>" +
+			"Första knappen med YODA när bakgrunden är på. <br><br>" +
+			"<b>?</b><br>" +
+			"Överallt är detta hjälpknappen där du kan få hjälp om hur allt fungerar.<br>";
 
 	//Threads
 	Thread threadSaveToFile;
@@ -94,7 +128,7 @@ public class ButtonPanel extends JPanel {
 
 	/**
 	 * Acts on the output from the FileSystemFrame
-	 * 
+	 *
 	 * @param fsf the FileSystemFrame
 	 * @param st  the state of the information in the program
 	 */
@@ -135,8 +169,8 @@ public class ButtonPanel extends JPanel {
 	}
 
 	/**
-	 * Prints the file.
-	 * 
+	 * Prints the file. TODO: HANDLE WRONG PANEL STATE
+	 *
 	 * @param st the State of the panel
 	 */
 	private void print(State st) {
@@ -153,7 +187,7 @@ public class ButtonPanel extends JPanel {
 
 	/**
 	 * Used to format the text for printing.
-	 * 
+	 *
 	 * @param st the current state of the panel
 	 */
 	private void formatTextPrint(State st) {
@@ -204,7 +238,7 @@ public class ButtonPanel extends JPanel {
 
 	/**
 	 * Formats the text for the file.
-	 * 
+	 *
 	 * @param st the state of informations shown
 	 */
 	private void formatTextFile(State st) {
@@ -255,7 +289,7 @@ public class ButtonPanel extends JPanel {
 
 	/**
 	 * Changes and saves the file at a new location.
-	 * 
+	 *
 	 * @param path the new path that should be saved at
 	 */
 	public void saveAs(String path) {
@@ -274,7 +308,7 @@ public class ButtonPanel extends JPanel {
 
 	/**
 	 * Acts on the FileSystemFrames output.
-	 * 
+	 *
 	 * @param fsf the FileSystemFrame
 	 */
 	@SuppressWarnings("static-access")
@@ -328,7 +362,7 @@ public class ButtonPanel extends JPanel {
 		this.setLayout(layout);
 
 		//Adds action listeners
-		btnHelp.addActionListener((e) -> new HelpFrame(helpTitle, helpInfo, 500).setVisible(true));
+		btnHelp.addActionListener((e) -> new HelpFrame(helpTitle, "<html><p>" + helpText + "</p></html>", 500, 650).setVisible(true));
 
 		btnSave.addActionListener((e) -> {
 			mf.saveData(mf.getSaveFilePath());
