@@ -131,6 +131,9 @@ public class MainFrame extends JFrame implements ComponentListener, WindowStateL
 
 		//Initializes the components
 		initComponents();
+
+		//Stores the state
+		this.s = gradePanel.getState();
 	}
 
 	/**
@@ -316,6 +319,7 @@ public class MainFrame extends JFrame implements ComponentListener, WindowStateL
 	 * */
 	public void updateGradeState(State s) {
 		this.s = s;
+		gradePanel.setState(s);
 	}
 
 	/**
