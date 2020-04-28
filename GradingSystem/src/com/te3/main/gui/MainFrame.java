@@ -54,6 +54,9 @@ public class MainFrame extends JFrame implements ComponentListener, WindowStateL
 	/** If baby yoda is shown or not */
 	private boolean shouldShowBabyYoda;
 
+	/** The number of times the window has been resized */
+	private int resizeCount = 0;
+
 	//Layout
 	BoxLayout pLayout;
 
@@ -572,7 +575,13 @@ public class MainFrame extends JFrame implements ComponentListener, WindowStateL
 
 	@Override
 	public void componentResized(ComponentEvent e) {
-		resizeFrame();
+		//To improve resize speed.
+		//It will only call it every
+		//Five times it's resized, since
+		//resizing takes time, because of
+		//the image scaling.
+		if (resizeCount % 5 == 0)
+			resizeFrame();
 	}
 
 	@Override
