@@ -7,10 +7,7 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 /**
  * The frame used to display a help message.
@@ -43,6 +40,9 @@ public class HelpFrame extends JFrame implements ActionListener {
 	JLabel lblSpacer2 = new JLabel("     ");
 	JLabel lblSpacer3 = new JLabel("     ");
 	JLabel lblSpacer4 = new JLabel(" ");
+
+	//ScrollPane
+	JScrollPane scrPane = new JScrollPane(lblInfo);
 
 	//Panels
 	JPanel pContent = new JPanel();
@@ -118,7 +118,7 @@ public class HelpFrame extends JFrame implements ActionListener {
 		//Adds the components
 		pContent.setLayout(pContentLayout);
 		pContent.add(lblTitle, BorderLayout.PAGE_START);
-		pContent.add(lblInfo, BorderLayout.CENTER);
+		pContent.add(scrPane, BorderLayout.CENTER);
 		pContent.add(btnOk, BorderLayout.PAGE_END);
 
 		cp.add(lblSpacer1, BorderLayout.PAGE_START);
