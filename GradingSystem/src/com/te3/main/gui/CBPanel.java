@@ -49,6 +49,15 @@ public class CBPanel extends JPanel {
 		return new Dimension(super.getMaximumSize().width, super.getPreferredSize().height);
 	}
 	
+	private boolean checkInitTime(long compareTime) {
+		//System.out.println(compareTime - (initTime + 3000));
+		if (compareTime > (initTime + 3000)) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+	
 	private void initComponents() {
 		mainLayout 	= new GridLayout(2, 4);
 		this.setLayout(mainLayout);
@@ -72,33 +81,39 @@ public class CBPanel extends JPanel {
 		
 		//class combobox
 		cbClass.addActionListener((e) -> {
-			if (!e.getActionCommand().equals("comboBoxChanged")) return;
-			
-			//;
-			System.out.println(e.getActionCommand());
+			System.out.println("Class ActionCommand: " + e.getActionCommand());
+			if (checkInitTime(e.getWhen()) || !e.getActionCommand().equals("comboBoxChanged")) return;
 			
 			int i = cbClass.getSelectedIndex();
 			int itmCount = cbClass.getItemCount();
+			
+			System.out.println(i);
+			System.out.println(itmCount);
 			
 			if (i != -1 && i < itmCount - 2) {
 				mf.setCurrentlySelectedClassIndex(i);
 			} else if (i == itmCount - 1) {
 				mf.openAddEditGUI(SchoolClass.class, false);
+				
 			} else if (i == itmCount - 2) {
 				mf.openAddEditGUI(SchoolClass.class, true);
 			}
 			
-			this.refreshData(mf.getMainData());
+			//this.refreshData(mf.getMainData());
 		});
 		
 		//course combobox
 		cbCourse.addActionListener((e) -> {
-			if (!e.getActionCommand().equals("comboBoxChanged")) return;
+			System.out.println("Course ActionCommand: " + e.getActionCommand());
+			if (checkInitTime(e.getWhen()) || !e.getActionCommand().equals("comboBoxChanged")) return;
 			
 			int i = cbCourse.getSelectedIndex();
 			int itmCount = cbCourse.getItemCount();
 			
-			if (i != -1 && i < itmCount - 2) {
+			if (i == 0) { 
+				mf.updateGradeState(State.NOTHING_SELECTED);
+			} else if (i != -1 && i < itmCount - 2) {
+				mf.updateGradeState(State.CLASS);
 				mf.setCurrentlySelectedCourseIndex(i);
 			} else if (i == itmCount - 1) {
 				mf.openAddEditGUI(Course.class, false);
@@ -106,19 +121,21 @@ public class CBPanel extends JPanel {
 				mf.openAddEditGUI(Course.class, true);
 			}
 			
-			this.refreshData(mf.getMainData());
+			//this.refreshData(mf.getMainData());
 		});
 		
 		//student combobox
 		cbStudent.addActionListener((e) -> {
-			if (!e.getActionCommand().equals("comboBoxChanged")) return;
+			System.out.println("Student ActionCommand: " + e.getActionCommand());
+			if (checkInitTime(e.getWhen()) || !e.getActionCommand().equals("comboBoxChanged")) return;
 			
 			mf.setCurrentlySelectedStudentIndex(cbStudent.getSelectedIndex());
 		});
 		
 		//task combobox
 		cbTask.addActionListener((e) -> {
-			if (!e.getActionCommand().equals("comboBoxChanged")) return;
+			System.out.println("Task ActionCommand: " + e.getActionCommand());
+			if (checkInitTime(e.getWhen()) || !e.getActionCommand().equals("comboBoxChanged")) return;
 			
 			int i = cbTask.getSelectedIndex();
 			int itmCount = cbTask.getItemCount();
@@ -126,18 +143,16 @@ public class CBPanel extends JPanel {
 			if (i != -1 && i < itmCount - 2) {
 				mf.updateGradeState(State.CLASS_COURSE_STUDENT_TASK);
 				mf.setCurrentlySelectedAssignmentIndex(cbTask.getSelectedIndex());
-				mf.updateGradePanel();
 			} else if (i == 0) {
 				mf.updateGradeState(State.CLASS_COURSE_STUDENT);
 				mf.setCurrentlySelectedAssignmentIndex(cbTask.getSelectedIndex());
-				mf.updateGradePanel();
 			} else if (i == itmCount - 1) {
 				mf.openAddEditGUI(Task.class, false);
 			} else if (i == itmCount - 2) {
 				mf.openAddEditGUI(Task.class, true);
 			}
 			
-			this.refreshData(mf.getMainData());
+			//this.refreshData(mf.getMainData());
 		});
 		
 		this.add(cbClass);
@@ -165,10 +180,19 @@ public class CBPanel extends JPanel {
 	}
 
 	/**
+	 * Method to handle the comboboxes disabling when items are not selected
+	 */
+	public void handleNewState() {
+		State curState = mf.getGradeState();
+		System.out.println(curState.toString());
+	}
+	
+	/**
 	 * Completely updates the entire combobox panel with new information.
 	 * @param newData the new information to be parsed and updated with.
 	 */
 	public void refreshData(Data newData) {
+		System.out.println("Refreshing Data combobox data");
 		cbClass.removeAllItems();
 		cbCourse.removeAllItems();
 		cbStudent.removeAllItems();
@@ -180,11 +204,17 @@ public class CBPanel extends JPanel {
 //		Sorry att jag pajjade detta, du får gå på klassen som är vald.
 //		ArrayList<Course> dataCourses = localData.getCourses();
 		
+		System.out.println("Adding default combobox items...");
+		
+		cbClass.addItem("Klass");
+		cbCourse.addItem("Kurs");
 		cbStudent.addItem("Samlad vy");
 		cbTask.addItem("Samlad vy");
 		
 		dataClasses.forEach((n) -> cbClass.addItem(n.getName()));
 //		dataCourses.forEach((n) -> cbCourse.addItem(n.getName()));
+		
+		System.out.println("Adding change items...");
 		
 		cbClass.addItem("Ny");
 		cbClass.addItem("Ändra");
