@@ -106,6 +106,7 @@ public class HelpFrame extends JFrame implements ActionListener {
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.setLayout(layout);
 
+		//Sets text and font
 		lblTitle.setFont(new Font(lblTitle.getFont().getName(), Font.BOLD, 20));
 		lblTitle.setText(title);
 
@@ -114,6 +115,9 @@ public class HelpFrame extends JFrame implements ActionListener {
 		//Sets action command and adds an action listener
 		btnOk.setActionCommand("OK");
 		btnOk.addActionListener(this);
+
+		//Removes the border
+		scrPane.setBorder(BorderFactory.createEmptyBorder());
 
 		//Adds the components
 		pContent.setLayout(pContentLayout);
