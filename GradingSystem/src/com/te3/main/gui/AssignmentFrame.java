@@ -237,13 +237,6 @@ private String helpInfo =
 			throw new IllegalInputException("Du måste ha minst ett kunskapskrav i uppgiften.");
 		}
 
-		//Checks so there isn't a assignment with the same name.
-		for (int i = 0; i < mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getStudents().get(0).getCourses().get(mf.getCurrentlySelectedCourseIndex()).getCourseTasks().size(); i++) {
-			if (np.getLastInput().trim().equals(mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getStudents().get(i).getCourses().get(mf.getCurrentlySelectedCourseIndex()).getCourseTasks().get(i).getName())) {
-				throw new IllegalNameException("Det finns redan en uppgift med namnet: " + np.getLastInput().trim());
-			}
-		}
-
 		//Loops through the students and adds the task to the student
 		for (var i = 0; i < mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getStudents()
 				.size(); i++) {
@@ -281,13 +274,6 @@ private String helpInfo =
 		//If there are no criteria in the assingment
 		if (map.getAddedCriteria().size() == 0) {
 			throw new IllegalInputException("Du måste ha minst ett kunskapskrav i uppgiften.");
-		}
-
-		//Checks so there isn't a assignment with the same name.
-		for (int i = 0; i < mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getStudents().get(0).getCourses().get(mf.getCurrentlySelectedCourseIndex()).getCourseTasks().size(); i++) {
-			if (np.getLastInput().trim().equals(mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getStudents().get(i).getCourses().get(mf.getCurrentlySelectedCourseIndex()).getCourseTasks().get(i).getName())) {
-				throw new IllegalNameException("Det finns redan en uppgift med namnet: " + np.getLastInput().trim());
-			}
 		}
 
 		// Removes the task and adds the updated task
