@@ -15,7 +15,7 @@ import com.te3.main.objects.Task;
 /**
  * The class that holds the GUI for the assignments
  *
- * TODO: CHECK FOR SAME NAME, CHECK FOR ASSIGNMENTS WITHOUT CRITERIA, HELPTEXT
+ * TODO: CHECK FOR ASSIGNMENTS WITHOUT CRITERIA, HELPTEXT
  */
 public class AssignmentFrame extends JFrame {
 
@@ -199,6 +199,13 @@ public class AssignmentFrame extends JFrame {
 			throw new IllegalInputException("Du måste ha minst ett kunskapskrav i uppgiften.");
 		}
 
+		//Checks so there isn't a assignment with the same name.
+		for (int i = 0; i < mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getStudents().get(0).getCourses().get(mf.getCurrentlySelectedCourseIndex()).getCourseTasks().size(); i++) {
+			if (np.getLastInput().trim().equals(mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getStudents().get(i).getCourses().get(mf.getCurrentlySelectedCourseIndex()).getCourseTasks().get(i).getName())) {
+				throw new IllegalNameException("Det finns redan en uppgift med namnet: " + np.getLastInput().trim());
+			}
+		}
+
 		//Loops through the students and adds the task to the student
 		for (var i = 0; i < mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getStudents()
 				.size(); i++) {
@@ -236,6 +243,13 @@ public class AssignmentFrame extends JFrame {
 		//If there are no criteria in the assingment
 		if (map.getAddedCriteria().size() == 0) {
 			throw new IllegalInputException("Du måste ha minst ett kunskapskrav i uppgiften.");
+		}
+
+		//Checks so there isn't a assignment with the same name.
+		for (int i = 0; i < mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getStudents().get(0).getCourses().get(mf.getCurrentlySelectedCourseIndex()).getCourseTasks().size(); i++) {
+			if (np.getLastInput().trim().equals(mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getStudents().get(i).getCourses().get(mf.getCurrentlySelectedCourseIndex()).getCourseTasks().get(i).getName())) {
+				throw new IllegalNameException("Det finns redan en uppgift med namnet: " + np.getLastInput().trim());
+			}
 		}
 
 		// Removes the task and adds the updated task
