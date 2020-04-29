@@ -23,6 +23,9 @@ public class GamePanel extends JPanel implements KeyListener, MouseListener, Mou
     /** The side of the button squares */
     private int squareSideLength;
 
+    /** The colour of the match results, default value: Color.YELLOW */
+    private Color resColour = Color.YELLOW;
+
     /**
      * Constructor
      */
@@ -278,7 +281,7 @@ public class GamePanel extends JPanel implements KeyListener, MouseListener, Mou
             int width = g.getFontMetrics().stringWidth(text);
 
             //Draws the actual String
-            g.drawString("Tryck på 'S' för att starta spelet!", (this.getWidth() / 2) - (width / 2), this.getHeight() / 2);
+            g.drawString(text, (this.getWidth() / 2) - (width / 2), this.getHeight() / 2);
         } else {
             //Button calculations
             //Calculates the space
@@ -291,7 +294,7 @@ public class GamePanel extends JPanel implements KeyListener, MouseListener, Mou
             drawButtons(g);
 
             //Changes color
-            g.setColor(Color.YELLOW);
+            g.setColor(this.resColour);
 
             //Sets the font
             g.setFont(new Font("TimesRoman", Font.BOLD, 16));
@@ -322,6 +325,37 @@ public class GamePanel extends JPanel implements KeyListener, MouseListener, Mou
 
     @Override
     public void mousePressed(MouseEvent e) {
+        //Updates the color of the results text.
+        switch (new Random().nextInt(9)) {
+            case 0:
+                this.resColour = Color.RED;
+                break;
+            case 1:
+                this.resColour = Color.GREEN;
+                break;
+            case 2:
+                this.resColour = Color.YELLOW;
+                break;
+            case 3:
+                this.resColour = Color.WHITE;
+                break;
+            case 4:
+                this.resColour = Color.BLUE;
+                break;
+            case 5:
+                this.resColour = Color.PINK;
+                break;
+            case 6:
+                this.resColour = Color.LIGHT_GRAY;
+                break;
+            case 7:
+                this.resColour = Color.GRAY;
+                break;
+            case 8:
+                this.resColour = Color.DARK_GRAY;
+        }
+
+        //Acts on button press
         this.detectButtonPress(e.getX(), e.getY());
     }
 
