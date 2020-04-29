@@ -188,6 +188,9 @@ public class GradesPanel extends JPanel implements KeyListener {
 		//Sets some properties
 		this.setProperties();
 
+		//Stores the State
+		this.state = s;
+
 		//Calculates which grades should be shown, based on the state.
 		if (s.equals(State.CLASS_COURSE_STUDENT_TASK)) {
 			displayCriteria(criteria);
@@ -355,6 +358,9 @@ public class GradesPanel extends JPanel implements KeyListener {
 		panelInfo.add(panelInfo2, BorderLayout.CENTER);
 		panelInfo.add(lblSpacer3, BorderLayout.LINE_END);
 		panelInfo.add(lblSpacer4, BorderLayout.PAGE_END);
+
+		//Adds the components
+		this.addComponents(st);
 	}
 
 	/**
