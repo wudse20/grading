@@ -28,7 +28,7 @@ public class CourseFrame extends JFrame {
 			+ "Klicka på en klass i rutan <b>klasser</b> så kommer den att <br>"
 			+ "kopplas till kursen. För att tabort en klass från kursen <br>"
 			+ "klicka på den i rutan <b>tillagda klasser</b>. <br><br>"
-			+ "För att lägga till ett kunskaps krav till kursen så skriv in <br>"
+			+ "För att lägga till ett kunskapskrav till kursen så skriv in <br>"
 			+ "in den i rutan: <b>Nytt kunskapskrav</b>. Detta måste vara <br>"
 			+ "minst tre tecken långt. Skulle du vilja ta bort <br>"
 			+ "ett kunskapskrav behöver du bara klicka på det<br>" + "i <b>kunskapskravs</b>-rutan.<br>"
