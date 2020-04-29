@@ -15,7 +15,7 @@ import com.te3.main.objects.Task;
 /**
  * The class that holds the GUI for the assignments
  *
- * TODO: CHECK FOR ASSIGNMENTS WITHOUT CRITERIA, HELPTEXT, Handle delete action
+ * TODO: CHECK FOR ASSIGNMENTS WITHOUT CRITERIA, Handle delete action
  */
 public class AssignmentFrame extends JFrame {
 
@@ -23,7 +23,13 @@ public class AssignmentFrame extends JFrame {
 	private static final long serialVersionUID = 1797348437376328717L;
 
 	/** The help text */
-	private String helpInfo = "PLACEHOLDER";
+private String helpInfo =
+			  "Skriv in namnet på kursen i rutan: <b>Namn</b> <br>"
+		    + "Klicka på de kunskapskrav du vill ha i uppgiften. <br>"
+		    + "De kunskapskraven till vänster är de som är med i uppgiften. <br>"
+		    + "För att avbryta tryck på knappen: <b>Avbryt</b><br>"
+		    + "För att lägga till/Uppdatera klicka på knappen <b>Lägg Till/Uppdatera</b> <br>"
+			+ "Tryck på knappen: <b>Tabort</b> för att tabort uppgiften.";
 
 	//JLabels
 	JLabel lblSpacer1 = new JLabel(" ");
@@ -149,7 +155,7 @@ public class AssignmentFrame extends JFrame {
 
 			ecp.getBtnHelp().addActionListener((e) -> {
 				//Shows a new help frame.
-				new HelpFrame("Ändra en kurs", "<html><p>" + helpInfo + "</p></html>").setVisible(true);
+				new HelpFrame("Ändra en kurs", "<html><p>" + helpInfo + "</p></html>", 350, 450).setVisible(true);
 			});
 		}
 	}

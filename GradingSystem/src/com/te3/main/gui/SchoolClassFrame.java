@@ -15,7 +15,7 @@ import com.te3.main.objects.SchoolClass;
 /**
  * The frame for adding and editing SchoolClasses
  *
- * TODO: handle delete action, update helptext
+ * TODO: handle delete action
  * */
 public class SchoolClassFrame extends JFrame {
 
@@ -33,7 +33,8 @@ public class SchoolClassFrame extends JFrame {
 			+ "notera att dessa namnen även behöver vara minst <br>" + "tre tecken långa för att accepteras.<br>"
 			+ "Du lägger till namnen genom att antigen<br>"
 			+ "trycka på <b>lägg till</b> eller trycka på enter i rutan.<br><br>"
-			+ "För att skapa/uppdatera klassen klicka på <b>lägg till</b> eller <b>uppdatera</b>.";
+			+ "För att skapa/uppdatera klassen klicka på <b>lägg till</b> eller <b>uppdatera</b>."
+			+ "Tryck på knappen: <b>Tabort</b> för att tabort klassen.";
 
 	//Instances
 	MainFrame mf;

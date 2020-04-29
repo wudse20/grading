@@ -18,7 +18,7 @@ import com.te3.main.objects.SchoolClass;
  * The class that holds the Frame for
  * managing courses.
  *
- * TODO: handle delete action, update helptext
+ * TODO: handle delete action
  * */
 public class CourseFrame extends JFrame {
 
@@ -33,7 +33,8 @@ public class CourseFrame extends JFrame {
 			+ "För att lägga till ett kunskaps krav till kursen så skriv in <br>"
 			+ "in den i rutan: <b>Nytt kunskapskrav</b>. Detta måste vara <br>"
 			+ "minst tre tecken långt. Skulle du vilja ta bort <br>"
-			+ "ett kunskapskrav behöver du bara klicka på det<br>" + "i <b>kunskapskravs</b>-rutan.";
+			+ "ett kunskapskrav behöver du bara klicka på det<br>" + "i <b>kunskapskravs</b>-rutan.<br>"
+			+ "Tryck på knappen: <b>Tabort</b> för att tabort kursen.";
 
 	//Instances
 	Course c;
