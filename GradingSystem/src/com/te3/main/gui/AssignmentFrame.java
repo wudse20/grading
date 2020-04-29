@@ -15,7 +15,7 @@ import com.te3.main.objects.Task;
 /**
  * The class that holds the GUI for the assignments
  *
- * TODO: CHECK FOR ASSIGNMENTS WITHOUT CRITERIA, HELPTEXT
+ * TODO: CHECK FOR ASSIGNMENTS WITHOUT CRITERIA, HELPTEXT, Handle delete action
  */
 public class AssignmentFrame extends JFrame {
 

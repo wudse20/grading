@@ -14,6 +14,8 @@ import com.te3.main.objects.SchoolClass;
 
 /**
  * The frame for adding and editing SchoolClasses
+ *
+ * TODO: handle delete action, update helptext
  * */
 public class SchoolClassFrame extends JFrame {
 

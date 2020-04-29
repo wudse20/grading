@@ -8,8 +8,6 @@ import javax.swing.JPanel;
 /**
  * The button panel att the bottom <br>
  * of the editing GUI:s.
- *
- * TODO: FIX DELETE BUTTON
  * */
 public class EditControlPanel extends JPanel {
 
@@ -23,6 +21,7 @@ public class EditControlPanel extends JPanel {
 	JButton btnHelp = new JButton("?");
 	JButton btnCancel = new JButton("Avbryt");
 	JButton btnUpdate = new JButton("Uppdatera");
+	JButton btnDelete = new JButton("Tabort");
 
 	/**
 	 * Sets everything up
@@ -30,6 +29,7 @@ public class EditControlPanel extends JPanel {
 	public EditControlPanel() {
 		this.setLayout(layout);
 		this.add(btnHelp);
+		this.add(btnDelete);
 		this.add(btnCancel);
 		this.add(btnUpdate);
 	}

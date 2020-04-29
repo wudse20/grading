@@ -17,6 +17,8 @@ import com.te3.main.objects.SchoolClass;
 /**
  * The class that holds the Frame for
  * managing courses.
+ *
+ * TODO: handle delete action, update helptext
  * */
 public class CourseFrame extends JFrame {
 
