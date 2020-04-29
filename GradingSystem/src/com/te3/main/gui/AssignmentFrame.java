@@ -14,6 +14,8 @@ import com.te3.main.objects.Task;
 
 /**
  * The class that holds the GUI for the assignments
+ *
+ * TODO: DISPOSE, CHECK FOR SAME NAME, CHECK FOR ASSIGNMENTS WITHOUT CRITERIA.
  */
 public class AssignmentFrame extends JFrame {
 

@@ -8,6 +8,8 @@ import javax.swing.JPanel;
 /**
  * The button panel att the bottom <br>
  * of the editing GUI:s.
+ *
+ * TODO: FIX DELETE BUTTON
  * */
 public class EditControlPanel extends JPanel {
 
