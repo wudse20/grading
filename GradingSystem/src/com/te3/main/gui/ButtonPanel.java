@@ -169,11 +169,16 @@ public class ButtonPanel extends JPanel {
 	}
 
 	/**
-	 * Prints the file. TODO: HANDLE WRONG PANEL STATE
+	 * Prints the file.
 	 *
 	 * @param st the State of the panel
 	 */
 	private void print(State st) {
+		if (!(mf.getGradeState().equals(State.CLASS_COURSE_STUDENT_TASK) || mf.getGradeState().equals(State.CLASS_COURSE_STUDENT))) {
+			JOptionPane.showMessageDialog(this, "Du kan bara skriva ut om du har en Elev/Uppgift vald!", "Du kan inte skriva ut!", JOptionPane.WARNING_MESSAGE);
+			return;
+		}
+
 		//Formats the text
 		formatTextPrint(st);
 
