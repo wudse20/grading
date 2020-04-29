@@ -59,6 +59,26 @@ public class Student {
 		this.courses.add(c);
 	}
 
+
+	/**
+	 * Removes a course <br>
+	 * <br>
+	 * if c = {@code null} then it will return without doing anything.
+	 *
+	 * @param c the course that's being deleted.
+	 */
+	public void deleteCourse(Course c) {
+		if (c == null) {
+			return;
+		}
+		else if (this.courses == null) {
+			this.courses = new ArrayList<Course>();
+			return;
+		}
+
+		this.courses.remove(c);
+	}
+
     /**
      * A getter for the name
      *
@@ -107,22 +127,10 @@ public class Student {
     /**
      * A getter for the courses
      *
-     * @return the cloned list
+     * @return courses
      */
 	public ArrayList<Course> getCourses() {
-		try {
-		    //Creates a clone list
-			ArrayList<Course> clone = new ArrayList<Course>();
-
-			//Clones the list
-			clone.addAll(this.courses);
-
-			//Returns the list
-			return clone;
-		} catch (NullPointerException e) {
-		    //Returns a empty list
-			return new ArrayList<Course>();
-		}
+		return this.courses;
 	}
 
 	@Override

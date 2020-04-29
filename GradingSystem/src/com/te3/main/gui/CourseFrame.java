@@ -17,8 +17,6 @@ import com.te3.main.objects.SchoolClass;
 /**
  * The class that holds the Frame for
  * managing courses.
- *
- * TODO: handle delete action
  * */
 public class CourseFrame extends JFrame {
 
@@ -121,8 +119,9 @@ public class CourseFrame extends JFrame {
 		np.setLastInput(c.getName());
 
 		//Adds the action listener
-		ecp.getBtnUpdate().addActionListener((e) -> updateCourse());
-		ecp.getBtnCancel().addActionListener((e) -> dispose());
+		ecp.getBtnUpdate().addActionListener((e) -> this.updateCourse());
+		ecp.getBtnCancel().addActionListener((e) -> this.dispose());
+		ecp.getBtnDelete().addActionListener(e -> this.deleteCourse());
 		ecp.getBtnHelp().addActionListener((e) -> new HelpFrame("Lägg till kurs", "<html><p>" + helpInfo + "</p></html>", 500).setVisible(true));
 
 		//Adds components
@@ -136,6 +135,28 @@ public class CourseFrame extends JFrame {
 		this.add(panel, BorderLayout.CENTER);
 		this.add(lblSpacer3, BorderLayout.LINE_END);
 		this.add(lblSpacer4, BorderLayout.PAGE_END);
+	}
+
+	/**
+	 * Removes a Course
+	 */
+	private void deleteCourse() {
+		//User confirmation
+		int ans = JOptionPane.showConfirmDialog(this, "Är du säker på att du vill tabort: " + c.getName() + "?", "Tabort", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+
+		//Returns if no
+		if (ans == JOptionPane.NO_OPTION)
+			return;
+
+		//Removes the course from the students
+		for (int i = 0; i < mf.getMainData().getClasses().size(); i++) {
+			for (int j = 0; j < mf.getMainData().getClasses().get(i).getStudents().size(); j++) {
+				int index = mf.getMainData().getClasses().get(i).getStudents().get(j).getCourses().indexOf(c);
+				if (index != -1) {
+					mf.getMainData().getClasses().get(i).getStudents().get(j).getCourses().remove(index);
+				}
+			}
+		}
 	}
 
 	/**

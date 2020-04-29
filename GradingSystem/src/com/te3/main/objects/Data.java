@@ -26,6 +26,15 @@ public class Data {
 	}
 
 	/**
+	 * Removes a SchoolClass from the list.
+	 *
+	 * @param sc the SchoolClass to be removed
+	 */
+	public void removeClass(SchoolClass sc) {
+		this.classes.remove(sc);
+	}
+
+	/**
 	 * A getter for the classes
 	 *
 	 * @return the classes

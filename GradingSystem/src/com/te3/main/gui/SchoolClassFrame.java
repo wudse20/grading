@@ -14,8 +14,6 @@ import com.te3.main.objects.SchoolClass;
 
 /**
  * The frame for adding and editing SchoolClasses
- *
- * TODO: handle delete action
  * */
 public class SchoolClassFrame extends JFrame {
 
@@ -124,17 +122,34 @@ public class SchoolClassFrame extends JFrame {
 		np.setLastInput(sc.getName());
 
 		//Adds listeners
-		ecp.getBtnUpdate().addActionListener((e) -> {
-			updateSchoolClass();
-		});
+		ecp.getBtnUpdate().addActionListener((e) -> updateSchoolClass());
 
-		ecp.getBtnCancel().addActionListener((e) -> {
-			this.dispose();
-		});
+		ecp.getBtnCancel().addActionListener((e) -> this.dispose());
 
-		ecp.getBtnHelp().addActionListener((e) -> {
-			new HelpFrame("Uppdatera en klass", "<html><p>" + helpInfo + "</p></html>", 500).setVisible(true);
-		});
+		ecp.getBtnDelete().addActionListener(e -> this.deleteClass());
+
+		ecp.getBtnHelp().addActionListener((e) -> new HelpFrame("Uppdatera en klass", "<html><p>" + helpInfo + "</p></html>", 500).setVisible(true));
+	}
+
+	/**
+	 * Removes a SchoolClass
+	 */
+	private void deleteClass() {
+		//User Confirmation
+		int ans = JOptionPane.showConfirmDialog(this, "Är du säker på att du vill tabort: " + this.sc.getName() + "?", "Tabort", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+
+		//If no returns
+		if (ans == JOptionPane.NO_OPTION)
+			return;
+
+		//Removes the class
+		mf.getMainData().removeClass(this.sc);
+
+		//Message to the user
+		JOptionPane.showMessageDialog(this, "Du har tagit bort klassen: " + this.sc.getName(), "Tabort", JOptionPane.INFORMATION_MESSAGE);
+
+		//Closes the frame
+		this.dispose();
 	}
 
 	/**

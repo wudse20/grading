@@ -36,6 +36,8 @@ public class EditControlPanel extends JPanel {
 
 	/**
 	 * The getter for the update button
+	 *
+	 * @return the update button
 	 * */
 	public JButton getBtnUpdate() {
 		return this.btnUpdate;
@@ -43,6 +45,8 @@ public class EditControlPanel extends JPanel {
 
 	/**
 	 * The getter for the cancel button
+	 *
+	 * @return the cancel button
 	 * */
 	public JButton getBtnCancel() {
 		return this.btnCancel;
@@ -50,8 +54,20 @@ public class EditControlPanel extends JPanel {
 
 	/**
 	 * The getter for the help button
+	 *
+	 * @return the help button
 	 * */
 	public JButton getBtnHelp() {
 		return this.btnHelp;
+	}
+
+
+	/**
+	 * The getter for the delete button
+	 *
+	 * @return the delete button
+	 */
+	public JButton getBtnDelete() {
+		return this.btnDelete;
 	}
 }

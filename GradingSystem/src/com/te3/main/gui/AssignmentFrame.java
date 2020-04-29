@@ -15,7 +15,7 @@ import com.te3.main.objects.Task;
 /**
  * The class that holds the GUI for the assignments
  *
- * TODO: CHECK FOR ASSIGNMENTS WITHOUT CRITERIA, Handle delete action
+ * TODO: CHECK FOR ASSIGNMENTS WITHOUT CRITERIA
  */
 public class AssignmentFrame extends JFrame {
 
@@ -153,6 +153,8 @@ private String helpInfo =
 				this.dispose();
 			});
 
+			ecp.getBtnDelete().addActionListener(e -> this.deleteTask());
+
 			ecp.getBtnHelp().addActionListener((e) -> {
 				//Shows a new help frame.
 				new HelpFrame("Ändra en kurs", "<html><p>" + helpInfo + "</p></html>", 350, 450).setVisible(true);
@@ -186,6 +188,29 @@ private String helpInfo =
 		this.add(panel, BorderLayout.CENTER);
 		this.add(lblSpacer3, BorderLayout.LINE_END);
 		this.add(lblSpacer4, BorderLayout.PAGE_END);
+	}
+
+	/**
+	 * Deletes the task that's being updated
+	 */
+	private void deleteTask() {
+		//Confirmation
+		int ans = JOptionPane.showConfirmDialog(this, "Är du säker på att du vill tabort: " + t.getName() + "?", "Tabort", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+
+		//If no return
+		if (ans == JOptionPane.NO_OPTION)
+			return;
+
+		//Loops through the students and removes the task from the student
+		for (int i = 0; i < mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getStudents().size(); i++) {
+			mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getStudents().get(i).getCourses().get(mf.getCurrentlySelectedCourseIndex()).removeCourseTask(t);
+		}
+
+		//Message to the user
+		JOptionPane.showMessageDialog(this, "Du har nu tagit bort uppgiften: " + t.getName(), "Tabort", JOptionPane.INFORMATION_MESSAGE);
+
+		//Closes the frame
+		this.dispose();
 	}
 
 	/**
