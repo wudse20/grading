@@ -13,7 +13,7 @@ import com.te3.main.objects.*;
 /**
  *	Du behöver fixa en metod i MainFrame för att uppdatera din panel.
  *	Du behöver även uppdatera GUI:t och sätta vilket stadie panelen är i
- *	m.h.a. mf.updateGradeState(State), med rätt state. Sedan mf.updateGradePanel()
+ *	m.h.a. mf.updateGradePanel(State), med rätt state. Sedan mf.updateGradePanel()
  */
 public class CBPanel extends JPanel {
 	/** Default */
@@ -99,9 +99,9 @@ public class CBPanel extends JPanel {
 			System.out.println(itmCount);
 			
 			if (i == 0) {
-				mf.updateGradeState(State.NOTHING_SELECTED);
+				mf.updateGradePanel(State.NOTHING_SELECTED);
 			} else if (i != -1 && i < itmCount - 2) {
-				mf.updateGradeState(State.CLASS);
+				mf.updateGradePanel(State.CLASS);
 				mf.setCurrentlySelectedClassIndex(i-1);
 			} else if (i == itmCount - 1) {
 				mf.openAddEditGUI(SchoolClass.class, false);
@@ -120,10 +120,10 @@ public class CBPanel extends JPanel {
 			int itmCount = cbCourse.getItemCount();
 			
 			if (i == 0) { 
-				mf.updateGradeState(State.NOTHING_SELECTED);
+				mf.updateGradePanel(State.NOTHING_SELECTED);
 			} else if (i != -1 && i < itmCount - 2) {
 				mf.setCurrentlySelectedCourseIndex(i-1);
-				mf.updateGradeState(State.CLASS_COURSE);
+				mf.updateGradePanel(State.CLASS_COURSE);
 			} else if (i == itmCount - 1) {
 				mf.openAddEditGUI(Course.class, false);
 			} else if (i == itmCount - 2) {
@@ -149,10 +149,10 @@ public class CBPanel extends JPanel {
 			
 			if (i == 0) {
 				mf.setCurrentlySelectedAssignmentIndex(i);
-				mf.updateGradeState(State.CLASS_COURSE_STUDENT);
+				mf.updateGradePanel(State.CLASS_COURSE_STUDENT);
 			} else if (i != -1 && i < itmCount - 2) {
 				mf.setCurrentlySelectedAssignmentIndex(i-1);
-				mf.updateGradeState(State.CLASS_COURSE_STUDENT_TASK);
+				mf.updateGradePanel(State.CLASS_COURSE_STUDENT_TASK);
 			} else if (i == itmCount - 1) {
 				mf.openAddEditGUI(Task.class, false);
 			} else if (i == itmCount - 2) {

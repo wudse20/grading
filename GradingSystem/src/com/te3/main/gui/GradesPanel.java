@@ -88,7 +88,7 @@ public class GradesPanel extends JPanel implements KeyListener {
 	 */
 	public GradesPanel(MainFrame mf) {
 		//Sets the needed values
-		this.state = State.CLASS_COURSE_STUDENT_TASK; //Get from cbPanel
+		this.state = State.NOTHING_SELECTED;
 		this.mf = mf;
 
 		//Sets the layout
@@ -183,7 +183,7 @@ public class GradesPanel extends JPanel implements KeyListener {
 		this.addComponents(s);
 
 		//Grabs the needed information.
-		this.grabInfo();
+		this.grabInfo(s);
 
 		//Sets some properties
 		this.setProperties();
@@ -236,16 +236,18 @@ public class GradesPanel extends JPanel implements KeyListener {
 
 	/**
 	 * Grabs the needed information from the MainFrame's data object.
+	 *
+	 * @param s The state of the GUI
 	 */
-	private void grabInfo() {
+	private void grabInfo(State s) {
 		//Grabs the info if it needs it, else sets it to null to prevent a NullPointerException
-		if (this.state.equals(State.CLASS_COURSE_STUDENT_TASK)) {
+		if (s.equals(State.CLASS_COURSE_STUDENT_TASK)) {
 			classes = mf.getMainData().getClasses();
 			students = classes.get(mf.getCurrentlySelectedClassIndex()).getStudents();
 			courses = students.get(0).getCourses();
 			tasks = courses.get(mf.getCurrentlySelectedCourseIndex()).getCourseTasks();
 			criteria = tasks.get(mf.getCurrentlySelectedAssignmentIndex()).getCriteria();
-		}else if (this.state.equals(State.CLASS_COURSE_STUDENT)) {
+		}else if (s.equals(State.CLASS_COURSE_STUDENT)) {
 			classes = mf.getMainData().getClasses();
 			students = classes.get(mf.getCurrentlySelectedClassIndex()).getStudents();
 			courses = students.get(0).getCourses();

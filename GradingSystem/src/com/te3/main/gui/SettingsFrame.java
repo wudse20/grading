@@ -441,7 +441,7 @@ public class SettingsFrame extends JFrame {
 
 		//If yes then deletes
 		if (prompt == JOptionPane.YES_OPTION) {
-			mf.updateGradeState(State.NOTHING_SELECTED);
+			mf.updateGradePanel(State.NOTHING_SELECTED);
 			mf.updateGradePanel();
 			mf.setMainData(new Data(new ArrayList<SchoolClass>()));
 			mf.saveData(mf.getSaveFilePath());

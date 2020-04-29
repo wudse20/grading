@@ -328,11 +328,12 @@ public class MainFrame extends JFrame implements ComponentListener, WindowStateL
 	}
 
 	/**
-	 * Updates the state of the GUI
+	 * Updates the state of the GUI and
+	 * the GUI.
 	 *
 	 * @param s the new state of the GUI
 	 * */
-	public void updateGradeState(State s) {
+	public void updateGradePanel(State s) {
 		this.s = s;
 		gradePanel.update(s);
 		this.cbPanel.handleNewState();
