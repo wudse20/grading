@@ -8,6 +8,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import com.te3.main.enums.State;
 import com.te3.main.exceptions.IllegalInputException;
 import com.te3.main.exceptions.IllegalNameException;
 import com.te3.main.objects.Task;
@@ -208,6 +209,12 @@ private String helpInfo =
 
 		//Message to the user
 		JOptionPane.showMessageDialog(this, "Du har nu tagit bort uppgiften: " + t.getName(), "Tabort", JOptionPane.INFORMATION_MESSAGE);
+
+		//Updates GradePanel
+		mf.updateGradePanel(State.CLASS_COURSE_STUDENT);
+
+		//Updates CBPanel
+		mf.cbPanel.refreshData(mf.getMainData());
 
 		//Closes the frame
 		this.dispose();

@@ -9,6 +9,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import com.te3.main.enums.State;
 import com.te3.main.exceptions.IllegalNameException;
 import com.te3.main.objects.SchoolClass;
 
@@ -147,6 +148,12 @@ public class SchoolClassFrame extends JFrame {
 
 		//Message to the user
 		JOptionPane.showMessageDialog(this, "Du har tagit bort klassen: " + this.sc.getName(), "Tabort", JOptionPane.INFORMATION_MESSAGE);
+
+		//Updates gradepanel
+		mf.updateGradePanel(State.NOTHING_SELECTED);
+
+		//Updates cbpanel
+		mf.cbPanel.refreshData(mf.getMainData());
 
 		//Closes the frame
 		this.dispose();

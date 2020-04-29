@@ -10,6 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import com.te3.main.enums.State;
 import com.te3.main.exceptions.IllegalNameException;
 import com.te3.main.objects.Course;
 import com.te3.main.objects.SchoolClass;
@@ -157,6 +158,15 @@ public class CourseFrame extends JFrame {
 				}
 			}
 		}
+
+		//Updates grade panel
+		mf.updateGradePanel(State.CLASS);
+
+		//Updates CBPanel
+		mf.cbPanel.refreshData(mf.getMainData());
+
+		//Closes the frame
+		this.dispose();
 	}
 
 	/**
