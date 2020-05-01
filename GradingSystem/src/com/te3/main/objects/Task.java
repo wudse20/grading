@@ -86,7 +86,7 @@ public class Task {
 	 * @return the criteria
 	 */
 	public ArrayList<Criteria> getCriteria() {
-		return criteria;
+		return (ArrayList<Criteria>) this.criteria.clone();
 	}
 
 	/**

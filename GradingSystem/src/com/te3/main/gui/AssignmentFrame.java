@@ -67,7 +67,7 @@ public class AssignmentFrame extends JFrame {
 		// Stores the instance
 		this.mf = mf;
 
-		// Sets the properties and adds the componentss
+		// Sets the properties and adds the components
 		this.setProperties(true);
 		this.addComponents(true);
 	}
@@ -84,7 +84,13 @@ public class AssignmentFrame extends JFrame {
 
 		// Stores the instances
 		this.mf = mf;
-		this.t = t;
+
+		//Stores a clone of the object
+		try {
+			this.t = new Task(t.getName(), t.getCriteria());
+		} catch (IllegalNameException e) {
+			e.printStackTrace();
+		}
 
 		// Sets the properties and adds the components
 		this.setProperties(false);
