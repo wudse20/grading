@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import com.te3.main.enums.State;
 import com.te3.main.exceptions.IllegalInputException;
 import com.te3.main.exceptions.IllegalNameException;
+import com.te3.main.objects.Course;
 import com.te3.main.objects.Task;
 
 /**
@@ -206,7 +207,7 @@ public class AssignmentFrame extends JFrame {
 		for (int i = 0; i < mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getStudents()
 				.size(); i++) {
 			mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getStudents().get(i).getCourses()
-					.get(mf.getCurrentlySelectedCourseIndex()).removeCourseTask(t);
+					.get(mf.getCurrentlySelectedCourseIndex()).removeTask(t);
 		}
 
 		// Message to the user
@@ -245,7 +246,7 @@ public class AssignmentFrame extends JFrame {
 				.size(); i++) {
 			mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getStudents().get(i).getCourses()
 					.get(mf.getCurrentlySelectedCourseIndex())
-					.addCourseTask(new Task(np.getLastInput(), map.getAddedCriteria()));
+					.addTask(new Task(np.getLastInput(), map.getAddedCriteria()));
 		}
 
 		// Saves the progress
@@ -267,7 +268,6 @@ public class AssignmentFrame extends JFrame {
 	 * @throws IllegalInputException if there are no criteria being added.
 	 * @throws IllegalNameException  if the inputted name isn't allowed.
 	 */
-	@SuppressWarnings("unlikely-arg-type")
 	private void updateAssignment() throws IllegalNameException, IllegalInputException {
 		// If it's to short of a name and if it's just whitespaces.
 		if (np.getLastInput().length() < 3) {
@@ -282,15 +282,14 @@ public class AssignmentFrame extends JFrame {
 		// Removes the task and adds the updated task
 		for (int i = 0; i < mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getStudents()
 				.size(); i++) {
-			var newList = mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getStudents().get(i)
-					.getCourses();
-			newList.remove(this.t);
-			mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getStudents().get(i)
-					.setCourses(newList);
+			//Stores the course instance
+			Course c = mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getStudents().get(i).getCourses().get(mf.getCurrentlySelectedCourseIndex());
 
-			mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getStudents().get(i).getCourses()
-					.get(mf.getCurrentlySelectedCourseIndex())
-					.addCourseTask(new Task(np.getLastInput(), map.getAddedCriteria()));
+			//Removes the old task to prevent duplicates
+			c.removeTask(this.t);
+
+			//Adds the updated task.
+			c.addTask(new Task(np.getLastInput(), map.getAddedCriteria()));
 		}
 
 		// Saves the task

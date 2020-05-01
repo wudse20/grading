@@ -66,7 +66,7 @@ public class Course {
 	}
 
 	/**
-	 * Adds a new course
+	 * Adds a new course task
 	 *
 	 * @param t the new task
 	 * @return {@code true} -> if successful <br>
@@ -82,6 +82,16 @@ public class Course {
 
 		// Returns true
 		return true;
+	}
+
+	/**
+	 * Removes a task
+	 *
+	 * @param deletedTask the task to be removed
+	 */
+	public void removeTask(Task deletedTask) {
+		// Removes the task.
+		courseTasks.remove(deletedTask);
 	}
 
 	/**
@@ -169,26 +179,6 @@ public class Course {
 	public void setCourseTasks(ArrayList<Task> courseTasks) {
 		// Stores the tasks
 		this.courseTasks = courseTasks;
-	}
-
-	/**
-	 * Adds a new task
-	 *
-	 * @param newTask the new task
-	 */
-	public void addCourseTask(Task newTask) {
-		// Adds the task
-		this.courseTasks.add(newTask);
-	}
-
-	/**
-	 * Removes a task
-	 *
-	 * @param deletedTask the task to be removed
-	 */
-	public void removeCourseTask(Task deletedTask) {
-		// Removes the task.
-		courseTasks.remove(deletedTask);
 	}
 
 	@Override
