@@ -1,6 +1,7 @@
 package com.te3.main.gui;
 
-import java.awt.*;
+import java.awt.Dimension;
+import java.awt.Image;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 import java.awt.event.WindowEvent;
@@ -11,11 +12,15 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
-import javax.swing.*;
+import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.Timer;
 
 import com.te3.main.enums.State;
 import com.te3.main.exceptions.IllegalInputException;
-import com.te3.main.exceptions.IllegalNameException;
 import com.te3.main.objects.Course;
 import com.te3.main.objects.Criteria;
 import com.te3.main.objects.Data;
@@ -262,14 +267,13 @@ public class MainFrame extends JFrame implements ComponentListener, WindowStateL
 	 * Loads the data in to memory
 	 * */
 	public Data loadData(String filePath) {
+		//If the file doesn't exist then create a new Data Object.
+		if (!(new File(filePath).exists()))
+			return new Data(new ArrayList<SchoolClass>());
+		
+		//Reads and returns the saved data
 		XML<Data> xml = new XML<Data>();
-		Data d;
-		d = xml.read(filePath);
-
-		if (d == null) {
-			d = new Data(new ArrayList<SchoolClass>());
-		}
-
+		Data d = xml.read(filePath);
 		return d;
 	}
 
@@ -283,7 +287,7 @@ public class MainFrame extends JFrame implements ComponentListener, WindowStateL
 		// change this boolean to false if you do not want to run the program with
 		// default predefined classes, courses, students and tasks.
 
-		boolean debug = true;
+		boolean debug = false;
 
 		if (debug) {
 			ArrayList<SchoolClass> classes = new ArrayList<SchoolClass>();
