@@ -1,17 +1,29 @@
 package com.te3.main.gui;
 
-import java.awt.*;
-
+import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
-import java.util.concurrent.Flow;
 
-import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 
 import com.te3.main.enums.Grade;
 import com.te3.main.enums.State;
-import com.te3.main.objects.*;
+import com.te3.main.objects.Course;
+import com.te3.main.objects.Criteria;
+import com.te3.main.objects.SchoolClass;
+import com.te3.main.objects.Student;
+import com.te3.main.objects.Task;
 
 /**
  * The panel that holds all the <br>

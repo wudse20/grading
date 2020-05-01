@@ -2,7 +2,6 @@ package com.te3.main.objects;
 
 import java.util.ArrayList;
 
-import com.te3.main.exceptions.IllegalInputException;
 import com.te3.main.exceptions.IllegalNameException;
 
 /**

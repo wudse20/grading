@@ -105,6 +105,9 @@ public class HelpFrame extends JFrame implements ActionListener {
 		this.setSize(new Dimension(width, height));
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.setLayout(layout);
+		
+		//Gets the default color for the background. To make everything match.
+		scrPane.setBackground(new JFrame().getBackground());
 
 		// Sets text and font
 		lblTitle.setFont(new Font(lblTitle.getFont().getName(), Font.BOLD, 20));

@@ -71,7 +71,7 @@ public class ButtonPanel extends JPanel {
 	// Buttons
 	JButton btnSave = new JButton("Spara");
 	JButton btnSaveAs = new JButton("Spara som");
-	JButton btnSaveToFile = new JButton("Spara till fil"); // Ska vi döpa om denna?
+	JButton btnSaveToFile = new JButton("Spara till fil"); 
 	JButton btnPrint = new JButton("Skriv ut");
 	JButton btnSettings = new JButton("Inställningar");
 	JButton btnHelp = new JButton("?");
@@ -361,7 +361,7 @@ public class ButtonPanel extends JPanel {
 
 		// Adds action listeners
 		btnHelp.addActionListener(
-				(e) -> new HelpFrame(helpTitle, "<html><p>" + helpText + "</p></html>", 500, 650).setVisible(true));
+				(e) -> new HelpFrame(helpTitle, "<html><p>" + helpText + "</p></html>", 500, 725).setVisible(true));
 
 		btnSave.addActionListener((e) -> {
 			mf.saveData(mf.getSaveFilePath());
