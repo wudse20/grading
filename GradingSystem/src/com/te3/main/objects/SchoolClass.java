@@ -61,12 +61,13 @@ public class SchoolClass {
 	}
 
 	/**
-	 * A getter for the students
+	 * A getter for the students. <br>
+	 * Returns a clone of the object.
 	 *
 	 * @return the students
 	 */
 	public ArrayList<Student> getStudents() {
-		return this.students;
+		return (ArrayList<Student>) this.students.clone();
 	}
 
 	/**

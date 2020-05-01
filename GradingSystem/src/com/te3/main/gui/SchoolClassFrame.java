@@ -103,14 +103,18 @@ public class SchoolClassFrame extends JFrame {
 	 * @param sc the schoolclass to be updated
 	 */
 	public SchoolClassFrame(MainFrame mf, SchoolClass sc) {
-		// Calls the super constructor and sets the title of the fram
+		// Calls the super constructor and sets the title of the frame
 		super("Uppdatera en klass");
 
 		// Stores the instances
 		this.mf = mf;
-		this.sc = sc;
+        try {
+            this.sc = new SchoolClass(sc.getName(), sc.getStudents());
+        } catch (IllegalNameException e) {
+            e.printStackTrace();
+        }
 
-		// Initializes the MainSchoolClassPanel
+        // Initializes the MainSchoolClassPanel
 		this.mscp = new MainSchoolClassPanel(mf, this.sc);
 
 		// Sets properties
