@@ -84,7 +84,7 @@ public class CourseFrame extends JFrame {
 		acp.getBtnCancel().addActionListener((e) -> dispose());
 
 		acp.getBtnHelp().addActionListener(
-				(e) -> new HelpFrame("Lägg till kurs", "<html><p>" + helpInfo + "</p></html>", 500).setVisible(true));
+				(e) -> new HelpFrame("Lägg till en kurs", "<html><p>" + helpInfo + "</p></html>", 500).setVisible(true));
 
 		// Adds the components
 		panel.setLayout(pLayout);
@@ -123,7 +123,7 @@ public class CourseFrame extends JFrame {
 		ecp.getBtnCancel().addActionListener((e) -> this.dispose());
 		ecp.getBtnDelete().addActionListener(e -> this.deleteCourse());
 		ecp.getBtnHelp().addActionListener(
-				(e) -> new HelpFrame("Lägg till kurs", "<html><p>" + helpInfo + "</p></html>", 500).setVisible(true));
+				(e) -> new HelpFrame("Uppdatera en kurs", "<html><p>" + helpInfo + "</p></html>", 500).setVisible(true));
 
 		// Adds components
 		panel.setLayout(pLayout);

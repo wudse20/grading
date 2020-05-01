@@ -28,11 +28,11 @@ public class SchoolClassFrame extends JFrame {
 			+ "är det bara att skriva in namnet på eleven i rutan <b>Elev</b>.<br>"
 			+ "Namnet måste vara minst 3 tecken långt, <br>" + "för att det ska vara accepterat. <br>"
 			+ "Du kan även lägga in flera namn samtidigt. <br>"
-			+ "Det är bara att spearera dem, med kommatecken, ',',<br>"
+			+ "Det är bara att spearera dem, med kommatecken: <i>(\",\")</i>,<br>"
 			+ "notera att dessa namnen även behöver vara minst <br>" + "tre tecken långa för att accepteras.<br>"
 			+ "Du lägger till namnen genom att antigen<br>"
 			+ "trycka på <b>lägg till</b> eller trycka på enter i rutan.<br><br>"
-			+ "För att skapa/uppdatera klassen klicka på <b>lägg till</b> eller <b>uppdatera</b>."
+			+ "För att skapa/uppdatera klassen klicka på <b>lägg till</b> eller <b>uppdatera</b>. <br>"
 			+ "Tryck på knappen: <b>Tabort</b> för att tabort klassen.";
 
 	// Instances
@@ -92,7 +92,7 @@ public class SchoolClassFrame extends JFrame {
 		});
 
 		acp.getBtnHelp().addActionListener((e) -> {
-			new HelpFrame("Skapa en klass", "<html><p>" + helpInfo + "</p></html>", 500).setVisible(true);
+			new HelpFrame("Skapa en klass", "<html><p>" + helpInfo + "</p></html>", 500, 500).setVisible(true);
 		});
 	}
 
@@ -134,7 +134,7 @@ public class SchoolClassFrame extends JFrame {
 		ecp.getBtnDelete().addActionListener(e -> this.deleteClass());
 
 		ecp.getBtnHelp().addActionListener(
-				(e) -> new HelpFrame("Uppdatera en klass", "<html><p>" + helpInfo + "</p></html>", 500)
+				(e) -> new HelpFrame("Uppdatera en klass", "<html><p>" + helpInfo + "</p></html>", 500, 500)
 						.setVisible(true));
 	}
 

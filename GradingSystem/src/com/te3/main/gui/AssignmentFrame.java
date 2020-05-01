@@ -16,8 +16,6 @@ import com.te3.main.objects.Task;
 
 /**
  * The class that holds the GUI for the assignments
- *
- * TODO: CHECK FOR ASSIGNMENTS WITHOUT CRITERIA
  */
 public class AssignmentFrame extends JFrame {
 
@@ -138,7 +136,7 @@ public class AssignmentFrame extends JFrame {
 
 			acp.getBtnHelp().addActionListener((e) -> {
 				// Shows a new help frame.
-				new HelpFrame("Lägg till en kurs", "<html><p>" + helpInfo + "</p></html>").setVisible(true);
+				new HelpFrame("Lägg till en uppgift", "<html><p>" + helpInfo + "</p></html>").setVisible(true);
 			});
 		} else {
 			// Adds action listeners
@@ -164,7 +162,7 @@ public class AssignmentFrame extends JFrame {
 
 			ecp.getBtnHelp().addActionListener((e) -> {
 				// Shows a new help frame.
-				new HelpFrame("Ändra en kurs", "<html><p>" + helpInfo + "</p></html>", 350, 450).setVisible(true);
+				new HelpFrame("Ändra en uppgift", "<html><p>" + helpInfo + "</p></html>", 350, 450).setVisible(true);
 			});
 		}
 	}

@@ -184,7 +184,7 @@ public class SettingsFrame extends JFrame {
 		btnApply.addActionListener((e) -> applySettings());
 		btnCancel.addActionListener((e) -> this.dispose());
 		btnHelp.addActionListener(
-				(e) -> new HelpFrame("Inställningar", "<html><p>" + helpText + "</p></html>", 500).setVisible(true));
+				(e) -> new HelpFrame("Inställningar", "<html><p>" + helpText + "</p></html>", 500, 600).setVisible(true));
 		btnSetSavePath.addActionListener((e) -> setSavePath());
 		banDeleteData.addActionListener((e) -> deleteData());
 		cBoxShouldShowBabyYoda.addActionListener((e) -> setYodaBtnStatus(cBoxShouldShowBabyYoda.isSelected()));
