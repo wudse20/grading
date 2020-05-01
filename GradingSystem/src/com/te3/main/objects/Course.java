@@ -6,7 +6,7 @@ import com.te3.main.exceptions.IllegalNameException;
 
 /**
  * A course
- * */
+ */
 public class Course {
 
 	/** The name of the course */
@@ -25,43 +25,43 @@ public class Course {
 	/**
 	 * Sets up the course with a name and criteria.
 	 *
-	 * @param name The name of the course
+	 * @param name           The name of the course
 	 * @param courseCriteria the course criteria
 	 * @throws IllegalNameException If the name isn't accepted
 	 */
 	public Course(String name, ArrayList<Criteria> courseCriteria) throws IllegalNameException {
-		//Sets the name
+		// Sets the name
 		this.setName(name);
 
-		//Sets the criteria
+		// Sets the criteria
 		this.setCourseCriteria(courseCriteria);
 
-		//Sets the tasks, creates an empty ArrayList
+		// Sets the tasks, creates an empty ArrayList
 		this.setCourseTasks(new ArrayList<Task>());
 	}
 
 	/**
 	 * Sets up a course with criteria, tasks and a name
 	 *
-	 * @param name the name of the course
+	 * @param name           the name of the course
 	 * @param courseCriteria the criteria
-	 * @param courseTasks the tasks
+	 * @param courseTasks    the tasks
 	 * @throws IllegalNameException If the name isn't accepted
 	 */
 	public Course(String name, ArrayList<Criteria> courseCriteria, ArrayList<Task> courseTasks)
 			throws IllegalNameException {
 		try {
-			//Sets the name
+			// Sets the name
 			setName(name);
 		} catch (IllegalNameException e) {
-			//Throws the exception with the received message
+			// Throws the exception with the received message
 			throw new IllegalNameException(e.getMessage());
 		}
 
-		//This sets the course criteria
+		// This sets the course criteria
 		this.setCourseCriteria(courseCriteria);
 
-		//Sets the course tasks
+		// Sets the course tasks
 		this.setCourseTasks(courseTasks);
 	}
 
@@ -73,17 +73,16 @@ public class Course {
 	 *         {@code false} -> if unsuccessful
 	 */
 	public boolean addTask(Task t) {
-		//If the task is null then it returns false
+		// If the task is null then it returns false
 		if (t == null)
 			return false;
 
-		//Adds the task
+		// Adds the task
 		this.courseTasks.add(t);
 
-		//Returns true
+		// Returns true
 		return true;
 	}
-
 
 	/**
 	 * A getter for the name.
@@ -98,14 +97,15 @@ public class Course {
 	 * A setter for the name.
 	 *
 	 * @param name the new name
-	 * @throws IllegalNameException if the new name isn't accepted (less then 3 characters trimmed)
+	 * @throws IllegalNameException if the new name isn't accepted (less then 3
+	 *                              characters trimmed)
 	 */
 	public void setName(String name) throws IllegalNameException {
-		//Throws an exception with a message if the name is to short.
+		// Throws an exception with a message if the name is to short.
 		if (name.trim().length() < 3) {
 			throw new IllegalNameException("Name too short");
 		} else {
-			//Sets the name
+			// Sets the name
 			this.name = name;
 		}
 	}
@@ -116,17 +116,17 @@ public class Course {
 	 * @return a clone of the course criteria
 	 */
 	public ArrayList<Criteria> getCourseCriteria() {
-		//Creates the clone list
+		// Creates the clone list
 		ArrayList<Criteria> clone = new ArrayList<Criteria>();
 		try {
-			//Clones the list
+			// Clones the list
 			clone.addAll(this.courseCriteria);
 		} catch (NullPointerException ex) {
-			//Returns a empty list
+			// Returns a empty list
 			return new ArrayList<Criteria>();
 		}
 
-		//Returns the clone
+		// Returns the clone
 		return clone;
 	}
 
@@ -136,7 +136,7 @@ public class Course {
 	 * @param courseCriteria the criteria
 	 */
 	public void setCourseCriteria(ArrayList<Criteria> courseCriteria) {
-		//Stores the course criteria
+		// Stores the course criteria
 		this.courseCriteria = courseCriteria;
 	}
 
@@ -147,20 +147,19 @@ public class Course {
 	 */
 	public ArrayList<Task> getCourseTasks() {
 		try {
-			//Defines a new list
+			// Defines a new list
 			ArrayList<Task> clone = new ArrayList<Task>();
 
-			//Clones the courses
+			// Clones the courses
 			clone.addAll(this.courseTasks);
 
-			//Returns the list
+			// Returns the list
 			return clone;
 		} catch (NullPointerException e) {
-			//Returns an empty list
+			// Returns an empty list
 			return new ArrayList<Task>();
 		}
 	}
-
 
 	/**
 	 * A setter for the tasks.
@@ -168,7 +167,7 @@ public class Course {
 	 * @param courseTasks the tasks
 	 */
 	public void setCourseTasks(ArrayList<Task> courseTasks) {
-		//Stores the tasks
+		// Stores the tasks
 		this.courseTasks = courseTasks;
 	}
 
@@ -178,7 +177,7 @@ public class Course {
 	 * @param newTask the new task
 	 */
 	public void addCourseTask(Task newTask) {
-		//Adds the task
+		// Adds the task
 		this.courseTasks.add(newTask);
 	}
 
@@ -188,7 +187,7 @@ public class Course {
 	 * @param deletedTask the task to be removed
 	 */
 	public void removeCourseTask(Task deletedTask) {
-		//Removes the task.
+		// Removes the task.
 		courseTasks.remove(deletedTask);
 	}
 

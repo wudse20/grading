@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 /**
  * The object that holds all the data in the program
- * */
+ */
 public class Data {
 
 	/** The ArrayList with all the classes */

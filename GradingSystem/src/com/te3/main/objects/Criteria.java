@@ -16,7 +16,7 @@ import com.te3.main.exceptions.IllegalNameException;
 
 /**
  * A criteria
- * */
+ */
 public class Criteria {
 
 	/** The name of the criteria */
@@ -29,28 +29,27 @@ public class Criteria {
 	private JButton[] gradeBtns = new JButton[] { new JButton("F"), new JButton("E"), new JButton("C"),
 			new JButton("A") };
 
-	//Labels
+	// Labels
 	private JLabel lblCriteria;
 	private JLabel lblGrade;
 
-	//Panels
+	// Panels
 	private JPanel pButtons = new JPanel();
 	private JPanel pCriteria = new JPanel();
 
-	//Layouts
+	// Layouts
 	private FlowLayout pButtonsLayout = new FlowLayout(FlowLayout.LEFT);
 
 	private GridLayout pCriteriaLayout = new GridLayout(2, 2);
-
 
 	/**
 	 * Used for the saving of the criteria
 	 */
 	public Criteria() {
-		//Initializes the lblCriteria
+		// Initializes the lblCriteria
 		lblCriteria = new JLabel();
 
-		//Sets the properties
+		// Sets the properties
 		this.setProperties();
 	}
 
@@ -62,20 +61,20 @@ public class Criteria {
 	 */
 	public Criteria(String name) throws IllegalNameException {
 		try {
-			//Sets the name
+			// Sets the name
 			this.setName(name);
 		} catch (IllegalNameException e) {
-			//Throws the exception
+			// Throws the exception
 			throw new IllegalNameException(e.getMessage());
 		}
 
-		//Initializes the lblCriteria
+		// Initializes the lblCriteria
 		lblCriteria = new JLabel(name);
 
-		//Sets the properties
+		// Sets the properties
 		this.setProperties();
 
-		//Updates the gui
+		// Updates the gui
 		this.updateGUI(grade);
 	}
 
@@ -83,41 +82,41 @@ public class Criteria {
 	 * Sets properties
 	 */
 	private void setProperties() {
-		//Sets the default grade
+		// Sets the default grade
 		this.setGrade(Grade.F);
 
-		//Initializes the lblGrade
+		// Initializes the lblGrade
 		lblGrade = new JLabel();
 
-		//Sets the font of the buttons
+		// Sets the font of the buttons
 		gradeBtns[0].setFont(new Font("Dialog", Font.PLAIN, 18));
 		gradeBtns[1].setFont(new Font("Dialog", Font.PLAIN, 18));
 		gradeBtns[2].setFont(new Font("Dialog", Font.PLAIN, 18));
 		gradeBtns[3].setFont(new Font("Dialog", Font.PLAIN, 18));
 
-		//Sets the font of the labels
+		// Sets the font of the labels
 		lblGrade.setFont(new Font("Dialog", Font.BOLD, 18));
 		lblCriteria.setFont(new Font("Dialog", Font.BOLD, 18));
 
-		//Sets the layout
+		// Sets the layout
 		pButtons.setLayout(pButtonsLayout);
 
-		//Adds the buttons
+		// Adds the buttons
 		for (int i = 0; i < gradeBtns.length; i++) {
 			pButtons.add(gradeBtns[i]);
 		}
 
-		//Sets the layout
+		// Sets the layout
 		pCriteria.setLayout(pCriteriaLayout);
 
-		//Sets the buttons to be transparent
+		// Sets the buttons to be transparent
 		pButtons.setOpaque(false);
 		pCriteria.setOpaque(false);
 
-		//Sets max size
+		// Sets max size
 		pCriteria.setMaximumSize(new Dimension(640, 78));
 
-		//Adds components
+		// Adds components
 		pCriteria.add(lblCriteria);
 		pCriteria.add(lblGrade);
 		pCriteria.add(pButtons);
@@ -129,7 +128,7 @@ public class Criteria {
 	 * @param grade The current grade
 	 */
 	private void updateGUI(Grade grade) {
-		//Sets the color of the button based on the state the the correct colour.
+		// Sets the color of the button based on the state the the correct colour.
 		switch (grade) {
 			case F:
 				for (int i = 0; i < gradeBtns.length; i++) {
@@ -173,7 +172,7 @@ public class Criteria {
 				break;
 		}
 
-		//Sets the text of the lables
+		// Sets the text of the lables
 		lblCriteria.setText(name);
 		lblGrade.setText(grade.toString());
 	}
@@ -184,7 +183,6 @@ public class Criteria {
 	public void updateGUI() {
 		this.updateGUI(grade);
 	}
-
 
 	/**
 	 * A getter for the name
@@ -205,9 +203,8 @@ public class Criteria {
 		/*
 		 * Checks the trimmed length
 		 *
-		 * if accepted sets the name
-		 * else throws an exception with a message.
-		 * */
+		 * if accepted sets the name else throws an exception with a message.
+		 */
 		if (name.trim().length() >= 3)
 			this.name = name;
 		else
@@ -243,7 +240,6 @@ public class Criteria {
 		this.pCriteria = panelCriteria;
 	}
 
-
 	/**
 	 * A getter for the panel Criteria. <br>
 	 * Transient annotation so it won't be saved.
@@ -267,8 +263,7 @@ public class Criteria {
 	}
 
 	/**
-	 * A getter for the grade buttons
-	 * Transient annotation so it won't be saved.
+	 * A getter for the grade buttons Transient annotation so it won't be saved.
 	 *
 	 * @return the grade buttons
 	 */
@@ -286,10 +281,9 @@ public class Criteria {
 	 */
 	public boolean compare(Criteria c) {
 		/*
-		 * Using ordinal since the enum is set up
-		 * so the hedger grade the higher ordinal
+		 * Using ordinal since the enum is set up so the hedger grade the higher ordinal
 		 * and that makes for easy comparisons.
-		 * */
+		 */
 		if (grade.ordinal() > c.grade.ordinal())
 			return true;
 		else

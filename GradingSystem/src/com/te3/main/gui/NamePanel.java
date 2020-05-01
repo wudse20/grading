@@ -9,7 +9,7 @@ import javax.swing.JTextField;
 /**
  * The panel used for getting a name input <br>
  * for the editing and adding frames.
- * */
+ */
 public class NamePanel extends JPanel {
 
 	/** Default */
@@ -18,46 +18,46 @@ public class NamePanel extends JPanel {
 	/** The last input in the text field */
 	private String lastInput;
 
-	//Layout
+	// Layout
 	FlowLayout layout = new FlowLayout(FlowLayout.LEFT);
 
-	//Label
+	// Label
 	JLabel lblName = new JLabel("Namn:");
 
-	//TextField
+	// TextField
 	JTextField txfName = new JTextField(12);
 
 	/**
 	 * Sets everything up
-	 * */
+	 */
 	public NamePanel() {
-		//Sets layout
+		// Sets layout
 		this.setLayout(layout);
 
-		//Adds components
+		// Adds components
 		this.add(lblName);
 		this.add(txfName);
 	}
 
 	/**
 	 * Gets the last input
-	 * */
+	 */
 	public String getLastInput() {
-		//Stores the text in the TextField
+		// Stores the text in the TextField
 		this.lastInput = txfName.getText();
 
-		//Returns the last input
+		// Returns the last input
 		return lastInput;
 	}
 
 	/**
 	 * Sets the last input
-	 * */
+	 */
 	public void setLastInput(String lastInput) {
-		//Stores the last input
+		// Stores the last input
 		this.lastInput = lastInput;
 
-		//Sets the TextField's text to the parameter.
+		// Sets the TextField's text to the parameter.
 		txfName.setText(this.lastInput);
 	}
 }

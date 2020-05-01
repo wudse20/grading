@@ -31,45 +31,45 @@ public class MainCoursePanel extends JPanel implements DocumentListener {
 	/** Default */
 	private static final long serialVersionUID = 1L;
 
-	//The index
+	// The index
 	private int selectedIndexAddedClasses = -1;
 	private int selectedIndexNotAddedClasses = -1;
 	private int selectedIndexCriteria = -1;
 
-	//The array lists
+	// The array lists
 	private ArrayList<SchoolClass> notAddedClasses = new ArrayList<SchoolClass>();
 	private ArrayList<SchoolClass> addedClasses = new ArrayList<SchoolClass>();
 	private ArrayList<Criteria> criteria = new ArrayList<Criteria>();
 
-	//The JLists
+	// The JLists
 	JList<SchoolClass> listNotAddedClasses = new JList<SchoolClass>();
 	JList<SchoolClass> listAddedClasses = new JList<SchoolClass>();
 	JList<Criteria> listCriteria = new JList<Criteria>();
 
-	//The scroll panes
+	// The scroll panes
 	JScrollPane scrNotAddedClasses = new JScrollPane(listNotAddedClasses);
 	JScrollPane scrAddedClasses = new JScrollPane(listAddedClasses);
 	JScrollPane scrCriteria = new JScrollPane(listCriteria);
 
-	//Buttons
+	// Buttons
 	JButton btnAdd = new JButton("Lägg till");
 
-	//Text boxes
+	// Text boxes
 	JTextField txfCriteria = new JTextField(12);
 
-	//Labels
+	// Labels
 	JLabel lblNotAddedClasses = new JLabel("Klasser: ");
 	JLabel lblAddedClasses = new JLabel("Tillagada Klasser: ");
 	JLabel lblCriteria = new JLabel("Nytt kunskapskrav: ");
 	JLabel lblCriteria2 = new JLabel("Kunskapskrav: ");
 
-	//Panels
+	// Panels
 	JPanel pClasses = new JPanel();
 	JPanel pNewCriteria = new JPanel();
 	JPanel pCriteria = new JPanel();
 	JPanel pLables = new JPanel();
 
-	//Layouts
+	// Layouts
 	BoxLayout layout = new BoxLayout(this, BoxLayout.Y_AXIS);
 
 	BorderLayout pClassesLayout = new BorderLayout();
@@ -78,12 +78,11 @@ public class MainCoursePanel extends JPanel implements DocumentListener {
 
 	FlowLayout pNewCriteriaLayout = new FlowLayout(FlowLayout.LEFT);
 
-	//Instances
+	// Instances
 	MainFrame mf;
 
 	@SuppressWarnings("unused")
 	private Course c;
-
 
 	/**
 	 * For adding.
@@ -91,22 +90,22 @@ public class MainCoursePanel extends JPanel implements DocumentListener {
 	 * @param mf the instance of the MainFrame
 	 */
 	public MainCoursePanel(MainFrame mf) {
-		//Stores the instance
+		// Stores the instance
 		this.mf = mf;
 
-		//Sets the layout
+		// Sets the layout
 		this.setLayout(layout);
 
-		//Copies the array lists
+		// Copies the array lists
 		this.cloneArrayLists();
 
-		//Refreshes the classes
+		// Refreshes the classes
 		this.refreshClasses();
 
-		//Sets the properties
+		// Sets the properties
 		this.setProperties();
 
-		//Adds the components
+		// Adds the components
 		this.addComponents();
 	}
 
@@ -117,14 +116,14 @@ public class MainCoursePanel extends JPanel implements DocumentListener {
 	 * @param c  the course that's being edited
 	 */
 	public MainCoursePanel(MainFrame mf, Course c) {
-		//Stores the instances
+		// Stores the instances
 		this.mf = mf;
 		this.c = c;
 
-		//Gets the classes
+		// Gets the classes
 		ArrayList<SchoolClass> classes = mf.getMainData().getClasses();
 
-		//Adds the school classes.
+		// Adds the school classes.
 		for (int i = 0; i < classes.size(); i++) {
 			SchoolClass sc = classes.get(i);
 
@@ -135,33 +134,33 @@ public class MainCoursePanel extends JPanel implements DocumentListener {
 			}
 		}
 
-		//Gets the course criteria
+		// Gets the course criteria
 		criteria = c.getCourseCriteria();
 
-		//Sets the layout
+		// Sets the layout
 		this.setLayout(layout);
 
-		//Refreshes the classes
+		// Refreshes the classes
 		this.refreshClasses();
 
-		//Refreshes the criteria
+		// Refreshes the criteria
 		this.refreshCriteria();
 
-		//Sets the properties
+		// Sets the properties
 		this.setProperties();
 
-		//Adds the components
+		// Adds the components
 		this.addComponents();
 	}
 
 	/**
 	 * Clones the ArrayList
-	 * */
+	 */
 	private void cloneArrayLists() {
-		//Gets the classes
+		// Gets the classes
 		ArrayList<SchoolClass> classes = mf.getMainData().getClasses();
 
-		//Makes a clone of the classes
+		// Makes a clone of the classes
 		for (int i = 0; i < classes.size(); i++) {
 			SchoolClass sc = classes.get(i);
 			try {
@@ -174,13 +173,13 @@ public class MainCoursePanel extends JPanel implements DocumentListener {
 
 	/**
 	 * Sets the properties.
-	 * */
+	 */
 	private void setProperties() {
-		//Sets the size
+		// Sets the size
 		listAddedClasses.setPreferredSize(new Dimension(250, 100));
 		listNotAddedClasses.setPreferredSize(new Dimension(250, 100));
 
-		//Adds listeners
+		// Adds listeners
 		listAddedClasses.getSelectionModel().addListSelectionListener((e) -> {
 			selectedIndexAddedClasses = listAddedClasses.getSelectedIndex();
 
@@ -234,24 +233,24 @@ public class MainCoursePanel extends JPanel implements DocumentListener {
 	 * Removes a criteria.
 	 *
 	 * @param index the index of the criteria in the lsit
-	 * */
+	 */
 	private void removeCriteria(int index) {
-		//Removes the criteria
+		// Removes the criteria
 		criteria.remove(index);
 
-		//Refreshes the criteira
+		// Refreshes the criteira
 		refreshCriteria();
 	}
 
 	/**
 	 * Adds a criteria
-	 * */
+	 */
 	private void addCriteria() {
 		try {
-			//Creates a new criteria with the name in the text box
+			// Creates a new criteria with the name in the text box
 			Criteria c = new Criteria(txfCriteria.getText());
 
-			//If it already exists then it will send an error message else it will add it
+			// If it already exists then it will send an error message else it will add it
 			if (criteria.contains(c)) {
 				JOptionPane.showMessageDialog(this, "Du har redan lagt till detta kunskapskravet!", "Fel",
 						JOptionPane.ERROR_MESSAGE);
@@ -277,7 +276,7 @@ public class MainCoursePanel extends JPanel implements DocumentListener {
 	 * @param index the selected index
 	 */
 	private void classesSelected(byte mode, int index) {
-		//Adds or removes a class from the list
+		// Adds or removes a class from the list
 		if (mode == 0) {
 			SchoolClass sc = notAddedClasses.get(index);
 			addedClasses.add(sc);
@@ -288,15 +287,15 @@ public class MainCoursePanel extends JPanel implements DocumentListener {
 			addedClasses.remove(index);
 		}
 
-		//refreshes the classes
+		// refreshes the classes
 		refreshClasses();
 	}
 
 	/**
 	 * Refreshes the class GUI
-	 * */
+	 */
 	private void refreshClasses() {
-		//Gets the data and sets it to JLists
+		// Gets the data and sets it to JLists
 		SchoolClass[] arrAdded = new SchoolClass[addedClasses.size()];
 		SchoolClass[] arrNotAdded = new SchoolClass[notAddedClasses.size()];
 
@@ -306,18 +305,17 @@ public class MainCoursePanel extends JPanel implements DocumentListener {
 
 	/**
 	 * Refreshes the criteria GUI
-	 * */
+	 */
 	private void refreshCriteria() {
-		//Gets the data and sets it to the JList
+		// Gets the data and sets it to the JList
 		Criteria[] arrCriteria = new Criteria[criteria.size()];
 
 		listCriteria.setListData(criteria.toArray(arrCriteria));
 	}
 
-
 	/**
 	 * Adds the components
-	 * */
+	 */
 	private void addComponents() {
 		pLables.setLayout(pLabelsLayout);
 		pLables.add(lblNotAddedClasses, BorderLayout.LINE_START);
@@ -346,7 +344,7 @@ public class MainCoursePanel extends JPanel implements DocumentListener {
 	 * Getter for the added classes
 	 *
 	 * @return the added classes
-	 * */
+	 */
 	public ArrayList<SchoolClass> getAddedClasses() {
 		return addedClasses;
 	}
@@ -355,7 +353,7 @@ public class MainCoursePanel extends JPanel implements DocumentListener {
 	 * Getter for the criteria
 	 *
 	 * @return the criteria
-	 * */
+	 */
 	public ArrayList<Criteria> getCriteria() {
 		return criteria;
 	}

@@ -6,10 +6,10 @@ import javax.swing.*;
 
 /**
  * Main class
- * */
+ */
 public class Main {
 	public static void main(String[] args) {
-		//Initializes the frame
+		// Initializes the frame
 		SwingUtilities.invokeLater(() -> new MainFrame().setVisible(true));
 	}
 }

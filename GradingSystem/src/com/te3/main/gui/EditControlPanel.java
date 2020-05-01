@@ -8,16 +8,16 @@ import javax.swing.JPanel;
 /**
  * The button panel att the bottom <br>
  * of the editing GUI:s.
- * */
+ */
 public class EditControlPanel extends JPanel {
 
 	/** Generated */
 	private static final long serialVersionUID = -7606289199305316004L;
 
-	//Layout
+	// Layout
 	FlowLayout layout = new FlowLayout(FlowLayout.RIGHT);
 
-	//Buttons
+	// Buttons
 	JButton btnHelp = new JButton("?");
 	JButton btnCancel = new JButton("Avbryt");
 	JButton btnUpdate = new JButton("Uppdatera");
@@ -25,7 +25,7 @@ public class EditControlPanel extends JPanel {
 
 	/**
 	 * Sets everything up
-	 * */
+	 */
 	public EditControlPanel() {
 		this.setLayout(layout);
 		this.add(btnHelp);
@@ -38,7 +38,7 @@ public class EditControlPanel extends JPanel {
 	 * The getter for the update button
 	 *
 	 * @return the update button
-	 * */
+	 */
 	public JButton getBtnUpdate() {
 		return this.btnUpdate;
 	}
@@ -47,7 +47,7 @@ public class EditControlPanel extends JPanel {
 	 * The getter for the cancel button
 	 *
 	 * @return the cancel button
-	 * */
+	 */
 	public JButton getBtnCancel() {
 		return this.btnCancel;
 	}
@@ -56,11 +56,10 @@ public class EditControlPanel extends JPanel {
 	 * The getter for the help button
 	 *
 	 * @return the help button
-	 * */
+	 */
 	public JButton getBtnHelp() {
 		return this.btnHelp;
 	}
-
 
 	/**
 	 * The getter for the delete button

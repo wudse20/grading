@@ -11,57 +11,66 @@ import java.awt.event.WindowListener;
  * The class that holds the main frame
  */
 public class GameFrame extends JFrame implements WindowListener {
-    //Panels
-    GamePanel gp = new GamePanel();
+	/** Generated */
+	private static final long serialVersionUID = -4356306834956152395L;
 
-    //Instances
-    SettingsFrame sf;
+	// Panels
+	GamePanel gp = new GamePanel();
 
-    public GameFrame(SettingsFrame sf) {
-        //Calls the super constructor
-        super("Sten, Sax, Påse");
+	// Instances
+	SettingsFrame sf;
 
-        //Stores instance
-        this.sf = sf;
+	public GameFrame(SettingsFrame sf) {
+		// Calls the super constructor
+		super("Sten, Sax, Påse");
 
-        //Sets properties
-        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        this.setSize(new Dimension(400, 300));
+		// Stores instance
+		this.sf = sf;
 
-        //Adds components
-        this.getContentPane().add(gp);
+		// Sets properties
+		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		this.setSize(new Dimension(400, 300));
 
-        //Adds listeners
-        this.addKeyListener(gp);
-        this.addMouseListener(gp);
-        this.addMouseMotionListener(gp);
-        this.addWindowListener(this);
-    }
+		// Adds components
+		this.getContentPane().add(gp);
 
-    @Override
-    public void windowOpened(WindowEvent e) { }
+		// Adds listeners
+		this.addKeyListener(gp);
+		this.addMouseListener(gp);
+		this.addMouseMotionListener(gp);
+		this.addWindowListener(this);
+	}
 
-    @Override
-    public void windowClosing(WindowEvent e) {
-        //Tells the program that the easter egg is closed
-        sf.setEasterEggOpened(false);
+	@Override
+	public void windowOpened(WindowEvent e) {
+	}
 
-        //Closes the easter egg
-        this.dispose();
-    }
+	@Override
+	public void windowClosing(WindowEvent e) {
+		// Tells the program that the easter egg is closed
+		sf.setEasterEggOpened(false);
 
-    @Override
-    public void windowClosed(WindowEvent e) { }
+		// Closes the easter egg
+		this.dispose();
+	}
 
-    @Override
-    public void windowIconified(WindowEvent e) { }
+	@Override
+	public void windowClosed(WindowEvent e) {
+	}
 
-    @Override
-    public void windowDeiconified(WindowEvent e) { }
+	@Override
+	public void windowIconified(WindowEvent e) {
+	}
 
-    @Override
-    public void windowActivated(WindowEvent e) { }
+	@Override
+	public void windowDeiconified(WindowEvent e) {
+	}
 
-    @Override
-    public void windowDeactivated(WindowEvent e) { }
+	@Override
+	public void windowActivated(WindowEvent e) {
+	}
+
+	@Override
+	public void windowDeactivated(WindowEvent e) {
+	}
 }

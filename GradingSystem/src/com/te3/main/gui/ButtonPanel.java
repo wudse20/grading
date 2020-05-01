@@ -33,53 +33,42 @@ public class ButtonPanel extends JPanel {
 	private String helpTitle = "Betygsättning";
 
 	/** The help text of this part of the program */
-	private String helpText =
-			"<br><b>Klasser/Grupper:</b><br>" +
-			"För att skapa en klass: välj <b>NY</b> i listan med klasser. <br>" +
-			"För att uppdatera en klass: välj <b>UPPDATERA</b> i listan med klasser. <br>" +
-			"För att välja en klass: välj den önskade klassen i listan med klasser. <br><br>" +
-			"<b>Kurser:</b><br>" +
-			"För att skapa en kurs: välj <b>NY</b> i listan med kurser. <br>" +
-			"För att uppdatera en kurs: välj <b>UPPDATERA</b> i listan med kurser. <br>" +
-			"För att välja en kurs: välj den önskade kurser i listan med kurser. <br><br>" +
-			"<b>Elever:</b><br>" +
-			"För att välja en elev: välj den önskade eleven i listan med elever. <br><br>" +
-			"<b>Uppgifter:</b><br>" +
-			"För att se elevens högst uppnådda resultat i varje kriterie: välj samlad vy <br>" +
-			"För att se elevens resultat på en viss uppgift: välj den önskade uppgiften i listan. <br><br>" +
-			"<b>Kommentar:</b><br>" +
-			"Du kan lämna en kommentar på varje uppgift. Detta gör du genom <br>" +
-			"att skriva in den i rutan till höger. <b>OBS! Den syns bara om en uppgift är vald</b><br>" +
-			"Kommentaren kommer att spara sig själv var 50:de knapp tryck, för att spara:<br>" +
-			"Tryck på spara under rutan. <br>" +
-			"Trycker du på rensa kommentar kommer den att tömmas. <br>" +
-			"<b>DET GÅR INTE ATT FÅ OGJORT!</b><br><br>" +
-			"<b>Spara/Spara som:</b><br>" +
-			"Spara: Sparar nuvarande framstegen <br>" +
-			"Spara som: Sparar nuvarande framstegen till en ny fil och uppdaterar standard filen som allt sparas till. <br><br>" +
-			"<b>Spara till fil:</b><br>" +
-			"Sparar ner till en fil som man kan skicka till eleven. <br>" +
-			"<b>Detta sparar inte nuvarande framsteg!</b> <br><br>" +
-			"<b>Skriv ut:</b><br>" +
-			"Skriver ut ett papper med alla resultat, efter hur programet är inställt. <br><br>" +
-			"<b>Inställningar:</b><br>" +
-			"Några olika inställningar som man kan göra i sitt program. <br>" +
-			"Skulle det bli tråkigt att sätta betyg tryck tre gånger på <br>" +
-			"Första knappen med YODA när bakgrunden är på. <br><br>" +
-			"<b>?</b><br>" +
-			"Överallt är detta hjälpknappen där du kan få hjälp om hur allt fungerar.<br>";
+	private String helpText = "<br><b>Klasser/Grupper:</b><br>"
+			+ "För att skapa en klass: välj <b>NY</b> i listan med klasser. <br>"
+			+ "För att uppdatera en klass: välj <b>UPPDATERA</b> i listan med klasser. <br>"
+			+ "För att välja en klass: välj den önskade klassen i listan med klasser. <br><br>" + "<b>Kurser:</b><br>"
+			+ "För att skapa en kurs: välj <b>NY</b> i listan med kurser. <br>"
+			+ "För att uppdatera en kurs: välj <b>UPPDATERA</b> i listan med kurser. <br>"
+			+ "För att välja en kurs: välj den önskade kurser i listan med kurser. <br><br>" + "<b>Elever:</b><br>"
+			+ "För att välja en elev: välj den önskade eleven i listan med elever. <br><br>" + "<b>Uppgifter:</b><br>"
+			+ "För att se elevens högst uppnådda resultat i varje kriterie: välj samlad vy <br>"
+			+ "För att se elevens resultat på en viss uppgift: välj den önskade uppgiften i listan. <br><br>"
+			+ "<b>Kommentar:</b><br>" + "Du kan lämna en kommentar på varje uppgift. Detta gör du genom <br>"
+			+ "att skriva in den i rutan till höger. <b>OBS! Den syns bara om en uppgift är vald</b><br>"
+			+ "Kommentaren kommer att spara sig själv var 50:de knapp tryck, för att spara:<br>"
+			+ "Tryck på spara under rutan. <br>" + "Trycker du på rensa kommentar kommer den att tömmas. <br>"
+			+ "<b>DET GÅR INTE ATT FÅ OGJORT!</b><br><br>" + "<b>Spara/Spara som:</b><br>"
+			+ "Spara: Sparar nuvarande framstegen <br>"
+			+ "Spara som: Sparar nuvarande framstegen till en ny fil och uppdaterar standard filen som allt sparas till. <br><br>"
+			+ "<b>Spara till fil:</b><br>" + "Sparar ner till en fil som man kan skicka till eleven. <br>"
+			+ "<b>Detta sparar inte nuvarande framsteg!</b> <br><br>" + "<b>Skriv ut:</b><br>"
+			+ "Skriver ut ett papper med alla resultat, efter hur programet är inställt. <br><br>"
+			+ "<b>Inställningar:</b><br>" + "Några olika inställningar som man kan göra i sitt program. <br>"
+			+ "Skulle det bli tråkigt att sätta betyg tryck tre gånger på <br>"
+			+ "Första knappen med YODA när bakgrunden är på. <br><br>" + "<b>?</b><br>"
+			+ "Överallt är detta hjälpknappen där du kan få hjälp om hur allt fungerar.<br>";
 
-	//Threads
+	// Threads
 	Thread threadSaveToFile;
 	Thread threadSaveAs;
 
-	//MainFrames
+	// MainFrames
 	MainFrame mf;
 
-	//Layouts
+	// Layouts
 	FlowLayout layout = new FlowLayout(FlowLayout.RIGHT);
 
-	//Buttons
+	// Buttons
 	JButton btnSave = new JButton("Spara");
 	JButton btnSaveAs = new JButton("Spara som");
 	JButton btnSaveToFile = new JButton("Spara till fil"); // Ska vi döpa om denna?
@@ -87,20 +76,20 @@ public class ButtonPanel extends JPanel {
 	JButton btnSettings = new JButton("Inställningar");
 	JButton btnHelp = new JButton("?");
 
-	//Labels
+	// Labels
 	JLabel lblSpacer1 = new JLabel("  ");
 
-	//TextAreas
+	// TextAreas
 	JTextArea printView = new JTextArea();
 
 	/**
 	 * @param mf the instance of the MainFrame
 	 */
 	public ButtonPanel(MainFrame mf) {
-		//Stores the instance
+		// Stores the instance
 		this.mf = mf;
 
-		//Adds the components and sets the properties of the components
+		// Adds the components and sets the properties of the components
 		this.setProperties();
 		this.addComponents();
 	}
@@ -109,20 +98,20 @@ public class ButtonPanel extends JPanel {
 	 * @param st the state of the data shown.
 	 */
 	private void saveToFile(State st) {
-		//Gets the student.
+		// Gets the student.
 		Student s = mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getStudents()
 				.get(mf.getCurrentlySelectedStudentIndex());
 
-		//Creates a new FileSystemFrame
+		// Creates a new FileSystemFrame
 		FileSystemFrame fsf = new FileSystemFrame(s.getName(), "txt");
 
-		//Sets the frame visible
+		// Sets the frame visible
 		fsf.setVisible(true);
 
-		//Creates the thread
+		// Creates the thread
 		threadSaveToFile = new Thread(() -> saveToFileThread(fsf, st));
 
-		//starts the thread
+		// starts the thread
 		threadSaveToFile.start();
 	}
 
@@ -134,7 +123,7 @@ public class ButtonPanel extends JPanel {
 	 */
 	@SuppressWarnings("static-access")
 	private void saveToFileThread(FileSystemFrame fsf, State st) {
-		//keeps the window open while the user is doing it's things.
+		// keeps the window open while the user is doing it's things.
 		while (fsf.getExitCode() == -1) {
 			try {
 				threadSaveToFile.sleep(450);
@@ -143,15 +132,15 @@ public class ButtonPanel extends JPanel {
 			}
 		}
 
-		//If the user chooses to save to file.
+		// If the user chooses to save to file.
 		if (fsf.getExitCode() == 0) {
-			//Formats the text
+			// Formats the text
 			formatTextFile(st);
 
-			//Gets the text
+			// Gets the text
 			String text = printView.getText();
 
-			//Tries the save it to a file then closes the frame
+			// Tries the save it to a file then closes the frame
 			try {
 				BufferedWriter w = new BufferedWriter(new FileWriter(fsf.getFilePath(), true));
 				w.append(text);
@@ -174,15 +163,17 @@ public class ButtonPanel extends JPanel {
 	 * @param st the State of the panel
 	 */
 	private void print(State st) {
-		if (!(mf.getGradeState().equals(State.CLASS_COURSE_STUDENT_TASK) || mf.getGradeState().equals(State.CLASS_COURSE_STUDENT))) {
-			JOptionPane.showMessageDialog(this, "Du kan bara skriva ut om du har en Elev/Uppgift vald!", "Du kan inte skriva ut!", JOptionPane.WARNING_MESSAGE);
+		if (!(mf.getGradeState().equals(State.CLASS_COURSE_STUDENT_TASK)
+				|| mf.getGradeState().equals(State.CLASS_COURSE_STUDENT))) {
+			JOptionPane.showMessageDialog(this, "Du kan bara skriva ut om du har en Elev/Uppgift vald!",
+					"Du kan inte skriva ut!", JOptionPane.WARNING_MESSAGE);
 			return;
 		}
 
-		//Formats the text
+		// Formats the text
 		formatTextPrint(st);
 
-		//Tries to print
+		// Tries to print
 		try {
 			printView.print();
 		} catch (PrinterException e) {
@@ -196,7 +187,7 @@ public class ButtonPanel extends JPanel {
 	 * @param st the current state of the panel
 	 */
 	private void formatTextPrint(State st) {
-		//Gets the necessary info
+		// Gets the necessary info
 		Student s = mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getStudents()
 				.get(mf.getCurrentlySelectedStudentIndex());
 
@@ -211,16 +202,16 @@ public class ButtonPanel extends JPanel {
 
 		ArrayList<Criteria> c;
 
-		//resets the settings of the print view
+		// resets the settings of the print view
 		printView.setText("");
 		printView.setTabSize(15);
 
-		//adds all the info
+		// adds all the info
 		printView.append("Namn:\t" + s.getName());
 		printView.append("\nKlass:\t" + sc.getName());
 		printView.append("\nKurs:\t" + co.getName());
 
-		//Adds info and stores the criteria based on state of the window.
+		// Adds info and stores the criteria based on state of the window.
 		if (st.equals(State.CLASS_COURSE_STUDENT)) {
 			printView.append("\nUppgift:\t" + t.getName());
 			c = t.getCriteria();
@@ -228,15 +219,16 @@ public class ButtonPanel extends JPanel {
 			c = co.getCourseCriteria();
 		}
 
-		//Adds more text
+		// Adds more text
 		printView.append("\n\nKunskapskrav:\n");
 		for (int i = 0; i < c.size(); i++) {
 			Criteria cr = c.get(i);
 			printView.append(cr.getName() + ":\t" + cr.getGrade().toString() + "\n");
 		}
 
-		//Adds the comment if it exists:
-		if (t.getComment().trim().length() != 0 && mf.getGradePanel().getState().equals(State.CLASS_COURSE_STUDENT_TASK)) {
+		// Adds the comment if it exists:
+		if (t.getComment().trim().length() != 0
+				&& mf.getGradePanel().getState().equals(State.CLASS_COURSE_STUDENT_TASK)) {
 			printView.append("\n\nKommentar:\n" + t.getComment());
 		}
 	}
@@ -247,7 +239,7 @@ public class ButtonPanel extends JPanel {
 	 * @param st the state of informations shown
 	 */
 	private void formatTextFile(State st) {
-		//Gets the necessary info
+		// Gets the necessary info
 		Student s = mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getStudents()
 				.get(mf.getCurrentlySelectedStudentIndex());
 
@@ -260,18 +252,18 @@ public class ButtonPanel extends JPanel {
 		Course co = mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getStudents()
 				.get(mf.getCurrentlySelectedStudentIndex()).getCourses().get(mf.getCurrentlySelectedCourseIndex());
 
-		//Creates list for criteria
+		// Creates list for criteria
 		ArrayList<Criteria> c;
 
-		//Setup
+		// Setup
 		printView.setText("");
 
-		//adds text
+		// adds text
 		printView.append(String.format("%-20s%s", "Namn:", s.getName()) + "\n");
 		printView.append(String.format("%-20s%s", "Klass:", sc.getName()) + "\n");
 		printView.append(String.format("%-20s%s", "Kurs:", co.getName()) + "\n");
 
-		//Adds text and sets up criteria based on the state of the panel
+		// Adds text and sets up criteria based on the state of the panel
 		if (st.equals(State.CLASS_COURSE_STUDENT)) {
 			printView.append(String.format("%-20s%s", "Uppgift:", t.getName()) + "\n");
 			c = t.getCriteria();
@@ -286,8 +278,9 @@ public class ButtonPanel extends JPanel {
 			printView.append(String.format("%-20s%-1s", cr.getName() + ":", cr.getGrade().toString()) + "\n");
 		}
 
-		//Adds the comment if it exists:
-		if (t.getComment().trim().length() != 0 && mf.getGradePanel().getState().equals(State.CLASS_COURSE_STUDENT_TASK)) {
+		// Adds the comment if it exists:
+		if (t.getComment().trim().length() != 0
+				&& mf.getGradePanel().getState().equals(State.CLASS_COURSE_STUDENT_TASK)) {
 			printView.append("\n\nKommentar:\n" + t.getComment());
 		}
 	}
@@ -298,16 +291,16 @@ public class ButtonPanel extends JPanel {
 	 * @param path the new path that should be saved at
 	 */
 	public void saveAs(String path) {
-		//Creates a new FileSystemFrame
+		// Creates a new FileSystemFrame
 		FileSystemFrame fsf = new FileSystemFrame("saves", "xml");
 
-		//Shows the frame
+		// Shows the frame
 		fsf.setVisible(true);
 
-		//Creates a thread
+		// Creates a thread
 		threadSaveAs = new Thread(() -> saveAsThread(fsf));
 
-		//Starts the thread
+		// Starts the thread
 		threadSaveAs.start();
 	}
 
@@ -318,7 +311,7 @@ public class ButtonPanel extends JPanel {
 	 */
 	@SuppressWarnings("static-access")
 	private void saveAsThread(FileSystemFrame fsf) {
-		//Waits for the user to do the input
+		// Waits for the user to do the input
 		while (fsf.getExitCode() == -1) {
 			try {
 				threadSaveAs.sleep(450);
@@ -327,7 +320,7 @@ public class ButtonPanel extends JPanel {
 			}
 		}
 
-		//Saves the data and set's the path
+		// Saves the data and set's the path
 		if (fsf.getExitCode() == 0) {
 			try {
 				mf.setSaveFilePath(fsf.getFilePath());
@@ -338,12 +331,12 @@ public class ButtonPanel extends JPanel {
 			}
 		}
 
-		//Closes the FileSystemFrame
+		// Closes the FileSystemFrame
 		fsf.close();
 	}
 
 	private void settings() {
-		//Shows the settings frame
+		// Shows the settings frame
 		new SettingsFrame(mf).setVisible(true);
 	}
 
@@ -366,8 +359,9 @@ public class ButtonPanel extends JPanel {
 	private void setProperties() {
 		this.setLayout(layout);
 
-		//Adds action listeners
-		btnHelp.addActionListener((e) -> new HelpFrame(helpTitle, "<html><p>" + helpText + "</p></html>", 500, 650).setVisible(true));
+		// Adds action listeners
+		btnHelp.addActionListener(
+				(e) -> new HelpFrame(helpTitle, "<html><p>" + helpText + "</p></html>", 500, 650).setVisible(true));
 
 		btnSave.addActionListener((e) -> {
 			mf.saveData(mf.getSaveFilePath());

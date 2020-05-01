@@ -6,53 +6,53 @@ import com.te3.main.exceptions.IllegalNameException;
 
 /**
  * A school class
- * */
+ */
 public class SchoolClass {
 
-    /** The name of the class */
+	/** The name of the class */
 	private String name;
 
 	/** The students */
 	private ArrayList<Student> students = new ArrayList<Student>();
 
 	/**
-     * Used in saving
-     * */
+	 * Used in saving
+	 */
 	public SchoolClass() {
 	}
 
-    /**
-     * Sets up a school class with a name and students.
-     *
-     * @param name the name of the class
-     * @param students the students of the class
-     * @throws IllegalNameException if the name isn't accepted
-     */
+	/**
+	 * Sets up a school class with a name and students.
+	 *
+	 * @param name     the name of the class
+	 * @param students the students of the class
+	 * @throws IllegalNameException if the name isn't accepted
+	 */
 	public SchoolClass(String name, ArrayList<Student> students) throws IllegalNameException {
 		this.setName(name);
 		this.students = students;
 	}
 
-    /**
-     * @return the name of the class
-     */
+	/**
+	 * @return the name of the class
+	 */
 	public String getName() {
 		return this.name;
 	}
 
-    /**
-     * A setter for name.
-     *
-     * @param name the new name for the class
-     * @throws IllegalNameException if the name isn't accepted (trimmed min 3 chars.)
-     */
+	/**
+	 * A setter for name.
+	 *
+	 * @param name the new name for the class
+	 * @throws IllegalNameException if the name isn't accepted (trimmed min 3
+	 *                              chars.)
+	 */
 	public void setName(String name) throws IllegalNameException {
-	    /*
-	     * Checks the length (trimmed) of the input.
-	     *
-	     * if > 3 then sets the name
-	     * else throws an exception
-	     * */
+		/*
+		 * Checks the length (trimmed) of the input.
+		 *
+		 * if > 3 then sets the name else throws an exception
+		 */
 		if (name.trim().length() < 3) {
 			throw new IllegalNameException("För kort namn");
 		} else {
@@ -60,20 +60,20 @@ public class SchoolClass {
 		}
 	}
 
-    /**
-     * A getter for the students
-     *
-     * @return the students
-     */
+	/**
+	 * A getter for the students
+	 *
+	 * @return the students
+	 */
 	public ArrayList<Student> getStudents() {
 		return this.students;
 	}
 
-    /**
-     * A setter for the students.
-     *
-     * @param students the new students
-     */
+	/**
+	 * A setter for the students.
+	 *
+	 * @param students the new students
+	 */
 	public void setStudents(ArrayList<Student> students) {
 		this.students = students;
 	}

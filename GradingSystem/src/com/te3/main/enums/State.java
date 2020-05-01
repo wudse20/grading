@@ -8,9 +8,9 @@ public enum State {
 	CLASS_COURSE_STUDENT_TASK,
 	/** A view for all the assignments displaying the highest grade */
 	CLASS_COURSE_STUDENT,
-	/** A view when no student is selected*/
+	/** A view when no student is selected */
 	CLASS_COURSE,
-	/** A view when only a SchoolClass is selected*/
+	/** A view when only a SchoolClass is selected */
 	CLASS,
 	/** A view when nothing is selected */
 	NOTHING_SELECTED

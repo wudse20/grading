@@ -16,9 +16,8 @@ import com.te3.main.objects.Course;
 import com.te3.main.objects.SchoolClass;
 
 /**
- * The class that holds the Frame for
- * managing courses.
- * */
+ * The class that holds the Frame for managing courses.
+ */
 public class CourseFrame extends JFrame {
 
 	/** Default */
@@ -35,13 +34,12 @@ public class CourseFrame extends JFrame {
 			+ "ett kunskapskrav behöver du bara klicka på det<br>" + "i <b>kunskapskravs</b>-rutan.<br>"
 			+ "Tryck på knappen: <b>Tabort</b> för att tabort kursen.";
 
-	//Instances
+	// Instances
 	Course c;
 
 	MainFrame mf;
 
-
-	//Panels
+	// Panels
 	NamePanel np = new NamePanel();
 
 	MainCoursePanel mcp;
@@ -52,14 +50,14 @@ public class CourseFrame extends JFrame {
 
 	JPanel panel = new JPanel();
 
-	//Containers
+	// Containers
 	Container cp = this.getContentPane();
 
-	//Layouts
+	// Layouts
 	BorderLayout layout = new BorderLayout();
 	BorderLayout pLayout = new BorderLayout();
 
-	//Labels
+	// Labels
 	JLabel lblSpacer1 = new JLabel(" ");
 	JLabel lblSpacer2 = new JLabel("      ");
 	JLabel lblSpacer3 = new JLabel("      ");
@@ -71,23 +69,24 @@ public class CourseFrame extends JFrame {
 	 * @param mf The instance of the MainFrame.
 	 */
 	public CourseFrame(MainFrame mf) {
-		//Sets some properties
+		// Sets some properties
 		super("Lägg till en kurs");
 		this.mf = mf;
 		this.setLayout(layout);
 		this.setSize(new Dimension(600, 600));
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-		//Creates the MainCoursePanel
+		// Creates the MainCoursePanel
 		mcp = new MainCoursePanel(mf);
 
-		//Adds action listeners
+		// Adds action listeners
 		acp.getBtnAdd().addActionListener((e) -> newCourse());
 		acp.getBtnCancel().addActionListener((e) -> dispose());
 
-		acp.getBtnHelp().addActionListener((e) -> new HelpFrame("Lägg till kurs", "<html><p>" + helpInfo + "</p></html>", 500).setVisible(true));
+		acp.getBtnHelp().addActionListener(
+				(e) -> new HelpFrame("Lägg till kurs", "<html><p>" + helpInfo + "</p></html>", 500).setVisible(true));
 
-		//Adds the components
+		// Adds the components
 		panel.setLayout(pLayout);
 		panel.add(np, BorderLayout.PAGE_START);
 		panel.add(mcp, BorderLayout.CENTER);
@@ -107,7 +106,7 @@ public class CourseFrame extends JFrame {
 	 * @param c  the course that's being updated.
 	 */
 	public CourseFrame(MainFrame mf, Course c) {
-		//Sets some properties
+		// Sets some properties
 		super("Uppdatera en kurs");
 		this.mf = mf;
 		this.c = c;
@@ -115,17 +114,18 @@ public class CourseFrame extends JFrame {
 		this.setSize(new Dimension(600, 600));
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-		//Panel setup
+		// Panel setup
 		mcp = new MainCoursePanel(mf, c);
 		np.setLastInput(c.getName());
 
-		//Adds the action listener
+		// Adds the action listener
 		ecp.getBtnUpdate().addActionListener((e) -> this.updateCourse());
 		ecp.getBtnCancel().addActionListener((e) -> this.dispose());
 		ecp.getBtnDelete().addActionListener(e -> this.deleteCourse());
-		ecp.getBtnHelp().addActionListener((e) -> new HelpFrame("Lägg till kurs", "<html><p>" + helpInfo + "</p></html>", 500).setVisible(true));
+		ecp.getBtnHelp().addActionListener(
+				(e) -> new HelpFrame("Lägg till kurs", "<html><p>" + helpInfo + "</p></html>", 500).setVisible(true));
 
-		//Adds components
+		// Adds components
 		panel.setLayout(pLayout);
 		panel.add(np, BorderLayout.PAGE_START);
 		panel.add(mcp, BorderLayout.CENTER);
@@ -142,14 +142,15 @@ public class CourseFrame extends JFrame {
 	 * Removes a Course
 	 */
 	private void deleteCourse() {
-		//User confirmation
-		int ans = JOptionPane.showConfirmDialog(this, "Är du säker på att du vill tabort: " + c.getName() + "?", "Tabort", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+		// User confirmation
+		int ans = JOptionPane.showConfirmDialog(this, "Är du säker på att du vill tabort: " + c.getName() + "?",
+				"Tabort", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 
-		//Returns if no
+		// Returns if no
 		if (ans == JOptionPane.NO_OPTION)
 			return;
 
-		//Removes the course from the students
+		// Removes the course from the students
 		for (int i = 0; i < mf.getMainData().getClasses().size(); i++) {
 			for (int j = 0; j < mf.getMainData().getClasses().get(i).getStudents().size(); j++) {
 				int index = mf.getMainData().getClasses().get(i).getStudents().get(j).getCourses().indexOf(c);
@@ -159,13 +160,13 @@ public class CourseFrame extends JFrame {
 			}
 		}
 
-		//Updates grade panel
+		// Updates grade panel
 		mf.updateGradePanel(State.CLASS);
 
-		//Updates CBPanel
+		// Updates CBPanel
 		mf.cbPanel.refreshData(mf.getMainData());
 
-		//Closes the frame
+		// Closes the frame
 		this.dispose();
 	}
 
@@ -173,7 +174,7 @@ public class CourseFrame extends JFrame {
 	 * Adds a new course to the main data.
 	 */
 	private void newCourse() {
-		//Some cases that will break it, so it handles them
+		// Some cases that will break it, so it handles them
 		if (mcp.getAddedClasses().size() == 0) {
 			JOptionPane.showMessageDialog(this, "Du måste välja minst en klass!", "Fel", JOptionPane.ERROR_MESSAGE);
 			return;
@@ -186,7 +187,7 @@ public class CourseFrame extends JFrame {
 		}
 
 		try {
-			//Adds the courses to the new classes
+			// Adds the courses to the new classes
 			ArrayList<SchoolClass> al2 = mcp.getAddedClasses();
 
 			for (var i = 0; i < al2.size(); i++) {
@@ -196,26 +197,26 @@ public class CourseFrame extends JFrame {
 				}
 			}
 
-			//Saves the data
+			// Saves the data
 			mf.saveData(mf.getSaveFilePath());
 
-			//Message
+			// Message
 			JOptionPane.showMessageDialog(this, "Du har lagt till kursen: " + np.getLastInput(),
 					"Du har lagt till en kurs", JOptionPane.INFORMATION_MESSAGE);
 
-			//Updates the grade panel
+			// Updates the grade panel
 			mf.updateGradePanel();
 
-			//Updates CBPanel
+			// Updates CBPanel
 			mf.cbPanel.refreshData(mf.getMainData());
 
-			//Disposes the frame
+			// Disposes the frame
 			this.dispose();
 		} catch (IllegalNameException e) {
-			//sends error message
+			// sends error message
 			JOptionPane.showMessageDialog(this, e.getMessage(), "Fel", JOptionPane.ERROR_MESSAGE);
 
-			//returns
+			// returns
 			return;
 		}
 	}
@@ -224,7 +225,7 @@ public class CourseFrame extends JFrame {
 	 * Updates a course.
 	 */
 	private void updateCourse() {
-		//Control message
+		// Control message
 		int ans = JOptionPane.showConfirmDialog(this,
 				"Är du säker på att du vill uppdatera kursen: " + np.getLastInput() + "?", "Är du säker?",
 				JOptionPane.YES_NO_OPTION);
@@ -232,7 +233,7 @@ public class CourseFrame extends JFrame {
 		if (ans == JOptionPane.NO_OPTION)
 			return;
 
-		//Checking for illegal inputs.
+		// Checking for illegal inputs.
 		if (mcp.getAddedClasses().size() == 0) {
 			JOptionPane.showMessageDialog(this, "Du måste välja minst en klass!", "Fel", JOptionPane.ERROR_MESSAGE);
 			return;
@@ -244,9 +245,9 @@ public class CourseFrame extends JFrame {
 			return;
 		}
 
-		//Loops through the list and updates the courses
+		// Loops through the list and updates the courses
 		try {
-			//Removes the old courses
+			// Removes the old courses
 			for (int i = 0; i < mf.getMainData().getClasses().size(); i++) {
 				for (int j = 0; j < mf.getMainData().getClasses().get(i).getStudents().size(); j++) {
 					int index = mf.getMainData().getClasses().get(i).getStudents().get(j).getCourses().indexOf(c);
@@ -273,26 +274,26 @@ public class CourseFrame extends JFrame {
 				}
 			}
 
-			//Saves the data
+			// Saves the data
 			mf.saveData(mf.getSaveFilePath());
 
-			//Message
+			// Message
 			JOptionPane.showMessageDialog(this, "Du har uppdaterat kursen: " + np.getLastInput(),
 					"Du har uppdaterat en kurs", JOptionPane.INFORMATION_MESSAGE);
 
-			//Updates the grade panel.
+			// Updates the grade panel.
 			mf.updateGradePanel();
 
-			//Updates CBPanel
+			// Updates CBPanel
 			mf.cbPanel.refreshData(mf.getMainData());
 
-			//Closes the frame
+			// Closes the frame
 			this.dispose();
 		} catch (IllegalNameException e) {
-			//Sends error message
+			// Sends error message
 			JOptionPane.showMessageDialog(this, e.getMessage(), "Fel", JOptionPane.ERROR_MESSAGE);
 
-			//returns
+			// returns
 			return;
 		}
 	}

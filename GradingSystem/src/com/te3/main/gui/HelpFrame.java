@@ -17,23 +17,23 @@ public class HelpFrame extends JFrame implements ActionListener {
 	/** Default */
 	private static final long serialVersionUID = 1L;
 
-	//Strings
+	// Strings
 	private String title, info;
 
-	//Integers
+	// Integers
 	private int height, width;
 
-	//Containers
+	// Containers
 	Container cp = this.getContentPane();
 
-	//Layouts
+	// Layouts
 	BorderLayout layout = new BorderLayout();
 	BorderLayout pContentLayout = new BorderLayout();
 
-	//Buttons
+	// Buttons
 	JButton btnOk = new JButton("Ok");
 
-	//Labels
+	// Labels
 	JLabel lblInfo = new JLabel();
 	JLabel lblTitle = new JLabel();
 	JLabel lblSpacer1 = new JLabel(" ");
@@ -41,10 +41,10 @@ public class HelpFrame extends JFrame implements ActionListener {
 	JLabel lblSpacer3 = new JLabel("     ");
 	JLabel lblSpacer4 = new JLabel(" ");
 
-	//ScrollPane
+	// ScrollPane
 	JScrollPane scrPane = new JScrollPane(lblInfo);
 
-	//Panels
+	// Panels
 	JPanel pContent = new JPanel();
 
 	/**
@@ -54,7 +54,7 @@ public class HelpFrame extends JFrame implements ActionListener {
 	 * @param info  the help info about the subject
 	 */
 	public HelpFrame(String title, String info) {
-		//Sets properties
+		// Sets properties
 		this.setTitle(title);
 		this.setInfo(info);
 		this.setHeight(300);
@@ -71,7 +71,7 @@ public class HelpFrame extends JFrame implements ActionListener {
 	 * @param height the height of the window
 	 */
 	public HelpFrame(String title, String info, int height) {
-		//Sets some properties
+		// Sets some properties
 		this.setTitle(title);
 		this.setInfo(info);
 		this.setHeight(height);
@@ -88,7 +88,7 @@ public class HelpFrame extends JFrame implements ActionListener {
 	 * @param height the height of the window
 	 */
 	public HelpFrame(String title, String info, int height, int width) {
-		//Sets some properties
+		// Sets some properties
 		this.setTitle(title);
 		this.setInfo(info);
 		this.setHeight(height);
@@ -98,28 +98,28 @@ public class HelpFrame extends JFrame implements ActionListener {
 
 	/**
 	 * Initializes the GUI
-	 * */
+	 */
 	private void initialize() {
-		//Sets some properties
+		// Sets some properties
 		this.setTitle(title);
 		this.setSize(new Dimension(width, height));
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.setLayout(layout);
 
-		//Sets text and font
+		// Sets text and font
 		lblTitle.setFont(new Font(lblTitle.getFont().getName(), Font.BOLD, 20));
 		lblTitle.setText(title);
 
 		lblInfo.setText(info);
 
-		//Sets action command and adds an action listener
+		// Sets action command and adds an action listener
 		btnOk.setActionCommand("OK");
 		btnOk.addActionListener(this);
 
-		//Removes the border
+		// Removes the border
 		scrPane.setBorder(BorderFactory.createEmptyBorder());
 
-		//Adds the components
+		// Adds the components
 		pContent.setLayout(pContentLayout);
 		pContent.add(lblTitle, BorderLayout.PAGE_START);
 		pContent.add(scrPane, BorderLayout.CENTER);
@@ -136,7 +136,7 @@ public class HelpFrame extends JFrame implements ActionListener {
 	 * A setter for the title
 	 *
 	 * @param title the title of the frame
-	 * */
+	 */
 	public void setTitle(String title) {
 		this.title = (title.trim().equals("")) ? "Too short title" : title;
 	}
@@ -145,7 +145,7 @@ public class HelpFrame extends JFrame implements ActionListener {
 	 * A setter for the info
 	 *
 	 * @param info the main body of the frame
-	 * */
+	 */
 	public void setInfo(String info) {
 		this.info = (info.trim().equals("")) ? "Too short info" : info;
 	}
@@ -154,7 +154,7 @@ public class HelpFrame extends JFrame implements ActionListener {
 	 * A setter for the height
 	 *
 	 * @param height the height of the frame can't be less then 100.
-	 * */
+	 */
 	public void setHeight(int height) {
 		this.height = (height < 100) ? 100 : height;
 	}
@@ -163,14 +163,14 @@ public class HelpFrame extends JFrame implements ActionListener {
 	 * A setter for the width
 	 *
 	 * @param width the width of teh frame, can't be less then 100.
-	 * */
+	 */
 	public void setWidth(int width) {
 		this.width = (width < 100) ? 100 : width;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		//Shuts down the frame on button press with action command: OK
+		// Shuts down the frame on button press with action command: OK
 		if (e.getActionCommand().equals("OK")) {
 			this.dispose();
 		}

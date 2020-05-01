@@ -44,7 +44,7 @@ public class MainFrame extends JFrame implements ComponentListener, WindowStateL
 	/** The settings */
 	private Settings settings;
 
-	/**Timer in seconds*/
+	/** Timer in seconds */
 	private int saveTimer;
 
 	/** The index of the currently selected class */
@@ -53,10 +53,10 @@ public class MainFrame extends JFrame implements ComponentListener, WindowStateL
 	/** The index of the currently selected course */
 	private int currentlySelectedCourseIndex = 0;
 
-	/** The index of the currently selected assignment*/
+	/** The index of the currently selected assignment */
 	private int currentlySelectedAssignmentIndex = 0;
 
-	/** The index of the currently selected student*/
+	/** The index of the currently selected student */
 	private int currentlySelectedStudentIndex = 0;
 
 	/** The currently selected yoda */
@@ -74,17 +74,17 @@ public class MainFrame extends JFrame implements ComponentListener, WindowStateL
 	/** The number of times the window has been resized */
 	private int resizeCount = 0;
 
-	//Layout
+	// Layout
 	BoxLayout pLayout;
 
-	//Panels
+	// Panels
 	CBPanel cbPanel;
 	GradesPanel gradePanel;
 	ButtonPanel btnPanel;
 
 	JPanel panel = new JPanel();
 
-	//Lables
+	// Lables
 	JLabel lblBackground = new JLabel();
 
 	/** The state of the program */
@@ -96,128 +96,123 @@ public class MainFrame extends JFrame implements ComponentListener, WindowStateL
 	/**
 	 * Sets everything in the program up, <br>
 	 * that's needed.
-	 * */
+	 */
 	public MainFrame() {
-		//Sets the title through the super constructor
+		// Sets the title through the super constructor
 		super("Betygssättning");
 
-		//Sets the default close operation
+		// Sets the default close operation
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		//Sets the size
+		// Sets the size
 		this.setSize(new Dimension(1200, 600));
 
-		//Sets the content pane
+		// Sets the content pane
 		this.setContentPane(lblBackground);
 
 		/*
-		 * If it can find the settings file
-		 * it will load it in to memory, else
-		 * it will create the new settings with
-		 * the default values.
-		 * */
+		 * If it can find the settings file it will load it in to memory, else it will
+		 * create the new settings with the default values.
+		 */
 		if (new File("./settings.xml").exists())
 			settings = loadSettings();
 		else
 			settings = new Settings("./saves.xml", 300, false, "yoda1.jpg");
 
-		//Loads the settings to the variables from the settings object
+		// Loads the settings to the variables from the settings object
 		this.saveFilePath = settings.getSavePath();
 		this.saveTimer = settings.getSaveTimer();
 		this.shouldShowBabyYoda = settings.isShouldShowYoda();
 		this.currentYoda = settings.getCurrentYoda();
 
-		//Gets the saved data
+		// Gets the saved data
 		mainData = getSavedData();
 
-		//Tells the timer to auto save based on the save timer
+		// Tells the timer to auto save based on the save timer
 		t = new Timer(saveTimer * 1000, (e) -> saveData(saveFilePath));
 
 		// Hooks in to the shutdown sequence and writes to the files and then exits.
 		Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-			//Saves the settings
+			// Saves the settings
 			saveSettings();
 
-			//Saves the data
+			// Saves the data
 			saveData(saveFilePath);
 		}));
 
-		//Adds listeners
+		// Adds listeners
 		this.addComponentListener(this);
 		this.addWindowStateListener(this);
 
-		//Starts the timer
+		// Starts the timer
 		t.start();
 
-		//Initializes the components
+		// Initializes the components
 		initComponents();
 
-		//Stores the state
+		// Stores the state
 		this.s = gradePanel.getState();
 	}
 
 	/**
 	 * Initializes the components
-	 * */
+	 */
 	private void initComponents() {
-		//Initializes the layout
+		// Initializes the layout
 		pLayout = new BoxLayout(panel, BoxLayout.Y_AXIS);
 
-		//Initializes the panels
+		// Initializes the panels
 		cbPanel = new CBPanel(mainData, this);
 		gradePanel = new GradesPanel(this);
 		btnPanel = new ButtonPanel(this);
 
-		//Sets the layout
+		// Sets the layout
 		panel.setLayout(pLayout);
 
-		//Makes the panel transparent
+		// Makes the panel transparent
 		panel.setOpaque(false);
 
-		//Adds the components
+		// Adds the components
 		panel.add(cbPanel);
 		panel.add(gradePanel);
 		panel.add(btnPanel);
 
-		//sets baby yoda up
-        this.setBabyYoda(shouldShowBabyYoda);
+		// sets baby yoda up
+		this.setBabyYoda(shouldShowBabyYoda);
 
-        //Adds the panel
-        this.add(panel);
+		// Adds the panel
+		this.add(panel);
 
-        //Sets the panels bounds
+		// Sets the panels bounds
 		panel.setBounds(0, 0, this.getWidth() - 15, this.getHeight());
 	}
 
+	/**
+	 * Set up for Baby Yoda. Not a setter
+	 *
+	 * @param shouldShowBabyYoda if {@code true} -> shows Baby yoda, else not
+	 */
+	public void setBabyYoda(boolean shouldShowBabyYoda) {
+		// Sets the different components to be transparent or opaque based on
+		// if baby yoda should be shown or not.
+		if (shouldShowBabyYoda) {
+			cbPanel.setOpaque(false);
+			gradePanel.setOpaque(false);
+			btnPanel.setOpaque(false);
+		} else {
+			cbPanel.setOpaque(true);
+			gradePanel.setOpaque(true);
+			btnPanel.setOpaque(true);
+		}
 
-    /**
-     * Set up for Baby Yoda. Not a setter
-     *
-     * @param shouldShowBabyYoda if {@code true} -> shows Baby yoda, else not
-     */
-    public void setBabyYoda(boolean shouldShowBabyYoda) {
-    	//Sets the different components to be transparent or opaque based on
-		//if baby yoda should be shown or not.
-        if (shouldShowBabyYoda) {
-            cbPanel.setOpaque(false);
-            gradePanel.setOpaque(false);
-            btnPanel.setOpaque(false);
-        } else {
-            cbPanel.setOpaque(true);
-            gradePanel.setOpaque(true);
-            btnPanel.setOpaque(true);
-        }
-
-        //Tells the panels to handle baby yoda
-        gradePanel.yoda(shouldShowBabyYoda);
-        cbPanel.yoda(shouldShowBabyYoda);
+		// Tells the panels to handle baby yoda
+		gradePanel.yoda(shouldShowBabyYoda);
+		cbPanel.yoda(shouldShowBabyYoda);
 
 		/*
-		 * Scales the background image to the size of
-		 * the JFrame. To save on performance it only
-		 * dose the calculations while the background
-		 * is selected.
-		 * */
+		 * Scales the background image to the size of the JFrame. To save on performance
+		 * it only dose the calculations while the background is selected.
+		 */
 		if (shouldShowBabyYoda) {
 			BufferedImage img = null;
 
@@ -231,15 +226,15 @@ public class MainFrame extends JFrame implements ComponentListener, WindowStateL
 			lblBackground.setIcon(new ImageIcon(scaleImg));
 		}
 
-		//Repaints everything
-        cbPanel.repaint();
-        gradePanel.repaint();
-        this.repaint();
+		// Repaints everything
+		cbPanel.repaint();
+		gradePanel.repaint();
+		this.repaint();
 	}
 
 	/**
 	 * Loads the settings into memory
-	 * */
+	 */
 	public Settings loadSettings() {
 		this.settingsFilePath = "./settings.xml";
 		XML<Settings> xml = new XML<Settings>();
@@ -248,7 +243,7 @@ public class MainFrame extends JFrame implements ComponentListener, WindowStateL
 
 	/**
 	 * Saves the settings
-	 * */
+	 */
 	public void saveSettings() {
 		this.settingsFilePath = "./settings.xml";
 		XML<Settings> xml = new XML<Settings>();
@@ -257,7 +252,7 @@ public class MainFrame extends JFrame implements ComponentListener, WindowStateL
 
 	/**
 	 * Saves the data
-	 * */
+	 */
 	public void saveData(String filePath) {
 		XML<Data> xml = new XML<Data>();
 		xml.write(filePath, this.mainData);
@@ -265,13 +260,13 @@ public class MainFrame extends JFrame implements ComponentListener, WindowStateL
 
 	/**
 	 * Loads the data in to memory
-	 * */
+	 */
 	public Data loadData(String filePath) {
-		//If the file doesn't exist then create a new Data Object.
+		// If the file doesn't exist then create a new Data Object.
 		if (!(new File(filePath).exists()))
 			return new Data(new ArrayList<SchoolClass>());
-		
-		//Reads and returns the saved data
+
+		// Reads and returns the saved data
 		XML<Data> xml = new XML<Data>();
 		Data d = xml.read(filePath);
 		return d;
@@ -280,14 +275,14 @@ public class MainFrame extends JFrame implements ComponentListener, WindowStateL
 	/**
 	 * Get's the saved data <br>
 	 * It will also create a debug student if needed.
-	 * */
+	 */
 	private Data getSavedData() {
 		// should be able to find local stored data, and import it. for now we just have
 		// it create a new empty data object.
 		// change this boolean to false if you do not want to run the program with
 		// default predefined classes, courses, students and tasks.
 
-		boolean debug = false;
+		boolean debug = true;
 
 		if (debug) {
 			ArrayList<SchoolClass> classes = new ArrayList<SchoolClass>();
@@ -315,7 +310,6 @@ public class MainFrame extends JFrame implements ComponentListener, WindowStateL
 				criteria2.add(new Criteria("Dokumentation"));
 				criteria2.add(new Criteria("Förmåga"));
 
-
 				tasks.add(new Task("Något jätteprov", criteria2));
 
 				students.get(0).addCourse(new Course("Dator- och nätverksteknik", criteria, tasks));
@@ -332,24 +326,23 @@ public class MainFrame extends JFrame implements ComponentListener, WindowStateL
 	}
 
 	/**
-	 * Updates the state of the GUI and
-	 * the GUI.
+	 * Updates the state of the GUI and the GUI.
 	 *
 	 * @param s the new state of the GUI
-	 * */
+	 */
 	public void updateGradePanel(State s) {
 		this.s = s;
 		gradePanel.update(s);
 		this.cbPanel.handleNewState();
 	}
-	
+
 	public State getGradeState() {
 		return this.s;
 	}
 
 	/**
 	 * Updates the grade panel GUI and information
-	 * */
+	 */
 	public void updateGradePanel() {
 		gradePanel.update(s);
 	}
@@ -388,8 +381,8 @@ public class MainFrame extends JFrame implements ComponentListener, WindowStateL
 						(Class<Task>) clazz).setVisible(true);
 			}
 		}
-		
-		//Update the CB Panel with the new data
+
+		// Update the CB Panel with the new data
 		cbPanel.refreshData(this.mainData);
 	}
 
@@ -400,11 +393,9 @@ public class MainFrame extends JFrame implements ComponentListener, WindowStateL
 		panel.setBounds(0, 0, this.getWidth() - 15, this.getHeight() - btnPanel.getHeight());
 
 		/*
-		 * Scales the background image to the size of
-		 * the JFrame. To save on performance it only
-		 * dose the calculations while the background
-		 * is selected.
-		 * */
+		 * Scales the background image to the size of the JFrame. To save on performance
+		 * it only dose the calculations while the background is selected.
+		 */
 		if (shouldShowBabyYoda) {
 			BufferedImage img = null;
 
@@ -421,21 +412,21 @@ public class MainFrame extends JFrame implements ComponentListener, WindowStateL
 
 	/**
 	 * Getter for the main data
-	 * */
+	 */
 	public Data getMainData() {
 		return mainData;
 	}
 
 	/**
 	 * Setter for the main data
-	 * */
+	 */
 	public void setMainData(Data mainData) {
 		this.mainData = mainData;
 	}
 
 	/**
 	 * Getter for the save timer
-	 * */
+	 */
 	public int getSaveTimer() {
 		this.saveTimer = settings.getSaveTimer();
 		return this.saveTimer;
@@ -443,7 +434,7 @@ public class MainFrame extends JFrame implements ComponentListener, WindowStateL
 
 	/**
 	 * Sets the new value and restarts the timer.
-	 * */
+	 */
 	public void setSaveTimer(int saveTimer) throws IllegalInputException {
 		settings.setSaveTimer(saveTimer);
 		this.saveTimer = saveTimer;
@@ -454,7 +445,7 @@ public class MainFrame extends JFrame implements ComponentListener, WindowStateL
 
 	/**
 	 * A setter for the settings save file path
-	 * */
+	 */
 	public String getSettingsFilePath() {
 		this.settingsFilePath = "./settings.xml";
 		return settingsFilePath;
@@ -462,7 +453,7 @@ public class MainFrame extends JFrame implements ComponentListener, WindowStateL
 
 	/**
 	 * A getter for the save file path
-	 * */
+	 */
 	public String getSaveFilePath() {
 		return saveFilePath;
 	}
@@ -471,7 +462,7 @@ public class MainFrame extends JFrame implements ComponentListener, WindowStateL
 	 * Sets the save file path
 	 *
 	 * @throws if the file path isn't accepted.
-	 * */
+	 */
 	public void setSaveFilePath(String saveFilePath) throws IllegalInputException {
 		try {
 			settings.setSavePath(saveFilePath);
@@ -483,77 +474,77 @@ public class MainFrame extends JFrame implements ComponentListener, WindowStateL
 
 	/**
 	 * A getter for the currently selected class index
-	 * */
+	 */
 	public int getCurrentlySelectedClassIndex() {
 		return currentlySelectedClassIndex;
 	}
 
 	/**
 	 * A setter for the currently selected class index
-	 * */
+	 */
 	public void setCurrentlySelectedClassIndex(int currentlySelectedClassIndex) {
 		this.currentlySelectedClassIndex = currentlySelectedClassIndex;
 	}
 
 	/**
 	 * A getter for the currently selected course index.
-	 * */
+	 */
 	public int getCurrentlySelectedCourseIndex() {
 		return currentlySelectedCourseIndex;
 	}
 
 	/**
 	 * A setter for the currently selected course index.
-	 * */
+	 */
 	public void setCurrentlySelectedCourseIndex(int currentlySelectedCourseIndex) {
 		this.currentlySelectedCourseIndex = currentlySelectedCourseIndex;
 	}
 
 	/**
 	 * A getter for the currently selected assignment index.
-	 * */
+	 */
 	public int getCurrentlySelectedAssignmentIndex() {
 		return currentlySelectedAssignmentIndex;
 	}
 
 	/**
 	 * A setter for the currently selected assignment index
-	 * */
+	 */
 	public void setCurrentlySelectedAssignmentIndex(int currentlySelectedAssignmentIndex) {
 		this.currentlySelectedAssignmentIndex = currentlySelectedAssignmentIndex;
 	}
 
 	/**
 	 * A getter for the currently selected student index.
-	 * */
+	 */
 	public int getCurrentlySelectedStudentIndex() {
 		return currentlySelectedStudentIndex;
 	}
 
 	/**
 	 * A setter for the currently selected student index.
-	 * */
+	 */
 	public void setCurrentlySelectedStudentIndex(int currentlySelectedStudentIndex) {
 		this.currentlySelectedStudentIndex = currentlySelectedStudentIndex;
 	}
 
 	/**
 	 * A getter for the grade panel
-	 * */
+	 */
 	public GradesPanel getGradePanel() {
 		return gradePanel;
 	}
 
 	/**
 	 * A getter for the settings
-	 * */
+	 */
 	public Settings getSettings() {
 		return this.settings;
 	}
 
 	/**
 	 * A setter for the settings.
-	 * */
+	 */
 	public void setSettings(Settings s) {
 		this.settings = s;
 		this.saveFilePath = s.getSavePath();
@@ -562,21 +553,21 @@ public class MainFrame extends JFrame implements ComponentListener, WindowStateL
 	}
 
 	/**
-     * A getter for should show baby yoda
-     * */
-    public boolean shouldShowBabyYoda() {
-	    return this.shouldShowBabyYoda;
-    }
+	 * A getter for should show baby yoda
+	 */
+	public boolean shouldShowBabyYoda() {
+		return this.shouldShowBabyYoda;
+	}
 
-    public void setShouldShowBabyYoda(boolean shouldShowBabyYoda) {
-        this.shouldShowBabyYoda = shouldShowBabyYoda;
+	public void setShouldShowBabyYoda(boolean shouldShowBabyYoda) {
+		this.shouldShowBabyYoda = shouldShowBabyYoda;
 	}
 
 	/**
 	 * A getter for current yoda.
 	 *
 	 * @return the current yoda.
-	 * */
+	 */
 	public String getCurrentYoda() {
 		return currentYoda;
 	}
@@ -585,18 +576,18 @@ public class MainFrame extends JFrame implements ComponentListener, WindowStateL
 	 * A setter for current yoda.
 	 *
 	 * @param currentYoda the current yoda
-	 * */
+	 */
 	public void setCurrentYoda(String currentYoda) {
 		this.currentYoda = currentYoda;
 	}
 
 	@Override
 	public void componentResized(ComponentEvent e) {
-		//To improve resize speed.
-		//It will only call it every
-		//Five times it's resized, since
-		//resizing takes time, because of
-		//the image scaling.
+		// To improve resize speed.
+		// It will only call it every
+		// Five times it's resized, since
+		// resizing takes time, because of
+		// the image scaling.
 		if (resizeCount % 5 == 0)
 			resizeFrame();
 	}
