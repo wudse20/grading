@@ -1,8 +1,8 @@
 package com.te3.main;
 
-import com.te3.main.gui.MainFrame;
+import javax.swing.SwingUtilities;
 
-import javax.swing.*;
+import com.te3.main.gui.MainFrame;
 
 /**
  * Main class

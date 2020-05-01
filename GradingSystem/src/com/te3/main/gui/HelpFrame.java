@@ -7,7 +7,12 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 /**
  * The frame used to display a help message.
@@ -105,8 +110,8 @@ public class HelpFrame extends JFrame implements ActionListener {
 		this.setSize(new Dimension(width, height));
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.setLayout(layout);
-		
-		//Gets the default color for the background. To make everything match.
+
+		// Gets the default color for the background. To make everything match.
 		scrPane.setBackground(new JFrame().getBackground());
 
 		// Sets text and font

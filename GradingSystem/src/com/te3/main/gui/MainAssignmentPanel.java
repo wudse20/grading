@@ -13,7 +13,7 @@ import com.te3.main.objects.Criteria;
 import com.te3.main.objects.Task;
 
 /**
- * The class used to handle the assignemnts, <br>
+ * The class used to handle the assignments, <br>
  * with GUI components.
  */
 public class MainAssignmentPanel extends JPanel {

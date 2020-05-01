@@ -66,6 +66,7 @@ public class SchoolClass {
 	 *
 	 * @return the students
 	 */
+	@SuppressWarnings("unchecked")
 	public ArrayList<Student> getStudents() {
 		return (ArrayList<Student>) this.students.clone();
 	}

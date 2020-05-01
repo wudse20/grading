@@ -1,11 +1,12 @@
 package com.te3.main.gui.easteregg.GUI;
 
-import com.te3.main.gui.SettingsFrame;
-
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Dimension;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+
+import javax.swing.JFrame;
+
+import com.te3.main.gui.SettingsFrame;
 
 /**
  * The class that holds the main frame

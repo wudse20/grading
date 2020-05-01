@@ -6,7 +6,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 /**
- * The button panel att the bottom <br>
+ * The button panel at the bottom <br>
  * of the editing GUI:s.
  */
 public class EditControlPanel extends JPanel {

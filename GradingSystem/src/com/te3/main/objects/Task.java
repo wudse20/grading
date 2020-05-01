@@ -85,6 +85,7 @@ public class Task {
 	 *
 	 * @return the criteria
 	 */
+	@SuppressWarnings("unchecked")
 	public ArrayList<Criteria> getCriteria() {
 		return (ArrayList<Criteria>) this.criteria.clone();
 	}

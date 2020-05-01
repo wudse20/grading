@@ -1,11 +1,20 @@
 package com.te3.main.gui.easteregg.GUI;
 
-import com.te3.main.gui.easteregg.Move;
-
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.BasicStroke;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.util.Random;
+
+import javax.swing.JPanel;
+
+import com.te3.main.gui.easteregg.Move;
 
 public class GamePanel extends JPanel implements KeyListener, MouseListener, MouseMotionListener {
 	/** Generated */

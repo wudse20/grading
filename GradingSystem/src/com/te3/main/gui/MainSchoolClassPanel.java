@@ -22,7 +22,7 @@ import com.te3.main.objects.SchoolClass;
 import com.te3.main.objects.Student;
 
 /**
- * The class for maneging the classes.
+ * The class for managing the classes.
  */
 public class MainSchoolClassPanel extends JPanel implements DocumentListener {
 

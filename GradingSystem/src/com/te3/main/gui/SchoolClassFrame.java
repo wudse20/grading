@@ -108,13 +108,13 @@ public class SchoolClassFrame extends JFrame {
 
 		// Stores the instances
 		this.mf = mf;
-        try {
-            this.sc = new SchoolClass(sc.getName(), sc.getStudents());
-        } catch (IllegalNameException e) {
-            e.printStackTrace();
-        }
+		try {
+			this.sc = new SchoolClass(sc.getName(), sc.getStudents());
+		} catch (IllegalNameException e) {
+			e.printStackTrace();
+		}
 
-        // Initializes the MainSchoolClassPanel
+		// Initializes the MainSchoolClassPanel
 		this.mscp = new MainSchoolClassPanel(mf, this.sc);
 
 		// Sets properties

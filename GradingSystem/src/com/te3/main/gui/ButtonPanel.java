@@ -71,7 +71,7 @@ public class ButtonPanel extends JPanel {
 	// Buttons
 	JButton btnSave = new JButton("Spara");
 	JButton btnSaveAs = new JButton("Spara som");
-	JButton btnSaveToFile = new JButton("Spara till fil"); 
+	JButton btnSaveToFile = new JButton("Spara till fil");
 	JButton btnPrint = new JButton("Skriv ut");
 	JButton btnSettings = new JButton("Inställningar");
 	JButton btnHelp = new JButton("?");

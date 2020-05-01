@@ -1,15 +1,27 @@
 package com.te3.main.gui;
 
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.util.ArrayList;
 
-import javax.swing.*;
+import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
 import com.te3.main.enums.State;
-import com.te3.main.gui.easteregg.GUI.GameFrame;
 import com.te3.main.exceptions.IllegalInputException;
+import com.te3.main.gui.easteregg.GUI.GameFrame;
 import com.te3.main.objects.Data;
 import com.te3.main.objects.SchoolClass;
 import com.te3.main.objects.Settings;
@@ -184,7 +196,8 @@ public class SettingsFrame extends JFrame {
 		btnApply.addActionListener((e) -> applySettings());
 		btnCancel.addActionListener((e) -> this.dispose());
 		btnHelp.addActionListener(
-				(e) -> new HelpFrame("Inställningar", "<html><p>" + helpText + "</p></html>", 500, 600).setVisible(true));
+				(e) -> new HelpFrame("Inställningar", "<html><p>" + helpText + "</p></html>", 500, 600)
+						.setVisible(true));
 		btnSetSavePath.addActionListener((e) -> setSavePath());
 		banDeleteData.addActionListener((e) -> deleteData());
 		cBoxShouldShowBabyYoda.addActionListener((e) -> setYodaBtnStatus(cBoxShouldShowBabyYoda.isSelected()));

@@ -83,7 +83,7 @@ public class AssignmentFrame extends JFrame {
 		// Stores the instances
 		this.mf = mf;
 
-		//Stores a clone of the object
+		// Stores a clone of the object
 		try {
 			this.t = new Task(t.getName(), t.getCriteria());
 		} catch (IllegalNameException e) {
@@ -286,13 +286,14 @@ public class AssignmentFrame extends JFrame {
 		// Removes the task and adds the updated task
 		for (int i = 0; i < mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getStudents()
 				.size(); i++) {
-			//Stores the course instance
-			Course c = mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getStudents().get(i).getCourses().get(mf.getCurrentlySelectedCourseIndex());
+			// Stores the course instance
+			Course c = mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getStudents().get(i)
+					.getCourses().get(mf.getCurrentlySelectedCourseIndex());
 
-			//Removes the old task to prevent duplicates
+			// Removes the old task to prevent duplicates
 			c.removeTask(this.t);
 
-			//Adds the updated task.
+			// Adds the updated task.
 			c.addTask(new Task(np.getLastInput(), map.getAddedCriteria()));
 		}
 
