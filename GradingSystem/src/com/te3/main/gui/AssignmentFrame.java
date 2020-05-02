@@ -218,11 +218,19 @@ public class AssignmentFrame extends JFrame {
 		JOptionPane.showMessageDialog(this, "Du har nu tagit bort uppgiften: " + t.getName(), "Tabort",
 				JOptionPane.INFORMATION_MESSAGE);
 
-		// Updates GradePanel
-		mf.updateGradePanel(State.CLASS_COURSE_STUDENT);
+		//Stores the list of courses.
+		var listCourses = mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getStudents().get(0).getCourses().get(mf.getCurrentlySelectedCourseIndex()).getCourseTasks();
+
+		/*
+		* If no tasks it will set the state to
+		* CLASS_COURSE, else it will set the state
+		* to CLASS_COURSE_STUDENT
+		* */
+		mf.updateGradePanel((listCourses.size() != 0) ? State.CLASS_COURSE_STUDENT : State.CLASS_COURSE);
 
 		// Updates CBPanel
 		mf.cbPanel.refreshData(mf.getMainData());
+		mf.cbPanel.handleNewState();
 
 		// Closes the frame
 		this.dispose();

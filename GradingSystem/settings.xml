@@ -10,8 +10,5 @@
   <void property="saveTimer">
    <int>300</int>
   </void>
-  <void property="shouldShowYoda">
-   <boolean>true</boolean>
-  </void>
  </object>
 </java>
