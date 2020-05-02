@@ -136,7 +136,8 @@ public class AssignmentFrame extends JFrame {
 
 			acp.getBtnHelp().addActionListener((e) -> {
 				// Shows a new help frame.
-				new HelpFrame("Lägg till en uppgift", "<html><p>" + helpInfo + "</p></html>").setVisible(true);
+				new HelpFrame("Lägg till en uppgift", "<html><p>" + helpInfo + "</p></html>", 300, 475)
+						.setVisible(true);
 			});
 		} else {
 			// Adds action listeners
@@ -162,7 +163,7 @@ public class AssignmentFrame extends JFrame {
 
 			ecp.getBtnHelp().addActionListener((e) -> {
 				// Shows a new help frame.
-				new HelpFrame("Ändra en uppgift", "<html><p>" + helpInfo + "</p></html>", 350, 450).setVisible(true);
+				new HelpFrame("Ändra en uppgift", "<html><p>" + helpInfo + "</p></html>", 350, 475).setVisible(true);
 			});
 		}
 	}
@@ -218,19 +219,18 @@ public class AssignmentFrame extends JFrame {
 		JOptionPane.showMessageDialog(this, "Du har nu tagit bort uppgiften: " + t.getName(), "Tabort",
 				JOptionPane.INFORMATION_MESSAGE);
 
-		//Stores the list of courses.
-		var listCourses = mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getStudents().get(0).getCourses().get(mf.getCurrentlySelectedCourseIndex()).getCourseTasks();
+		// Stores the list of courses.
+		var listCourses = mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getStudents().get(0)
+				.getCourses().get(mf.getCurrentlySelectedCourseIndex()).getCourseTasks();
 
 		/*
-		* If no tasks it will set the state to
-		* CLASS_COURSE, else it will set the state
-		* to CLASS_COURSE_STUDENT
-		* */
+		 * If no tasks it will set the state to CLASS_COURSE, else it will set the state
+		 * to CLASS_COURSE_STUDENT
+		 */
 		mf.updateGradePanel((listCourses.size() != 0) ? State.CLASS_COURSE_STUDENT : State.CLASS_COURSE);
 
 		// Updates CBPanel
 		mf.cbPanel.refreshData(mf.getMainData());
-		mf.cbPanel.handleNewState();
 
 		// Closes the frame
 		this.dispose();

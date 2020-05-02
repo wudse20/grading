@@ -165,7 +165,7 @@ public class ButtonPanel extends JPanel {
 	private void print(State st) {
 		if (!(mf.getGradeState().equals(State.CLASS_COURSE_STUDENT_TASK)
 				|| mf.getGradeState().equals(State.CLASS_COURSE_STUDENT))) {
-			JOptionPane.showMessageDialog(this, "Du kan bara skriva ut om du har en Elev/Uppgift vald!",
+			JOptionPane.showMessageDialog(mf, "Du kan bara skriva ut om du har en Elev/Uppgift vald!",
 					"Du kan inte skriva ut!", JOptionPane.WARNING_MESSAGE);
 			return;
 		}
