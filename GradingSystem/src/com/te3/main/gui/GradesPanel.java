@@ -416,7 +416,7 @@ public class GradesPanel extends JPanel implements KeyListener {
 	 * Updates the GUI with all the buttons for each criteria.
 	 * 
 	 * @param criteria the criteria to be displayed
-	 * @param s the state of the panel.
+	 * @param s        the state of the panel.
 	 */
 	private void displayCriteria(ArrayList<Criteria> criteria, State s) {
 		// Removes all components
@@ -428,14 +428,11 @@ public class GradesPanel extends JPanel implements KeyListener {
 		panelCriteria.setLayout(pCriteriaLayout);
 
 		/*
-		* If the state is CLASS_COURSE_STUDENT_TASK
-		* it will show all the GUI buttons and you
-		* can update the different grades in the
-		* different criteria, but if it's the view
-		* with no assignment selected (s = CLASS_COURSE_STUDENT)
-		* then it will just list the grades with out being
-		* able to change the grades.
-		* */
+		 * If the state is CLASS_COURSE_STUDENT_TASK it will show all the GUI buttons
+		 * and you can update the different grades in the different criteria, but if
+		 * it's the view with no assignment selected (s = CLASS_COURSE_STUDENT) then it
+		 * will just list the grades with out being able to change the grades.
+		 */
 		if (s.equals(State.CLASS_COURSE_STUDENT_TASK)) {
 			// Loops through the criteria.
 			for (var i = 0; i < criteria.size(); i++) {
@@ -476,26 +473,48 @@ public class GradesPanel extends JPanel implements KeyListener {
 				panelCriteria.add(criteria.get(i).getPanelCriteria());
 			}
 		} else {
-			//Adds the label
+			// Adds the label
 			panelCriteria.add(lblNoTaskSelected);
 
-			//Sets the font
+			// Sets the font
 			lblNoTaskSelected.setFont(new Font("DIALOG", Font.BOLD, 30));
 
-			//Clears the text of the label
-			//And setup for the HTML formatting
+			// Clears the text of the label
+			// And setup for the HTML formatting
 			lblNoTaskSelected.setText("<html><p>");
 
-			//Loops through the list and appends the information.
+			// Loops through the list and appends the information.
 			for (int i = 0; i < criteria.size(); i++) {
-				//Stores this grade's information
-				String thisGrade = "&emsp;&emsp;" + criteria.get(i).toString() + ":&emsp;" + "<span><font color=" + ((criteria.get(i).getGrade().ordinal() == 0) ? "red" : "lime") + ">" + criteria.get(i).getGrade().toString() + "</font></span><br><br>";
+				/*
+				 * Stores the current grades information.
+				 * 
+				 * &emsp; is a tab in the HTML-world (4 whitespaces)
+				 * 
+				 * <span><font color= is the start of the part that sets the color of the Grade
+				 * Letter.
+				 * 
+				 * ((criteria.get(i).getGrade().ordinal() == 0) ? "red" : "lime") decides which
+				 * color it is. If the ordinal of the grade is = 0 (Grade.F) has got that
+				 * ordinal, then it will append red to the string else it will append lime to
+				 * the string and therefore the letter will be lime when the grade is above F
+				 * else it will be red.
+				 * 
+				 * >, just closes the font tag.
+				 * 
+				 * <br> makes a line brake.
+				 */
+				String thisGrade = "&emsp;&emsp;" + criteria.get(i).toString() + ":&emsp;" + "<span><font color="
+						+ ((criteria.get(i).getGrade().ordinal() == 0) ? "red" : "lime") + ">"
+						+ criteria.get(i).getGrade().toString() + "</font></span><br><br>";
 
-				//Adds the information to the label
+				/*
+				 * It appends the information for the current grade to the string, by getting
+				 * the old text and setting the new text to the old text + the new text.
+				 */
 				lblNoTaskSelected.setText(lblNoTaskSelected.getText() + thisGrade);
 			}
 
-			//Closes the HTML-tags
+			// Closes the HTML-tags
 			lblNoTaskSelected.setText(lblNoTaskSelected.getText() + "</p></html>");
 		}
 
