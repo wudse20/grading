@@ -485,33 +485,38 @@ public class GradesPanel extends JPanel implements KeyListener {
 
 			// Loops through the list and appends the information.
 			for (int i = 0; i < criteria.size(); i++) {
-				//Defines a table row
+				// Defines a table row
 				String thisGrade = "<tr>";
 
-				//Adds a new item to the table, which is the name of the criteria.
-				//&emsp; adds some spacing (4 whitespaces)
+				// Adds a new item to the table, which is the name of the criteria.
+				// &emsp; adds some spacing (4 whitespaces)
 				thisGrade += "<td>&emsp;&emsp;" + criteria.get(i).toString() + ":&emsp;</td>";
 
 				/*
-				* Adds the grade in the specific criteria to the string, as a new item in the table.
-				*
-				* <td> defines a new table item
-				* <span> makes a part of the text which should have special properties.
-				* <font color=aColor> sets the text color of this segement of code.
-				*
-				* ((criteria.get(i).getGrade().ordinal() == 0) ? "red" : "lime") decides which
+				 * Adds the grade in the specific criteria to the string, as a new item in the
+				 * table.
+				 *
+				 * <td> defines a new table item
+				 * 
+				 * <span> makes a part of the text which should have special properties.
+				 * 
+				 * <font color=aColor> sets the text color of this segement of code.
+				 *
+				 * ((criteria.get(i).getGrade().ordinal() == 0) ? "red" : "lime") decides which
 				 * color it is. If the ordinal of the grade is = 0 (Grade.F) has got that
 				 * ordinal, then it will append red to the string else it will append lime to
 				 * the string and therefore the letter will be lime when the grade is above F
 				 * else it will be red.
 				 *
-				 * */
-				thisGrade += "<td><span><font color="
-						+ ((criteria.get(i).getGrade().ordinal() == 0) ? "red" : "lime") + ">"
-						+ criteria.get(i).getGrade().toString() + "</font></span></td>";
+				 */
+				thisGrade += "<td><span><font color=" + ((criteria.get(i).getGrade().ordinal() == 0) ? "red" : "lime")
+						+ ">" + criteria.get(i).getGrade().toString() + "</font></span></td>";
 
-				//Adds some space and closes the table row
-				//<br> line break.
+				/*
+				 * Adds some spacing between the lines.
+				 * 
+				 * <br> is a line break
+				 */
 				thisGrade += "<br><br></tr>";
 
 				/*
