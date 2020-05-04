@@ -80,6 +80,7 @@ public class GradesPanel extends JPanel implements KeyListener {
 	JLabel lblName = new JLabel();
 	JLabel lblAssignment = new JLabel();
 	JLabel lblGrades = new JLabel();
+	JLabel lblNoTaskSelected = new JLabel();
 	JLabel lblSpacer1 = new JLabel(" ");
 	JLabel lblSpacer2 = new JLabel("    ");
 	JLabel lblSpacer3 = new JLabel("    ");
@@ -207,7 +208,7 @@ public class GradesPanel extends JPanel implements KeyListener {
 
 		// Calculates which grades should be shown, based on the state.
 		if (s.equals(State.CLASS_COURSE_STUDENT_TASK)) {
-			displayCriteria(criteria);
+			displayCriteria(criteria, s);
 		} else if (s.equals(State.CLASS_COURSE_STUDENT)) {
 			// An ArrayList with the highest grade in each criteria.
 			ArrayList<Criteria> displayedGrades = new ArrayList<Criteria>();
@@ -243,7 +244,7 @@ public class GradesPanel extends JPanel implements KeyListener {
 			}
 
 			// Displays the criteria
-			displayCriteria(displayedGrades);
+			displayCriteria(displayedGrades, s);
 		}
 
 		// Updates the frame with the new components
@@ -415,8 +416,9 @@ public class GradesPanel extends JPanel implements KeyListener {
 	 * Updates the GUI with all the buttons for each criteria.
 	 * 
 	 * @param criteria the criteria to be displayed
+	 * @param s the state of the panel.
 	 */
-	private void displayCriteria(ArrayList<Criteria> criteria) {
+	private void displayCriteria(ArrayList<Criteria> criteria, State s) {
 		// Removes all components
 		for (Component c : panelCriteria.getComponents())
 			panelCriteria.remove(c);
@@ -425,43 +427,76 @@ public class GradesPanel extends JPanel implements KeyListener {
 		pCriteriaLayout = new BoxLayout(panelCriteria, BoxLayout.Y_AXIS);
 		panelCriteria.setLayout(pCriteriaLayout);
 
-		// Loops through the criteria.
-		for (var i = 0; i < criteria.size(); i++) {
-			// Adds the action listeners
-			JButton[] gradeBtns = criteria.get(i).getGradeBtns();
+		/*
+		* If the state is CLASS_COURSE_STUDENT_TASK
+		* it will show all the GUI buttons and you
+		* can update the different grades in the
+		* different criteria, but if it's the view
+		* with no assignment selected (s = CLASS_COURSE_STUDENT)
+		* then it will just list the grades with out being
+		* able to change the grades.
+		* */
+		if (s.equals(State.CLASS_COURSE_STUDENT_TASK)) {
+			// Loops through the criteria.
+			for (var i = 0; i < criteria.size(); i++) {
+				// Adds the action listeners
+				JButton[] gradeBtns = criteria.get(i).getGradeBtns();
 
-			// Removes old action listeners
-			for (var j = 0; j < gradeBtns.length; j++) {
-				// If it's null print message to the console.
-				try {
-					gradeBtns[j].removeActionListener(gradeBtns[j].getActionListeners()[0]);
-				} catch (IndexOutOfBoundsException e) {
-					System.out.println("Skipped gradebtn -> IndexOutOfBounds: no action listeners attached");
+				// Removes old action listeners
+				for (var j = 0; j < gradeBtns.length; j++) {
+					// If it's null print message to the console.
+					try {
+						gradeBtns[j].removeActionListener(gradeBtns[j].getActionListeners()[0]);
+					} catch (IndexOutOfBoundsException e) {
+						System.out.println("Skipped gradebtn -> IndexOutOfBounds: no action listeners attached");
+					}
 				}
+
+				// Since it needs to be final or effectively final in lambda
+				final int i2 = i;
+
+				// Adds the action listeners
+				gradeBtns[0].addActionListener((e) -> {
+					btnClicked(Grade.F, criteria.get(i2));
+				});
+
+				gradeBtns[1].addActionListener((e) -> {
+					btnClicked(Grade.E, criteria.get(i2));
+				});
+
+				gradeBtns[2].addActionListener((e) -> {
+					btnClicked(Grade.C, criteria.get(i2));
+				});
+
+				gradeBtns[3].addActionListener((e) -> {
+					btnClicked(Grade.A, criteria.get(i2));
+				});
+
+				// Adds the panel
+				panelCriteria.add(criteria.get(i).getPanelCriteria());
+			}
+		} else {
+			//Adds the label
+			panelCriteria.add(lblNoTaskSelected);
+
+			//Sets the font
+			lblNoTaskSelected.setFont(new Font("DIALOG", Font.BOLD, 30));
+
+			//Clears the text of the label
+			//And setup for the HTML formatting
+			lblNoTaskSelected.setText("<html><p>");
+
+			//Loops through the list and appends the information.
+			for (int i = 0; i < criteria.size(); i++) {
+				//Stores this grade's information
+				String thisGrade = "&emsp;&emsp;" + criteria.get(i).toString() + ":&emsp;" + "<span><font color=" + ((criteria.get(i).getGrade().ordinal() == 0) ? "red" : "lime") + ">" + criteria.get(i).getGrade().toString() + "</font></span><br><br>";
+
+				//Adds the information to the label
+				lblNoTaskSelected.setText(lblNoTaskSelected.getText() + thisGrade);
 			}
 
-			// Since it needs to be final or effectively final in lambda
-			final int i2 = i;
-
-			// Adds the action listeners
-			gradeBtns[0].addActionListener((e) -> {
-				btnClicked(Grade.F, criteria.get(i2));
-			});
-
-			gradeBtns[1].addActionListener((e) -> {
-				btnClicked(Grade.E, criteria.get(i2));
-			});
-
-			gradeBtns[2].addActionListener((e) -> {
-				btnClicked(Grade.C, criteria.get(i2));
-			});
-
-			gradeBtns[3].addActionListener((e) -> {
-				btnClicked(Grade.A, criteria.get(i2));
-			});
-
-			// Adds the panel
-			panelCriteria.add(criteria.get(i).getPanelCriteria());
+			//Closes the HTML-tags
+			lblNoTaskSelected.setText(lblNoTaskSelected.getText() + "</p></html>");
 		}
 
 		// Sets the layout
