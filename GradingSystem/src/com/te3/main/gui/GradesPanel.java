@@ -481,31 +481,38 @@ public class GradesPanel extends JPanel implements KeyListener {
 
 			// Clears the text of the label
 			// And setup for the HTML formatting
-			lblNoTaskSelected.setText("<html><p>");
+			lblNoTaskSelected.setText("<html><table>");
 
 			// Loops through the list and appends the information.
 			for (int i = 0; i < criteria.size(); i++) {
+				//Defines a table row
+				String thisGrade = "<tr>";
+
+				//Adds a new item to the table, which is the name of the criteria.
+				//&emsp; adds some spacing (4 whitespaces)
+				thisGrade += "<td>&emsp;&emsp;" + criteria.get(i).toString() + ":&emsp;</td>";
+
 				/*
-				 * Stores the current grades information.
-				 * 
-				 * &emsp; is a tab in the HTML-world (4 whitespaces)
-				 * 
-				 * <span><font color= is the start of the part that sets the color of the Grade
-				 * Letter.
-				 * 
-				 * ((criteria.get(i).getGrade().ordinal() == 0) ? "red" : "lime") decides which
+				* Adds the grade in the specific criteria to the string, as a new item in the table.
+				*
+				* <td> defines a new table item
+				* <span> makes a part of the text which should have special properties.
+				* <font color=aColor> sets the text color of this segement of code.
+				*
+				* ((criteria.get(i).getGrade().ordinal() == 0) ? "red" : "lime") decides which
 				 * color it is. If the ordinal of the grade is = 0 (Grade.F) has got that
 				 * ordinal, then it will append red to the string else it will append lime to
 				 * the string and therefore the letter will be lime when the grade is above F
 				 * else it will be red.
-				 * 
-				 * >, just closes the font tag.
-				 * 
-				 * <br> makes a line brake.
-				 */
-				String thisGrade = "&emsp;&emsp;" + criteria.get(i).toString() + ":&emsp;" + "<span><font color="
+				 *
+				 * */
+				thisGrade += "<td><span><font color="
 						+ ((criteria.get(i).getGrade().ordinal() == 0) ? "red" : "lime") + ">"
-						+ criteria.get(i).getGrade().toString() + "</font></span><br><br>";
+						+ criteria.get(i).getGrade().toString() + "</font></span></td>";
+
+				//Adds some space and closes the table row
+				//<br> line break.
+				thisGrade += "<br><br></tr>";
 
 				/*
 				 * It appends the information for the current grade to the string, by getting
@@ -515,7 +522,7 @@ public class GradesPanel extends JPanel implements KeyListener {
 			}
 
 			// Closes the HTML-tags
-			lblNoTaskSelected.setText(lblNoTaskSelected.getText() + "</p></html>");
+			lblNoTaskSelected.setText(lblNoTaskSelected.getText() + "</table></html>");
 		}
 
 		// Sets the layout
