@@ -216,7 +216,7 @@ public class ButtonPanel extends JPanel {
 			printView.append("\nUppgift:\t" + t.getName());
 			c = t.getCriteria();
 		} else {
-			c = co.getCourseCriteria();
+			c = this.getHighestGrades();
 		}
 
 		// Adds more text
@@ -268,7 +268,7 @@ public class ButtonPanel extends JPanel {
 			printView.append(String.format("%-20s%s", "Uppgift:", t.getName()) + "\n");
 			c = t.getCriteria();
 		} else {
-			c = co.getCourseCriteria();
+			c = this.getHighestGrades();
 		}
 
 		printView.append("\nKunskapskrav:\n");
@@ -283,6 +283,45 @@ public class ButtonPanel extends JPanel {
 				&& mf.getGradePanel().getState().equals(State.CLASS_COURSE_STUDENT_TASK)) {
 			printView.append("\n\nKommentar:\n" + t.getComment());
 		}
+	}
+
+	private ArrayList<Criteria> getHighestGrades() {
+		// An ArrayList with the highest grade in each criteria.
+		ArrayList<Criteria> grades = new ArrayList<Criteria>();
+		var tasks = mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getStudents().get(mf.getCurrentlySelectedStudentIndex()).getCourses().get(mf.getCurrentlySelectedCourseIndex()).getCourseTasks();
+
+		// Loops through all the tasks.
+		for (int i = 0; i < tasks.size(); i++) {
+			// Loops through all the criteria in each task.
+			for (var j = 0; j < tasks.get(i).getCriteria().size(); j++) {
+				// Stores the criteria
+				Criteria c = tasks.get(i).getCriteria().get(j);
+
+				// Stores the index in the list
+				int index = grades.indexOf(c);
+
+				// If it's in the list, displayed grades
+				if (index != -1) {
+					// If it's higher
+					if (!(grades.get(index).compare(c))) {
+						// Removes the lower grade
+						grades.remove(index);
+
+						// Adds the new one
+						grades.add(c);
+
+						// Updates the gui of the criteria.
+						grades.get(grades.indexOf(c)).updateGUI();
+					}
+				} else {
+					// Adds it
+					grades.add(c);
+				}
+			}
+		}
+
+		//Returns
+		return grades;
 	}
 
 	/**

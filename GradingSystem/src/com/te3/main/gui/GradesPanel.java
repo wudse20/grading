@@ -263,13 +263,13 @@ public class GradesPanel extends JPanel implements KeyListener {
 		if (s.equals(State.CLASS_COURSE_STUDENT_TASK)) {
 			classes = mf.getMainData().getClasses();
 			students = classes.get(mf.getCurrentlySelectedClassIndex()).getStudents();
-			courses = students.get(0).getCourses();
+			courses = students.get(mf.getCurrentlySelectedStudentIndex()).getCourses();
 			tasks = courses.get(mf.getCurrentlySelectedCourseIndex()).getCourseTasks();
 			criteria = tasks.get(mf.getCurrentlySelectedAssignmentIndex()).getCriteria();
 		} else if (s.equals(State.CLASS_COURSE_STUDENT)) {
 			classes = mf.getMainData().getClasses();
 			students = classes.get(mf.getCurrentlySelectedClassIndex()).getStudents();
-			courses = students.get(0).getCourses();
+			courses = students.get(mf.getCurrentlySelectedStudentIndex()).getCourses();
 			tasks = courses.get(mf.getCurrentlySelectedCourseIndex()).getCourseTasks();
 		} else {
 			classes = null;
