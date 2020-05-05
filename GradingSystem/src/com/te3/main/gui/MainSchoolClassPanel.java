@@ -31,6 +31,8 @@ public class MainSchoolClassPanel extends JPanel implements DocumentListener {
 
 	MainFrame mf;
 
+	NamePanel np;
+
 	/** The timer that is responsible for the blinking JList. */
 	Timer flashTimer;
 
@@ -262,8 +264,10 @@ public class MainSchoolClassPanel extends JPanel implements DocumentListener {
 			}
 		});
 
+		//Starts the timer
 		flashTimer.start();
 
+		//Debug message
 		System.out.println("[" + LocalTime.now().getHour() + ":" + LocalTime.now().getMinute() + ":"  + ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond() : LocalTime.now().getSecond()) + "] Started flashing the students list");
 	}
 
@@ -271,8 +275,13 @@ public class MainSchoolClassPanel extends JPanel implements DocumentListener {
 	 * Stops the flashing of the students list, and sets the background to white.
 	 */
 	public void stopFlashing() {
+		//Stops the timer
 		flashTimer.stop();
+
+		//Sets the background color
 		listStudents.setBackground(Color.WHITE);
+
+		//Debug message
 		System.out.println("[" + LocalTime.now().getHour() + ":" + LocalTime.now().getMinute() + ":" + ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond() : LocalTime.now().getSecond()) + "] Stopped flashing the students list");
 	}
 
