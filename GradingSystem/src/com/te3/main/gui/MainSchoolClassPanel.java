@@ -36,6 +36,9 @@ public class MainSchoolClassPanel extends JPanel implements DocumentListener {
 	/** The students */
 	private ArrayList<Student> students = new ArrayList<Student>();
 
+	/** If the timer is running or not */
+	private boolean isFlashingTimerRunning = false;
+
 	// Instances
 	SchoolClass sc;
 
@@ -251,6 +254,15 @@ public class MainSchoolClassPanel extends JPanel implements DocumentListener {
 	 * @parma interval The flashing speed in seconds
 	 */
 	public void startFlashing(final Color c1, final Color c2, double interval) {
+		System.out.println("[" + LocalTime.now().getHour() + ":" + LocalTime.now().getMinute() + ":"
+				+ ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond()
+				: LocalTime.now().getSecond())
+				+ "] Flashing timer running: " + isFlashingTimerRunning);
+
+		// It will only start if it isn't running
+		if (isFlashingTimerRunning)
+			return;
+
 		// Initializes the timer
 		flashTimer = new Timer((int) (interval * 1000), new ActionListener() {
 			/** The count of flashes */
@@ -284,6 +296,9 @@ public class MainSchoolClassPanel extends JPanel implements DocumentListener {
 		// Starts the timer
 		flashTimer.start();
 
+		// Tells the program that the timer is running.
+		this.isFlashingTimerRunning = true;
+
 		// Debug message
 		System.out.println("[" + LocalTime.now().getHour() + ":" + LocalTime.now().getMinute() + ":"
 				+ ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond() : LocalTime.now().getSecond())
@@ -294,11 +309,23 @@ public class MainSchoolClassPanel extends JPanel implements DocumentListener {
 	 * Stops the flashing of the students list, and sets the background to white.
 	 */
 	public void stopFlashing() {
+		System.out.println("[" + LocalTime.now().getHour() + ":" + LocalTime.now().getMinute() + ":"
+				+ ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond()
+				: LocalTime.now().getSecond())
+				+ "] Flashing timer running: " + isFlashingTimerRunning);
+
+		// If the timer isn't running then don't stop it.
+		if (!isFlashingTimerRunning)
+			return;
+
 		// Stops the timer
 		flashTimer.stop();
 
 		// Sets the background color
 		listStudents.setBackground(Color.WHITE);
+
+		// Tells the program that the timer isn't running.
+		this.isFlashingTimerRunning = false;
 
 		// Debug message
 		System.out.println("[" + LocalTime.now().getHour() + ":" + LocalTime.now().getMinute() + ":"
