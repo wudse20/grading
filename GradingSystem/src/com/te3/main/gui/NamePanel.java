@@ -1,6 +1,7 @@
 package com.te3.main.gui;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.FlowLayout;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -36,7 +37,7 @@ public class NamePanel extends JPanel implements DocumentListener {
 		// Sets layout
 		this.setLayout(layout);
 
-		//Adds listener to the txfName
+		// Adds listener to the txfName
 		this.txfName.getDocument().addDocumentListener(this);
 
 		// Adds components
@@ -86,5 +87,6 @@ public class NamePanel extends JPanel implements DocumentListener {
 	}
 
 	@Override
-	public void changedUpdate(DocumentEvent e) {}
+	public void changedUpdate(DocumentEvent e) {
+	}
 }

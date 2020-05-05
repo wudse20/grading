@@ -1,6 +1,8 @@
 package com.te3.main.gui;
 
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
@@ -182,24 +184,31 @@ public class SchoolClassFrame extends JFrame {
 		// Handles errors
 
 		/*
-		* If there are no students in the the list, the size of the added students is equal to zero, then it will send a message to the user. After the user disposes the popup, this method will return, and then nothing happens.
-		* */
+		 * If there are no students in the the list, the size of the added students is
+		 * equal to zero, then it will send a message to the user. After the user
+		 * disposes the popup, this method will return, and then nothing happens.
+		 */
 		if (mscp.getStudents().size() == 0) {
 			JOptionPane.showMessageDialog(this, "Du måste lägga till minst en elev", "Fel", JOptionPane.ERROR_MESSAGE);
 			return;
 		}
 
 		/*
-		* Checks for class with the same name, but only if the user hasn't changed the name.
-		*
-		* It will fist check if the name is updated, if not then it will not check for duplicate names, else it will check for it.
-		*
-		* Then it will send a message to the user and turn the name box red. Then it will return, so nothing else happens in the method.
-		* */
+		 * Checks for class with the same name, but only if the user hasn't changed the
+		 * name.
+		 *
+		 * It will fist check if the name is updated, if not then it will not check for
+		 * duplicate names, else it will check for it.
+		 *
+		 * Then it will send a message to the user and turn the name box red. Then it
+		 * will return, so nothing else happens in the method.
+		 */
 		if (!(sc.getName().equals(np.getLastInput().trim()))) {
-			//Checks for duplicate names
+			// Checks for duplicate names
 			if (this.doesNameExist(np.getLastInput().trim())) {
-				JOptionPane.showMessageDialog(this, "Namnet: " + np.getLastInput().trim() + " finns redan, välj ett nytt namn.", "Namn finns redan", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(this,
+						"Namnet: " + np.getLastInput().trim() + " finns redan, välj ett nytt namn.", "Namn finns redan",
+						JOptionPane.ERROR_MESSAGE);
 				np.setTextFieldColour(Color.PINK);
 				return;
 			}
@@ -224,20 +233,20 @@ public class SchoolClassFrame extends JFrame {
 			// Disposes this frame
 			this.dispose();
 		} catch (IllegalNameException e) {
-			//Sets the text box to red
+			// Sets the text box to red
 			this.np.setTextFieldColour(Color.PINK);
 
 			// Sends error message
 			JOptionPane.showMessageDialog(this, e.getMessage(), "Fel", JOptionPane.ERROR_MESSAGE);
 
-			//returns
+			// returns
 			return;
 		}
 
 		// Updates the grade panel
 		mf.updateGradePanel();
 
-		//Updates cbPanel
+		// Updates cbPanel
 		mf.cbPanel.refreshData(mf.getMainData());
 	}
 
@@ -251,29 +260,32 @@ public class SchoolClassFrame extends JFrame {
 		// Handles errors
 
 		/*
-		 * If there are no students in the the list, the size of the added students is equal to zero, then it will send a message to the user. After the user disposes the popup, this method will return, and then nothing happens.
-		 * */
+		 * If there are no students in the the list, the size of the added students is
+		 * equal to zero, then it will send a message to the user. After the user
+		 * disposes the popup, this method will return, and then nothing happens.
+		 */
 		if (mscp.getStudents().size() == 0) {
 			JOptionPane.showMessageDialog(this, "Du måste lägga till minst en elev", "Fel", JOptionPane.ERROR_MESSAGE);
 			return;
 		}
 
 		/*
-		* Checks for duplicate name.
-		*
-		* If the name is a duplicate then it will send an error message to the user and set the input box to red, then it will return.
-		* */
+		 * Checks for duplicate name.
+		 *
+		 * If the name is a duplicate then it will send an error message to the user and
+		 * set the input box to red, then it will return.
+		 */
 		if (this.doesNameExist(np.getLastInput().trim())) {
-			//Sets the text box to red
+			// Sets the text box to red
 			this.np.setTextFieldColour(Color.PINK);
 
-			//Sends error
-			JOptionPane.showMessageDialog(this, np.getLastInput().trim() + " är ett namn som redan finns.", "Namnet finns redan", JOptionPane.ERROR_MESSAGE);
+			// Sends error
+			JOptionPane.showMessageDialog(this, np.getLastInput().trim() + " är ett namn som redan finns.",
+					"Namnet finns redan", JOptionPane.ERROR_MESSAGE);
 
-			//Returns
+			// Returns
 			return;
 		}
-
 
 		try {
 			// Adds a school class
@@ -289,7 +301,7 @@ public class SchoolClassFrame extends JFrame {
 			// Disposes the frame
 			this.dispose();
 		} catch (IllegalNameException e) {
-			//Sets the text box to red
+			// Sets the text box to red
 			this.np.setTextFieldColour(Color.PINK);
 
 			// Shows a message to the user
@@ -340,20 +352,27 @@ public class SchoolClassFrame extends JFrame {
 	 * @param name the name of the class
 	 *
 	 * @return {@code true} if the name is a duplicate. <br>
-	 *     	   {@code false} if the name isn't a duplicate.
+	 *         {@code false} if the name isn't a duplicate.
 	 */
 	private boolean doesNameExist(String name) {
 		/*
-		* Loops through all the classes and if the name is equal then it will return true, if it gets through all the classes without being the same name it will return false.
-		* */
+		 * Loops through all the classes and if the name is equal then it will return
+		 * true, if it gets through all the classes without being the same name it will
+		 * return false.
+		 */
 		for (var i = 0; i < mf.getMainData().getClasses().size(); i++) {
 			if (name.equals(mf.getMainData().getClasses().get(i).getName())) {
-				System.out.println("[" + LocalTime.now().getHour() + ":" + LocalTime.now().getMinute() + ":" + ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond() : LocalTime.now().getSecond()) + "] Found name: " + name + " in another SchoolClass, returning true...");
+				System.out.println("[" + LocalTime.now().getHour() + ":" + LocalTime.now().getMinute() + ":"
+						+ ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond()
+								: LocalTime.now().getSecond())
+						+ "] Found name: " + name + " in another SchoolClass, returning true...");
 				return true;
 			}
 		}
 
-		System.out.println("[" + LocalTime.now().getHour() + ":" + LocalTime.now().getMinute() + ":" + ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond() : LocalTime.now().getSecond()) + "] " + name + " wasn't found returning false...");
+		System.out.println("[" + LocalTime.now().getHour() + ":" + LocalTime.now().getMinute() + ":"
+				+ ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond() : LocalTime.now().getSecond())
+				+ "] " + name + " wasn't found returning false...");
 		return false;
 	}
 }
