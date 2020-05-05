@@ -20,6 +20,9 @@ public class CBPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 	
 	long initTime = System.currentTimeMillis();
+	
+	//Keeps track of what "level" you have selected in the comboboxes so it can properly update the visibility of them
+	int selectionLevel = 0;
 
 	GridLayout mainLayout;
 	
@@ -47,9 +50,16 @@ public class CBPanel extends JPanel {
 		return new Dimension(super.getMaximumSize().width, super.getPreferredSize().height);
 	}
 	
-	private boolean checkInitTime(long compareTime) {
-		//System.out.println(compareTime - (initTime + 3000));
-		if (compareTime > (initTime + 3000)) {
+	/**
+	 * Deprecated method of checking wether or not comboboxes were changed by the program
+	 * @return
+	 */
+	private boolean checkInitTime() {
+		int deltaTime = 2000;
+		long compareTime = System.currentTimeMillis();
+		
+		System.out.println(compareTime - (initTime + deltaTime));
+		if (compareTime > (initTime + deltaTime)) {
 			return false;
 		} else {
 			return true;
@@ -90,7 +100,7 @@ public class CBPanel extends JPanel {
 		//class combobox
 		cbClass.addActionListener((e) -> {
 			System.out.println("Class ActionCommand: " + e.getActionCommand());
-			if (checkInitTime(e.getWhen()) || !e.getActionCommand().equals("comboBoxChanged")) return;
+			if (!cbClass.isFocusOwner()) return;
 			
 			int i = cbClass.getSelectedIndex();
 			int itmCount = cbClass.getItemCount();
@@ -103,18 +113,28 @@ public class CBPanel extends JPanel {
 			} else if (i != -1 && i < itmCount - 2) {
 				mf.updateGradePanel(State.CLASS);
 				mf.setCurrentlySelectedClassIndex(i-1);
+				
+				//update student combobox if the class changed
+				initTime = System.currentTimeMillis();
+				cbStudent.removeAllItems();
+				ArrayList<SchoolClass> dataClasses = mf.getMainData().getClasses();
+				ArrayList<Student> dataStudents = dataClasses.get(i-1).getStudents();
+				dataStudents.forEach((n) -> cbStudent.addItem(n.getName()));
 			} else if (i == itmCount - 1) {
 				mf.openAddEditGUI(SchoolClass.class, false);
-				
+				mf.setCurrentlySelectedClassIndex(itmCount-3);
 			} else if (i == itmCount - 2) {
 				mf.openAddEditGUI(SchoolClass.class, true);
+				mf.setCurrentlySelectedClassIndex(itmCount-3);
 			}
+			
+			//handleNewState();
 		});
 		
 		//course combobox
 		cbCourse.addActionListener((e) -> {
 			System.out.println("Course ActionCommand: " + e.getActionCommand());
-			if (checkInitTime(e.getWhen()) || !e.getActionCommand().equals("comboBoxChanged")) return;
+			if (!cbCourse.isFocusOwner()) return;
 			
 			int i = cbCourse.getSelectedIndex();
 			int itmCount = cbCourse.getItemCount();
@@ -124,25 +144,35 @@ public class CBPanel extends JPanel {
 			} else if (i != -1 && i < itmCount - 2) {
 				mf.setCurrentlySelectedCourseIndex(i-1);
 				mf.updateGradePanel(State.CLASS_COURSE);
+				
+				cbStudent.grabFocus();
+				cbStudent.setSelectedIndex(0);
 			} else if (i == itmCount - 1) {
 				mf.openAddEditGUI(Course.class, false);
+				mf.setCurrentlySelectedCourseIndex(itmCount-3);
 			} else if (i == itmCount - 2) {
 				mf.openAddEditGUI(Course.class, true);
+				mf.setCurrentlySelectedCourseIndex(itmCount-3);
 			}
 		});
 		
 		//student combobox
 		cbStudent.addActionListener((e) -> {
 			System.out.println("Student ActionCommand: " + e.getActionCommand());
-			if (checkInitTime(e.getWhen()) || !e.getActionCommand().equals("comboBoxChanged")) return;
+			if (!cbStudent.isFocusOwner()) return;
 			
 			mf.setCurrentlySelectedStudentIndex(cbStudent.getSelectedIndex());
+			
+			mf.updateGradePanel(State.CLASS_COURSE_STUDENT);
+			
+			cbTask.grabFocus();
+			cbTask.setSelectedIndex(0);
 		});
 		
 		//task combobox
 		cbTask.addActionListener((e) -> {
 			System.out.println("Task ActionCommand: " + e.getActionCommand());
-			if (checkInitTime(e.getWhen()) || !e.getActionCommand().equals("comboBoxChanged")) return;
+			if (!cbTask.isFocusOwner()) return;
 			
 			int i = cbTask.getSelectedIndex();
 			int itmCount = cbTask.getItemCount();
@@ -155,8 +185,10 @@ public class CBPanel extends JPanel {
 				mf.updateGradePanel(State.CLASS_COURSE_STUDENT_TASK);
 			} else if (i == itmCount - 1) {
 				mf.openAddEditGUI(Task.class, false);
+				mf.setCurrentlySelectedAssignmentIndex(itmCount-3);
 			} else if (i == itmCount - 2) {
 				mf.openAddEditGUI(Task.class, true);
+				mf.setCurrentlySelectedAssignmentIndex(itmCount-3);
 			}
 		});
 		
@@ -216,29 +248,41 @@ public class CBPanel extends JPanel {
 		initTime = System.currentTimeMillis();
 		
 		System.out.println("Refreshing Data combobox data");
+		System.out.println("Deleting old items...");
 		cbClass.removeAllItems();
 		cbCourse.removeAllItems();
 		cbStudent.removeAllItems();
 		cbTask.removeAllItems();
 		
 		Data localData = newData;
-		
-		ArrayList<SchoolClass> dataClasses = localData.getClasses();
-		ArrayList<Student> dataStudents = dataClasses.get(0).getStudents();
-		ArrayList<Course> dataCourses = dataStudents.get(0).getCourses();
-		ArrayList<Task> dataTasks = dataCourses.get(0).getCourseTasks();
-		
+
 		System.out.println("Adding default combobox items...");
-		
 		cbClass.addItem("Klass");
 		cbCourse.addItem("Kurs");
-		
+		cbStudent.addItem("-");
 		cbTask.addItem("Samlad vy");
 		
-		dataClasses.forEach((n) -> cbClass.addItem(n.getName()));
-		dataCourses.forEach((n) -> cbCourse.addItem(n.getName()));
-		dataStudents.forEach((n) -> cbStudent.addItem(n.getName()));
-		dataTasks.forEach((n) -> cbTask.addItem(n.getName()));
+		System.out.println("Getting new data...");
+		ArrayList<SchoolClass> dataClasses = localData.getClasses();
+		if (dataClasses.size() != 0) {
+			
+			dataClasses.forEach((n) -> cbClass.addItem(n.getName()));
+			
+			ArrayList<Student> dataStudents = dataClasses.get(mf.getCurrentlySelectedClassIndex()).getStudents();
+			
+			if (dataStudents.size() != 0) {
+				
+				dataStudents.forEach((n) -> cbStudent.addItem(n.getName()));
+				
+				ArrayList<Course> dataCourses = dataStudents.get(mf.getCurrentlySelectedClassIndex()).getCourses();
+				
+				dataCourses.forEach((n) -> cbCourse.addItem(n.getName()));
+				
+				ArrayList<Task> dataTasks = dataCourses.get(mf.getCurrentlySelectedCourseIndex()).getCourseTasks();
+				
+				dataTasks.forEach((n) -> cbTask.addItem(n.getName()));
+			}
+		}
 		
 		System.out.println("Adding change items...");
 		
@@ -248,5 +292,7 @@ public class CBPanel extends JPanel {
 		cbCourse.addItem("Ändra");
 		cbTask.addItem("Ny");
 		cbTask.addItem("Ändra");
+		
+		
 	}
 }
