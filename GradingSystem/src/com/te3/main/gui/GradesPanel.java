@@ -6,6 +6,8 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
@@ -445,7 +447,7 @@ public class GradesPanel extends JPanel implements KeyListener {
 					try {
 						gradeBtns[j].removeActionListener(gradeBtns[j].getActionListeners()[0]);
 					} catch (IndexOutOfBoundsException e) {
-						System.out.println("Skipped gradebtn -> IndexOutOfBounds: no action listeners attached");
+						System.out.println("[" + LocalTime.now().getHour() + ":" + LocalTime.now().getMinute() + ":" + ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond() : LocalTime.now().getSecond()) + "] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached");
 					}
 				}
 
@@ -568,8 +570,8 @@ public class GradesPanel extends JPanel implements KeyListener {
 		this.update(this.state);
 
 		// Prints debug message
-		System.out.println(c.toString());
-	}
+		System.out.println("[" + LocalTime.now().getHour() + ":" + LocalTime.now().getMinute() + ":" + ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond() : LocalTime.now().getSecond()) + "] Criteria updated: " + c.toString() + ", New Grade: " + c.getGrade().toString());
+}
 
 	/**
 	 * A getter for the state.
