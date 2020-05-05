@@ -236,7 +236,7 @@ public class ButtonPanel extends JPanel {
 	/**
 	 * Formats the text for the file.
 	 *
-	 * @param st the state of informations shown
+	 * @param st the state of information shown
 	 */
 	private void formatTextFile(State st) {
 		// Gets the necessary info
