@@ -288,7 +288,9 @@ public class ButtonPanel extends JPanel {
 	private ArrayList<Criteria> getHighestGrades() {
 		// An ArrayList with the highest grade in each criteria.
 		ArrayList<Criteria> grades = new ArrayList<Criteria>();
-		var tasks = mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getStudents().get(mf.getCurrentlySelectedStudentIndex()).getCourses().get(mf.getCurrentlySelectedCourseIndex()).getCourseTasks();
+		var tasks = mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getStudents()
+				.get(mf.getCurrentlySelectedStudentIndex()).getCourses().get(mf.getCurrentlySelectedCourseIndex())
+				.getCourseTasks();
 
 		// Loops through all the tasks.
 		for (int i = 0; i < tasks.size(); i++) {
@@ -320,7 +322,7 @@ public class ButtonPanel extends JPanel {
 			}
 		}
 
-		//Returns
+		// Returns
 		return grades;
 	}
 
