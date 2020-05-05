@@ -3,6 +3,8 @@ package com.te3.main.gui;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
@@ -18,7 +20,7 @@ import com.te3.main.objects.SchoolClass;
 /**
  * The frame for adding and editing SchoolClasses
  */
-public class SchoolClassFrame extends JFrame {
+public class SchoolClassFrame extends JFrame implements WindowListener {
 
 	/** Generated */
 	private static final long serialVersionUID = 8791137725545409036L;
@@ -262,9 +264,13 @@ public class SchoolClassFrame extends JFrame {
 		/*
 		 * If there are no students in the the list, the size of the added students is
 		 * equal to zero, then it will send a message to the user. After the user
-		 * disposes the popup, this method will return, and then nothing happens.
+		 * disposes the popup, this method will return, and then nothing happens. It will also make the list blink.
 		 */
 		if (mscp.getStudents().size() == 0) {
+			//Makes the list blink
+			mscp.startFlashing(Color.pink, Color.RED, .5D);
+
+			//Sends error message
 			JOptionPane.showMessageDialog(this, "Du måste lägga till minst en elev", "Fel", JOptionPane.ERROR_MESSAGE);
 			return;
 		}
@@ -344,6 +350,8 @@ public class SchoolClassFrame extends JFrame {
 		this.setLayout(layout);
 		this.setSize(new Dimension(600, 600));
 		panel.setLayout(pLayout);
+
+		this.addWindowListener(this);
 	}
 
 	/**
@@ -375,4 +383,31 @@ public class SchoolClassFrame extends JFrame {
 				+ "] " + name + " wasn't found returning false...");
 		return false;
 	}
+
+	@Override
+	public void windowOpened(WindowEvent e) { }
+
+	@Override
+	public void windowClosing(WindowEvent e) {
+		//Stops the flashing
+		mscp.stopFlashing();
+
+		//Disposes
+		this.dispose();
+	}
+
+	@Override
+	public void windowClosed(WindowEvent e) { }
+
+	@Override
+	public void windowIconified(WindowEvent e) { }
+
+	@Override
+	public void windowDeiconified(WindowEvent e) { }
+
+	@Override
+	public void windowActivated(WindowEvent e) { }
+
+	@Override
+	public void windowDeactivated(WindowEvent e) { }
 }

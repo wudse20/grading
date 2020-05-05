@@ -3,17 +3,11 @@ package com.te3.main.gui;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import java.awt.event.*;
+import java.time.LocalTime;
 import java.util.ArrayList;
 
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JList;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextField;
+import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
@@ -36,6 +30,9 @@ public class MainSchoolClassPanel extends JPanel implements DocumentListener {
 	SchoolClass sc;
 
 	MainFrame mf;
+
+	/** The timer that is responsible for the blinking JList. */
+	Timer flashTimer;
 
 	// TextFields
 	JTextField txfName = new JTextField(24);
@@ -136,6 +133,7 @@ public class MainSchoolClassPanel extends JPanel implements DocumentListener {
 			// Since it's called twice
 			try {
 				students.remove(listStudents.getSelectedIndex());
+				stopFlashing();
 				updateJList();
 			} catch (IndexOutOfBoundsException ex) {
 				return;
@@ -154,6 +152,9 @@ public class MainSchoolClassPanel extends JPanel implements DocumentListener {
 
 			@Override
 			public void keyPressed(KeyEvent e) {
+				/*
+				* If enter key, key code 10, is pressed, the add students.
+				* */
 				if (e.getKeyCode() == 10) {
 					addStudents(txfName.getText());
 				}
@@ -211,6 +212,9 @@ public class MainSchoolClassPanel extends JPanel implements DocumentListener {
 			}
 		}
 
+		//Stops the flashing
+		this.stopFlashing();
+
 		// Clears the text box
 		txfName.setText("");
 
@@ -225,6 +229,51 @@ public class MainSchoolClassPanel extends JPanel implements DocumentListener {
 		// Gets the students and adds them
 		Student[] students = new Student[this.students.size()];
 		listStudents.setListData(this.students.toArray(students));
+	}
+
+	/**
+	 * Makes the students list flash
+	 *
+	 * @param c1 The first color
+	 * @param c2 The second color
+	 * @parma interval The flashing speed in seconds
+	 */
+	public void startFlashing(final Color c1, final Color c2, double interval) {
+		//Initializes the timer
+		flashTimer = new Timer((int)(interval * 1000), new ActionListener() {
+			/** The count of flashes */
+			private int count = 0;
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				/*
+				* It switches between the colors every other time it runs. It will set c1 on even counts and c2 on odd counts.
+				* */
+				if (count % 2 == 0) {
+					System.out.println("[" + LocalTime.now().getHour() + ":" + LocalTime.now().getMinute() + ":"  + ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond() : LocalTime.now().getSecond()) + "] Current color: c1");
+					listStudents.setBackground(c1);
+				} else {
+					System.out.println("[" + LocalTime.now().getHour() + ":" + LocalTime.now().getMinute() + ":"  + ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond() : LocalTime.now().getSecond()) + "] Current color: c2");
+					listStudents.setBackground(c2);
+				}
+
+				//Increments the count
+				count++;
+			}
+		});
+
+		flashTimer.start();
+
+		System.out.println("[" + LocalTime.now().getHour() + ":" + LocalTime.now().getMinute() + ":"  + ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond() : LocalTime.now().getSecond()) + "] Started flashing the students list");
+	}
+
+	/**
+	 * Stops the flashing of the students list, and sets the background to white.
+	 */
+	public void stopFlashing() {
+		flashTimer.stop();
+		listStudents.setBackground(Color.WHITE);
+		System.out.println("[" + LocalTime.now().getHour() + ":" + LocalTime.now().getMinute() + ":" + ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond() : LocalTime.now().getSecond()) + "] Stopped flashing the students list");
 	}
 
 	/**
@@ -245,6 +294,5 @@ public class MainSchoolClassPanel extends JPanel implements DocumentListener {
 	}
 
 	@Override
-	public void changedUpdate(DocumentEvent e) {
-	}
+	public void changedUpdate(DocumentEvent e) { }
 }
