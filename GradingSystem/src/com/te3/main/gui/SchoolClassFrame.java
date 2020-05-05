@@ -264,13 +264,14 @@ public class SchoolClassFrame extends JFrame implements WindowListener {
 		/*
 		 * If there are no students in the the list, the size of the added students is
 		 * equal to zero, then it will send a message to the user. After the user
-		 * disposes the popup, this method will return, and then nothing happens. It will also make the list blink.
+		 * disposes the popup, this method will return, and then nothing happens. It
+		 * will also make the list blink.
 		 */
 		if (mscp.getStudents().size() == 0) {
-			//Makes the list blink
+			// Makes the list blink
 			mscp.startFlashing(Color.pink, Color.RED, .5D);
 
-			//Sends error message
+			// Sends error message
 			JOptionPane.showMessageDialog(this, "Du måste lägga till minst en elev", "Fel", JOptionPane.ERROR_MESSAGE);
 			return;
 		}
@@ -385,29 +386,35 @@ public class SchoolClassFrame extends JFrame implements WindowListener {
 	}
 
 	@Override
-	public void windowOpened(WindowEvent e) { }
+	public void windowOpened(WindowEvent e) {
+	}
 
 	@Override
 	public void windowClosing(WindowEvent e) {
-		//Stops the flashing
+		// Stops the flashing
 		mscp.stopFlashing();
 
-		//Disposes
+		// Disposes
 		this.dispose();
 	}
 
 	@Override
-	public void windowClosed(WindowEvent e) { }
+	public void windowClosed(WindowEvent e) {
+	}
 
 	@Override
-	public void windowIconified(WindowEvent e) { }
+	public void windowIconified(WindowEvent e) {
+	}
 
 	@Override
-	public void windowDeiconified(WindowEvent e) { }
+	public void windowDeiconified(WindowEvent e) {
+	}
 
 	@Override
-	public void windowActivated(WindowEvent e) { }
+	public void windowActivated(WindowEvent e) {
+	}
 
 	@Override
-	public void windowDeactivated(WindowEvent e) { }
+	public void windowDeactivated(WindowEvent e) {
+	}
 }

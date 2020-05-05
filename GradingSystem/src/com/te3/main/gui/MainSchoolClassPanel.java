@@ -3,11 +3,21 @@ package com.te3.main.gui;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
-import javax.swing.*;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextField;
+import javax.swing.Timer;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
@@ -155,8 +165,8 @@ public class MainSchoolClassPanel extends JPanel implements DocumentListener {
 			@Override
 			public void keyPressed(KeyEvent e) {
 				/*
-				* If enter key, key code 10, is pressed, the add students.
-				* */
+				 * If enter key, key code 10, is pressed, the add students.
+				 */
 				if (e.getKeyCode() == 10) {
 					addStudents(txfName.getText());
 				}
@@ -214,7 +224,7 @@ public class MainSchoolClassPanel extends JPanel implements DocumentListener {
 			}
 		}
 
-		//Stops the flashing
+		// Stops the flashing
 		this.stopFlashing();
 
 		// Clears the text box
@@ -241,48 +251,59 @@ public class MainSchoolClassPanel extends JPanel implements DocumentListener {
 	 * @parma interval The flashing speed in seconds
 	 */
 	public void startFlashing(final Color c1, final Color c2, double interval) {
-		//Initializes the timer
-		flashTimer = new Timer((int)(interval * 1000), new ActionListener() {
+		// Initializes the timer
+		flashTimer = new Timer((int) (interval * 1000), new ActionListener() {
 			/** The count of flashes */
 			private int count = 0;
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				/*
-				* It switches between the colors every other time it runs. It will set c1 on even counts and c2 on odd counts.
-				* */
+				 * It switches between the colors every other time it runs. It will set c1 on
+				 * even counts and c2 on odd counts.
+				 */
 				if (count % 2 == 0) {
-					System.out.println("[" + LocalTime.now().getHour() + ":" + LocalTime.now().getMinute() + ":"  + ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond() : LocalTime.now().getSecond()) + "] Current color: c1");
+					System.out.println("[" + LocalTime.now().getHour() + ":" + LocalTime.now().getMinute() + ":"
+							+ ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond()
+									: LocalTime.now().getSecond())
+							+ "] Current color: c1");
 					listStudents.setBackground(c1);
 				} else {
-					System.out.println("[" + LocalTime.now().getHour() + ":" + LocalTime.now().getMinute() + ":"  + ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond() : LocalTime.now().getSecond()) + "] Current color: c2");
+					System.out.println("[" + LocalTime.now().getHour() + ":" + LocalTime.now().getMinute() + ":"
+							+ ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond()
+									: LocalTime.now().getSecond())
+							+ "] Current color: c2");
 					listStudents.setBackground(c2);
 				}
 
-				//Increments the count
+				// Increments the count
 				count++;
 			}
 		});
 
-		//Starts the timer
+		// Starts the timer
 		flashTimer.start();
 
-		//Debug message
-		System.out.println("[" + LocalTime.now().getHour() + ":" + LocalTime.now().getMinute() + ":"  + ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond() : LocalTime.now().getSecond()) + "] Started flashing the students list");
+		// Debug message
+		System.out.println("[" + LocalTime.now().getHour() + ":" + LocalTime.now().getMinute() + ":"
+				+ ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond() : LocalTime.now().getSecond())
+				+ "] Started flashing the students list");
 	}
 
 	/**
 	 * Stops the flashing of the students list, and sets the background to white.
 	 */
 	public void stopFlashing() {
-		//Stops the timer
+		// Stops the timer
 		flashTimer.stop();
 
-		//Sets the background color
+		// Sets the background color
 		listStudents.setBackground(Color.WHITE);
 
-		//Debug message
-		System.out.println("[" + LocalTime.now().getHour() + ":" + LocalTime.now().getMinute() + ":" + ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond() : LocalTime.now().getSecond()) + "] Stopped flashing the students list");
+		// Debug message
+		System.out.println("[" + LocalTime.now().getHour() + ":" + LocalTime.now().getMinute() + ":"
+				+ ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond() : LocalTime.now().getSecond())
+				+ "] Stopped flashing the students list");
 	}
 
 	/**
@@ -303,5 +324,6 @@ public class MainSchoolClassPanel extends JPanel implements DocumentListener {
 	}
 
 	@Override
-	public void changedUpdate(DocumentEvent e) { }
+	public void changedUpdate(DocumentEvent e) {
+	}
 }
