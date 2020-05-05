@@ -115,11 +115,11 @@ public class CBPanel extends JPanel {
 				mf.setCurrentlySelectedClassIndex(i-1);
 				
 				//update student combobox if the class changed
-				initTime = System.currentTimeMillis();
 				cbStudent.removeAllItems();
 				ArrayList<SchoolClass> dataClasses = mf.getMainData().getClasses();
 				ArrayList<Student> dataStudents = dataClasses.get(i-1).getStudents();
 				dataStudents.forEach((n) -> cbStudent.addItem(n.getName()));
+				
 			} else if (i == itmCount - 1) {
 				mf.openAddEditGUI(SchoolClass.class, false);
 				mf.setCurrentlySelectedClassIndex(itmCount-3);
@@ -292,7 +292,5 @@ public class CBPanel extends JPanel {
 		cbCourse.addItem("Ändra");
 		cbTask.addItem("Ny");
 		cbTask.addItem("Ändra");
-		
-		
 	}
 }
