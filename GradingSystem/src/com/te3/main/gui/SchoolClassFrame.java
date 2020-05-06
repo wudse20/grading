@@ -209,15 +209,15 @@ public class SchoolClassFrame extends JFrame implements WindowListener {
 		if (!(sc.getName().equals(np.getLastInput().trim()))) {
 			// Checks for duplicate names
 			if (this.doesNameExist(np.getLastInput().trim())) {
-				//Starts the flashing of the list
+				// Starts the flashing of the list
 				np.setTextFieldColour(Color.PINK);
 
-				//Sends error message to user
+				// Sends error message to user
 				JOptionPane.showMessageDialog(this,
 						"Namnet: " + np.getLastInput().trim() + " finns redan, välj ett nytt namn.", "Namn finns redan",
 						JOptionPane.ERROR_MESSAGE);
 
-				//Returns
+				// Returns
 				return;
 			}
 		}

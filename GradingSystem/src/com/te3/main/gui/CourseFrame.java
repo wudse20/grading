@@ -1,6 +1,10 @@
 package com.te3.main.gui;
 
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.Frame;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.util.ArrayList;
@@ -408,11 +412,10 @@ public class CourseFrame extends JFrame implements WindowListener {
 
 	/**
 	 * Invoked when a Window is no longer the active Window. Only a Frame or a
-	 * Dialog can be the active Window. The native windowing system may denote
-	 * the active Window or its children with special decorations, such as a
-	 * highlighted title bar. The active Window is always either the focused
-	 * Window, or the first Frame or Dialog that is an owner of the focused
-	 * Window.
+	 * Dialog can be the active Window. The native windowing system may denote the
+	 * active Window or its children with special decorations, such as a highlighted
+	 * title bar. The active Window is always either the focused Window, or the
+	 * first Frame or Dialog that is an owner of the focused Window.
 	 *
 	 * @param e the event to be processed
 	 */
