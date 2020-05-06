@@ -239,7 +239,7 @@ public class CBPanel extends JPanel {
 	}
 	
 	/**
-	 * OBS DU MÅSTE FIXA SÅ ATT DEN TÅLER ATT DET INTE FINNS NÅGOT I LISTAN.
+	 * Den här metoden krashar vid uppdatering/lägga till, vet inte vad det är, mer än rad 281, 271
 	 *
 	 * Completely updates the entire combobox panel with new information.
 	 * @param newData the new information to be parsed and updated with.

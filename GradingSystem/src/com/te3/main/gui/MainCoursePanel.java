@@ -443,12 +443,12 @@ public class MainCoursePanel extends JPanel implements DocumentListener {
 	}
 
 	/**
-	 * Getter for the criteria
+	 * Getter for the criteria, it clones the criteria.
 	 *
-	 * @return the criteria
+	 * @return the criteria (Cloned)
 	 */
 	public ArrayList<Criteria> getCriteria() {
-		return this.criteria;
+		return (ArrayList<Criteria>) this.criteria.clone();
 	}
 
 	public JList<SchoolClass> getListAddedClasses() {
