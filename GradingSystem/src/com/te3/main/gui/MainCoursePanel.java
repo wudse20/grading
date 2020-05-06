@@ -1,21 +1,14 @@
 package com.te3.main.gui;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.time.LocalTime;
 import java.util.ArrayList;
 
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JList;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextField;
+import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
@@ -40,6 +33,13 @@ public class MainCoursePanel extends JPanel implements DocumentListener {
 	private ArrayList<SchoolClass> notAddedClasses = new ArrayList<SchoolClass>();
 	private ArrayList<SchoolClass> addedClasses = new ArrayList<SchoolClass>();
 	private ArrayList<Criteria> criteria = new ArrayList<Criteria>();
+
+	//Booleans
+	/**
+	 * If a component is flashing or not.
+	 * <br> 0, for classes, 1, for criteria
+	 * */
+	private boolean[] isComponentFlashing = {false, false};
 
 	// The JLists
 	JList<SchoolClass> listNotAddedClasses = new JList<SchoolClass>();
@@ -81,8 +81,14 @@ public class MainCoursePanel extends JPanel implements DocumentListener {
 	// Instances
 	MainFrame mf;
 
-	@SuppressWarnings("unused")
-	private Course c;
+	Course c;
+
+	//Flashing timer
+	/**
+	 * The timers responsible for flashing the different components
+	 * <br> 0, for classes, 1, for criteria
+	 * */
+	Timer[] flashTimers = {null, null};
 
 	/**
 	 * For adding.
@@ -238,7 +244,7 @@ public class MainCoursePanel extends JPanel implements DocumentListener {
 		// Removes the criteria
 		criteria.remove(index);
 
-		// Refreshes the criteira
+		// Refreshes the criteria
 		refreshCriteria();
 	}
 
@@ -261,9 +267,12 @@ public class MainCoursePanel extends JPanel implements DocumentListener {
 				criteria.add(c);
 				refreshCriteria();
 			}
+
+			//Stops the flashing
+			this.stopFlashing(listCriteria, (byte) 1);
 		} catch (IllegalNameException e) {
-			JOptionPane.showMessageDialog(this, e.getMessage(), "Fel", JOptionPane.ERROR_MESSAGE);
 			txfCriteria.setBackground(Color.PINK);
+			JOptionPane.showMessageDialog(this, e.getMessage(), "Fel", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 
@@ -281,6 +290,7 @@ public class MainCoursePanel extends JPanel implements DocumentListener {
 			SchoolClass sc = notAddedClasses.get(index);
 			addedClasses.add(sc);
 			notAddedClasses.remove(index);
+			this.stopFlashing(listAddedClasses, (byte) 0);
 		} else if (mode == 1) {
 			SchoolClass sc = addedClasses.get(index);
 			notAddedClasses.add(sc);
@@ -341,12 +351,95 @@ public class MainCoursePanel extends JPanel implements DocumentListener {
 	}
 
 	/**
+	 * Starts flashing a component
+	 *
+	 * @param comp The component that is being effected
+	 * @param c1 The first colour
+	 * @param c2 The second colour
+	 * @param interval The blinking interval in seconds
+	 * @param item 0 for classes, 1 for criteria
+	 */
+	public void startFlashing(final Component comp, final Color c1, final Color c2, double interval, byte item) {
+		//If it is flashing it will do nothing.
+		if (this.isComponentFlashing[item]) {
+			return;
+		}
+
+		//Initializes the timer
+		flashTimers[item] = new Timer((int) (interval * 1000), new ActionListener() {
+			/** The amount of times the timer has run */
+			private int count = 0;
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				/*
+				* On even counts it will chose color c1, and colour c2 on odd counts.
+				* */
+				if (count % 2 == 0) {
+					//Sets the colour
+					comp.setBackground(c1);
+
+					//Sends log message
+					System.out.println("[" + LocalTime.now().getHour() + ":" + LocalTime.now().getMinute() + ":" + ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond() : LocalTime.now().getSecond()) + "] Current color: c1");
+				} else {
+					//Sets the colour
+					comp.setBackground(c2);
+
+					//Sends log message
+					System.out.println("[" + LocalTime.now().getHour() + ":" + LocalTime.now().getMinute() + ":" + ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond() : LocalTime.now().getSecond()) + "] Current color: c2");
+				}
+
+				//increments the counter
+				count++;
+			}
+		});
+
+		//Log message
+		//Sets the colour
+		comp.setBackground(c1);
+
+		//Sends log message
+		System.out.println("[" + LocalTime.now().getHour() + ":" + LocalTime.now().getMinute() + ":" + ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond() : LocalTime.now().getSecond()) + "] Starting flashing timer at index: " + item);
+
+		//Starts timer
+		flashTimers[item].start();
+
+		//Tells the program that the timer is running.
+		this.isComponentFlashing[item] = true;
+	}
+
+	/**
+	 * Stops flashing a component
+	 *
+	 * @param comp The component that is being effected
+	 * @param item 0 for classes, 1 for criteria
+	 */
+	public void stopFlashing(Component comp, byte item) {
+		//If it is not flashing it will return.
+		if (!this.isComponentFlashing[item]) {
+			return;
+		}
+
+		//Stops the timer
+		flashTimers[item].stop();
+
+		//Sets the color of the component
+		comp.setBackground(Color.WHITE);
+
+		//Tells the program that the component isn't flashing.
+		this.isComponentFlashing[item] = false;
+
+		//Sends a log message
+		System.out.println("[" + LocalTime.now().getHour() + ":" + LocalTime.now().getMinute() + ":" + ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond() : LocalTime.now().getSecond()) + "] Stop flashing component nr: " + item);
+	}
+
+	/**
 	 * Getter for the added classes
 	 *
 	 * @return the added classes
 	 */
 	public ArrayList<SchoolClass> getAddedClasses() {
-		return addedClasses;
+		return this.addedClasses;
 	}
 
 	/**
@@ -355,8 +448,17 @@ public class MainCoursePanel extends JPanel implements DocumentListener {
 	 * @return the criteria
 	 */
 	public ArrayList<Criteria> getCriteria() {
-		return criteria;
+		return this.criteria;
 	}
+
+	public JList<SchoolClass> getListAddedClasses() {
+		return this.listAddedClasses;
+	}
+
+	public JList<Criteria> getListCriteria() {
+		return this.listCriteria;
+	}
+
 
 	@Override
 	public void insertUpdate(DocumentEvent e) {

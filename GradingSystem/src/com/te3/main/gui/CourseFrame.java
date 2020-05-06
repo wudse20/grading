@@ -1,8 +1,8 @@
 package com.te3.main.gui;
 
-import java.awt.BorderLayout;
-import java.awt.Container;
-import java.awt.Dimension;
+import java.awt.*;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
@@ -18,7 +18,7 @@ import com.te3.main.objects.SchoolClass;
 /**
  * The class that holds the Frame for managing courses.
  */
-public class CourseFrame extends JFrame {
+public class CourseFrame extends JFrame implements WindowListener {
 
 	/** Default */
 	private static final long serialVersionUID = 1L;
@@ -75,6 +75,7 @@ public class CourseFrame extends JFrame {
 		this.setLayout(layout);
 		this.setSize(new Dimension(600, 600));
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		this.addWindowListener(this);
 
 		// Creates the MainCoursePanel
 		mcp = new MainCoursePanel(mf);
@@ -114,6 +115,9 @@ public class CourseFrame extends JFrame {
 		this.setSize(new Dimension(600, 600));
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
+		//Adds a window listener
+		this.addWindowListener(this);
+
 		// Panel setup
 		mcp = new MainCoursePanel(mf, c);
 		np.setLastInput(c.getName());
@@ -122,8 +126,8 @@ public class CourseFrame extends JFrame {
 		ecp.getBtnUpdate().addActionListener((e) -> this.updateCourse());
 		ecp.getBtnCancel().addActionListener((e) -> this.dispose());
 		ecp.getBtnDelete().addActionListener(e -> this.deleteCourse());
-		ecp.getBtnHelp().addActionListener((
-				e) -> new HelpFrame("Uppdatera en kurs", "<html><p>" + helpInfo + "</p></html>", 500).setVisible(true));
+		ecp.getBtnHelp().addActionListener(
+				e -> new HelpFrame("Uppdatera en kurs", "<html><p>" + helpInfo + "</p></html>", 500).setVisible(true));
 
 		// Adds components
 		panel.setLayout(pLayout);
@@ -174,17 +178,33 @@ public class CourseFrame extends JFrame {
 	 * Adds a new course to the main data.
 	 */
 	private void newCourse() {
+		//Set to true if it should return, after checking for cases that breaks the code.
+		boolean shouldReturn = false;
+
 		// Some cases that will break it, so it handles them
+
+		/*
+		* If there are no added classes, then it will start flashing the list, then it will send a message to the user and finally tell the program to return.
+		* */
 		if (mcp.getAddedClasses().size() == 0) {
+			mcp.startFlashing(mcp.getListAddedClasses(), Color.PINK, Color.WHITE, .5D, (byte) 0);
 			JOptionPane.showMessageDialog(this, "Du måste välja minst en klass!", "Fel", JOptionPane.ERROR_MESSAGE);
-			return;
+			shouldReturn = true;
 		}
 
+		/*
+		 * If there are no added criteria, then it will start flashing the list, then it will send a message to the user and finally tell the program to return.
+		 * */
 		if (mcp.getCriteria().size() == 0) {
+			mcp.startFlashing(mcp.getListCriteria(), Color.PINK, Color.WHITE, .5D, (byte) 1);
 			JOptionPane.showMessageDialog(this, "Du måste lägga till minst ett kunskapskrav!", "Fel",
 					JOptionPane.ERROR_MESSAGE);
-			return;
+			shouldReturn = true;
 		}
+
+		//Returns if it's supposed to return
+		if (shouldReturn)
+			return;
 
 		try {
 			// Adds the courses to the new classes
@@ -213,6 +233,9 @@ public class CourseFrame extends JFrame {
 			// Disposes the frame
 			this.dispose();
 		} catch (IllegalNameException e) {
+			//Sets the TextBox to red
+			np.setTextFieldColour(Color.PINK);
+
 			// sends error message
 			JOptionPane.showMessageDialog(this, e.getMessage(), "Fel", JOptionPane.ERROR_MESSAGE);
 
@@ -225,6 +248,9 @@ public class CourseFrame extends JFrame {
 	 * Updates a course.
 	 */
 	private void updateCourse() {
+		//Set to true if it should return, after checking for cases that breaks the code.
+		boolean shouldReturn = false;
+
 		// Control message
 		int ans = JOptionPane.showConfirmDialog(this,
 				"Är du säker på att du vill uppdatera kursen: " + np.getLastInput() + "?", "Är du säker?",
@@ -235,15 +261,21 @@ public class CourseFrame extends JFrame {
 
 		// Checking for illegal inputs.
 		if (mcp.getAddedClasses().size() == 0) {
+			mcp.startFlashing(mcp.getListAddedClasses(), Color.PINK, Color.WHITE, .5D, (byte) 0);
 			JOptionPane.showMessageDialog(this, "Du måste välja minst en klass!", "Fel", JOptionPane.ERROR_MESSAGE);
-			return;
+			shouldReturn = true;
 		}
 
 		if (mcp.getCriteria().size() == 0) {
+			mcp.startFlashing(mcp.getListCriteria(), Color.PINK, Color.WHITE, .5D, (byte) 1);
 			JOptionPane.showMessageDialog(this, "Du måste lägga till minst ett kunskapskrav!", "Fel",
 					JOptionPane.ERROR_MESSAGE);
-			return;
+			shouldReturn = true;
 		}
+
+		//Returns if it is supposed to do that.
+		if (shouldReturn)
+			return;
 
 		// Loops through the list and updates the courses
 		try {
@@ -290,11 +322,102 @@ public class CourseFrame extends JFrame {
 			// Closes the frame
 			this.dispose();
 		} catch (IllegalNameException e) {
+			//Sets the TextField to red
+			np.setTextFieldColour(Color.PINK);
+
 			// Sends error message
 			JOptionPane.showMessageDialog(this, e.getMessage(), "Fel", JOptionPane.ERROR_MESSAGE);
 
 			// returns
 			return;
 		}
+	}
+
+	/**
+	 * Invoked the first time a window is made visible.
+	 *
+	 * @param e the event to be processed
+	 */
+	@Override
+	public void windowOpened(WindowEvent e) {
+
+	}
+
+	/**
+	 * Invoked when the user attempts to close the window
+	 * from the window's system menu.
+	 *
+	 * @param e the event to be processed
+	 */
+	@Override
+	public void windowClosing(WindowEvent e) {
+		mcp.stopFlashing(mcp.getListAddedClasses(), (byte) 0);
+		mcp.stopFlashing(mcp.getListCriteria(), (byte) 1);
+	}
+
+	/**
+	 * Invoked when a window has been closed as the result
+	 * of calling dispose on the window.
+	 *
+	 * @param e the event to be processed
+	 */
+	@Override
+	public void windowClosed(WindowEvent e) {
+
+	}
+
+	/**
+	 * Invoked when a window is changed from a normal to a
+	 * minimized state. For many platforms, a minimized window
+	 * is displayed as the icon specified in the window's
+	 * iconImage property.
+	 *
+	 * @param e the event to be processed
+	 * @see Frame#setIconImage
+	 */
+	@Override
+	public void windowIconified(WindowEvent e) {
+
+	}
+
+	/**
+	 * Invoked when a window is changed from a minimized
+	 * to a normal state.
+	 *
+	 * @param e the event to be processed
+	 */
+	@Override
+	public void windowDeiconified(WindowEvent e) {
+
+	}
+
+	/**
+	 * Invoked when the Window is set to be the active Window. Only a Frame or
+	 * a Dialog can be the active Window. The native windowing system may
+	 * denote the active Window or its children with special decorations, such
+	 * as a highlighted title bar. The active Window is always either the
+	 * focused Window, or the first Frame or Dialog that is an owner of the
+	 * focused Window.
+	 *
+	 * @param e the event to be processed
+	 */
+	@Override
+	public void windowActivated(WindowEvent e) {
+
+	}
+
+	/**
+	 * Invoked when a Window is no longer the active Window. Only a Frame or a
+	 * Dialog can be the active Window. The native windowing system may denote
+	 * the active Window or its children with special decorations, such as a
+	 * highlighted title bar. The active Window is always either the focused
+	 * Window, or the first Frame or Dialog that is an owner of the focused
+	 * Window.
+	 *
+	 * @param e the event to be processed
+	 */
+	@Override
+	public void windowDeactivated(WindowEvent e) {
+
 	}
 }

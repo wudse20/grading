@@ -191,8 +191,8 @@ public class SchoolClassFrame extends JFrame implements WindowListener {
 		 * disposes the popup, this method will return, and then nothing happens.
 		 */
 		if (mscp.getStudents().size() == 0) {
+			mscp.startFlashing(Color.PINK, Color.WHITE, .5D);
 			JOptionPane.showMessageDialog(this, "Du måste lägga till minst en elev", "Fel", JOptionPane.ERROR_MESSAGE);
-			mscp.startFlashing(Color.PINK, Color.RED, .5D);
 			return;
 		}
 
@@ -252,7 +252,7 @@ public class SchoolClassFrame extends JFrame implements WindowListener {
 		}
 
 		// Updates the grade panel
-		mf.updateGradePanel();
+		mf.updateGradePanel(State.NOTHING_SELECTED);
 
 		// Updates cbPanel
 		mf.cbPanel.refreshData(mf.getMainData());
@@ -275,7 +275,7 @@ public class SchoolClassFrame extends JFrame implements WindowListener {
 		 */
 		if (mscp.getStudents().size() == 0) {
 			// Makes the list blink
-			mscp.startFlashing(Color.pink, Color.RED, .5D);
+			mscp.startFlashing(Color.PINK, Color.WHITE, .5D);
 
 			// Sends error message
 			JOptionPane.showMessageDialog(this, "Du måste lägga till minst en elev", "Fel", JOptionPane.ERROR_MESSAGE);
@@ -325,7 +325,7 @@ public class SchoolClassFrame extends JFrame implements WindowListener {
 		}
 
 		// Updates the grade panel
-		mf.updateGradePanel();
+		mf.updateGradePanel(State.NOTHING_SELECTED);
 
 		// Updates CBPanel
 		mf.cbPanel.refreshData(mf.getMainData());
