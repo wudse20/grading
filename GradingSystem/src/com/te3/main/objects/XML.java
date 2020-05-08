@@ -50,7 +50,7 @@ public class XML<E> {
 							: LocalTime.now().getMinute())
 					+ ":" + ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond()
 							: LocalTime.now().getSecond())
-					+ "] XML has successfully wrote the data.");
+					+ "] XML has successfully written the data.");
 		} catch (IOException e) {
 			// Print the error message to the console
 			System.out.println("["
