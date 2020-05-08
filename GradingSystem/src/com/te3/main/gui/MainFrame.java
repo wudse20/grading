@@ -579,7 +579,7 @@ public class MainFrame extends JFrame implements ComponentListener, WindowStateL
 		this.saveTimer = s.getSaveTimer();
 		this.shouldShowBabyYoda = s.isShouldShowYoda();
 
-		//Restarts the savetimer, after setting the new time.
+		//Restarts the auto save timer, after setting the new time.
 		this.autoSaveTimer.setDelay(this.saveTimer * 1000);
 
 		//restarts the timer
