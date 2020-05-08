@@ -377,7 +377,13 @@ public class SchoolClassFrame extends JFrame implements WindowListener {
 		 */
 		for (var i = 0; i < mf.getMainData().getClasses().size(); i++) {
 			if (name.equals(mf.getMainData().getClasses().get(i).getName())) {
-				System.out.println("[" + ((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour() : LocalTime.now().getHour()) + ":" + ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute() : LocalTime.now().getMinute()) + ":"
+				System.out.println("["
+						+ ((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour()
+								: LocalTime.now().getHour())
+						+ ":"
+						+ ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute()
+								: LocalTime.now().getMinute())
+						+ ":"
 						+ ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond()
 								: LocalTime.now().getSecond())
 						+ "] Found name: " + name + " in another SchoolClass, returning true...");
@@ -385,7 +391,10 @@ public class SchoolClassFrame extends JFrame implements WindowListener {
 			}
 		}
 
-		System.out.println("[" + ((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour() : LocalTime.now().getHour()) + ":" + ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute() : LocalTime.now().getMinute()) + ":"
+		System.out.println("["
+				+ ((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour() : LocalTime.now().getHour()) + ":"
+				+ ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute() : LocalTime.now().getMinute())
+				+ ":"
 				+ ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond() : LocalTime.now().getSecond())
 				+ "] " + name + " wasn't found returning false...");
 		return false;

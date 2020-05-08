@@ -42,11 +42,26 @@ public class XML<E> {
 			encoder.close();
 			fos.close();
 
-			//Prints debug message to the console
-			System.out.println("[" + ((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour() : LocalTime.now().getHour()) + ":" + ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute() : LocalTime.now().getMinute()) + ":" + ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond() : LocalTime.now().getSecond()) + "] XML has successfully wrote the data.");
+			// Prints debug message to the console
+			System.out.println("["
+					+ ((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour() : LocalTime.now().getHour())
+					+ ":"
+					+ ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute()
+							: LocalTime.now().getMinute())
+					+ ":" + ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond()
+							: LocalTime.now().getSecond())
+					+ "] XML has successfully wrote the data.");
 		} catch (IOException e) {
 			// Print the error message to the console
-			System.out.println("[" + ((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour() : LocalTime.now().getHour()) + ":" + ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute() : LocalTime.now().getMinute()) + ":" + ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond() : LocalTime.now().getSecond()) + "] XML threw exception with message: " + e.getLocalizedMessage());
+			System.out.println("["
+					+ ((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour() : LocalTime.now().getHour())
+					+ ":"
+					+ ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute()
+							: LocalTime.now().getMinute())
+					+ ":"
+					+ ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond()
+							: LocalTime.now().getSecond())
+					+ "] XML threw exception with message: " + e.getLocalizedMessage());
 		}
 	}
 
@@ -75,15 +90,29 @@ public class XML<E> {
 			fis.close();
 			decoder.close();
 
-			//Prints debug message to the console.
-			System.out.println("[" + ((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour() : LocalTime.now().getHour()) + ":" + ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute() : LocalTime.now().getMinute()) + ":" + ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond() : LocalTime.now().getSecond()) + "] XML loaded the data");
-
+			// Prints debug message to the console.
+			System.out.println("["
+					+ ((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour() : LocalTime.now().getHour())
+					+ ":"
+					+ ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute()
+							: LocalTime.now().getMinute())
+					+ ":" + ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond()
+							: LocalTime.now().getSecond())
+					+ "] XML loaded the data");
 
 			// Returns the object
 			return e;
 		} catch (IOException ex) {
-			//Prints a debug message to the console, with the message
-			System.out.println("[" + ((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour() : LocalTime.now().getHour()) + ":" + ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute() : LocalTime.now().getMinute()) + ":" + ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond() : LocalTime.now().getSecond()) + "] XML threw exception with message: " + ex.getLocalizedMessage());
+			// Prints a debug message to the console, with the message
+			System.out.println("["
+					+ ((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour() : LocalTime.now().getHour())
+					+ ":"
+					+ ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute()
+							: LocalTime.now().getMinute())
+					+ ":"
+					+ ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond()
+							: LocalTime.now().getSecond())
+					+ "] XML threw exception with message: " + ex.getLocalizedMessage());
 
 			// Returns the object(null)
 			return e;

@@ -1,12 +1,18 @@
 package com.te3.main.gui;
 
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
-import javax.swing.*;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.Timer;
 
 import com.te3.main.objects.Criteria;
 import com.te3.main.objects.Task;
@@ -182,24 +188,32 @@ public class MainAssignmentPanel extends JPanel {
 		listAddedCriteria.setListData(this.addedCriteria.toArray(addedCriteria));
 		listCourseCriteria.setListData(this.courseCriteria.toArray(courseCriteria));
 
-		//Stops flashing the list
+		// Stops flashing the list
 		this.stopFlashingJList();
 	}
 
 	/**
 	 * Starts flashing the JList.
 	 *
-	 * @param c1 The first colour
-	 * @param c2 The second colour
+	 * @param c1       The first colour
+	 * @param c2       The second colour
 	 * @param interval The interval in seconds.
 	 */
 	public void startFlashingJList(Color c1, Color c2, double interval) {
-		//Returns if the JList is already flashing.
+		// Returns if the JList is already flashing.
 		if (this.isJListFlashing) {
-			//Sends a debug message to the console
-			System.out.println("[" + ((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour() : LocalTime.now().getHour()) + ":" + ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute() : LocalTime.now().getMinute()) + ":" + ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond() : LocalTime.now().getSecond()) + "] MainAssignmentPanel: JList: listAddedCriteria already flashing");
+			// Sends a debug message to the console
+			System.out.println("["
+					+ ((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour() : LocalTime.now().getHour())
+					+ ":"
+					+ ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute()
+							: LocalTime.now().getMinute())
+					+ ":"
+					+ ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond()
+							: LocalTime.now().getSecond())
+					+ "] MainAssignmentPanel: JList: listAddedCriteria already flashing");
 
-			//returns
+			// returns
 			return;
 		}
 
@@ -214,15 +228,25 @@ public class MainAssignmentPanel extends JPanel {
 				 * even counts and c2 on odd counts.
 				 */
 				if (count % 2 == 0) {
-					System.out.println("[" + ((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour() : LocalTime.now().getHour()) + ":" + ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute() : LocalTime.now().getMinute()) + ":"
-							+ ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond()
-							: LocalTime.now().getSecond())
+					System.out.println("["
+							+ ((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour()
+									: LocalTime.now().getHour())
+							+ ":"
+							+ ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute()
+									: LocalTime.now().getMinute())
+							+ ":" + ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond()
+									: LocalTime.now().getSecond())
 							+ "] Current color: c1");
 					listAddedCriteria.setBackground(c1);
 				} else {
-					System.out.println("[" + ((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour() : LocalTime.now().getHour()) + ":" + ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute() : LocalTime.now().getMinute()) + ":"
-							+ ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond()
-							: LocalTime.now().getSecond())
+					System.out.println("["
+							+ ((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour()
+									: LocalTime.now().getHour())
+							+ ":"
+							+ ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute()
+									: LocalTime.now().getMinute())
+							+ ":" + ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond()
+									: LocalTime.now().getSecond())
 							+ "] Current color: c2");
 					listAddedCriteria.setBackground(c2);
 				}
@@ -239,7 +263,10 @@ public class MainAssignmentPanel extends JPanel {
 		this.isJListFlashing = true;
 
 		// Debug message
-		System.out.println("[" + ((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour() : LocalTime.now().getHour()) + ":" + ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute() : LocalTime.now().getMinute()) + ":"
+		System.out.println("["
+				+ ((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour() : LocalTime.now().getHour()) + ":"
+				+ ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute() : LocalTime.now().getMinute())
+				+ ":"
 				+ ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond() : LocalTime.now().getSecond())
 				+ "] MinAssignmentPanel: JList: listAddedCriteria, has started flashing");
 	}
@@ -250,16 +277,20 @@ public class MainAssignmentPanel extends JPanel {
 	public void stopFlashingJList() {
 		// If the timer isn't running then don't stop it.
 		if (!this.isJListFlashing) {
-			//Sends Debug message
-			System.out.println("[" + ((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour() : LocalTime.now().getHour()) + ":" + ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute() : LocalTime.now().getMinute()) + ":"
+			// Sends Debug message
+			System.out.println("["
+					+ ((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour() : LocalTime.now().getHour())
+					+ ":"
+					+ ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute()
+							: LocalTime.now().getMinute())
+					+ ":"
 					+ ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond()
-					: LocalTime.now().getSecond())
+							: LocalTime.now().getSecond())
 					+ "] MainAssignmentPanel: JList: listAddedCriteria, isn't flashing");
 
-			//Returns
+			// Returns
 			return;
 		}
-
 
 		// Stops the timer
 		flashTimer.stop();
@@ -271,7 +302,10 @@ public class MainAssignmentPanel extends JPanel {
 		this.isJListFlashing = false;
 
 		// Debug message
-		System.out.println("[" +((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour() : LocalTime.now().getHour()) + ":" + ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute() : LocalTime.now().getMinute()) + ":"
+		System.out.println("["
+				+ ((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour() : LocalTime.now().getHour()) + ":"
+				+ ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute() : LocalTime.now().getMinute())
+				+ ":"
 				+ ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond() : LocalTime.now().getSecond())
 				+ "] MinAssignmentPanel: JList: listAddedCriteria, has stopped flashing");
 

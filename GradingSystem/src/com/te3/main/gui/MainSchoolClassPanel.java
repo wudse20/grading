@@ -254,9 +254,11 @@ public class MainSchoolClassPanel extends JPanel implements DocumentListener {
 	 * @parma interval The flashing speed in seconds
 	 */
 	public void startFlashing(final Color c1, final Color c2, double interval) {
-		System.out.println("[" + ((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour() : LocalTime.now().getHour()) + ":" + ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute() : LocalTime.now().getMinute()) + ":"
-				+ ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond()
-				: LocalTime.now().getSecond())
+		System.out.println("["
+				+ ((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour() : LocalTime.now().getHour()) + ":"
+				+ ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute() : LocalTime.now().getMinute())
+				+ ":"
+				+ ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond() : LocalTime.now().getSecond())
 				+ "] Flashing timer running: " + isFlashingTimerRunning);
 
 		// It will only start if it isn't running
@@ -275,14 +277,24 @@ public class MainSchoolClassPanel extends JPanel implements DocumentListener {
 				 * even counts and c2 on odd counts.
 				 */
 				if (count % 2 == 0) {
-					System.out.println("[" + ((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour() : LocalTime.now().getHour()) + ":" + ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute() : LocalTime.now().getMinute()) + ":"
-							+ ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond()
+					System.out.println("["
+							+ ((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour()
+									: LocalTime.now().getHour())
+							+ ":"
+							+ ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute()
+									: LocalTime.now().getMinute())
+							+ ":" + ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond()
 									: LocalTime.now().getSecond())
 							+ "] Current color: c1");
 					listStudents.setBackground(c1);
 				} else {
-					System.out.println("[" + ((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour() : LocalTime.now().getHour()) + ":" + ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute() : LocalTime.now().getMinute()) + ":"
-							+ ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond()
+					System.out.println("["
+							+ ((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour()
+									: LocalTime.now().getHour())
+							+ ":"
+							+ ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute()
+									: LocalTime.now().getMinute())
+							+ ":" + ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond()
 									: LocalTime.now().getSecond())
 							+ "] Current color: c2");
 					listStudents.setBackground(c2);
@@ -300,7 +312,10 @@ public class MainSchoolClassPanel extends JPanel implements DocumentListener {
 		this.isFlashingTimerRunning = true;
 
 		// Debug message
-		System.out.println("[" + ((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour() : LocalTime.now().getHour()) + ":" + ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute() : LocalTime.now().getMinute()) + ":"
+		System.out.println("["
+				+ ((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour() : LocalTime.now().getHour()) + ":"
+				+ ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute() : LocalTime.now().getMinute())
+				+ ":"
 				+ ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond() : LocalTime.now().getSecond())
 				+ "] Started flashing the students list");
 	}
@@ -309,9 +324,11 @@ public class MainSchoolClassPanel extends JPanel implements DocumentListener {
 	 * Stops the flashing of the students list, and sets the background to white.
 	 */
 	public void stopFlashing() {
-		System.out.println("[" + ((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour() : LocalTime.now().getHour()) + ":" + ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute() : LocalTime.now().getMinute()) + ":"
-				+ ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond()
-				: LocalTime.now().getSecond())
+		System.out.println("["
+				+ ((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour() : LocalTime.now().getHour()) + ":"
+				+ ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute() : LocalTime.now().getMinute())
+				+ ":"
+				+ ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond() : LocalTime.now().getSecond())
 				+ "] Flashing timer running: " + isFlashingTimerRunning);
 
 		// If the timer isn't running then don't stop it.
@@ -328,7 +345,10 @@ public class MainSchoolClassPanel extends JPanel implements DocumentListener {
 		this.isFlashingTimerRunning = false;
 
 		// Debug message
-		System.out.println("[" +((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour() : LocalTime.now().getHour()) + ":" + ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute() : LocalTime.now().getMinute()) + ":"
+		System.out.println("["
+				+ ((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour() : LocalTime.now().getHour()) + ":"
+				+ ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute() : LocalTime.now().getMinute())
+				+ ":"
 				+ ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond() : LocalTime.now().getSecond())
 				+ "] Stopped flashing the students list");
 	}

@@ -202,8 +202,9 @@ public class MainCoursePanel extends JPanel implements DocumentListener {
 			selectedIndexAddedClasses = listAddedClasses.getSelectedIndex();
 
 			/*
-			 * This is action is for some reason called twice, and the check if it's not -1 is to prevent an exception being thrown. When trying to access a index at -1.
-			 * */
+			 * This is action is for some reason called twice, and the check if it's not -1
+			 * is to prevent an exception being thrown. When trying to access a index at -1.
+			 */
 			if (selectedIndexAddedClasses != -1) {
 				classesSelected((byte) 1, selectedIndexAddedClasses);
 			}
@@ -213,8 +214,9 @@ public class MainCoursePanel extends JPanel implements DocumentListener {
 			selectedIndexNotAddedClasses = listNotAddedClasses.getSelectedIndex();
 
 			/*
-			 * This is action is for some reason called twice, and the check if it's not -1 is to prevent an exception being thrown. When trying to access a index at -1.
-			 * */
+			 * This is action is for some reason called twice, and the check if it's not -1
+			 * is to prevent an exception being thrown. When trying to access a index at -1.
+			 */
 			if (selectedIndexNotAddedClasses != -1) {
 				classesSelected((byte) 0, selectedIndexNotAddedClasses);
 			}
@@ -224,8 +226,9 @@ public class MainCoursePanel extends JPanel implements DocumentListener {
 			selectedIndexCriteria = listCriteria.getSelectedIndex();
 
 			/*
-			 * This is action is for some reason called twice, and the check if it's not -1 is to prevent an exception being thrown. When trying to access a index at -1.
-			 * */
+			 * This is action is for some reason called twice, and the check if it's not -1
+			 * is to prevent an exception being thrown. When trying to access a index at -1.
+			 */
 			if (selectedIndexCriteria != -1) {
 				removeCriteria(selectedIndexCriteria);
 			}
@@ -249,7 +252,7 @@ public class MainCoursePanel extends JPanel implements DocumentListener {
 
 			@Override
 			public void keyPressed(KeyEvent e) {
-				//If enter key is pressed then it will add a criteria.
+				// If enter key is pressed then it will add a criteria.
 				if (e.getKeyCode() == 10) {
 					addCriteria();
 				}
@@ -402,8 +405,13 @@ public class MainCoursePanel extends JPanel implements DocumentListener {
 					comp.setBackground(c1);
 
 					// Sends log message
-					System.out.println("[" + ((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour() : LocalTime.now().getHour()) + ":" + ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute() : LocalTime.now().getMinute()) + ":"
-							+ ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond()
+					System.out.println("["
+							+ ((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour()
+									: LocalTime.now().getHour())
+							+ ":"
+							+ ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute()
+									: LocalTime.now().getMinute())
+							+ ":" + ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond()
 									: LocalTime.now().getSecond())
 							+ "] Current color: c1");
 				} else {
@@ -411,8 +419,13 @@ public class MainCoursePanel extends JPanel implements DocumentListener {
 					comp.setBackground(c2);
 
 					// Sends log message
-					System.out.println("[" + ((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour() : LocalTime.now().getHour()) + ":" + ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute() : LocalTime.now().getMinute()) + ":"
-							+ ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond()
+					System.out.println("["
+							+ ((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour()
+									: LocalTime.now().getHour())
+							+ ":"
+							+ ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute()
+									: LocalTime.now().getMinute())
+							+ ":" + ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond()
 									: LocalTime.now().getSecond())
 							+ "] Current color: c2");
 				}
@@ -427,7 +440,10 @@ public class MainCoursePanel extends JPanel implements DocumentListener {
 		comp.setBackground(c1);
 
 		// Sends log message
-		System.out.println("[" + ((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour() : LocalTime.now().getHour()) + ":" + ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute() : LocalTime.now().getMinute()) + ":"
+		System.out.println("["
+				+ ((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour() : LocalTime.now().getHour()) + ":"
+				+ ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute() : LocalTime.now().getMinute())
+				+ ":"
 				+ ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond() : LocalTime.now().getSecond())
 				+ "] Starting flashing timer at index: " + item);
 
@@ -460,7 +476,10 @@ public class MainCoursePanel extends JPanel implements DocumentListener {
 		this.isComponentFlashing[item] = false;
 
 		// Sends a log message
-		System.out.println("[" + ((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour() : LocalTime.now().getHour()) + ":" + ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute() : LocalTime.now().getMinute()) + ":"
+		System.out.println("["
+				+ ((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour() : LocalTime.now().getHour()) + ":"
+				+ ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute() : LocalTime.now().getMinute())
+				+ ":"
 				+ ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond() : LocalTime.now().getSecond())
 				+ "] Stop flashing component nr: " + item);
 	}

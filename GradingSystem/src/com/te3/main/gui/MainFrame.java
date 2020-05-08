@@ -186,8 +186,8 @@ public class MainFrame extends JFrame implements ComponentListener, WindowStateL
 
 		// Sets the panels bounds
 		panel.setBounds(0, 0, this.getWidth() - 15, this.getHeight());
-		
-		//Updates the grade panel state
+
+		// Updates the grade panel state
 		this.updateGradePanel(State.NOTHING_SELECTED);
 	}
 
@@ -271,13 +271,28 @@ public class MainFrame extends JFrame implements ComponentListener, WindowStateL
 		Data d = xml.read(filePath);
 
 		/*
-		* If the read data is null it will create a new data object, else it will return the read data.
-		* */
-		if (d == null){
-			System.out.println("[" + ((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour() : LocalTime.now().getHour()) + ":" + ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute() : LocalTime.now().getMinute()) + ":" + ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond() : LocalTime.now().getSecond()) + "] Failed to load data, creating a new data object");
+		 * If the read data is null it will create a new data object, else it will
+		 * return the read data.
+		 */
+		if (d == null) {
+			System.out.println("["
+					+ ((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour() : LocalTime.now().getHour())
+					+ ":"
+					+ ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute()
+							: LocalTime.now().getMinute())
+					+ ":" + ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond()
+							: LocalTime.now().getSecond())
+					+ "] Failed to load data, creating a new data object");
 			return new Data(new ArrayList<SchoolClass>());
 		} else {
-			System.out.println("[" + ((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour() : LocalTime.now().getHour()) + ":" + ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute() : LocalTime.now().getMinute()) + ":" + ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond() : LocalTime.now().getSecond()) + "] Successfully loaded the data");
+			System.out.println("["
+					+ ((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour() : LocalTime.now().getHour())
+					+ ":"
+					+ ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute()
+							: LocalTime.now().getMinute())
+					+ ":" + ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond()
+							: LocalTime.now().getSecond())
+					+ "] Successfully loaded the data");
 			return d;
 		}
 	}
