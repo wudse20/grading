@@ -92,7 +92,7 @@ public class MainFrame extends JFrame implements ComponentListener, WindowStateL
 	private State s;
 
 	/** The timer for the auto save function */
-	Timer t;
+	Timer autoSaveTimer;
 
 	/**
 	 * Sets everything in the program up, <br>
@@ -130,7 +130,7 @@ public class MainFrame extends JFrame implements ComponentListener, WindowStateL
 		mainData = getSavedData();
 
 		// Tells the timer to auto save based on the save timer
-		t = new Timer(saveTimer * 1000, (e) -> saveData(saveFilePath));
+		autoSaveTimer = new Timer(saveTimer * 1000, (e) -> saveData(saveFilePath));
 
 		// Hooks in to the shutdown sequence and writes to the files and then exits.
 		Runtime.getRuntime().addShutdownHook(new Thread(() -> {
@@ -146,7 +146,7 @@ public class MainFrame extends JFrame implements ComponentListener, WindowStateL
 		this.addWindowStateListener(this);
 
 		// Starts the timer
-		t.start();
+		autoSaveTimer.start();
 
 		// Initializes the components
 		initComponents();
@@ -463,9 +463,9 @@ public class MainFrame extends JFrame implements ComponentListener, WindowStateL
 	public void setSaveTimer(int saveTimer) throws IllegalInputException {
 		settings.setSaveTimer(saveTimer);
 		this.saveTimer = saveTimer;
-		t.stop();
-		t.setDelay(saveTimer * 1000);
-		t.start();
+		autoSaveTimer.stop();
+		autoSaveTimer.setDelay(saveTimer * 1000);
+		autoSaveTimer.start();
 	}
 
 	/**
@@ -571,10 +571,19 @@ public class MainFrame extends JFrame implements ComponentListener, WindowStateL
 	 * A setter for the settings.
 	 */
 	public void setSettings(Settings s) {
+		//Stores the variables
+		//No getters since they are already controlled
+		//When they get to this point in the program.
 		this.settings = s;
 		this.saveFilePath = s.getSavePath();
 		this.saveTimer = s.getSaveTimer();
 		this.shouldShowBabyYoda = s.isShouldShowYoda();
+
+		//Restarts the savetimer, after setting the new time.
+		this.autoSaveTimer.setDelay(this.saveTimer * 1000);
+
+		//restarts the timer
+		this.autoSaveTimer.restart();
 	}
 
 	/**
