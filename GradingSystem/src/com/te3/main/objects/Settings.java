@@ -34,7 +34,7 @@ public class Settings {
 	 * @param saveTimer      the auto save interval
 	 * @param shouldShowYoda if baby yoda should be shown or not
 	 * @param currentYoda    which yoda that's currently selected.
-	 * @param shouldSaveLog if it should save the log or not.
+	 * @param shouldSaveLog  if it should save the log or not.
 	 */
 	public Settings(String savePath, int saveTimer, boolean shouldShowYoda, String currentYoda, boolean shouldSaveLog) {
 		this.savePath = savePath;

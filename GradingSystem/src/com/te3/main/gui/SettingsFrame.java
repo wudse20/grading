@@ -163,11 +163,11 @@ public class SettingsFrame extends JFrame {
 		// Sets the closing operation
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-		//Sets the status of cBoxShouldSaveLog
+		// Sets the status of cBoxShouldSaveLog
 		cBoxShouldSaveLog.setSelected(mf.getSettings().isShouldSaveLog());
 
-		//Updates cBoxShouldSaveLog accordingly
-		this.updateCBoxShouldSaveLog(cBoxShouldShowBabyYoda.isSelected());
+		// Updates cBoxShouldSaveLog accordingly
+		this.updateCBoxShouldSaveLog(cBoxShouldSaveLog.isSelected());
 
 		// Sets the current yoda
 		currentYoda = mf.getCurrentYoda();
@@ -432,7 +432,7 @@ public class SettingsFrame extends JFrame {
 
 		s.setShouldShowYoda(cBoxShouldShowBabyYoda.isSelected());
 
-		//Handles the logging
+		// Handles the logging
 		s.setShouldSaveLog(cBoxShouldSaveLog.isSelected());
 
 		// Sets the settings and save them
@@ -475,7 +475,7 @@ public class SettingsFrame extends JFrame {
 	 * @param isActivated the status of the checkbox
 	 */
 	private void updateCBoxShouldSaveLog(boolean isActivated) {
-		this.cBoxShouldSaveLog.setText("Sparar log: " + ((isActivated) ? "Aktiverat" : "Inaktiverat"));
+		this.cBoxShouldSaveLog.setText("Sparar logar: " + ((isActivated) ? "Aktiverat" : "Inaktiverat"));
 	}
 
 	/**
