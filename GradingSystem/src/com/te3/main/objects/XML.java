@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.time.LocalTime;
 
 /**
  * XML de-/encoder
@@ -40,9 +41,12 @@ public class XML<E> {
 			// Closes the encoder and FileOutputStream
 			encoder.close();
 			fos.close();
+
+			//Prints debug message to the console
+			System.out.println("[" + ((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour() : LocalTime.now().getHour()) + ":" + ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute() : LocalTime.now().getMinute()) + ":" + ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond() : LocalTime.now().getSecond()) + "] XML has successfully wrote the data.");
 		} catch (IOException e) {
-			// Prints the eventual error to the console.
-			e.printStackTrace();
+			// Print the error message to the console
+			System.out.println("[" + ((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour() : LocalTime.now().getHour()) + ":" + ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute() : LocalTime.now().getMinute()) + ":" + ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond() : LocalTime.now().getSecond()) + "] XML threw exception with message: " + e.getLocalizedMessage());
 		}
 	}
 
@@ -71,11 +75,15 @@ public class XML<E> {
 			fis.close();
 			decoder.close();
 
+			//Prints debug message to the console.
+			System.out.println("[" + ((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour() : LocalTime.now().getHour()) + ":" + ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute() : LocalTime.now().getMinute()) + ":" + ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond() : LocalTime.now().getSecond()) + "] XML loaded the data");
+
+
 			// Returns the object
 			return e;
 		} catch (IOException ex) {
-			// Prints the stack trace to the console
-			ex.printStackTrace();
+			//Prints a debug message to the console, with the message
+			System.out.println("[" + ((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour() : LocalTime.now().getHour()) + ":" + ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute() : LocalTime.now().getMinute()) + ":" + ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond() : LocalTime.now().getSecond()) + "] XML threw exception with message: " + ex.getLocalizedMessage());
 
 			// Returns the object(null)
 			return e;

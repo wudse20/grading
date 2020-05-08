@@ -2,7 +2,7 @@
 <java version="13.0.2" class="java.beans.XMLDecoder">
  <object class="com.te3.main.objects.Settings">
   <void property="currentYoda">
-   <string>yoda1.jpg</string>
+   <string>yoda4.jpg</string>
   </void>
   <void property="savePath">
    <string>./saves.xml</string>

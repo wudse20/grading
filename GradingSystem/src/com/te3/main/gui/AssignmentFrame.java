@@ -1,7 +1,8 @@
 package com.te3.main.gui;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
+import java.awt.*;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -17,7 +18,7 @@ import com.te3.main.objects.Task;
 /**
  * The class that holds the GUI for the assignments
  */
-public class AssignmentFrame extends JFrame {
+public class AssignmentFrame extends JFrame implements WindowListener {
 
 	/** Generated */
 	private static final long serialVersionUID = 1797348437376328717L;
@@ -166,6 +167,9 @@ public class AssignmentFrame extends JFrame {
 				new HelpFrame("Ändra en uppgift", "<html><p>" + helpInfo + "</p></html>", 350, 475).setVisible(true);
 			});
 		}
+
+		//Adds a window listener
+		this.addWindowListener(this);
 	}
 
 	/**
@@ -245,11 +249,19 @@ public class AssignmentFrame extends JFrame {
 	private void addAssignment() throws IllegalNameException, IllegalInputException {
 		// If it's to short of a name and if it's just whitespaces.
 		if (np.getLastInput().trim().length() < 3) {
+			//Sets the color to pink
+			np.setTextFieldColour(Color.PINK);
+
+			//Throws an exception with a message
 			throw new IllegalNameException("För kort namn!");
 		}
 
 		// If there are no criteria in the assingment
 		if (map.getAddedCriteria().size() == 0) {
+			//Starts flashing the List
+			map.startFlashingJList(Color.PINK, Color.WHITE, .5D);
+
+			//Throws an exception with a message:
 			throw new IllegalInputException("Du måste ha minst ett kunskapskrav i uppgiften.");
 		}
 
@@ -283,11 +295,19 @@ public class AssignmentFrame extends JFrame {
 	private void updateAssignment() throws IllegalNameException, IllegalInputException {
 		// If it's to short of a name and if it's just whitespaces.
 		if (np.getLastInput().length() < 3) {
+			//Turns the TextField red
+			np.setTextFieldColour(Color.PINK);
+
+			//Throws an exception with a message
 			throw new IllegalNameException("För kort namn!");
 		}
 
 		// If there are no criteria in the assingment
 		if (map.getAddedCriteria().size() == 0) {
+			//Starts flashing the list
+			map.startFlashingJList(Color.PINK, Color.WHITE, .5D);
+
+			//Throws an exception with a message
 			throw new IllegalInputException("Du måste ha minst ett kunskapskrav i uppgiften.");
 		}
 
@@ -318,4 +338,79 @@ public class AssignmentFrame extends JFrame {
 		this.dispose();
 	}
 
+	/**
+	 * Invoked the first time a window is made visible.
+	 *
+	 * @param e the event to be processed
+	 */
+	@Override
+	public void windowOpened(WindowEvent e) { }
+
+	/**
+	 * Invoked when the user attempts to close the window
+	 * from the window's system menu.
+	 *
+	 * @param e the event to be processed
+	 */
+	@Override
+	public void windowClosing(WindowEvent e) { }
+
+	/**
+	 * Invoked when a window has been closed as the result
+	 * of calling dispose on the window.
+	 *
+	 * @param e the event to be processed
+	 */
+	@Override
+	public void windowClosed(WindowEvent e) {
+		//Stops flashing the JList
+		map.stopFlashingJList();
+	}
+
+	/**
+	 * Invoked when a window is changed from a normal to a
+	 * minimized state. For many platforms, a minimized window
+	 * is displayed as the icon specified in the window's
+	 * iconImage property.
+	 *
+	 * @param e the event to be processed
+	 * @see Frame#setIconImage
+	 */
+	@Override
+	public void windowIconified(WindowEvent e) { }
+
+	/**
+	 * Invoked when a window is changed from a minimized
+	 * to a normal state.
+	 *
+	 * @param e the event to be processed
+	 */
+	@Override
+	public void windowDeiconified(WindowEvent e) { }
+
+	/**
+	 * Invoked when the Window is set to be the active Window. Only a Frame or
+	 * a Dialog can be the active Window. The native windowing system may
+	 * denote the active Window or its children with special decorations, such
+	 * as a highlighted title bar. The active Window is always either the
+	 * focused Window, or the first Frame or Dialog that is an owner of the
+	 * focused Window.
+	 *
+	 * @param e the event to be processed
+	 */
+	@Override
+	public void windowActivated(WindowEvent e) { }
+
+	/**
+	 * Invoked when a Window is no longer the active Window. Only a Frame or a
+	 * Dialog can be the active Window. The native windowing system may denote
+	 * the active Window or its children with special decorations, such as a
+	 * highlighted title bar. The active Window is always either the focused
+	 * Window, or the first Frame or Dialog that is an owner of the focused
+	 * Window.
+	 *
+	 * @param e the event to be processed
+	 */
+	@Override
+	public void windowDeactivated(WindowEvent e) { }
 }

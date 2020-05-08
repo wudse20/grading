@@ -9,6 +9,7 @@ import java.awt.event.WindowStateListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
@@ -265,14 +266,20 @@ public class MainFrame extends JFrame implements ComponentListener, WindowStateL
 	 * Loads the data in to memory
 	 */
 	public Data loadData(String filePath) {
-		// If the file doesn't exist then create a new Data Object.
-		if (!(new File(filePath).exists()))
-			return new Data(new ArrayList<SchoolClass>());
-
 		// Reads and returns the saved data
 		XML<Data> xml = new XML<Data>();
 		Data d = xml.read(filePath);
-		return d;
+
+		/*
+		* If the read data is null it will create a new data object, else it will return the read data.
+		* */
+		if (d == null){
+			System.out.println("[" + ((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour() : LocalTime.now().getHour()) + ":" + ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute() : LocalTime.now().getMinute()) + ":" + ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond() : LocalTime.now().getSecond()) + "] Failed to load data, creating a new data object");
+			return new Data(new ArrayList<SchoolClass>());
+		} else {
+			System.out.println("[" + ((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour() : LocalTime.now().getHour()) + ":" + ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute() : LocalTime.now().getMinute()) + ":" + ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond() : LocalTime.now().getSecond()) + "] Successfully loaded the data");
+			return d;
+		}
 	}
 
 	/**
