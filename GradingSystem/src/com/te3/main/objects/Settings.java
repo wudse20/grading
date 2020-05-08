@@ -18,6 +18,9 @@ public class Settings {
 	/** If baby yoda should be shown or not */
 	private boolean shouldShowYoda;
 
+	/** If it should save the log or not */
+	private boolean shouldSaveLog;
+
 	/**
 	 * Used for saving
 	 */
@@ -31,8 +34,9 @@ public class Settings {
 	 * @param saveTimer      the auto save interval
 	 * @param shouldShowYoda if baby yoda should be shown or not
 	 * @param currentYoda    which yoda that's currently selected.
+	 * @param shouldSaveLog if it should save the log or not.
 	 */
-	public Settings(String savePath, int saveTimer, boolean shouldShowYoda, String currentYoda) {
+	public Settings(String savePath, int saveTimer, boolean shouldShowYoda, String currentYoda, boolean shouldSaveLog) {
 		this.savePath = savePath;
 		this.saveTimer = saveTimer;
 		this.shouldShowYoda = shouldShowYoda;
@@ -131,5 +135,23 @@ public class Settings {
 	 */
 	public void setShouldShowYoda(boolean shouldShowYoda) {
 		this.shouldShowYoda = shouldShowYoda;
+	}
+
+	/**
+	 * A getter for shouldSaveLog
+	 *
+	 * @return if it should save the log or not.
+	 */
+	public boolean isShouldSaveLog() {
+		return shouldSaveLog;
+	}
+
+	/**
+	 * A setter for shouldSaveLog
+	 *
+	 * @param shouldSaveLog if it should save the log or not
+	 */
+	public void setShouldSaveLog(boolean shouldSaveLog) {
+		this.shouldSaveLog = shouldSaveLog;
 	}
 }

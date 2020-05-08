@@ -106,6 +106,7 @@ public class SettingsFrame extends JFrame {
 
 	// Check boxes
 	JCheckBox cBoxShouldShowBabyYoda = new JCheckBox("Baby Yoda som bakgrund");
+	JCheckBox cBoxShouldSaveLog = new JCheckBox("Sparar Log: ");
 
 	// Panels
 	JPanel panel = new JPanel();
@@ -162,6 +163,12 @@ public class SettingsFrame extends JFrame {
 		// Sets the closing operation
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
+		//Sets the status of cBoxShouldSaveLog
+		cBoxShouldSaveLog.setSelected(mf.getSettings().isShouldSaveLog());
+
+		//Updates cBoxShouldSaveLog accordingly
+		this.updateCBoxShouldSaveLog(cBoxShouldShowBabyYoda.isSelected());
+
 		// Sets the current yoda
 		currentYoda = mf.getCurrentYoda();
 
@@ -201,6 +208,7 @@ public class SettingsFrame extends JFrame {
 		btnSetSavePath.addActionListener((e) -> setSavePath());
 		banDeleteData.addActionListener((e) -> deleteData());
 		cBoxShouldShowBabyYoda.addActionListener((e) -> setYodaBtnStatus(cBoxShouldShowBabyYoda.isSelected()));
+		cBoxShouldSaveLog.addActionListener(e -> this.updateCBoxShouldSaveLog(cBoxShouldSaveLog.isSelected()));
 
 		btnYoda1.addActionListener((e) -> {
 			// Sets the current yoda
@@ -259,6 +267,7 @@ public class SettingsFrame extends JFrame {
 
 		pCheckBox.setLayout(pCheckBoxLayout);
 		pCheckBox.add(cBoxShouldShowBabyYoda);
+		pCheckBox.add(cBoxShouldSaveLog);
 
 		pChoseYoda.setLayout(pChoseYodaLayout);
 		pChoseYoda.add(lblChoseYoda);
@@ -362,7 +371,7 @@ public class SettingsFrame extends JFrame {
 	}
 
 	/**
-	 * The thread method for settings the save path
+	 * The thread method for settings the save path. Not a setter.
 	 *
 	 * @param fsf the instance of the current FileSystemFrame
 	 */
@@ -423,6 +432,9 @@ public class SettingsFrame extends JFrame {
 
 		s.setShouldShowYoda(cBoxShouldShowBabyYoda.isSelected());
 
+		//Handles the logging
+		s.setShouldSaveLog(cBoxShouldSaveLog.isSelected());
+
 		// Sets the settings and save them
 		mf.setSettings(s);
 		mf.saveSettings();
@@ -455,6 +467,15 @@ public class SettingsFrame extends JFrame {
 			JOptionPane.showMessageDialog(this, "All data är raderad!", "Raderingen lyckades",
 					JOptionPane.INFORMATION_MESSAGE);
 		}
+	}
+
+	/**
+	 * Sets the text of the checkbox
+	 *
+	 * @param isActivated the status of the checkbox
+	 */
+	private void updateCBoxShouldSaveLog(boolean isActivated) {
+		this.cBoxShouldSaveLog.setText("Sparar log: " + ((isActivated) ? "Aktiverat" : "Inaktiverat"));
 	}
 
 	/**

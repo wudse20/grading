@@ -7,8 +7,8 @@ import java.awt.event.ComponentListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowStateListener;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
@@ -75,7 +75,13 @@ public class MainFrame extends JFrame implements ComponentListener, WindowStateL
 	/** The number of times the window has been resized */
 	private int resizeCount = 0;
 
-	// Layout
+	/** Stores the original System.out */
+	private PrintStream console = System.out;
+
+	/** This session's log file */
+    private File logFile = new File("./logs/log-" + LocalDateTime.now().getYear() + "-" + ((LocalDateTime.now().getMonthValue() < 10) ? "0" + LocalDateTime.now().getMonthValue() : LocalDateTime.now().getMonthValue()) + "-" + ((LocalDateTime.now().getDayOfMonth() < 10) ? "0" + LocalDateTime.now().getDayOfMonth() : LocalDateTime.now().getDayOfMonth()) + "-" + ((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour() : LocalTime.now().getHour()) + "-" + ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute() : LocalTime.now().getMinute())+ "-" + ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond(): LocalTime.now().getSecond()) + ".txt");
+
+    // Layout
 	BoxLayout pLayout;
 
 	// Panels
@@ -118,7 +124,7 @@ public class MainFrame extends JFrame implements ComponentListener, WindowStateL
 		if (new File("./settings.xml").exists())
 			settings = loadSettings();
 		else
-			settings = new Settings("./saves.xml", 300, false, "yoda1.jpg");
+			settings = new Settings("./saves.xml", 300, false, "yoda1.jpg", false);
 
 		// Loads the settings to the variables from the settings object
 		this.saveFilePath = settings.getSavePath();
@@ -126,7 +132,10 @@ public class MainFrame extends JFrame implements ComponentListener, WindowStateL
 		this.shouldShowBabyYoda = settings.isShouldShowYoda();
 		this.currentYoda = settings.getCurrentYoda();
 
-		// Gets the saved data
+        // Stores System.out to a file, if the user is wanting it.
+        this.createLogs(settings.isShouldSaveLog());
+
+        // Gets the saved data
 		mainData = getSavedData();
 
 		// Tells the timer to auto save based on the save timer
@@ -155,7 +164,58 @@ public class MainFrame extends JFrame implements ComponentListener, WindowStateL
 		this.s = gradePanel.getState();
 	}
 
-	/**
+    /**
+     * A option to make the system create logs.
+     *
+     * @param shouldCreateLogs if the program should create logs or not. <br>
+     *                         if {@code true} -> then it will create logs <br>
+     *                         if {@code false} -> then it will not create logs.
+     */
+    private void createLogs(boolean shouldCreateLogs) {
+        /*
+        * If true it will save all the logs to the logs folder, this can be used to find errors. If false it will just be printed to the console without saving the logs.
+        * */
+        if (shouldCreateLogs) {
+            //Creates a print stream
+            PrintStream out = null;
+
+            /*
+            * If the log file doesn't exist, then it will create a new one.
+            * */
+            if (!logFile.exists()) {
+                try {
+                    //If the directory doesn't exist then it will create it.
+                    if (!new File("./logs").exists())
+                        new File("./logs").mkdir();
+
+                    //Creates the new file
+                    logFile.createNewFile();
+                } catch (IOException e) {
+                    //Sends debug message
+                    System.out.println("[" + ((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour() : LocalTime.now().getHour()) + ":" + ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute() : LocalTime.now().getMinute())+ ":" + ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond(): LocalTime.now().getSecond())+ "] MainFrame: Threw exception message: " + e.getLocalizedMessage());
+                }
+            }
+
+            try {
+                //Stores the new print stream
+                out = new PrintStream(new FileOutputStream(logFile.getPath(), true), true);
+            } catch (FileNotFoundException e) {
+                System.out.println("[" + ((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour() : LocalTime.now().getHour()) + ":" + ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute() : LocalTime.now().getMinute())+ ":" + ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond(): LocalTime.now().getSecond()) + "] MainFrame threw an exception with the message: " + e.getLocalizedMessage());
+            }
+
+            //If out isn't null it will set it as the as the System.out
+            if (out != null) {
+                //Sets the file to System.out
+                System.setOut(out);
+                System.out.println("[" + ((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour() : LocalTime.now().getHour()) + ":" + ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute() : LocalTime.now().getMinute())+ ":" + ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond(): LocalTime.now().getSecond())+ "] MainFrame: is saving logs");
+            }
+        } else {
+            //Sets the console to System.out
+            System.setOut(this.console);
+        }
+    }
+
+    /**
 	 * Initializes the components
 	 */
 	private void initComponents() {
@@ -578,6 +638,9 @@ public class MainFrame extends JFrame implements ComponentListener, WindowStateL
 		this.saveFilePath = s.getSavePath();
 		this.saveTimer = s.getSaveTimer();
 		this.shouldShowBabyYoda = s.isShouldShowYoda();
+
+		//Handles the logging
+        this.createLogs(s.isShouldSaveLog());
 
 		//Restarts the auto save timer, after setting the new time.
 		this.autoSaveTimer.setDelay(this.saveTimer * 1000);
