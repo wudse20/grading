@@ -61,7 +61,9 @@ public class SchoolClass {
 	}
 
 	/**
-	 * USE THIS METHOD, NOT {@link #getStudentsNotCloned() getStundentsNotCloned}!<br><br>
+	 * USE THIS METHOD, NOT {@link #getStudentsNotCloned()
+	 * getStundentsNotCloned}!<br>
+	 * <br>
 	 *
 	 * A getter for the students. <br>
 	 * Returns a clone of the object.
@@ -75,10 +77,12 @@ public class SchoolClass {
 	}
 
 	/**
-	 * DO NOT USE THIS METHOD, IF NOT NECESSARY. USE: {@link #getStudents() getStudents} <br><br>
+	 * DO NOT USE THIS METHOD, IF NOT NECESSARY. USE: {@link #getStudents()
+	 * getStudents} <br>
+	 * <br>
 	 *
 	 * A getter for the students. <br>
-  	 * Does not return a clone of the object
+	 * Does not return a clone of the object
 	 *
 	 * @return the students (Not Cloned)
 	 * @see #getStudents()

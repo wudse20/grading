@@ -426,19 +426,36 @@ public class ButtonPanel extends JPanel {
 		btnSettings.addActionListener((e) -> settings());
 
 		btnSearch.addActionListener(e -> {
-			//Checks the windows status
+			// Checks the windows status
 			if (!this.isSearchWindowOpened) {
-				//Sends Debug message
-				System.out.println("[" + ((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour() : LocalTime.now().getHour()) + ":" + ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute() : LocalTime.now().getMinute())+ ":" + ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond(): LocalTime.now().getSecond())+ "] ButtonPanel: Opening SearchWindow");
+				// Sends Debug message
+				System.out.println("["
+						+ ((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour()
+								: LocalTime.now().getHour())
+						+ ":"
+						+ ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute()
+								: LocalTime.now().getMinute())
+						+ ":" + ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond()
+								: LocalTime.now().getSecond())
+						+ "] ButtonPanel: Opening SearchWindow");
 
-				//Opens the search frame
+				// Opens the search frame
 				new SearchFrame(mf, this).setVisible(true);
 
-				//Updates the windows status
+				// Updates the windows status
 				this.isSearchWindowOpened = true;
 			} else {
-				//Sends Debug message
-				System.out.println("[" + ((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour() : LocalTime.now().getHour()) + ":" + ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute() : LocalTime.now().getMinute())+ ":" + ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond(): LocalTime.now().getSecond())+ "] ButtonPanel: Search Window already opened, doing nothing...");
+				// Sends Debug message
+				System.out.println("["
+						+ ((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour()
+								: LocalTime.now().getHour())
+						+ ":"
+						+ ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute()
+								: LocalTime.now().getMinute())
+						+ ":"
+						+ ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond()
+								: LocalTime.now().getSecond())
+						+ "] ButtonPanel: Search Window already opened, doing nothing...");
 			}
 		});
 	}
