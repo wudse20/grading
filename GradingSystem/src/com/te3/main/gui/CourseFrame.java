@@ -124,14 +124,14 @@ public class CourseFrame extends JFrame implements WindowListener {
 		this.setSize(new Dimension(600, 600));
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-		//Adds a window listener
+		// Adds a window listener
 		this.addWindowListener(this);
 
 		// Panel setup
 		mcp = new MainCoursePanel(mf, c);
 		np.setLastInput(c.getName());
 
-		//Gets a clone of the original added SchoolClasses.
+		// Gets a clone of the original added SchoolClasses.
 		this.orgSchoolClasses = (ArrayList<SchoolClass>) mcp.getAddedClasses().clone();
 
 		// Adds the action listener
@@ -190,14 +190,16 @@ public class CourseFrame extends JFrame implements WindowListener {
 	 * Adds a new course to the main data.
 	 */
 	private void newCourse() {
-		//Set to true if it should return, after checking for cases that breaks the code.
+		// Set to true if it should return, after checking for cases that breaks the
+		// code.
 		boolean shouldReturn = false;
 
 		// Some cases that will break it, so it handles them
 
 		/*
-		* If there are no added classes, then it will start flashing the list, then it will send a message to the user and finally tell the program to return.
-		* */
+		 * If there are no added classes, then it will start flashing the list, then it
+		 * will send a message to the user and finally tell the program to return.
+		 */
 		if (mcp.getAddedClasses().size() == 0) {
 			mcp.startFlashing(mcp.getListAddedClasses(), Color.PINK, Color.WHITE, .5D, (byte) 0);
 			JOptionPane.showMessageDialog(this, "Du måste välja minst en klass!", "Fel", JOptionPane.ERROR_MESSAGE);
@@ -205,8 +207,9 @@ public class CourseFrame extends JFrame implements WindowListener {
 		}
 
 		/*
-		 * If there are no added criteria, then it will start flashing the list, then it will send a message to the user and finally tell the program to return.
-		 * */
+		 * If there are no added criteria, then it will start flashing the list, then it
+		 * will send a message to the user and finally tell the program to return.
+		 */
 		if (mcp.getCriteria().size() == 0) {
 			mcp.startFlashing(mcp.getListCriteria(), Color.PINK, Color.WHITE, .5D, (byte) 1);
 			JOptionPane.showMessageDialog(this, "Du måste lägga till minst ett kunskapskrav!", "Fel",
@@ -214,7 +217,7 @@ public class CourseFrame extends JFrame implements WindowListener {
 			shouldReturn = true;
 		}
 
-		//Returns if it's supposed to return
+		// Returns if it's supposed to return
 		if (shouldReturn)
 			return;
 
@@ -245,7 +248,7 @@ public class CourseFrame extends JFrame implements WindowListener {
 			// Disposes the frame
 			this.dispose();
 		} catch (IllegalNameException e) {
-			//Sets the TextBox to red
+			// Sets the TextBox to red
 			np.setTextFieldColour(Color.PINK);
 
 			// sends error message
@@ -260,7 +263,8 @@ public class CourseFrame extends JFrame implements WindowListener {
 	 * Updates a course.
 	 */
 	private void updateCourse() {
-		//Set to true if it should return, after checking for cases that breaks the code.
+		// Set to true if it should return, after checking for cases that breaks the
+		// code.
 		boolean shouldReturn = false;
 
 		// Control message
@@ -285,7 +289,7 @@ public class CourseFrame extends JFrame implements WindowListener {
 			shouldReturn = true;
 		}
 
-		//Returns if it is supposed to do that.
+		// Returns if it is supposed to do that.
 		if (shouldReturn)
 			return;
 
@@ -305,30 +309,52 @@ public class CourseFrame extends JFrame implements WindowListener {
 			ArrayList<SchoolClass> allSchoolClasses = mf.getMainData().getClasses();
 			ArrayList<SchoolClass> addedSchoolClasses = mcp.getAddedClasses();
 
-			//Loops through all the school classes
+			// Loops through all the school classes
 			for (int i = 0; i < allSchoolClasses.size(); i++) {
-				//Stores the current school class under a new name.
+				// Stores the current school class under a new name.
 				SchoolClass sc = allSchoolClasses.get(i);
 
-				//If the current school class is in the list of added school classes
+				// If the current school class is in the list of added school classes
 				if (addedSchoolClasses.contains(sc)) {
-					//Loops through the students and adds the course
+					// Loops through the students and adds the course
 					for (int j = 0; j < allSchoolClasses.get(i).getStudents().size(); j++) {
 						/*
-						* If the the current school class already had the course it will keep the same grades, comment. If there is a new SchoolClass added the it will create new course tasks with everything new.
-						* */
+						 * If the the current school class already had the course it will keep the same
+						 * grades, comment. If there is a new SchoolClass added the it will create new
+						 * course tasks with everything new.
+						 */
 						if (orgSchoolClasses.contains(sc)) {
-							//Adds the updated course
-							allSchoolClasses.get(i).getStudents().get(j).addCourse(new Course(np.getLastInput(), mcp.getCriteria(), c.getCourseTasks()));
+							// Adds the updated course
+							allSchoolClasses.get(i).getStudents().get(j)
+									.addCourse(new Course(np.getLastInput(), mcp.getCriteria(), c.getCourseTasks()));
 
-							//Debug message:
-							System.out.println("[" + ((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour() : LocalTime.now().getHour()) + ":" + ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute() : LocalTime.now().getMinute())+ ":" + ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond(): LocalTime.now().getSecond())+ "] CourseFrame: Updated a course, no new course created in the student.");
+							// Debug message:
+							System.out.println("["
+									+ ((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour()
+											: LocalTime.now().getHour())
+									+ ":"
+									+ ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute()
+											: LocalTime.now().getMinute())
+									+ ":"
+									+ ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond()
+											: LocalTime.now().getSecond())
+									+ "] CourseFrame: Updated a course, no new course created in the student.");
 						} else {
-							//Adds the updated course with new blank tasks
-							allSchoolClasses.get(i).getStudents().get(j).addCourse(new Course(np.getLastInput(), mcp.getCriteria(), c.getNewCourseTask()));
+							// Adds the updated course with new blank tasks
+							allSchoolClasses.get(i).getStudents().get(j)
+									.addCourse(new Course(np.getLastInput(), mcp.getCriteria(), c.getNewCourseTask()));
 
-							//Debug message:
-							System.out.println("[" + ((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour() : LocalTime.now().getHour()) + ":" + ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute() : LocalTime.now().getMinute())+ ":" + ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond(): LocalTime.now().getSecond())+ "] CourseFrame: Updated a course, a new course created in the student.");
+							// Debug message:
+							System.out.println("["
+									+ ((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour()
+											: LocalTime.now().getHour())
+									+ ":"
+									+ ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute()
+											: LocalTime.now().getMinute())
+									+ ":"
+									+ ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond()
+											: LocalTime.now().getSecond())
+									+ "] CourseFrame: Updated a course, a new course created in the student.");
 						}
 					}
 				}
@@ -350,7 +376,7 @@ public class CourseFrame extends JFrame implements WindowListener {
 			// Closes the frame
 			this.dispose();
 		} catch (IllegalNameException e) {
-			//Sets the TextField to red
+			// Sets the TextField to red
 			np.setTextFieldColour(Color.PINK);
 
 			// Sends error message
@@ -372,8 +398,8 @@ public class CourseFrame extends JFrame implements WindowListener {
 	}
 
 	/**
-	 * Invoked when the user attempts to close the window
-	 * from the window's system menu.
+	 * Invoked when the user attempts to close the window from the window's system
+	 * menu.
 	 *
 	 * @param e the event to be processed
 	 */
@@ -384,8 +410,8 @@ public class CourseFrame extends JFrame implements WindowListener {
 	}
 
 	/**
-	 * Invoked when a window has been closed as the result
-	 * of calling dispose on the window.
+	 * Invoked when a window has been closed as the result of calling dispose on the
+	 * window.
 	 *
 	 * @param e the event to be processed
 	 */
@@ -395,10 +421,9 @@ public class CourseFrame extends JFrame implements WindowListener {
 	}
 
 	/**
-	 * Invoked when a window is changed from a normal to a
-	 * minimized state. For many platforms, a minimized window
-	 * is displayed as the icon specified in the window's
-	 * iconImage property.
+	 * Invoked when a window is changed from a normal to a minimized state. For many
+	 * platforms, a minimized window is displayed as the icon specified in the
+	 * window's iconImage property.
 	 *
 	 * @param e the event to be processed
 	 * @see Frame#setIconImage
@@ -409,8 +434,7 @@ public class CourseFrame extends JFrame implements WindowListener {
 	}
 
 	/**
-	 * Invoked when a window is changed from a minimized
-	 * to a normal state.
+	 * Invoked when a window is changed from a minimized to a normal state.
 	 *
 	 * @param e the event to be processed
 	 */
@@ -420,12 +444,11 @@ public class CourseFrame extends JFrame implements WindowListener {
 	}
 
 	/**
-	 * Invoked when the Window is set to be the active Window. Only a Frame or
-	 * a Dialog can be the active Window. The native windowing system may
-	 * denote the active Window or its children with special decorations, such
-	 * as a highlighted title bar. The active Window is always either the
-	 * focused Window, or the first Frame or Dialog that is an owner of the
-	 * focused Window.
+	 * Invoked when the Window is set to be the active Window. Only a Frame or a
+	 * Dialog can be the active Window. The native windowing system may denote the
+	 * active Window or its children with special decorations, such as a highlighted
+	 * title bar. The active Window is always either the focused Window, or the
+	 * first Frame or Dialog that is an owner of the focused Window.
 	 *
 	 * @param e the event to be processed
 	 */
