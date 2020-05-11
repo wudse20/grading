@@ -500,11 +500,11 @@ public class MainFrame extends JFrame implements ComponentListener, WindowStateL
 						.setVisible(true);
 			} else if (clazz.equals(Course.class)) {
 				new ListUpdateChooser<Course>(this,
-						mainData.getClasses().get(currentlySelectedClassIndex).getStudents().get(0).getCourses(),
+						mainData.getClasses().get(currentlySelectedClassIndex).getStudents().get(currentlySelectedCourseIndex).getCourses(),
 						(Class<Course>) clazz).setVisible(true);
 			} else if (clazz.equals(Task.class)) {
 				new ListUpdateChooser<Task>(this,
-						mainData.getClasses().get(currentlySelectedClassIndex).getStudents().get(0).getCourses()
+						mainData.getClasses().get(currentlySelectedClassIndex).getStudents().get(currentlySelectedStudentIndex).getCourses()
 								.get(currentlySelectedCourseIndex).getCourseTasks(),
 						(Class<Task>) clazz).setVisible(true);
 			}

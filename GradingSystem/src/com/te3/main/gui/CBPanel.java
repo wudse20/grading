@@ -19,7 +19,7 @@ public class CBPanel extends JPanel {
 	/** Default */
 	private static final long serialVersionUID = 1L;
 	
-	long initTime = System.currentTimeMillis();
+	boolean isRefreshing = false;
 	
 	//Keeps track of what "level" you have selected in the comboboxes so it can properly update the visibility of them
 	int selectionLevel = 0;
@@ -50,32 +50,6 @@ public class CBPanel extends JPanel {
 		return new Dimension(super.getMaximumSize().width, super.getPreferredSize().height);
 	}
 	
-	/**
-	 * Deprecated method of checking wether or not comboboxes were changed by the program
-	 * @return
-	 */
-	private boolean checkInitTime() {
-		int deltaTime = 2000;
-		long compareTime = System.currentTimeMillis();
-		
-		System.out.println(compareTime - (initTime + deltaTime));
-		if (compareTime > (initTime + deltaTime)) {
-			return false;
-		} else {
-			return true;
-		}
-	}
-	
-	/**
-	 * Method to override the init time when we set the index using a function, as to not open a bunch of unnecessary windows
-	 * @param overrideCombobox The combobox which we set the index of
-	 * @param theIndex The index to set the combobox to
-	 */
-	private void overrideInitTime(JComboBox<String> overrideCombobox, int theIndex) {
-		initTime = System.currentTimeMillis();
-		overrideCombobox.setSelectedIndex(theIndex);
-	}
-	
 	private void initComponents() {
 		mainLayout 	= new GridLayout(2, 4);
 		this.setLayout(mainLayout);
@@ -99,8 +73,9 @@ public class CBPanel extends JPanel {
 		
 		//class combobox
 		cbClass.addActionListener((e) -> {
-			System.out.println("Class ActionCommand: " + e.getActionCommand());
-			if (!cbClass.isFocusOwner()) return;
+			if (/*!cbClass.isFocusOwner() || */isRefreshing) return;
+			
+			System.out.println("Class combobox updating");
 			
 			int i = cbClass.getSelectedIndex();
 			int itmCount = cbClass.getItemCount();
@@ -133,8 +108,9 @@ public class CBPanel extends JPanel {
 		
 		//course combobox
 		cbCourse.addActionListener((e) -> {
-			System.out.println("Course ActionCommand: " + e.getActionCommand());
-			if (!cbCourse.isFocusOwner()) return;
+			if (!cbCourse.isFocusOwner() || isRefreshing) return;
+			
+			System.out.println("Course combobox updating");
 			
 			int i = cbCourse.getSelectedIndex();
 			int itmCount = cbCourse.getItemCount();
@@ -158,8 +134,9 @@ public class CBPanel extends JPanel {
 		
 		//student combobox
 		cbStudent.addActionListener((e) -> {
-			System.out.println("Student ActionCommand: " + e.getActionCommand());
-			if (!cbStudent.isFocusOwner()) return;
+			if (!cbStudent.isFocusOwner() || isRefreshing) return;
+
+			System.out.println("Student combobox updating");
 			
 			mf.setCurrentlySelectedStudentIndex(cbStudent.getSelectedIndex());
 			
@@ -171,8 +148,9 @@ public class CBPanel extends JPanel {
 		
 		//task combobox
 		cbTask.addActionListener((e) -> {
-			System.out.println("Task ActionCommand: " + e.getActionCommand());
-			if (!cbTask.isFocusOwner()) return;
+			if (!cbTask.isFocusOwner() || isRefreshing) return;
+			
+			System.out.println("Task combobox updating");
 			
 			int i = cbTask.getSelectedIndex();
 			int itmCount = cbTask.getItemCount();
@@ -239,13 +217,11 @@ public class CBPanel extends JPanel {
 	}
 	
 	/**
-	 * Den här metoden krashar vid uppdatering/lägga till, vet inte vad det är, mer än rad 281, 271
-	 *
 	 * Completely updates the entire combobox panel with new information.
 	 * @param newData the new information to be parsed and updated with.
 	 */
 	public void refreshData(Data newData) {
-		initTime = System.currentTimeMillis();
+		isRefreshing = true;
 		
 		System.out.println("Refreshing Data combobox data");
 		System.out.println("Deleting old items...");
@@ -274,14 +250,41 @@ public class CBPanel extends JPanel {
 				
 				dataStudents.forEach((n) -> cbStudent.addItem(n.getName()));
 				
-				ArrayList<Course> dataCourses = dataStudents.get(mf.getCurrentlySelectedClassIndex()).getCourses();
+				ArrayList<Course> dataCourses = null;
 				
-				dataCourses.forEach((n) -> cbCourse.addItem(n.getName()));
+				try {
+					dataCourses = dataStudents.get(mf.getCurrentlySelectedClassIndex()).getCourses();
+				} catch (java.lang.IndexOutOfBoundsException e) {
+					System.out.println("Selected class index is out of bounds. Reverting to default index 0.");
+					
+					if (dataStudents.size() != 0) {
+						mf.setCurrentlySelectedClassIndex(0);
+						dataCourses = dataStudents.get(0).getCourses();
+					}
+				}
 				
-				ArrayList<Task> dataTasks = dataCourses.get(mf.getCurrentlySelectedCourseIndex()).getCourseTasks();
+				if (dataCourses.size() != 0) {
+					dataCourses.forEach((n) -> cbCourse.addItem(n.getName()));
+				}
 				
-				dataTasks.forEach((n) -> cbTask.addItem(n.getName()));
+				ArrayList<Task> dataTasks = null;
+				
+				try {
+					dataTasks = dataCourses.get(mf.getCurrentlySelectedCourseIndex()).getCourseTasks();
+				} catch (java.lang.IndexOutOfBoundsException e) {
+					System.out.println("Selected task is out of bounds. Reverting to default index 0.");
+					
+					if (dataCourses.size() != 0) {
+						mf.setCurrentlySelectedCourseIndex(0);
+						dataTasks = dataCourses.get(0).getCourseTasks();
+					}
+				}
+				
+				if (dataTasks != null && dataTasks.size() != 0) {
+					dataTasks.forEach((n) -> cbTask.addItem(n.getName()));
+				}
 			}
+			isRefreshing = false;
 		}
 		
 		System.out.println("Adding change items...");
