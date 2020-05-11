@@ -7,6 +7,7 @@ import java.awt.Dimension;
 import java.awt.Frame;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
@@ -27,6 +28,7 @@ public class CourseFrame extends JFrame implements WindowListener {
 	/** Default */
 	private static final long serialVersionUID = 1L;
 
+	/** The help info of this frame */
 	private String helpInfo = "I <b>namn</b>-rutan skall namnet på kursen skrivas in. <br>"
 			+ "Namnet måste vara minst 3 tecken långt. <br><br>"
 			+ "Klicka på en klass i rutan <b>klasser</b> så kommer den att <br>"
@@ -37,6 +39,9 @@ public class CourseFrame extends JFrame implements WindowListener {
 			+ "minst tre tecken långt. Skulle du vilja ta bort <br>"
 			+ "ett kunskapskrav behöver du bara klicka på det<br>" + "i <b>kunskapskravs</b>-rutan.<br>"
 			+ "Tryck på knappen: <b>Tabort</b> för att tabort kursen.";
+
+	/** The original SchoolClasses before editing */
+	private ArrayList<SchoolClass> orgSchoolClasses;
 
 	// Instances
 	Course c;
@@ -125,6 +130,9 @@ public class CourseFrame extends JFrame implements WindowListener {
 		// Panel setup
 		mcp = new MainCoursePanel(mf, c);
 		np.setLastInput(c.getName());
+
+		//Gets a clone of the original added SchoolClasses.
+		this.orgSchoolClasses = (ArrayList<SchoolClass>) mcp.getAddedClasses().clone();
 
 		// Adds the action listener
 		ecp.getBtnUpdate().addActionListener((e) -> this.updateCourse());
@@ -294,18 +302,34 @@ public class CourseFrame extends JFrame implements WindowListener {
 			}
 
 			// Adds the course to the correct school classes
-			ArrayList<SchoolClass> al = mf.getMainData().getClasses();
-			ArrayList<SchoolClass> al2 = mcp.getAddedClasses();
+			ArrayList<SchoolClass> allSchoolClasses = mf.getMainData().getClasses();
+			ArrayList<SchoolClass> addedSchoolClasses = mcp.getAddedClasses();
 
-			for (int i = 0; i < al.size(); i++) {
-				SchoolClass sc = al.get(i);
+			//Loops through all the school classes
+			for (int i = 0; i < allSchoolClasses.size(); i++) {
+				//Stores the current school class under a new name.
+				SchoolClass sc = allSchoolClasses.get(i);
 
-				if (al2.contains(sc)) {
-					for (int j = 0; j < al.get(i).getStudents().size(); j++) {
-						al.get(i).getStudents().get(j).addCourse(new Course(np.getLastInput(), mcp.getCriteria()));
-						al.get(i).getStudents().get(j).getCourses()
-								.get(al.get(i).getStudents().get(j).getCourses().size() - 1)
-								.setCourseTasks(c.getCourseTasks());
+				//If the current school class is in the list of added school classes
+				if (addedSchoolClasses.contains(sc)) {
+					//Loops through the students and adds the course
+					for (int j = 0; j < allSchoolClasses.get(i).getStudents().size(); j++) {
+						/*
+						* If the the current school class already had the course it will keep the same grades, comment. If there is a new SchoolClass added the it will create new course tasks with everything new.
+						* */
+						if (orgSchoolClasses.contains(sc)) {
+							//Adds the updated course
+							allSchoolClasses.get(i).getStudents().get(j).addCourse(new Course(np.getLastInput(), mcp.getCriteria(), c.getCourseTasks()));
+
+							//Debug message:
+							System.out.println("[" + ((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour() : LocalTime.now().getHour()) + ":" + ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute() : LocalTime.now().getMinute())+ ":" + ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond(): LocalTime.now().getSecond())+ "] CourseFrame: Updated a course, no new course created in the student.");
+						} else {
+							//Adds the updated course with new blank tasks
+							allSchoolClasses.get(i).getStudents().get(j).addCourse(new Course(np.getLastInput(), mcp.getCriteria(), c.getNewCourseTask()));
+
+							//Debug message:
+							System.out.println("[" + ((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour() : LocalTime.now().getHour()) + ":" + ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute() : LocalTime.now().getMinute())+ ":" + ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond(): LocalTime.now().getSecond())+ "] CourseFrame: Updated a course, a new course created in the student.");
+						}
 					}
 				}
 			}

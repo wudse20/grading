@@ -1,5 +1,6 @@
 package com.te3.main.objects;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 import com.te3.main.exceptions.IllegalNameException;
@@ -88,6 +89,38 @@ public class Task {
 	@SuppressWarnings("unchecked")
 	public ArrayList<Criteria> getCriteria() {
 		return (ArrayList<Criteria>) this.criteria.clone();
+	}
+
+	/**
+	 * A getter for the course criteria. <br>
+	 * This will create a new instance of criteria <br>
+	 * So all the grades will be F, but have the same name.<br>
+	 * {@link #getCriteria()} () Use this method for: normal getter for the criteria}
+	 *
+	 * @return the criteria (only names stay the same)
+	 */
+	public ArrayList<Criteria> getNewCriteria() {
+		//Creates a new ArrayList for the created criteria
+		ArrayList<Criteria> newCriteria = new ArrayList<Criteria>();
+
+		//Loops through this course's criteria.
+		for (int i = 0; i < this.criteria.size(); i++) {
+			try {
+				//Creates the new criteria with the same name.
+				newCriteria.add(new Criteria(this.criteria.get(i).getName()));
+
+				//A debug message
+				System.out.println("[" + ((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour() : LocalTime.now().getHour()) + ":" + ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute() : LocalTime.now().getMinute())+ ":" + ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond(): LocalTime.now().getSecond())+ "] Task: Created a new criteria with the name: " + this.criteria.get(i).getName());
+			} catch (IllegalNameException e) {
+				//Prints stack trace to the console.
+				e.printStackTrace();
+
+				System.out.println("[" + ((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour() : LocalTime.now().getHour()) + ":" + ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute() : LocalTime.now().getMinute())+ ":" + ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond(): LocalTime.now().getSecond())+ "] Task: Exception thrown: " + e.getMessage());
+			}
+		}
+
+		//Returns the newly created criteria
+		return newCriteria;
 	}
 
 	/**
