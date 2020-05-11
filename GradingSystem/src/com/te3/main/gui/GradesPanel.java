@@ -130,19 +130,29 @@ public class GradesPanel extends JPanel implements KeyListener {
 				// Stores the task:
 				t = tasks.get(mf.getCurrentlySelectedAssignmentIndex());
 			} catch (IndexOutOfBoundsException e) {
-				//Updates it correctly
+				// Updates it correctly
 				mf.updateGradePanel(State.CLASS_COURSE);
 
-				//To prevent it from accessing something it isn't supposed to
+				// To prevent it from accessing something it isn't supposed to
 				this.setState(State.CLASS_COURSE);
 
-				//Message to user
-				JOptionPane.showMessageDialog(this, "Du måste skapa en uppgift!!!!! För detta alternativ!", "Fel", JOptionPane.ERROR_MESSAGE);
+				// Message to user
+				JOptionPane.showMessageDialog(this, "Du måste skapa en uppgift!!!!! För detta alternativ!", "Fel",
+						JOptionPane.ERROR_MESSAGE);
 
-				//Debug message:
-				System.out.println("[" + ((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour() : LocalTime.now().getHour()) + ":" + ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute() : LocalTime.now().getMinute())+ ":" + ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond(): LocalTime.now().getSecond())+ "] GradesPanel: Interrupting GUI update, no tasks created.");
+				// Debug message:
+				System.out.println("["
+						+ ((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour()
+								: LocalTime.now().getHour())
+						+ ":"
+						+ ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute()
+								: LocalTime.now().getMinute())
+						+ ":"
+						+ ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond()
+								: LocalTime.now().getSecond())
+						+ "] GradesPanel: Interrupting GUI update, no tasks created.");
 
-				//Returns
+				// Returns
 				return;
 			}
 
@@ -155,7 +165,7 @@ public class GradesPanel extends JPanel implements KeyListener {
 			// Adds actionListeners
 			btnClearComment.addActionListener(e -> txaComment.setText(""));
 
-			//To make it final
+			// To make it final
 			final Task t2 = t;
 
 			btnSaveComment.addActionListener(e -> saveComment(t2, true));
@@ -229,7 +239,12 @@ public class GradesPanel extends JPanel implements KeyListener {
 
 		s = this.state;
 
-		System.out.println("[" + ((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour() : LocalTime.now().getHour()) + ":" + ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute() : LocalTime.now().getMinute())+ ":" + ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond(): LocalTime.now().getSecond())+ "] GradesPanel: Current State: " + this.state.toString());
+		System.out.println("["
+				+ ((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour() : LocalTime.now().getHour()) + ":"
+				+ ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute() : LocalTime.now().getMinute())
+				+ ":"
+				+ ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond() : LocalTime.now().getSecond())
+				+ "] GradesPanel: Current State: " + this.state.toString());
 
 		// Calculates which grades should be shown, based on the state.
 		if (s.equals(State.CLASS_COURSE_STUDENT_TASK)) {
@@ -300,13 +315,23 @@ public class GradesPanel extends JPanel implements KeyListener {
 
 			// To prevent IndexOutOfBoundsException with no created tasks.
 			if (tasks.size() == 0) {
-				//Message to user
-				JOptionPane.showMessageDialog(this, "Du måste skapa en uppgift!!!!! För detta alternativ!", "Fel", JOptionPane.ERROR_MESSAGE);
+				// Message to user
+				JOptionPane.showMessageDialog(this, "Du måste skapa en uppgift!!!!! För detta alternativ!", "Fel",
+						JOptionPane.ERROR_MESSAGE);
 
-				//Debug message:
-				System.out.println("[" + ((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour() : LocalTime.now().getHour()) + ":" + ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute() : LocalTime.now().getMinute())+ ":" + ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond(): LocalTime.now().getSecond())+ "] GradesPanel: Interrupting GUI update, no tasks created.");
+				// Debug message:
+				System.out.println("["
+						+ ((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour()
+								: LocalTime.now().getHour())
+						+ ":"
+						+ ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute()
+								: LocalTime.now().getMinute())
+						+ ":"
+						+ ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond()
+								: LocalTime.now().getSecond())
+						+ "] GradesPanel: Interrupting GUI update, no tasks created.");
 
-				//Returns
+				// Returns
 				return State.CLASS_COURSE;
 			}
 		} else {
@@ -317,10 +342,15 @@ public class GradesPanel extends JPanel implements KeyListener {
 			criteria = null;
 		}
 
-		//Debug message:
-		System.out.println("[" + ((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour() : LocalTime.now().getHour()) + ":" + ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute() : LocalTime.now().getMinute())+ ":" + ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond(): LocalTime.now().getSecond())+ "] GradesPanel: Interrupting GUI update, no tasks created.");
+		// Debug message:
+		System.out.println("["
+				+ ((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour() : LocalTime.now().getHour()) + ":"
+				+ ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute() : LocalTime.now().getMinute())
+				+ ":"
+				+ ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond() : LocalTime.now().getSecond())
+				+ "] GradesPanel: Interrupting GUI update, no tasks created.");
 
-		//Returns the state, that was put in.
+		// Returns the state, that was put in.
 		return s;
 	}
 
