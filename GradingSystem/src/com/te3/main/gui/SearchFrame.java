@@ -149,7 +149,7 @@ public class SearchFrame extends JFrame implements WindowListener, DocumentListe
 	}
 
 	/**
-	 * Shows the user the overview.
+	 * Shows the user the overview. Closes this window and updates ButtonPanel
 	 *
 	 * @param index the index in the list that was clicked, and the index that the
 	 *              search result will open in.
@@ -167,6 +167,11 @@ public class SearchFrame extends JFrame implements WindowListener, DocumentListe
 				+ "] SearchFrame: List selected at index: " + index + ", SearchResult: "
 				+ s.getFoundStudents().get(0).getName());
 
+		//Opens the window
+		new OverviewFrame(s).setVisible(true);
+
+		//Closes this window
+		this.closeWindow();
 	}
 
 	private void search(String searchTerm) {
