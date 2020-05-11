@@ -1,0 +1,78 @@
+[21:35:41] MainFrame: is saving logs
+Refreshing Data combobox data
+Deleting old items...
+Adding default combobox items...
+Getting new data...
+Adding change items...
+[21:35:42] GradesPanel: Interrupting GUI update, no tasks created.
+[21:35:42] GradesPanel: Current State: NOTHING_SELECTED
+[21:35:42] GradesPanel: Interrupting GUI update, no tasks created.
+[21:35:42] GradesPanel: Current State: NOTHING_SELECTED
+NOTHING_SELECTED
+[21:35:47] ButtonPanel: Opening SearchWindow
+[21:35:47] SearchFrame: Has reset the last result
+[21:35:47] SearchFrame: Currently searching through the class: TE3B...
+[21:35:47] SearchFrame: Adding first result...
+[21:35:47] SearchFrame: Updating list data...
+[21:35:48] SearchFrame: List selected at index: 0
+[21:35:48] SearchFrame: List selected at index: 0, SearchResult: Anton
+[21:35:48] OverviewFrame: The amount of courses is: 1
+[21:35:48] OverviewFrame: The amount of tasks is: 1
+[21:35:48] GradesPanel: Current State: NOTHING_SELECTED
+[21:35:48] GradesPanel: Current State: CLASS_COURSE_STUDENT
+[21:35:48] GradesPanel: Interrupting GUI update, no tasks created.
+[21:35:48] GradesPanel: Current State: NOTHING_SELECTED
+[21:35:48] SearchFrame: Closing
+[21:35:51] OverviewFrame: new state: CLASS_COURSE_STUDENT_TASK
+[21:35:51] OverviewFrame: The amount of courses is: 1
+[21:35:51] OverviewFrame: The amount of tasks is: 1
+[21:35:51] GradesPanel: Current State: NOTHING_SELECTED
+[21:35:51] GradesPanel: Current State: CLASS_COURSE_STUDENT_TASK
+[21:35:51] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[21:35:51] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[21:35:51] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[21:35:51] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[21:35:51] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[21:35:51] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[21:35:51] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[21:35:51] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[21:35:51] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[21:35:51] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[21:35:51] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[21:35:51] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[21:35:51] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[21:35:51] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[21:35:51] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[21:35:51] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[21:35:51] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[21:35:51] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[21:35:51] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[21:35:51] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[21:35:51] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[21:35:51] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[21:35:51] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[21:35:51] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[21:35:51] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[21:35:51] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[21:35:51] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[21:35:51] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[21:35:51] GradesPanel: Interrupting GUI update, no tasks created.
+[21:35:51] GradesPanel: Current State: NOTHING_SELECTED
+[21:35:54] GradesPanel: Current State: CLASS_COURSE_STUDENT_TASK
+[21:35:54] Criteria updated: Åtgärda Fel, New Grade: A
+Class combobox updating
+1
+4
+[21:36:00] GradesPanel: Interrupting GUI update, no tasks created.
+[21:36:00] GradesPanel: Current State: CLASS
+CLASS
+Course combobox updating
+[21:36:01] GradesPanel: Interrupting GUI update, no tasks created.
+[21:36:01] GradesPanel: Current State: CLASS_COURSE
+CLASS_COURSE
+Student combobox updating
+[21:36:02] GradesPanel: Interrupting GUI update, no tasks created.
+[21:36:02] GradesPanel: Current State: CLASS_COURSE_STUDENT
+CLASS_COURSE_STUDENT
+[21:36:04] XML has successfully written the data.
+[21:36:04] XML has successfully written the data.

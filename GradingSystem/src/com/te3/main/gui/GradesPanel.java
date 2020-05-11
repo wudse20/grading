@@ -166,8 +166,37 @@ public class GradesPanel extends JPanel implements KeyListener {
 	private void setProperties() {
 		// As long as tasks aren't null.
 		if (tasks != null) {
-			// Stores the task:
-			Task t = tasks.get(mf.getCurrentlySelectedAssignmentIndex());
+			Task t;
+
+			try {
+				// Stores the task:
+				t = tasks.get(mf.getCurrentlySelectedAssignmentIndex());
+			} catch (IndexOutOfBoundsException e) {
+				// Updates it correctly
+				mf.updateGradePanel(State.CLASS_COURSE);
+
+				// To prevent it from accessing something it isn't supposed to
+				this.setState(State.CLASS_COURSE);
+
+				// Message to user
+				JOptionPane.showMessageDialog(this, "Du måste skapa en uppgift!!!!! För detta alternativ!", "Fel",
+						JOptionPane.ERROR_MESSAGE);
+
+				// Debug message:
+				System.out.println("["
+						+ ((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour()
+						: LocalTime.now().getHour())
+						+ ":"
+						+ ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute()
+						: LocalTime.now().getMinute())
+						+ ":"
+						+ ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond()
+						: LocalTime.now().getSecond())
+						+ "] GradesPanel: Interrupting GUI update, no tasks created.");
+
+				// Returns
+				return;
+			}
 
 			// Clears textBox
 			txaComment.setText("");
@@ -177,7 +206,11 @@ public class GradesPanel extends JPanel implements KeyListener {
 
 			// Adds actionListeners
 			btnClearComment.addActionListener(e -> txaComment.setText(""));
-			btnSaveComment.addActionListener(e -> saveComment(t, true));
+
+			// To make it final
+			final Task t2 = t;
+
+			btnSaveComment.addActionListener(e -> saveComment(t2, true));
 
 			// Adds key listener
 			txaComment.addKeyListener(this);

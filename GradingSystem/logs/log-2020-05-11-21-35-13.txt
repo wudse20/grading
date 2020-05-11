@@ -1,0 +1,58 @@
+[21:35:13] MainFrame: is saving logs
+[21:35:13] XML loaded the data
+[21:35:13] Successfully loaded the data
+Refreshing Data combobox data
+Deleting old items...
+Adding default combobox items...
+Getting new data...
+Adding change items...
+[21:35:13] GradesPanel: Interrupting GUI update, no tasks created.
+[21:35:13] GradesPanel: Current State: NOTHING_SELECTED
+[21:35:13] GradesPanel: Interrupting GUI update, no tasks created.
+[21:35:13] GradesPanel: Current State: NOTHING_SELECTED
+NOTHING_SELECTED
+Class combobox updating
+2
+5
+[21:35:16] GradesPanel: Interrupting GUI update, no tasks created.
+[21:35:16] GradesPanel: Current State: CLASS
+CLASS
+Course combobox updating
+[21:35:18] GradesPanel: Interrupting GUI update, no tasks created.
+[21:35:18] GradesPanel: Current State: CLASS_COURSE
+CLASS_COURSE
+Task combobox updating
+[21:35:21] MainAssignmentPanel: JList: listAddedCriteria, isn't flashing
+Refreshing Data combobox data
+Deleting old items...
+Adding default combobox items...
+Getting new data...
+Selected class index is out of bounds. Reverting to default index 0.
+Adding change items...
+[21:35:22] MainAssignmentPanel: JList: listAddedCriteria, isn't flashing
+[21:35:23] MainAssignmentPanel: JList: listAddedCriteria, isn't flashing
+[21:35:24] XML has successfully written the data.
+[21:35:24] GradesPanel: Interrupting GUI update, no tasks created.
+[21:35:24] GradesPanel: Current State: CLASS_COURSE
+Refreshing Data combobox data
+Deleting old items...
+Adding default combobox items...
+Getting new data...
+Adding change items...
+[21:35:24] MainAssignmentPanel: JList: listAddedCriteria, isn't flashing
+Class combobox updating
+2
+5
+[21:35:26] GradesPanel: Interrupting GUI update, no tasks created.
+[21:35:26] GradesPanel: Current State: CLASS
+CLASS
+Course combobox updating
+[21:35:28] GradesPanel: Interrupting GUI update, no tasks created.
+[21:35:28] GradesPanel: Current State: CLASS_COURSE
+CLASS_COURSE
+Student combobox updating
+[21:35:30] GradesPanel: Interrupting GUI update, no tasks created.
+[21:35:30] GradesPanel: Current State: CLASS_COURSE
+CLASS_COURSE_STUDENT
+[21:35:32] XML has successfully written the data.
+[21:35:32] XML has successfully written the data.

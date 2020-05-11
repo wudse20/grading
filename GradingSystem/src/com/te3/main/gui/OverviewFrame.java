@@ -11,6 +11,9 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 
 
+/**
+ * The frame that shows an overview of a student, in all its classes and courses.
+ */
 public class OverviewFrame extends JFrame {
 
     /** The state of the information shown, to be feed to the grade panels */
