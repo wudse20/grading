@@ -1,0 +1,45 @@
+[20:17:29] MainFrame: is saving logs
+Refreshing Data combobox data
+Deleting old items...
+Adding default combobox items...
+Getting new data...
+Adding change items...
+NOTHING_SELECTED
+Class combobox updating
+1
+4
+CLASS
+Course combobox updating
+CLASS_COURSE
+Task combobox updating
+[20:17:33] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[20:17:33] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[20:17:33] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[20:17:33] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[20:17:33] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[20:17:33] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[20:17:33] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[20:17:33] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[20:17:33] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[20:17:33] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[20:17:33] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[20:17:33] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[20:17:33] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[20:17:33] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[20:17:33] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[20:17:33] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[20:17:33] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[20:17:33] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[20:17:33] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[20:17:33] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[20:17:33] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[20:17:33] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[20:17:33] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[20:17:33] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[20:17:33] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[20:17:33] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[20:17:33] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[20:17:33] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+CLASS_COURSE_STUDENT_TASK
+[20:17:40] XML has successfully written the data.
+[20:17:40] XML has successfully written the data.

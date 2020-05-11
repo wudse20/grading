@@ -1,10 +1,14 @@
 package com.te3.main.gui;
 
 import com.te3.main.enums.State;
+import com.te3.main.objects.Course;
 import com.te3.main.objects.SearchResult;
+import com.te3.main.objects.Task;
 
 import javax.swing.*;
 import java.awt.*;
+import java.time.LocalTime;
+import java.util.ArrayList;
 
 
 public class OverviewFrame extends JFrame {
@@ -53,13 +57,17 @@ public class OverviewFrame extends JFrame {
     //ScrollPanes
     JScrollPane scrGrades = new JScrollPane(gradesPanel);
 
-    public OverviewFrame(SearchResult result) {
+    //Instances
+    MainFrame mf;
+
+    public OverviewFrame(SearchResult result, MainFrame mf) {
         //Sets some properties
-        this.setSize(new Dimension(750, 750));
+        this.setSize(new Dimension(1200, 750));
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-        //Stores the instance
+        //Stores the instances
         this.result = result;
+        this.mf = mf;
 
         //Sets the title of the frame
         this.setTitle(result.toString());
@@ -84,6 +92,12 @@ public class OverviewFrame extends JFrame {
 
         //Adds listeners
         btnClose.addActionListener(e -> this.dispose());
+
+        radioClassCourseStudent.addActionListener(e -> this.s = State.CLASS_COURSE_STUDENT);
+        radioClassCourseStudentTask.addActionListener(e -> this.s = State.CLASS_COURSE_STUDENT_TASK);
+
+        //Handling Grades Layout
+        this.handleGradePanel(s, this.result);
 
         //inputPanel
         //Sets the layout
@@ -128,5 +142,76 @@ public class OverviewFrame extends JFrame {
         this.add(lblSpacer2, BorderLayout.LINE_START);
         this.add(mainPanel, BorderLayout.CENTER);
         this.add(lblSpacer3, BorderLayout.LINE_END);
+    }
+
+    /**
+     * @param s The state of this GUI
+     * @param res The search result
+     */
+    private void handleGradePanel(State s, SearchResult res) {
+        //Removes the old components
+        for (Component c : gradesPanel.getComponents())
+            gradesPanel.remove(c);
+
+        //Sets the layout of the panel
+        gradesPanel.setLayout(pGradesLayout);
+
+        //The count of courses and tasks
+        int courseCount = 0, taskCount = 0;
+
+        //All the courses in one list
+        ArrayList<Course> courses = new ArrayList<Course>();
+
+        //Loops through the found students
+        for (int i = 0; i < res.getFoundStudents().size(); i++) {
+            //Adds the amount of courses, i.e. the size of the courses list of each entry.
+            courseCount += res.getFoundStudents().get(i).getCourses().size();
+
+            //Adds the courses to the list
+            for (int j = 0; j < res.getFoundStudents().get(i).getCourses().size(); j++) {
+                //Adds the courses
+                courses.add(res.getFoundStudents().get(i).getCourses().get(j));
+
+                //Counts the tasks
+                taskCount += res.getFoundStudents().get(i).getCourses().get(j).getCourseTasks().size();
+            }
+        }
+
+        //Debug message:
+        System.out.println("[" + ((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour() : LocalTime.now().getHour()) + ":" + ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute() : LocalTime.now().getMinute())+ ":" + ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond(): LocalTime.now().getSecond())+ "] OverviewFrame: The amount of courses is: " + courseCount);
+
+        //Debug message:
+        System.out.println("[" + ((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour() : LocalTime.now().getHour()) + ":" + ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute() : LocalTime.now().getMinute())+ ":" + ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond(): LocalTime.now().getSecond())+ "] OverviewFrame: The amount of tasks is: " + taskCount);
+
+        if (s.equals(State.CLASS_COURSE_STUDENT)) {
+            //Creates arrays of the different components.
+            GradesPanel[] gps = new GradesPanel[courseCount];
+            JLabel[] lblInfos = new JLabel[courseCount];
+
+            //Loops through and adds components
+            for (int i = 0; i < courseCount; i++) {
+                //Defines the label
+                lblInfos[i] = new JLabel();
+
+                //Sets the text
+                lblInfos[i].setText("Kurs: " + courses.get(i).getName());
+
+                //Sets font
+                lblInfos[i].setFont(new Font(Font.DIALOG, Font.BOLD, 35));
+
+                //Defines the grade panel
+                gps[i] = new GradesPanel(mf, true, courses.get(i).getCourseTasks(), null, res.getFoundStudents().get(0));
+
+                //Sets the state
+                gps[i].setState(s);
+
+                //Updates the GUI
+                gps[i].update(s, true);
+
+                //Adds the components to the frame
+                gradesPanel.add(lblInfos[i]);
+                gradesPanel.add(gps[i]);
+            }
+        }
     }
 }

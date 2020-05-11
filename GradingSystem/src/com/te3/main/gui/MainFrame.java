@@ -267,7 +267,7 @@ public class MainFrame extends JFrame implements ComponentListener, WindowStateL
 
 		// Initializes the panels
 		cbPanel = new CBPanel(mainData, this);
-		gradePanel = new GradesPanel(this);
+		gradePanel = new GradesPanel(this, false);
 		btnPanel = new ButtonPanel(this);
 
 		// Sets the layout
@@ -410,7 +410,7 @@ public class MainFrame extends JFrame implements ComponentListener, WindowStateL
 		// change this boolean to false if you do not want to run the program with
 		// default predefined classes, courses, students and tasks.
 
-		boolean debug = false;
+		boolean debug = true;
 
 		if (debug) {
 			ArrayList<SchoolClass> classes = new ArrayList<SchoolClass>();
@@ -460,7 +460,7 @@ public class MainFrame extends JFrame implements ComponentListener, WindowStateL
 	 */
 	public void updateGradePanel(State s) {
 		this.s = s;
-		gradePanel.update(s);
+		gradePanel.update(s, false);
 		this.cbPanel.handleNewState();
 	}
 
@@ -472,7 +472,7 @@ public class MainFrame extends JFrame implements ComponentListener, WindowStateL
 	 * Updates the grade panel GUI and information
 	 */
 	public void updateGradePanel() {
-		gradePanel.update(s);
+		gradePanel.update(s, false);
 	}
 
 	/**

@@ -1,0 +1,23 @@
+[19:48:34] MainFrame: is saving logs
+[19:48:34] XML loaded the data
+[19:48:34] Successfully loaded the data
+Refreshing Data combobox data
+Deleting old items...
+Adding default combobox items...
+Getting new data...
+Adding change items...
+NOTHING_SELECTED
+Class combobox updating
+3
+6
+CLASS
+Course combobox updating
+CLASS_COURSE
+Task combobox updating
+Task combobox updating
+Class combobox updating
+1
+6
+CLASS
+[19:48:55] XML has successfully written the data.
+[19:48:55] XML has successfully written the data.

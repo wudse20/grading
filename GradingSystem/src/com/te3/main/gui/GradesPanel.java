@@ -36,6 +36,9 @@ public class GradesPanel extends JPanel implements KeyListener {
 	/** Default */
 	private static final long serialVersionUID = 1L;
 
+	/** If {@code true} it's in list mode, else it's in normal mode*/
+	private boolean isListMode;
+
 	// Integers
 	private int keyCount = 0;
 
@@ -96,20 +99,57 @@ public class GradesPanel extends JPanel implements KeyListener {
 
 	// Instances
 	MainFrame mf;
+	Task t;
+	Student s;
 
 	/**
+	 * For normal mode
+	 *
 	 * @param mf the instance of the MainFrame.
+	 * @param isListMode if is accessed by the main list -> {@code true}, else {@code false}
 	 */
-	public GradesPanel(MainFrame mf) {
+	public GradesPanel(MainFrame mf, boolean isListMode) {
 		// Sets the needed values
 		this.state = State.NOTHING_SELECTED;
 		this.mf = mf;
+		this.isListMode = isListMode;
 
 		// Sets the layout
 		this.setLayout(layout);
 
 		// Updates the gui and information
-		update(state);
+		update(state, this.isListMode);
+
+		// Some properties
+		scroll.setBorder(BorderFactory.createEmptyBorder());
+
+		// Fixes stuff for yoda.
+		yoda(mf.shouldShowBabyYoda());
+	}
+
+	/**
+	 * For the ListMode
+	 *
+	 * @param mf the instance of the MainFrame.
+	 * @param isListMode if is accessed by the main list -> {@code true}, else {@code false}
+	 * @param tasks the tasks to be displayed
+	 * @param t the current task (null if not supposed to be shown)
+	 * @param s the current student
+	 */
+	public GradesPanel(MainFrame mf, boolean isListMode, ArrayList<Task> tasks, Task t, Student s) {
+		// Sets the needed values
+		this.state = State.NOTHING_SELECTED;
+		this.mf = mf;
+		this.isListMode = isListMode;
+		this.tasks = tasks;
+		this.t = t;
+		this.s = s;
+
+		// Sets the layout
+		this.setLayout(layout);
+
+		// Updates the gui and information
+		update(state, this.isListMode);
 
 		// Some properties
 		scroll.setBorder(BorderFactory.createEmptyBorder());
@@ -193,13 +233,16 @@ public class GradesPanel extends JPanel implements KeyListener {
 	 * and the information.
 	 * 
 	 * @param s the state of the program
-	 */
-	public void update(State s) {
+	 * @param isListMode if is accessed by the main list -> {@code true}, else {@code false}
+	 * */
+	public void update(State s, boolean isListMode) {
 		// Adds components
 		this.addComponents(s);
 
-		// Grabs the needed information.
-		this.grabInfo(s);
+		if (!isListMode) {
+			// Grabs the needed information.
+			this.grabInfo(s);
+		}
 
 		// Sets some properties
 		this.setProperties();
@@ -347,7 +390,10 @@ public class GradesPanel extends JPanel implements KeyListener {
 		// Sets the text
 		lblName.setText(s.getName());
 		lblGrades.setText(countGrades(criteria));
-		lblAssignment.setText(t.getName());
+
+		//Since t, can be null in the case of list mode
+		if (t != null)
+			lblAssignment.setText(t.getName());
 
 		// Sets the font
 		lblName.setFont(new Font(lblName.getFont().getName(), Font.BOLD, 20));
@@ -543,9 +589,14 @@ public class GradesPanel extends JPanel implements KeyListener {
 		// Updates the GUI for every criteria.
 		criteria.forEach(Criteria::updateGUI);
 
-		// Updates the sidebar.
-		updateSidebar(students.get(mf.getCurrentlySelectedStudentIndex()),
-				tasks.get(mf.getCurrentlySelectedAssignmentIndex()), criteria, this.state);
+		if (isListMode) {
+			//Updates the sidebar
+			updateSidebar(this.s, this.t, criteria, this.state);
+		} else {
+			// Updates the sidebar.
+			updateSidebar(students.get(mf.getCurrentlySelectedStudentIndex()),
+					tasks.get(mf.getCurrentlySelectedAssignmentIndex()), criteria, this.state);
+		}
 
 		// Updates the panel.
 		this.revalidate();
@@ -569,7 +620,7 @@ public class GradesPanel extends JPanel implements KeyListener {
 		gp.repaint();
 
 		// Updates the state
-		this.update(this.state);
+		this.update(this.state, this.isListMode);
 
 		// Prints debug message
 		System.out.println("[" + LocalTime.now().getHour() + ":" + LocalTime.now().getMinute() + ":"

@@ -1,0 +1,17 @@
+[20:09:47] MainFrame: is saving logs
+Refreshing Data combobox data
+Deleting old items...
+Adding default combobox items...
+Getting new data...
+Adding change items...
+NOTHING_SELECTED
+Class combobox updating
+1
+4
+CLASS
+Course combobox updating
+CLASS_COURSE
+Student combobox updating
+Task combobox updating
+[20:09:53] XML has successfully written the data.
+[20:09:53] XML has successfully written the data.

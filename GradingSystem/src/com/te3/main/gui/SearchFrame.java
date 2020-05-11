@@ -168,7 +168,7 @@ public class SearchFrame extends JFrame implements WindowListener, DocumentListe
 				+ s.getFoundStudents().get(0).getName());
 
 		//Opens the window
-		new OverviewFrame(s).setVisible(true);
+		new OverviewFrame(s, mf).setVisible(true);
 
 		//Closes this window
 		this.closeWindow();

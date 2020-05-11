@@ -1,0 +1,55 @@
+[20:30:01] MainFrame: is saving logs
+Refreshing Data combobox data
+Deleting old items...
+Adding default combobox items...
+Getting new data...
+Adding change items...
+NOTHING_SELECTED
+Class combobox updating
+1
+4
+CLASS
+Course combobox updating
+CLASS_COURSE
+Student combobox updating
+CLASS_COURSE_STUDENT
+Task combobox updating
+[20:30:10] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[20:30:10] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[20:30:10] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[20:30:10] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[20:30:10] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[20:30:10] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[20:30:10] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[20:30:10] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[20:30:10] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[20:30:10] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[20:30:10] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[20:30:10] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[20:30:10] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[20:30:10] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[20:30:10] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[20:30:10] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[20:30:10] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[20:30:10] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[20:30:10] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[20:30:10] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[20:30:10] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[20:30:10] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[20:30:10] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[20:30:10] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[20:30:10] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[20:30:10] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[20:30:10] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[20:30:10] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+CLASS_COURSE_STUDENT_TASK
+[20:30:14] ButtonPanel: Opening SearchWindow
+[20:30:14] SearchFrame: Has reset the last result
+[20:30:14] SearchFrame: Currently searching through the class: TE3B...
+[20:30:14] SearchFrame: Adding first result...
+[20:30:14] SearchFrame: Updating list data...
+[20:30:15] SearchFrame: List selected at index: 0
+[20:30:15] SearchFrame: List selected at index: 0, SearchResult: Anton
+[20:30:15] OverviewFrame: The amount of courses is: 1
+[20:30:15] OverviewFrame: The amount of tasks is: 1
+[20:30:15] SearchFrame: Closing

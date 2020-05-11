@@ -1,0 +1,25 @@
+[20:10:51] MainFrame: is saving logs
+Refreshing Data combobox data
+Deleting old items...
+Adding default combobox items...
+Getting new data...
+Adding change items...
+NOTHING_SELECTED
+Class combobox updating
+1
+4
+CLASS
+Course combobox updating
+CLASS_COURSE
+[20:10:58] ButtonPanel: Opening SearchWindow
+[20:10:58] SearchFrame: Has reset the last result
+[20:10:58] SearchFrame: Currently searching through the class: TE3B...
+[20:10:58] SearchFrame: Adding first result...
+[20:10:58] SearchFrame: Updating list data...
+[20:10:58] SearchFrame: List selected at index: 0
+[20:10:58] SearchFrame: List selected at index: 0, SearchResult: Anton
+[20:10:58] OverviewFrame: The amount of courses is: 1
+[20:10:58] SearchFrame: List selected at index: 0
+[20:10:58] SearchFrame: List selected at index: 0, SearchResult: Anton
+[20:10:58] OverviewFrame: The amount of courses is: 1
+[20:14:31] SearchFrame: Closing

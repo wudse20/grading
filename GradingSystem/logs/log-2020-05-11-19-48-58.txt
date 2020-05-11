@@ -1,0 +1,103 @@
+[19:48:58] MainFrame: is saving logs
+[19:48:59] XML loaded the data
+[19:48:59] Successfully loaded the data
+Refreshing Data combobox data
+Deleting old items...
+Adding default combobox items...
+Getting new data...
+Adding change items...
+NOTHING_SELECTED
+Class combobox updating
+1
+6
+CLASS
+Course combobox updating
+CLASS_COURSE
+Student combobox updating
+CLASS_COURSE_STUDENT
+Student combobox updating
+CLASS_COURSE_STUDENT
+Task combobox updating
+[19:49:15] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[19:49:15] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[19:49:15] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[19:49:15] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[19:49:15] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[19:49:15] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[19:49:15] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[19:49:15] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[19:49:15] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[19:49:15] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[19:49:15] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[19:49:15] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[19:49:15] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[19:49:15] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[19:49:15] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[19:49:15] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[19:49:15] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[19:49:15] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[19:49:15] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[19:49:15] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[19:49:15] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[19:49:15] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[19:49:15] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[19:49:15] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[19:49:15] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[19:49:15] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[19:49:15] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[19:49:15] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+CLASS_COURSE_STUDENT_TASK
+Task combobox updating
+[19:49:16] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[19:49:16] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[19:49:16] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[19:49:16] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[19:49:16] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[19:49:16] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[19:49:16] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[19:49:16] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[19:49:16] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[19:49:16] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[19:49:16] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[19:49:16] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[19:49:16] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[19:49:16] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[19:49:16] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[19:49:16] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+CLASS_COURSE_STUDENT_TASK
+Task combobox updating
+CLASS_COURSE_STUDENT_TASK
+Task combobox updating
+CLASS_COURSE_STUDENT_TASK
+[19:49:21] Criteria updated: Fika, New Grade: A
+[19:49:22] Criteria updated: Räkna mera pinar, New Grade: A
+[19:49:22] Criteria updated: Räkna Glasspinnar, New Grade: A
+[19:49:23] Criteria updated: Räkna, New Grade: A
+Task combobox updating
+CLASS_COURSE_STUDENT_TASK
+[19:49:26] Criteria updated: Datasäkerhet, New Grade: A
+[19:49:26] Criteria updated: Nätverket, New Grade: A
+[19:49:27] Criteria updated: Åtgärda Fel, New Grade: A
+[19:49:27] Criteria updated: Resultat, New Grade: A
+[19:49:29] Criteria updated: Installeringar, New Grade: A
+[19:49:29] Criteria updated: Dokumentation, New Grade: A
+[19:49:33] Criteria updated: Förmåga, New Grade: A
+[19:49:35] XML has successfully written the data.
+[19:49:38] ButtonPanel: Opening SearchWindow
+[19:49:38] SearchFrame: Has reset the last result
+[19:49:38] SearchFrame: Currently searching through the class: TE3B...
+[19:49:38] SearchFrame: Adding first result...
+[19:49:38] SearchFrame: Anton Skorupnot found, creating a new result and adding the student...
+[19:49:38] SearchFrame: Adding student: Anton Skorup to a current result...
+[19:49:38] SearchFrame: Currently searching through the class: Te3a...
+[19:49:38] SearchFrame: Jonnot found, creating a new result and adding the student...
+[19:49:38] SearchFrame: Adding student: Jon to a current result...
+[19:49:38] SearchFrame: Currently searching through the class: Te3ING...
+[19:49:38] SearchFrame: Adding student: Anton to a current result...
+[19:49:38] SearchFrame: Updating list data...
+[19:49:39] SearchFrame: List selected at index: 0
+[19:49:39] SearchFrame: List selected at index: 0, SearchResult: Anton
+[19:49:40] OverviewFrame: The amount of courses is: 4
+[19:49:40] SearchFrame: Closing
+[19:49:44] XML has successfully written the data.
+[19:49:44] XML has successfully written the data.
