@@ -513,6 +513,7 @@ public class FileSystemFrame extends JFrame implements KeyListener, ListSelectio
 
 	@Override
 	public void valueChanged(ListSelectionEvent e) {
+		// Acts on the clicked list
 		listClicked(files.getSelectedIndex());
 	}
 }

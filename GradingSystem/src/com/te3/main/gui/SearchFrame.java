@@ -167,10 +167,10 @@ public class SearchFrame extends JFrame implements WindowListener, DocumentListe
 				+ "] SearchFrame: List selected at index: " + index + ", SearchResult: "
 				+ s.getFoundStudents().get(0).getName());
 
-		//Opens the window
+		// Opens the window
 		new OverviewFrame(s, mf).setVisible(true);
 
-		//Closes this window
+		// Closes this window
 		this.closeWindow();
 	}
 

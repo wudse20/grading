@@ -36,7 +36,7 @@ public class GradesPanel extends JPanel implements KeyListener {
 	/** Default */
 	private static final long serialVersionUID = 1L;
 
-	/** If {@code true} it's in list mode, else it's in normal mode*/
+	/** If {@code true} it's in list mode, else it's in normal mode */
 	private boolean isListMode;
 
 	// Integers
@@ -105,8 +105,9 @@ public class GradesPanel extends JPanel implements KeyListener {
 	/**
 	 * For normal mode
 	 *
-	 * @param mf the instance of the MainFrame.
-	 * @param isListMode if is accessed by the main list -> {@code true}, else {@code false}
+	 * @param mf         the instance of the MainFrame.
+	 * @param isListMode if is accessed by the main list -> {@code true}, else
+	 *                   {@code false}
 	 */
 	public GradesPanel(MainFrame mf, boolean isListMode) {
 		// Sets the needed values
@@ -130,14 +131,18 @@ public class GradesPanel extends JPanel implements KeyListener {
 	/**
 	 * For the ListMode
 	 *
-	 * @param mf the instance of the MainFrame.
-	 * @param isListMode if is accessed by the main list -> {@code true}, else {@code false}
-	 * @param tasks the tasks to be displayed
-	 * @param t the current task ({@code null} if the state of the SearchFrame = {@code CLASS_COURSE_STUDENT})
-	 * @param s the current student
-	 * @param criteria the current task ({@code null} if the state of the SearchFrame = {@code CLASS_COURSE_STUDENT})
+	 * @param mf         the instance of the MainFrame.
+	 * @param isListMode if is accessed by the main list -> {@code true}, else
+	 *                   {@code false}
+	 * @param tasks      the tasks to be displayed
+	 * @param t          the current task ({@code null} if the state of the
+	 *                   SearchFrame = {@code CLASS_COURSE_STUDENT})
+	 * @param s          the current student
+	 * @param criteria   the current task ({@code null} if the state of the
+	 *                   SearchFrame = {@code CLASS_COURSE_STUDENT})
 	 */
-	public GradesPanel(MainFrame mf, boolean isListMode, ArrayList<Task> tasks, Task t, Student s, ArrayList<Criteria> criteria) {
+	public GradesPanel(MainFrame mf, boolean isListMode, ArrayList<Task> tasks, Task t, Student s,
+			ArrayList<Criteria> criteria) {
 		// Sets the needed values
 		this.state = State.NOTHING_SELECTED;
 		this.mf = mf;
@@ -185,13 +190,13 @@ public class GradesPanel extends JPanel implements KeyListener {
 				// Debug message:
 				System.out.println("["
 						+ ((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour()
-						: LocalTime.now().getHour())
+								: LocalTime.now().getHour())
 						+ ":"
 						+ ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute()
-						: LocalTime.now().getMinute())
+								: LocalTime.now().getMinute())
 						+ ":"
 						+ ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond()
-						: LocalTime.now().getSecond())
+								: LocalTime.now().getSecond())
 						+ "] GradesPanel: Interrupting GUI update, no tasks created.");
 
 				// Returns
@@ -267,9 +272,10 @@ public class GradesPanel extends JPanel implements KeyListener {
 	 * Updates the gui based on the state <br>
 	 * and the information.
 	 * 
-	 * @param s the state of the program
-	 * @param isListMode if is accessed by the main list -> {@code true}, else {@code false}
-	 * */
+	 * @param s          the state of the program
+	 * @param isListMode if is accessed by the main list -> {@code true}, else
+	 *                   {@code false}
+	 */
 	public void update(State s, boolean isListMode) {
 		// Adds components
 		this.addComponents(s);
@@ -277,12 +283,12 @@ public class GradesPanel extends JPanel implements KeyListener {
 		// Sets some properties
 		this.setProperties();
 
-		//If list mode or not
+		// If list mode or not
 		if (!isListMode) {
 			// Grabs the needed information and updates the state.
 			this.state = this.grabInfo(s);
 
-			//Stores the state
+			// Stores the state
 			s = this.state;
 		} else {
 			this.state = s;
@@ -370,13 +376,13 @@ public class GradesPanel extends JPanel implements KeyListener {
 				// Debug message:
 				System.out.println("["
 						+ ((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour()
-						: LocalTime.now().getHour())
+								: LocalTime.now().getHour())
 						+ ":"
 						+ ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute()
-						: LocalTime.now().getMinute())
+								: LocalTime.now().getMinute())
 						+ ":"
 						+ ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond()
-						: LocalTime.now().getSecond())
+								: LocalTime.now().getSecond())
 						+ "] GradesPanel: Interrupting GUI update, no tasks created.");
 
 				// Returns
@@ -401,7 +407,6 @@ public class GradesPanel extends JPanel implements KeyListener {
 		// Returns the state, that was put in.
 		return s;
 	}
-
 
 	/**
 	 * Adds the components, after removing them
@@ -470,7 +475,7 @@ public class GradesPanel extends JPanel implements KeyListener {
 		lblName.setText(s.getName());
 		lblGrades.setText(countGrades(criteria));
 
-		//Since t, can be null in the case of list mode
+		// Since t, can be null in the case of list mode
 		if (t != null)
 			lblAssignment.setText(t.getName());
 
@@ -669,7 +674,7 @@ public class GradesPanel extends JPanel implements KeyListener {
 		criteria.forEach(Criteria::updateGUI);
 
 		if (isListMode) {
-			//Updates the sidebar
+			// Updates the sidebar
 			updateSidebar(this.s, this.t, criteria, this.state);
 		} else {
 			// Updates the sidebar.
