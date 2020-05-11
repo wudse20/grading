@@ -1,5 +1,6 @@
 package com.te3.main.objects;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 import com.te3.main.exceptions.IllegalNameException;
@@ -169,6 +170,56 @@ public class Course {
 			// Returns an empty list
 			return new ArrayList<Task>();
 		}
+	}
+
+	/**
+	 * A getter for the course tasks. <br>
+	 * This will create a new instance of task <br>
+	 * So all the grades will be F, but have the same name.<br>
+	 * {@link #getCourseTasks()} () Use this method for: normal getter for the
+	 * tasks}
+	 *
+	 * @return the tasks (only names stay the same)
+	 */
+	public ArrayList<Task> getNewCourseTask() {
+		// Creates a new ArrayList for the created criteria
+		ArrayList<Task> newCriteria = new ArrayList<Task>();
+
+		// Loops through this course's criteria.
+		for (int i = 0; i < this.courseTasks.size(); i++) {
+			try {
+				// Creates the new criteria with the same name.
+				newCriteria.add(new Task(courseTasks.get(i).getName(), courseTasks.get(i).getNewCriteria()));
+
+				// A debug message
+				System.out.println("["
+						+ ((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour()
+								: LocalTime.now().getHour())
+						+ ":"
+						+ ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute()
+								: LocalTime.now().getMinute())
+						+ ":"
+						+ ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond()
+								: LocalTime.now().getSecond())
+						+ "] Course: Created a new task with the name: " + this.courseCriteria.get(i).getName());
+			} catch (IllegalNameException e) {
+				// Prints stack trace to the console.
+				e.printStackTrace();
+
+				System.out.println("["
+						+ ((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour()
+								: LocalTime.now().getHour())
+						+ ":"
+						+ ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute()
+								: LocalTime.now().getMinute())
+						+ ":" + ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond()
+								: LocalTime.now().getSecond())
+						+ "] Course: Exception thrown: " + e.getMessage());
+			}
+		}
+
+		// Returns the newly created criteria
+		return newCriteria;
 	}
 
 	/**

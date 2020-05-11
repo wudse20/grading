@@ -1,0 +1,4 @@
+[13:06:45] MainFrame: is saving logs
+[13:06:45] XML has successfully written the data.
+[13:06:51] XML has successfully written the data.
+[13:06:51] XML has successfully written the data.

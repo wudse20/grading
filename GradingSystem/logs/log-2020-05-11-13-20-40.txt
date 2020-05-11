@@ -1,0 +1,19 @@
+[13:20:40] MainFrame: is saving logs
+[13:20:41] XML loaded the data
+[13:20:41] Successfully loaded the data
+Refreshing Data combobox data
+Deleting old items...
+Adding default combobox items...
+Class ActionCommand: comboBoxChanged
+Course ActionCommand: comboBoxChanged
+Student ActionCommand: comboBoxChanged
+Task ActionCommand: comboBoxChanged
+Getting new data...
+Adding change items...
+NOTHING_SELECTED
+Class ActionCommand: comboBoxChanged
+1
+4
+CLASS
+Student ActionCommand: comboBoxChanged
+Student ActionCommand: comboBoxChanged
