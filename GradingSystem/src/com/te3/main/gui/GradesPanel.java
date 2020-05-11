@@ -241,17 +241,26 @@ public class GradesPanel extends JPanel implements KeyListener {
 		// Adds components
 		this.addComponents(s);
 
-		if (!isListMode) {
-			// Grabs the needed information.
-			this.grabInfo(s);
-		}
-
 		// Sets some properties
 		this.setProperties();
 
-		// Stores the State
-		this.state = s;
+		//If list mode or not
+		if (!isListMode) {
+			// Grabs the needed information and updates the state.
+			this.state = this.grabInfo(s);
 
+			//Stores the state
+			s = this.state;
+		} else {
+			this.state = s;
+		}
+
+		System.out.println("["
+				+ ((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour() : LocalTime.now().getHour()) + ":"
+				+ ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute() : LocalTime.now().getMinute())
+				+ ":"
+				+ ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond() : LocalTime.now().getSecond())
+				+ "] GradesPanel: Current State: " + this.state.toString());
 		// Calculates which grades should be shown, based on the state.
 		if (s.equals(State.CLASS_COURSE_STUDENT_TASK)) {
 			displayCriteria(criteria, s);
