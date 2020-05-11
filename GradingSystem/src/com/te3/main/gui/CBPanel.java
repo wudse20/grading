@@ -73,28 +73,33 @@ public class CBPanel extends JPanel {
 		
 		//class combobox
 		cbClass.addActionListener((e) -> {
-			if (/*!cbClass.isFocusOwner() || */isRefreshing) return;
+			if (!cbClass.isFocusOwner() || isRefreshing) return;
 			
 			System.out.println("Class combobox updating");
 			
 			int i = cbClass.getSelectedIndex();
 			int itmCount = cbClass.getItemCount();
 			
-			System.out.println(i);
-			System.out.println(itmCount);
-			
 			if (i == 0) {
 				mf.updateGradePanel(State.NOTHING_SELECTED);
 			} else if (i != -1 && i < itmCount - 2) {
+				
+				
 				mf.updateGradePanel(State.CLASS);
 				mf.setCurrentlySelectedClassIndex(i-1);
 				
-				//update student combobox if the class changed
+				//update student and course combobox if the class changed
 				cbStudent.removeAllItems();
 				ArrayList<SchoolClass> dataClasses = mf.getMainData().getClasses();
 				ArrayList<Student> dataStudents = dataClasses.get(i-1).getStudents();
 				dataStudents.forEach((n) -> cbStudent.addItem(n.getName()));
 				
+				cbCourse.removeAllItems();
+				ArrayList<Course> dataCourses = dataStudents.get(mf.getCurrentlySelectedStudentIndex()).getCourses();
+				dataCourses.forEach((n) -> cbCourse.addItem(n.getName()));
+				cbCourse.addItem("Ny");
+				cbCourse.addItem("Ändra");
+								
 			} else if (i == itmCount - 1) {
 				mf.openAddEditGUI(SchoolClass.class, false);
 				mf.setCurrentlySelectedClassIndex(itmCount-3);
