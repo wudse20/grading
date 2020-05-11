@@ -28,6 +28,7 @@ public class OverviewFrame extends JFrame {
 
     //Buttons
     JButton btnClose = new JButton("Stäng");
+    JButton btnUpdate = new JButton("Uppdatera");
     JButton btnHelp = new JButton("?");
 
     //Lables
@@ -92,9 +93,29 @@ public class OverviewFrame extends JFrame {
 
         //Adds listeners
         btnClose.addActionListener(e -> this.dispose());
+        btnUpdate.addActionListener(e -> this.handleGradePanel(this.s, this.result));
 
-        radioClassCourseStudent.addActionListener(e -> this.s = State.CLASS_COURSE_STUDENT);
-        radioClassCourseStudentTask.addActionListener(e -> this.s = State.CLASS_COURSE_STUDENT_TASK);
+        radioClassCourseStudent.addActionListener(e -> {
+            //Sets the state
+            this.s = State.CLASS_COURSE_STUDENT;
+
+            //Debug message:
+            System.out.println("[" + ((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour() : LocalTime.now().getHour()) + ":" + ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute() : LocalTime.now().getMinute())+ ":" + ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond(): LocalTime.now().getSecond())+ "] OverviewFrame: new state: " + this.s.toString());
+
+            //Updates this frame
+            this.handleGradePanel(this.s, this.result);
+        });
+
+        radioClassCourseStudentTask.addActionListener(e -> {
+            //Sets the state
+            this.s = State.CLASS_COURSE_STUDENT_TASK;
+
+            //Debug Message:
+            System.out.println("[" + ((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour() : LocalTime.now().getHour()) + ":" + ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute() : LocalTime.now().getMinute())+ ":" + ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond(): LocalTime.now().getSecond())+ "] OverviewFrame: new state: " + this.s.toString());
+
+            //Updates this frame
+            this.handleGradePanel(this.s, this.result);
+        });
 
         //Handling Grades Layout
         this.handleGradePanel(s, this.result);
@@ -162,6 +183,9 @@ public class OverviewFrame extends JFrame {
         //All the courses in one list
         ArrayList<Course> courses = new ArrayList<Course>();
 
+        //All the tasks in one list
+        ArrayList<Task> tasks = new ArrayList<Task>();
+
         //Loops through the found students
         for (int i = 0; i < res.getFoundStudents().size(); i++) {
             //Adds the amount of courses, i.e. the size of the courses list of each entry.
@@ -174,6 +198,11 @@ public class OverviewFrame extends JFrame {
 
                 //Counts the tasks
                 taskCount += res.getFoundStudents().get(i).getCourses().get(j).getCourseTasks().size();
+
+                //Adds the tasks to one list
+                for (int k = 0; k < res.getFoundStudents().get(i).getCourses().get(j).getCourseTasks().size(); k++) {
+                    tasks.add(res.getFoundStudents().get(i).getCourses().get(j).getCourseTasks().get(k));
+                }
             }
         }
 
@@ -183,6 +212,7 @@ public class OverviewFrame extends JFrame {
         //Debug message:
         System.out.println("[" + ((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour() : LocalTime.now().getHour()) + ":" + ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute() : LocalTime.now().getMinute())+ ":" + ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond(): LocalTime.now().getSecond())+ "] OverviewFrame: The amount of tasks is: " + taskCount);
 
+        //Handles the part of the GUI based on the state
         if (s.equals(State.CLASS_COURSE_STUDENT)) {
             //Creates arrays of the different components.
             GradesPanel[] gps = new GradesPanel[courseCount];
@@ -200,7 +230,7 @@ public class OverviewFrame extends JFrame {
                 lblInfos[i].setFont(new Font(Font.DIALOG, Font.BOLD, 35));
 
                 //Defines the grade panel
-                gps[i] = new GradesPanel(mf, true, courses.get(i).getCourseTasks(), null, res.getFoundStudents().get(0));
+                gps[i] = new GradesPanel(mf, true, courses.get(i).getCourseTasks(), null, res.getFoundStudents().get(0), null);
 
                 //Sets the state
                 gps[i].setState(s);
@@ -212,6 +242,47 @@ public class OverviewFrame extends JFrame {
                 gradesPanel.add(lblInfos[i]);
                 gradesPanel.add(gps[i]);
             }
+        } else if (s.equals(State.CLASS_COURSE_STUDENT_TASK)) {
+            //Creates arrays of the different components.
+            GradesPanel[] gps = new GradesPanel[taskCount];
+            JLabel[] lblInfos = new JLabel[taskCount];
+
+            //Loops through and adds components
+
+            //Loops through the courses
+            for (int i = 0; i < courseCount; i++) {
+                //Loops through the tasks
+                for (int j = 0; j < taskCount; j++) {
+                    //Defines the label
+                    lblInfos[i] = new JLabel();
+
+                    //Sets the text
+                    lblInfos[i].setText("Uppgift: " + tasks.get(j).getName());
+
+                    //Sets font
+                    lblInfos[i].setFont(new Font(Font.DIALOG, Font.BOLD, 35));
+
+                    //Defines the grade panel
+                    gps[i] = new GradesPanel(mf, true, courses.get(i).getCourseTasks(), courses.get(i).getCourseTasks().get(j), res.getFoundStudents().get(0), tasks.get(j).getCriteria());
+
+                    //Sets the state
+                    gps[i].setState(s);
+
+                    //Updates the GUI
+                    gps[i].update(s, true);
+
+                    //Adds the components to the frame
+                    gradesPanel.add(lblInfos[i]);
+                    gradesPanel.add(gps[i]);
+                }
+            }
         }
+
+        //Updates GradePanel
+        mf.updateGradePanel();
+
+        //Repaints and revalidate
+        this.revalidate();
+        this.repaint();
     }
 }

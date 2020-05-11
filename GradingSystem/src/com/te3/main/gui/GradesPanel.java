@@ -133,10 +133,11 @@ public class GradesPanel extends JPanel implements KeyListener {
 	 * @param mf the instance of the MainFrame.
 	 * @param isListMode if is accessed by the main list -> {@code true}, else {@code false}
 	 * @param tasks the tasks to be displayed
-	 * @param t the current task (null if not supposed to be shown)
+	 * @param t the current task ({@code null} if the state of the SearchFrame = {@code CLASS_COURSE_STUDENT})
 	 * @param s the current student
+	 * @param criteria the current task ({@code null} if the state of the SearchFrame = {@code CLASS_COURSE_STUDENT})
 	 */
-	public GradesPanel(MainFrame mf, boolean isListMode, ArrayList<Task> tasks, Task t, Student s) {
+	public GradesPanel(MainFrame mf, boolean isListMode, ArrayList<Task> tasks, Task t, Student s, ArrayList<Criteria> criteria) {
 		// Sets the needed values
 		this.state = State.NOTHING_SELECTED;
 		this.mf = mf;
@@ -144,6 +145,7 @@ public class GradesPanel extends JPanel implements KeyListener {
 		this.tasks = tasks;
 		this.t = t;
 		this.s = s;
+		this.criteria = criteria;
 
 		// Sets the layout
 		this.setLayout(layout);

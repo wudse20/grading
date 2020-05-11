@@ -1,0 +1,74 @@
+[21:07:21] MainFrame: is saving logs
+Refreshing Data combobox data
+Deleting old items...
+Adding default combobox items...
+Getting new data...
+Adding change items...
+NOTHING_SELECTED
+[21:07:25] ButtonPanel: Opening SearchWindow
+[21:07:25] SearchFrame: Has reset the last result
+[21:07:25] SearchFrame: Currently searching through the class: TE3B...
+[21:07:25] SearchFrame: Adding first result...
+[21:07:25] SearchFrame: Updating list data...
+[21:07:26] SearchFrame: List selected at index: 0
+[21:07:26] SearchFrame: List selected at index: 0, SearchResult: Anton
+[21:07:26] OverviewFrame: The amount of courses is: 1
+[21:07:26] OverviewFrame: The amount of tasks is: 1
+[21:07:26] SearchFrame: Closing
+Class combobox updating
+1
+4
+CLASS
+Course combobox updating
+CLASS_COURSE
+Student combobox updating
+CLASS_COURSE_STUDENT
+Task combobox updating
+[21:7:50] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[21:7:50] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[21:7:50] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[21:7:50] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[21:7:50] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[21:7:50] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[21:7:50] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[21:7:50] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[21:7:50] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[21:7:50] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[21:7:50] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[21:7:50] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[21:7:50] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[21:7:50] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[21:7:50] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[21:7:50] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[21:7:50] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[21:7:50] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[21:7:50] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[21:7:50] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[21:7:50] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[21:7:50] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[21:7:50] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[21:7:50] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[21:7:50] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[21:7:50] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[21:7:50] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[21:7:50] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+CLASS_COURSE_STUDENT_TASK
+[21:7:51] Criteria updated: Datasäkerhet, New Grade: A
+[21:7:51] Criteria updated: Nätverket, New Grade: A
+[21:7:52] Criteria updated: Åtgärda Fel, New Grade: A
+[21:7:52] Criteria updated: Resultat, New Grade: A
+[21:7:53] Criteria updated: Installeringar, New Grade: A
+[21:7:53] Criteria updated: Dokumentation, New Grade: A
+[21:7:56] Criteria updated: Förmåga, New Grade: A
+[21:07:59] ButtonPanel: Opening SearchWindow
+[21:07:59] SearchFrame: Has reset the last result
+[21:07:59] SearchFrame: Currently searching through the class: TE3B...
+[21:07:59] SearchFrame: Adding first result...
+[21:07:59] SearchFrame: Updating list data...
+[21:08:00] SearchFrame: List selected at index: 0
+[21:08:00] SearchFrame: List selected at index: 0, SearchResult: Anton
+[21:08:00] OverviewFrame: The amount of courses is: 1
+[21:08:00] OverviewFrame: The amount of tasks is: 1
+[21:08:00] SearchFrame: Closing
+[21:08:17] XML has successfully written the data.
+[21:08:17] XML has successfully written the data.
