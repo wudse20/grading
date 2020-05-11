@@ -67,6 +67,7 @@ public class SchoolClass {
 	 * Returns a clone of the object.
 	 *
 	 * @return the students (Cloned)
+	 * @see #getStudentsNotCloned()
 	 */
 	@SuppressWarnings("unchecked")
 	public ArrayList<Student> getStudents() {

@@ -54,10 +54,12 @@ public class ButtonPanel extends JPanel {
 			+ "<b>Spara till fil:</b><br>" + "Sparar ner till en fil som man kan skicka till eleven. <br>"
 			+ "<b>Detta sparar inte nuvarande framsteg!</b> <br><br>" + "<b>Skriv ut:</b><br>"
 			+ "Skriver ut ett papper med alla resultat, efter hur programet är inställt. <br><br>"
+			+ "<b>Register:</b><br>"
+			+ "Ett register över alla elever, där man kan få en samlad bild över hur en elev ligger till i alla kurser. <br><br>"
 			+ "<b>Inställningar:</b><br>" + "Några olika inställningar som man kan göra i sitt program. <br>"
 			+ "Skulle det bli tråkigt att sätta betyg tryck tre gånger på <br>"
 			+ "Första knappen med YODA när bakgrunden är på. <br><br>" + "<b>?</b><br>"
-			+ "Överallt är detta hjälpknappen där du kan få hjälp om hur allt fungerar.<br>";
+			+ "Överallt är detta hjälpknappen där du kan få hjälp om hur allt fungerar. <br> &#9;";
 
 	/** If the search window's opened or not */
 	private boolean isSearchWindowOpened = false;
@@ -79,7 +81,7 @@ public class ButtonPanel extends JPanel {
 	JButton btnPrint = new JButton("Skriv ut");
 	JButton btnSettings = new JButton("Inställningar");
 	JButton btnHelp = new JButton("?");
-	JButton btnSearch = new JButton("Sök");
+	JButton btnSearch = new JButton("Register");
 
 	// Labels
 	JLabel lblSpacer1 = new JLabel("  ");

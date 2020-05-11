@@ -22,6 +22,13 @@ public class HelpFrame extends JFrame implements ActionListener {
 	/** Default */
 	private static final long serialVersionUID = 1L;
 
+	/** The default height in pixels (= 300) */
+	public static final int DEFAULT_HEIGHT = 300;
+
+	/** The default width in pixels (= 400)*/
+	public static final int DEFAULT_WIDTH = 400;
+
+
 	// Strings
 	private String title, info;
 

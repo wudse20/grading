@@ -34,6 +34,21 @@ public class SearchResult {
         return this.foundStudents;
     }
 
+    /**
+     * Compares a string to this Object
+     *
+     * @param name the name of the student (not case sensitive)
+     * @return if name is equal to the name of the students of this result true, else false. Are there no students it will return false.
+     */
+    public boolean compare(String name) {
+        //If no students the return false
+        if (this.foundStudents.size() == 0)
+            return false;
+
+        //Returns true if equal else false
+        return (name.equalsIgnoreCase(this.foundStudents.get(0).getName()));
+    }
+
     @Override
     public String toString() {
         /*
