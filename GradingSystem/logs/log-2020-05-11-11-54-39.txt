@@ -1,0 +1,65 @@
+[11:54:39] MainFrame: is saving logs
+Refreshing Data combobox data
+Deleting old items...
+Adding default combobox items...
+Class ActionCommand: comboBoxChanged
+Course ActionCommand: comboBoxChanged
+Student ActionCommand: comboBoxChanged
+Task ActionCommand: comboBoxChanged
+Getting new data...
+Adding change items...
+NOTHING_SELECTED
+Class ActionCommand: comboBoxChanged
+1
+4
+CLASS
+Student ActionCommand: comboBoxChanged
+Student ActionCommand: comboBoxChanged
+Course ActionCommand: comboBoxChanged
+CLASS_COURSE
+Student ActionCommand: comboBoxChanged
+Student ActionCommand: comboBoxChanged
+CLASS_COURSE_STUDENT
+Task ActionCommand: comboBoxChanged
+Task ActionCommand: comboBoxChanged
+[11:54:59] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[11:54:59] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[11:54:59] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[11:54:59] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[11:54:59] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[11:54:59] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[11:54:59] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[11:54:59] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[11:54:59] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[11:54:59] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[11:54:59] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[11:54:59] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[11:54:59] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[11:54:59] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[11:54:59] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[11:54:59] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[11:54:59] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[11:54:59] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[11:54:59] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[11:54:59] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[11:54:59] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[11:54:59] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[11:54:59] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[11:54:59] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[11:54:59] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[11:54:59] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[11:54:59] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+[11:54:59] Skipped gradebtn -> IndexOutOfBounds: no action listeners attached
+CLASS_COURSE_STUDENT_TASK
+[11:55:01] Criteria updated: Datasäkerhet, New Grade: C
+[11:55:01] Criteria updated: Nätverket, New Grade: A
+[11:55:02] Criteria updated: Åtgärda Fel, New Grade: A
+[11:55:02] Criteria updated: Resultat, New Grade: C
+[11:55:03] Criteria updated: Installeringar, New Grade: C
+[11:55:07] Criteria updated: Dokumentation, New Grade: A
+[11:55:10] Criteria updated: Förmåga, New Grade: A
+Task ActionCommand: comboBoxChanged
+CLASS_COURSE_STUDENT
+[11:55:25] XML has successfully written the data.
+[11:55:27] XML has successfully written the data.
+[11:55:27] XML has successfully written the data.
