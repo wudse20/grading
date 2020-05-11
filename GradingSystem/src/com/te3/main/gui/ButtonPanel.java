@@ -5,6 +5,7 @@ import java.awt.print.PrinterException;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -58,6 +59,9 @@ public class ButtonPanel extends JPanel {
 			+ "Första knappen med YODA när bakgrunden är på. <br><br>" + "<b>?</b><br>"
 			+ "Överallt är detta hjälpknappen där du kan få hjälp om hur allt fungerar.<br>";
 
+	/** If the search window's opened or not */
+	private boolean isSearchWindowOpened = false;
+
 	// Threads
 	Thread threadSaveToFile;
 	Thread threadSaveAs;
@@ -75,6 +79,7 @@ public class ButtonPanel extends JPanel {
 	JButton btnPrint = new JButton("Skriv ut");
 	JButton btnSettings = new JButton("Inställningar");
 	JButton btnHelp = new JButton("?");
+	JButton btnSearch = new JButton("Sök");
 
 	// Labels
 	JLabel lblSpacer1 = new JLabel("  ");
@@ -388,6 +393,7 @@ public class ButtonPanel extends JPanel {
 		this.add(lblSpacer1);
 		this.add(btnHelp);
 		this.add(btnSettings);
+		this.add(btnSearch);
 		this.add(btnPrint);
 		this.add(btnSaveToFile);
 		this.add(btnSaveAs);
@@ -416,5 +422,31 @@ public class ButtonPanel extends JPanel {
 		btnSaveAs.addActionListener((e) -> saveAs(mf.getSaveFilePath()));
 
 		btnSettings.addActionListener((e) -> settings());
+
+		btnSearch.addActionListener(e -> {
+			//Checks the windows status
+			if (!this.isSearchWindowOpened) {
+				//Sends Debug message
+				System.out.println("[" + ((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour() : LocalTime.now().getHour()) + ":" + ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute() : LocalTime.now().getMinute())+ ":" + ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond(): LocalTime.now().getSecond())+ "] ButtonPanel: Opening SearchWindow");
+
+				//Opens the search frame
+				new SearchFrame(mf, this).setVisible(true);
+
+				//Updates the windows status
+				this.isSearchWindowOpened = true;
+			} else {
+				//Sends Debug message
+				System.out.println("[" + ((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour() : LocalTime.now().getHour()) + ":" + ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute() : LocalTime.now().getMinute())+ ":" + ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond(): LocalTime.now().getSecond())+ "] ButtonPanel: Search Window already opened, doing nothing...");
+			}
+		});
+	}
+
+	/**
+	 * A getter for the search window
+	 *
+	 * @param searchWindowOpened if the search window is open or not.
+	 */
+	public void setSearchWindowOpened(boolean searchWindowOpened) {
+		this.isSearchWindowOpened = searchWindowOpened;
 	}
 }

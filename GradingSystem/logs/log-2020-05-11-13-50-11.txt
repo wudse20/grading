@@ -1,0 +1,17 @@
+[13:50:11] MainFrame: is saving logs
+[13:50:11] XML loaded the data
+[13:50:11] Successfully loaded the data
+Refreshing Data combobox data
+Deleting old items...
+Adding default combobox items...
+Class ActionCommand: comboBoxChanged
+Course ActionCommand: comboBoxChanged
+Student ActionCommand: comboBoxChanged
+Task ActionCommand: comboBoxChanged
+Getting new data...
+Adding change items...
+NOTHING_SELECTED
+[13:50:13] ButtonPanel: Opening SearchWindow
+[13:50:14] SearchFrame: Closing
+[13:50:15] XML has successfully written the data.
+[13:50:15] XML has successfully written the data.
