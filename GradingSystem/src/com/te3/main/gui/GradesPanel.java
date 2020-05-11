@@ -302,8 +302,9 @@ public class GradesPanel extends JPanel implements KeyListener {
 	 * Grabs the needed information from the MainFrame's data object.
 	 *
 	 * @param s The state of the GUI
+	 * @return the correct state for continues operation
 	 */
-	private void grabInfo(State s) {
+	private State grabInfo(State s) {
 		// Grabs the info if it needs it, else sets it to null to prevent a
 		// NullPointerException
 		if (s.equals(State.CLASS_COURSE_STUDENT_TASK)) {
@@ -317,6 +318,28 @@ public class GradesPanel extends JPanel implements KeyListener {
 			students = classes.get(mf.getCurrentlySelectedClassIndex()).getStudents();
 			courses = students.get(mf.getCurrentlySelectedStudentIndex()).getCourses();
 			tasks = courses.get(mf.getCurrentlySelectedCourseIndex()).getCourseTasks();
+
+			// To prevent IndexOutOfBoundsException with no created tasks.
+			if (tasks.size() == 0) {
+				// Message to user
+				JOptionPane.showMessageDialog(this, "Du måste skapa en uppgift!!!!! För detta alternativ!", "Fel",
+						JOptionPane.ERROR_MESSAGE);
+
+				// Debug message:
+				System.out.println("["
+						+ ((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour()
+						: LocalTime.now().getHour())
+						+ ":"
+						+ ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute()
+						: LocalTime.now().getMinute())
+						+ ":"
+						+ ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond()
+						: LocalTime.now().getSecond())
+						+ "] GradesPanel: Interrupting GUI update, no tasks created.");
+
+				// Returns
+				return State.CLASS_COURSE;
+			}
 		} else {
 			classes = null;
 			students = null;
@@ -324,7 +347,19 @@ public class GradesPanel extends JPanel implements KeyListener {
 			tasks = null;
 			criteria = null;
 		}
+
+		// Debug message:
+		System.out.println("["
+				+ ((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour() : LocalTime.now().getHour()) + ":"
+				+ ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute() : LocalTime.now().getMinute())
+				+ ":"
+				+ ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond() : LocalTime.now().getSecond())
+				+ "] GradesPanel: Interrupting GUI update, no tasks created.");
+
+		// Returns the state, that was put in.
+		return s;
 	}
+
 
 	/**
 	 * Adds the components, after removing them
