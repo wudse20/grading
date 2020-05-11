@@ -4,7 +4,6 @@ import com.te3.main.enums.State;
 import com.te3.main.objects.SearchResult;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 
 
@@ -23,15 +22,23 @@ public class OverviewFrame extends JFrame {
     //ButtonGroup
     ButtonGroup bgViewSelectors = new ButtonGroup();
 
+    //Buttons
+    JButton btnClose = new JButton("Stäng");
+    JButton btnHelp = new JButton("?");
+
     //Lables
     JLabel lblName = new JLabel();
     JLabel lblSpacer1 = new JLabel("<html><p>&emsp;&emsp;</p></html>");
+    JLabel lblSpacer2 = new JLabel(" ");
+    JLabel lblSpacer3 = new JLabel("   ");
+    JLabel lblSpacer4 = new JLabel(" ");
 
     //Panels
     JPanel mainPanel = new JPanel();
     JPanel inputPanel = new JPanel();
     JPanel gradesPanel = new JPanel();
     JPanel buttonPanel = new JPanel();
+    JPanel buttonPanel2 = new JPanel();
 
     //Layouts
     BorderLayout layout = new BorderLayout();
@@ -41,6 +48,7 @@ public class OverviewFrame extends JFrame {
     FlowLayout pButtonsLayout = new FlowLayout(FlowLayout.RIGHT);
 
     BoxLayout pGradesLayout = new BoxLayout(gradesPanel, BoxLayout.Y_AXIS);
+    BoxLayout pButtons2Layout = new BoxLayout(buttonPanel2, BoxLayout.Y_AXIS);
 
     //ScrollPanes
     JScrollPane scrGrades = new JScrollPane(gradesPanel);
@@ -74,6 +82,9 @@ public class OverviewFrame extends JFrame {
         radioClassCourseStudent.setFont(new Font(Font.DIALOG, Font.PLAIN, 30));
         radioClassCourseStudentTask.setFont(new Font(Font.DIALOG, Font.PLAIN, 30));
 
+        //Adds listeners
+        btnClose.addActionListener(e -> this.dispose());
+
         //inputPanel
         //Sets the layout
         inputPanel.setLayout(pInputLayout);
@@ -83,6 +94,22 @@ public class OverviewFrame extends JFrame {
         inputPanel.add(lblSpacer1);
         inputPanel.add(radioClassCourseStudent);
         inputPanel.add(radioClassCourseStudentTask);
+
+        //buttonPanel
+        //Sets the layout
+        buttonPanel.setLayout(pButtonsLayout);
+
+        //Adds components
+        buttonPanel.add(btnHelp);
+        buttonPanel.add(btnClose);
+
+        //buttonPanel2
+        //Sets the layout
+        buttonPanel2.setLayout(pButtons2Layout);
+
+        //Adds components
+        buttonPanel2.add(lblSpacer4);
+        buttonPanel2.add(buttonPanel);
 
         //Main Panel
         //Sets the layout
@@ -96,5 +123,10 @@ public class OverviewFrame extends JFrame {
         //The Frame
         //Sets the layout manager
         this.setLayout(layout);
+
+        //Adds the components
+        this.add(lblSpacer2, BorderLayout.LINE_START);
+        this.add(mainPanel, BorderLayout.CENTER);
+        this.add(lblSpacer3, BorderLayout.LINE_END);
     }
 }
