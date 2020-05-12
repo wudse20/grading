@@ -84,7 +84,7 @@ public class MainSchoolClassPanel extends JPanel implements DocumentListener {
 
 	FlowLayout pInputLayout = new FlowLayout(FlowLayout.LEFT);
 
-	//Frames
+	// Frames
 	LinkCoursesFrame lcf;
 
 	/**
@@ -193,23 +193,40 @@ public class MainSchoolClassPanel extends JPanel implements DocumentListener {
 		});
 
 		btnLinkToCourses.addActionListener(e -> {
-			//Checks if the window is opened.
+			// Checks if the window is opened.
 			if (this.isCourseLinkerOpened) {
-				//Sends message to user
-				JOptionPane.showMessageDialog(this, "Du har redan öppnat denna ruta!", "Fel!", JOptionPane.ERROR_MESSAGE);
+				// Sends message to user
+				JOptionPane.showMessageDialog(this, "Du har redan öppnat denna ruta!", "Fel!",
+						JOptionPane.ERROR_MESSAGE);
 
-				//Sends debug message:
-				System.out.println("[" + ((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour() : LocalTime.now().getHour()) + ":" + ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute() : LocalTime.now().getMinute())+ ":" + ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond(): LocalTime.now().getSecond())+ "] MainSchoolClassPanel: Link window already opened.");
+				// Sends debug message:
+				System.out.println("["
+						+ ((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour()
+								: LocalTime.now().getHour())
+						+ ":"
+						+ ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute()
+								: LocalTime.now().getMinute())
+						+ ":" + ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond()
+								: LocalTime.now().getSecond())
+						+ "] MainSchoolClassPanel: Link window already opened.");
 			} else {
-				//Opens window
+				// Opens window
 				lcf = new LinkCoursesFrame(this, linkedCourses, mf);
 				lcf.setVisible(true);
 
-				//Tells the program that the window is opened.
+				// Tells the program that the window is opened.
 				this.isCourseLinkerOpened = true;
 
-				//Debug message:
-				System.out.println("[" + ((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour() : LocalTime.now().getHour()) + ":" + ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute() : LocalTime.now().getMinute())+ ":" + ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond(): LocalTime.now().getSecond())+ "] MainSchoolClassPanel: Opened link window");
+				// Debug message:
+				System.out.println("["
+						+ ((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour()
+								: LocalTime.now().getHour())
+						+ ":"
+						+ ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute()
+								: LocalTime.now().getMinute())
+						+ ":" + ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond()
+								: LocalTime.now().getSecond())
+						+ "] MainSchoolClassPanel: Opened link window");
 			}
 		});
 	}
@@ -420,6 +437,7 @@ public class MainSchoolClassPanel extends JPanel implements DocumentListener {
 	 *
 	 * @return a clone of the linked courses
 	 */
+	@SuppressWarnings("unchecked")
 	public ArrayList<Course> getLinkedCourses() {
 		return (ArrayList<Course>) this.linkedCourses.clone();
 	}

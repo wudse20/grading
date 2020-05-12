@@ -498,6 +498,7 @@ public class MainCoursePanel extends JPanel implements DocumentListener {
 	 *
 	 * @return the criteria (Cloned)
 	 */
+	@SuppressWarnings("unchecked")
 	public ArrayList<Criteria> getCriteria() {
 		return (ArrayList<Criteria>) this.criteria.clone();
 	}

@@ -31,6 +31,9 @@ import com.te3.main.objects.Student;
  */
 public class SearchFrame extends JFrame implements WindowListener, DocumentListener, ListSelectionListener {
 
+	/** Generated */
+	private static final long serialVersionUID = 1L;
+
 	/** The result of this search */
 	private ArrayList<SearchResult> result;
 

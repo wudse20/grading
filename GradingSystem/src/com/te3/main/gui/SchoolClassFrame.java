@@ -301,14 +301,14 @@ public class SchoolClassFrame extends JFrame implements WindowListener {
 		}
 
 		try {
-			//Creates the SchoolClass
+			// Creates the SchoolClass
 			SchoolClass sc = new SchoolClass(np.getLastInput(), mscp.getStudents());
 
-			//Sets the linked courses if it isn't null
+			// Sets the linked courses if it isn't null
 			if (mscp.getLinkedCourses() != null) {
-				//Loops through the students and adds the courses
+				// Loops through the students and adds the courses
 				for (var i = 0; i < sc.getStudents().size(); i++) {
-					//Adds the course to the SchoolClass
+					// Adds the course to the SchoolClass
 					sc.getStudents().get(i).setCourses(mscp.getLinkedCourses());
 				}
 			}
@@ -421,7 +421,7 @@ public class SchoolClassFrame extends JFrame implements WindowListener {
 		// Stops the flashing
 		mscp.stopFlashing();
 
-		//Closes the link window
+		// Closes the link window
 		mscp.getLinkedCoursesFrame().dispose();
 
 		// Disposes

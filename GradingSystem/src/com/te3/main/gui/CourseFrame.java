@@ -115,6 +115,7 @@ public class CourseFrame extends JFrame implements WindowListener {
 	 * @param mf the instance of the MainFrame
 	 * @param c  the course that's being updated.
 	 */
+	@SuppressWarnings("unchecked")
 	public CourseFrame(MainFrame mf, Course c) {
 		// Sets some properties
 		super("Uppdatera en kurs");
@@ -405,11 +406,11 @@ public class CourseFrame extends JFrame implements WindowListener {
 	 */
 	@Override
 	public void windowClosing(WindowEvent e) {
-		//Stops flashing
+		// Stops flashing
 		mcp.stopFlashing(mcp.getListAddedClasses(), (byte) 0);
 		mcp.stopFlashing(mcp.getListCriteria(), (byte) 1);
 
-		//Disposes the window
+		// Disposes the window
 		this.dispose();
 	}
 
