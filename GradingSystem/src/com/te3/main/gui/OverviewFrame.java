@@ -170,6 +170,7 @@ public class OverviewFrame extends JFrame {
 
 		// Adds components
 		buttonPanel.add(btnHelp);
+		buttonPanel.add(btnUpdate);
 		buttonPanel.add(btnClose);
 
 		// buttonPanel2
@@ -296,8 +297,8 @@ public class OverviewFrame extends JFrame {
 
 			// Loops through the courses
 			for (int i = 0; i < courseCount; i++) {
-				// Loops through the tasks
-				for (int j = 0; j < taskCount; j++) {
+				// Loops through the tasks of each course
+				for (int j = 0; j < courses.get(i).getCourseTasks().size(); j++) {
 					// Defines the label
 					lblInfos[i] = new JLabel();
 
@@ -308,8 +309,8 @@ public class OverviewFrame extends JFrame {
 					lblInfos[i].setFont(new Font(Font.DIALOG, Font.BOLD, 35));
 
 					// Defines the grade panel
-					gps[i] = new GradesPanel(mf, true, courses.get(i).getCourseTasks(),
-							courses.get(i).getCourseTasks().get(j), res.getFoundStudents().get(0),
+					gps[i] = new GradesPanel(mf, true, courses.get(i).getNotClonedTasks(),
+							courses.get(i).getNotClonedTasks().get(j), res.getFoundStudents().get(0),
 							tasks.get(j).getCriteria());
 
 					// Sets the state

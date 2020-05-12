@@ -155,6 +155,8 @@ public class Course {
 	 * Clones the course tasks.
 	 *
 	 * @return the course tasks
+	 * @see #getCourseTasks()
+	 * @see #getNotClonedTasks()
 	 */
 	public ArrayList<Task> getCourseTasks() {
 		try {
@@ -173,6 +175,18 @@ public class Course {
 	}
 
 	/**
+	 * {@link #getCourseTasks() Use this method instead} <br>
+	 * A getter for courseTasks. OBS THIS ONE DOSE NOT CLONE THE LIST
+	 *
+	 * @return not cloned course tasks
+	 * @see #getCourseTasks()
+	 * @see #getNotClonedTasks()
+	 */
+	public ArrayList<Task> getNotClonedTasks() {
+		return this.courseTasks;
+	}
+
+	/**
 	 * A getter for the course tasks. <br>
 	 * This will create a new instance of task <br>
 	 * So all the grades will be F, but have the same name.<br>
@@ -180,6 +194,8 @@ public class Course {
 	 * tasks}
 	 *
 	 * @return the tasks (only names stay the same)
+	 * @see #getCourseTasks()
+	 * @see #getNotClonedTasks()
 	 */
 	public ArrayList<Task> getNewCourseTask() {
 		// Creates a new ArrayList for the created criteria
