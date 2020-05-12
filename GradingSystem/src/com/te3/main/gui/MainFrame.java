@@ -154,7 +154,10 @@ public class MainFrame extends JFrame implements ComponentListener, WindowStateL
 		mainData = getSavedData();
 
 		// Tells the timer to auto save based on the save timer
-		autoSaveTimer = new Timer(saveTimer * 1000, (e) -> saveData(saveFilePath));
+		autoSaveTimer = new Timer(saveTimer * 1000, (e) -> {
+			saveData("autoSave.xml");
+			saveData(saveFilePath);
+		});
 
 		// Hooks in to the shutdown sequence and writes to the files and then exits.
 		Runtime.getRuntime().addShutdownHook(new Thread(() -> {

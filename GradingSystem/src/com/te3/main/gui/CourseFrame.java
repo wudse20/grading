@@ -240,7 +240,7 @@ public class CourseFrame extends JFrame implements WindowListener {
 					"Du har lagt till en kurs", JOptionPane.INFORMATION_MESSAGE);
 
 			// Updates the grade panel
-			mf.updateGradePanel();
+			mf.updateGradePanel(State.CLASS_COURSE);
 
 			// Updates CBPanel
 			mf.cbPanel.refreshData(mf.getMainData());
