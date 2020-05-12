@@ -10,19 +10,11 @@ import javax.swing.JPanel;
 import com.te3.main.enums.State;
 import com.te3.main.objects.*;
 
-/**
- *	Du behöver fixa en metod i MainFrame för att uppdatera din panel.
- *	Du behöver även uppdatera GUI:t och sätta vilket stadie panelen är i
- *	m.h.a. mf.updateGradePanel(State), med rätt state. Sedan mf.updateGradePanel()
- */
 public class CBPanel extends JPanel {
 	/** Default */
 	private static final long serialVersionUID = 1L;
 	
 	boolean isRefreshing = false;
-	
-	//Keeps track of what "level" you have selected in the comboboxes so it can properly update the visibility of them
-	int selectionLevel = 0;
 
 	GridLayout mainLayout;
 	
@@ -71,33 +63,41 @@ public class CBPanel extends JPanel {
 
 		yoda(mf.shouldShowBabyYoda());
 		
-		//class combobox
+		//Add the ActionListener to the Class combobox.
 		cbClass.addActionListener((e) -> {
+			//Check if the combobox !!!DOES NOT!!! have focus or if the data is being refreshed.
+			//If we don't have focus or the data is being refreshed, then return.
 			if (!cbClass.isFocusOwner() || isRefreshing) return;
 			
 			System.out.println("Class combobox updating");
 			
+			//Get the currently selected index of the combobox
 			int i = cbClass.getSelectedIndex();
+			//Get the total amount of objects in the combobox
 			int itmCount = cbClass.getItemCount();
 			
-			System.out.println(i);
-			System.out.println(itmCount);
-			
-			//selected the default entry
+			//The user has selected the default entry
 			if (i == 0) {
+				//Display nothing in the gradepanel
 				mf.updateGradePanel(State.NOTHING_SELECTED);
-			//selected a class
+			//The user has selected a class
 			} else if (i != -1 && i < itmCount - 2) {
+				//Update the gradepanel state, to have it display nothing (but the other comboboxes become available for selection)
 				mf.updateGradePanel(State.CLASS);
+				//Set the selected class index to the currently selected index in the combobox
 				mf.setCurrentlySelectedClassIndex(i-1);
+				//Reset the selected course, student and assignment index to 0, to completely reset the state of the display.
+				mf.setCurrentlySelectedCourseIndex(0);
+				mf.setCurrentlySelectedStudentIndex(0);
+				mf.setCurrentlySelectedAssignmentIndex(0);
 				
-				//update student combobox
+				//Update the Student combobox with eventual new items from the selected class
 				cbStudent.removeAllItems();
 				ArrayList<SchoolClass> dataClasses = mf.getMainData().getClasses();
 				ArrayList<Student> dataStudents = dataClasses.get(i-1).getStudents();
 				dataStudents.forEach((n) -> cbStudent.addItem(n.getName()));
 				
-				//update course combobox
+				//Update the Course combobox with eventual new items from the selected class
 				cbCourse.removeAllItems();
 				cbCourse.addItem("Kurs");
 				ArrayList<Course> dataCourses = dataStudents.get(mf.getCurrentlySelectedStudentIndex()).getCourses();
@@ -105,26 +105,33 @@ public class CBPanel extends JPanel {
 				cbCourse.addItem("Ny");
 				cbCourse.addItem("Ändra");
 				
-				//update task combobox
+				//update the Task combobox with eventual new items from the selected class.
 				cbTask.removeAllItems();
-				cbTask.addItem("Samlad vy");
-				ArrayList<Task> dataTasks = dataCourses.get(mf.getCurrentlySelectedCourseIndex()).getCourseTasks();
-				dataTasks.forEach((n) -> cbTask.addItem(n.getName()));
-				cbTask.addItem("Ny");
-				cbTask.addItem("Ändra");
+				//If there is a course in the selected class:
+				if (dataCourses.size() != 0) {
+					cbTask.addItem("Samlad vy");
+					//Add every object in the eventual tasks in the course to the task combobox.
+					ArrayList<Task> dataTasks = dataCourses.get(mf.getCurrentlySelectedCourseIndex()).getCourseTasks();
+					dataTasks.forEach((n) -> cbTask.addItem(n.getName()));
+					cbTask.addItem("Ny");
+					cbTask.addItem("Ändra");
+				//Otherwise do not display any selectable objects in the combobox.
+				} else {
+					cbTask.addItem("Saknas kurs");
+				}
 				
-			//selected the "New" option
+			//selected the "Change" option
 			} else if (i == itmCount - 1) {
 				mf.openAddEditGUI(SchoolClass.class, false);
 				mf.setCurrentlySelectedClassIndex(itmCount-3);
-			//selected the "Change" option
+			//selected the "New" option
 			} else if (i == itmCount - 2) {
 				mf.openAddEditGUI(SchoolClass.class, true);
 				mf.setCurrentlySelectedClassIndex(itmCount-3);
 			}
 		});
 		
-		//course combobox
+		//Add the ActionListener to the Course combobox.
 		cbCourse.addActionListener((e) -> {
 			if (!cbCourse.isFocusOwner() || isRefreshing) return;
 			
@@ -150,7 +157,7 @@ public class CBPanel extends JPanel {
 			}
 		});
 		
-		//student combobox
+		//Add the ActionListener to the Student combobox.
 		cbStudent.addActionListener((e) -> {
 			if (!cbStudent.isFocusOwner() || isRefreshing) return;
 
@@ -164,7 +171,7 @@ public class CBPanel extends JPanel {
 			cbTask.setSelectedIndex(0);
 		});
 		
-		//task combobox
+		//Add the ActionListener to the Task combobox.
 		cbTask.addActionListener((e) -> {
 			if (!cbTask.isFocusOwner() || isRefreshing) return;
 			
@@ -188,6 +195,7 @@ public class CBPanel extends JPanel {
 			}
 		});
 		
+		//Add the combobox items to the panel.
 		this.add(cbClass);
 		this.add(cbCourse);
 		this.add(cbStudent);
@@ -219,15 +227,18 @@ public class CBPanel extends JPanel {
 		State curState = mf.getGradeState();
 		System.out.println(curState.toString());
 		
-		if (curState == State.NOTHING_SELECTED) {
+		switch(curState) {
+		case NOTHING_SELECTED:
 			cbCourse.setEnabled(false);
 			cbStudent.setEnabled(false);
 			cbTask.setEnabled(false);
-		} else if (curState == State.CLASS) {
+			break;
+		case CLASS:
 			cbCourse.setEnabled(true);
 			cbStudent.setEnabled(false);
 			cbTask.setEnabled(false);
-		} else {
+			break;
+		default:
 			cbCourse.setEnabled(true);
 			cbStudent.setEnabled(true);
 			cbTask.setEnabled(true);
@@ -239,6 +250,7 @@ public class CBPanel extends JPanel {
 	 * @param newData the new information to be parsed and updated with.
 	 */
 	public void refreshData(Data newData) {
+		//Set the refreshing boolean (so the actionlisteners do not get run)
 		isRefreshing = true;
 		
 		System.out.println("Refreshing Data combobox data");
@@ -301,7 +313,6 @@ public class CBPanel extends JPanel {
 					dataTasks.forEach((n) -> cbTask.addItem(n.getName()));
 				}
 			}
-			isRefreshing = false;
 		}
 		
 		System.out.println("Adding change items...");
@@ -312,5 +323,8 @@ public class CBPanel extends JPanel {
 		cbCourse.addItem("Ändra");
 		cbTask.addItem("Ny");
 		cbTask.addItem("Ändra");
+		
+		//Reset the refreshing boolean (so the actionlisteners get run again)
+		isRefreshing = false;
 	}
 }
