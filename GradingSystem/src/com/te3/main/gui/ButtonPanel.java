@@ -428,6 +428,9 @@ public class ButtonPanel extends JPanel {
 		btnSearch.addActionListener(e -> {
 			// Checks the windows status
 			if (!this.isSearchWindowOpened) {
+				//Sets the state
+				mf.updateGradePanel(State.NOTHING_SELECTED);
+
 				// Sends Debug message
 				System.out.println("["
 						+ ((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour()
