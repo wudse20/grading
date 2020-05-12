@@ -73,7 +73,7 @@ public class CBPanel extends JPanel {
 		
 		//class combobox
 		cbClass.addActionListener((e) -> {
-			if (/*!cbClass.isFocusOwner() || */isRefreshing) return;
+			if (!cbClass.isFocusOwner() || isRefreshing) return;
 			
 			System.out.println("Class combobox updating");
 			
@@ -83,27 +83,45 @@ public class CBPanel extends JPanel {
 			System.out.println(i);
 			System.out.println(itmCount);
 			
+			//selected the default entry
 			if (i == 0) {
 				mf.updateGradePanel(State.NOTHING_SELECTED);
+			//selected a class
 			} else if (i != -1 && i < itmCount - 2) {
 				mf.updateGradePanel(State.CLASS);
 				mf.setCurrentlySelectedClassIndex(i-1);
 				
-				//update student combobox if the class changed
+				//update student combobox
 				cbStudent.removeAllItems();
 				ArrayList<SchoolClass> dataClasses = mf.getMainData().getClasses();
 				ArrayList<Student> dataStudents = dataClasses.get(i-1).getStudents();
 				dataStudents.forEach((n) -> cbStudent.addItem(n.getName()));
 				
+				//update course combobox
+				cbCourse.removeAllItems();
+				cbCourse.addItem("Kurs");
+				ArrayList<Course> dataCourses = dataStudents.get(mf.getCurrentlySelectedStudentIndex()).getCourses();
+				dataCourses.forEach((n) -> cbCourse.addItem(n.getName()));
+				cbCourse.addItem("Ny");
+				cbCourse.addItem("Ändra");
+				
+				//update task combobox
+				cbTask.removeAllItems();
+				cbTask.addItem("Samlad vy");
+				ArrayList<Task> dataTasks = dataCourses.get(mf.getCurrentlySelectedCourseIndex()).getCourseTasks();
+				dataTasks.forEach((n) -> cbTask.addItem(n.getName()));
+				cbTask.addItem("Ny");
+				cbTask.addItem("Ändra");
+				
+			//selected the "New" option
 			} else if (i == itmCount - 1) {
 				mf.openAddEditGUI(SchoolClass.class, false);
 				mf.setCurrentlySelectedClassIndex(itmCount-3);
+			//selected the "Change" option
 			} else if (i == itmCount - 2) {
 				mf.openAddEditGUI(SchoolClass.class, true);
 				mf.setCurrentlySelectedClassIndex(itmCount-3);
 			}
-			
-			//handleNewState();
 		});
 		
 		//course combobox
@@ -116,19 +134,19 @@ public class CBPanel extends JPanel {
 			int itmCount = cbCourse.getItemCount();
 			
 			if (i == 0) { 
-				mf.updateGradePanel(State.NOTHING_SELECTED);
+				mf.updateGradePanel(State.CLASS);
 			} else if (i != -1 && i < itmCount - 2) {
 				mf.setCurrentlySelectedCourseIndex(i-1);
-				mf.updateGradePanel(State.CLASS_COURSE);
+				mf.updateGradePanel(State.CLASS_COURSE_STUDENT);
 				
 				cbStudent.grabFocus();
 				cbStudent.setSelectedIndex(0);
 			} else if (i == itmCount - 1) {
 				mf.openAddEditGUI(Course.class, false);
-				mf.setCurrentlySelectedCourseIndex(itmCount-3);
+				mf.setCurrentlySelectedCourseIndex(0);
 			} else if (i == itmCount - 2) {
 				mf.openAddEditGUI(Course.class, true);
-				mf.setCurrentlySelectedCourseIndex(itmCount-3);
+				mf.setCurrentlySelectedCourseIndex(0);
 			}
 		});
 		
@@ -235,7 +253,6 @@ public class CBPanel extends JPanel {
 		System.out.println("Adding default combobox items...");
 		cbClass.addItem("Klass");
 		cbCourse.addItem("Kurs");
-		cbStudent.addItem("-");
 		cbTask.addItem("Samlad vy");
 		
 		System.out.println("Getting new data...");
@@ -253,7 +270,7 @@ public class CBPanel extends JPanel {
 				ArrayList<Course> dataCourses = null;
 				
 				try {
-					dataCourses = dataStudents.get(mf.getCurrentlySelectedClassIndex()).getCourses();
+					dataCourses = dataStudents.get(mf.getCurrentlySelectedStudentIndex()).getCourses();
 				} catch (java.lang.IndexOutOfBoundsException e) {
 					System.out.println("Selected class index is out of bounds. Reverting to default index 0.");
 					
