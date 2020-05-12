@@ -420,6 +420,7 @@ public class MainFrame extends JFrame implements ComponentListener, WindowStateL
 			ArrayList<Student> students = new ArrayList<Student>();
 			ArrayList<Criteria> criteria = new ArrayList<Criteria>();
 			ArrayList<Criteria> criteria2 = new ArrayList<Criteria>();
+			ArrayList<Criteria> criteria3 = new ArrayList<Criteria>();
 			ArrayList<Task> tasks = new ArrayList<Task>();
 
 			try {
@@ -441,7 +442,14 @@ public class MainFrame extends JFrame implements ComponentListener, WindowStateL
 				criteria2.add(new Criteria("Dokumentation"));
 				criteria2.add(new Criteria("Förmåga"));
 
+				criteria3.add(new Criteria("Åtgärda Fel"));
+				criteria3.add(new Criteria("Resultat"));
+				criteria3.add(new Criteria("Installeringar"));
+				criteria3.add(new Criteria("Dokumentation"));
+				criteria3.add(new Criteria("Förmåga"));
+
 				tasks.add(new Task("Något jätteprov", criteria2));
+				tasks.add(new Task("Ett till jätteprov", criteria3));
 
 				students.get(0).addCourse(new Course("Dator- och nätverksteknik", criteria, tasks));
 
