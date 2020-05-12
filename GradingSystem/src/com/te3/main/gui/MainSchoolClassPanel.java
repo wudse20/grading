@@ -22,6 +22,7 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
 import com.te3.main.exceptions.IllegalNameException;
+import com.te3.main.objects.Course;
 import com.te3.main.objects.SchoolClass;
 import com.te3.main.objects.Student;
 
@@ -41,6 +42,9 @@ public class MainSchoolClassPanel extends JPanel implements DocumentListener {
 
 	/** If the course linker window is opened */
 	private boolean isCourseLinkerOpened = false;
+
+	/** The ArrayList with linked courses */
+	private ArrayList<Course> linkedCourses;
 
 	// Instances
 	SchoolClass sc;
@@ -96,7 +100,7 @@ public class MainSchoolClassPanel extends JPanel implements DocumentListener {
 		this.setProperties();
 
 		// Adds the components
-		this.addComponents();
+		this.addComponents(false);
 	}
 
 	/**
@@ -118,17 +122,21 @@ public class MainSchoolClassPanel extends JPanel implements DocumentListener {
 		this.setProperties();
 
 		// Adds the components
-		this.addComponents();
+		this.addComponents(true);
 	}
 
 	/**
 	 * Adds the components
+	 *
+	 * @param isUpdateMode if {@code true} updating a course, else adding a course
 	 */
-	private void addComponents() {
+	private void addComponents(boolean isUpdateMode) {
 		pInput.add(lblName);
 		pInput.add(txfName);
 		pInput.add(btnAddName);
-		pInput.add(btnLinkToCourses);
+
+		if (!isUpdateMode)
+			pInput.add(btnLinkToCourses);
 
 		pStudents.add(lblStudents, BorderLayout.PAGE_START);
 		pStudents.add(scrStudents, BorderLayout.CENTER);
@@ -187,15 +195,18 @@ public class MainSchoolClassPanel extends JPanel implements DocumentListener {
 		btnLinkToCourses.addActionListener(e -> {
 			//Checks if the window is opened.
 			if (this.isCourseLinkerOpened) {
+				//Sends message to user
+				JOptionPane.showMessageDialog(this, "Du har redan öppnat denna ruta!", "Fel!", JOptionPane.ERROR_MESSAGE);
+
 				//Sends debug message:
 				System.out.println("[" + ((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour() : LocalTime.now().getHour()) + ":" + ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute() : LocalTime.now().getMinute())+ ":" + ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond(): LocalTime.now().getSecond())+ "] MainSchoolClassPanel: Link window already opened.");
 			} else {
 				//Opens window
-				lcf = new LinkCoursesFrame(this);
+				lcf = new LinkCoursesFrame(this, linkedCourses, mf);
 				lcf.setVisible(true);
 
 				//Tells the program that the window is opened.
-				this.isCourseLinkerOpened = false;
+				this.isCourseLinkerOpened = true;
 
 				//Debug message:
 				System.out.println("[" + ((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour() : LocalTime.now().getHour()) + ":" + ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute() : LocalTime.now().getMinute())+ ":" + ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond(): LocalTime.now().getSecond())+ "] MainSchoolClassPanel: Opened link window");
@@ -386,8 +397,31 @@ public class MainSchoolClassPanel extends JPanel implements DocumentListener {
 		return this.students;
 	}
 
+	/**
+	 * A getter for lcf
+	 *
+	 * @return the instance of the LinkedCoursesFrame
+	 */
 	public LinkCoursesFrame getLinkedCoursesFrame() {
 		return this.lcf;
+	}
+
+	/**
+	 * A setter for the linked courses
+	 *
+	 * @param linkedCourses the linked courses
+	 */
+	public void setLinkedCourses(ArrayList<Course> linkedCourses) {
+		this.linkedCourses = linkedCourses;
+	}
+
+	/**
+	 * A getter for the linked courses, clones the list.
+	 *
+	 * @return a clone of the linked courses
+	 */
+	public ArrayList<Course> getLinkedCourses() {
+		return (ArrayList<Course>) this.linkedCourses.clone();
 	}
 
 	/**

@@ -301,8 +301,20 @@ public class SchoolClassFrame extends JFrame implements WindowListener {
 		}
 
 		try {
+			//Creates the SchoolClass
+			SchoolClass sc = new SchoolClass(np.getLastInput(), mscp.getStudents());
+
+			//Sets the linked courses if it isn't null
+			if (mscp.getLinkedCourses() != null) {
+				//Loops through the students and adds the courses
+				for (var i = 0; i < sc.getStudents().size(); i++) {
+					//Adds the course to the SchoolClass
+					sc.getStudents().get(i).setCourses(mscp.getLinkedCourses());
+				}
+			}
+
 			// Adds a school class
-			al.add(new SchoolClass(np.getLastInput(), mscp.getStudents()));
+			al.add(sc);
 
 			// Sends a message
 			JOptionPane.showMessageDialog(this, "Klassen: " + np.getLastInput() + " är skapad.",
