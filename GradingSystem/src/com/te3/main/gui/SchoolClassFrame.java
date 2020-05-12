@@ -409,6 +409,9 @@ public class SchoolClassFrame extends JFrame implements WindowListener {
 		// Stops the flashing
 		mscp.stopFlashing();
 
+		//Closes the link window
+		mscp.getLinkedCoursesFrame().dispose();
+
 		// Disposes
 		this.dispose();
 	}

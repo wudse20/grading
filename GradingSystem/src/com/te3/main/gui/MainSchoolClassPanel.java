@@ -39,6 +39,9 @@ public class MainSchoolClassPanel extends JPanel implements DocumentListener {
 	/** If the timer is running or not */
 	private boolean isFlashingTimerRunning = false;
 
+	/** If the course linker window is opened */
+	private boolean isCourseLinkerOpened = false;
+
 	// Instances
 	SchoolClass sc;
 
@@ -54,6 +57,7 @@ public class MainSchoolClassPanel extends JPanel implements DocumentListener {
 
 	// Buttons
 	JButton btnAddName = new JButton("Lägg till");
+	JButton btnLinkToCourses = new JButton("Länka till kurser");
 
 	// Lables
 	JLabel lblStudents = new JLabel("Elever:");
@@ -75,6 +79,9 @@ public class MainSchoolClassPanel extends JPanel implements DocumentListener {
 	BorderLayout pStudentsLayout = new BorderLayout();
 
 	FlowLayout pInputLayout = new FlowLayout(FlowLayout.LEFT);
+
+	//Frames
+	LinkCoursesFrame lcf;
 
 	/**
 	 * For new class
@@ -121,6 +128,7 @@ public class MainSchoolClassPanel extends JPanel implements DocumentListener {
 		pInput.add(lblName);
 		pInput.add(txfName);
 		pInput.add(btnAddName);
+		pInput.add(btnLinkToCourses);
 
 		pStudents.add(lblStudents, BorderLayout.PAGE_START);
 		pStudents.add(scrStudents, BorderLayout.CENTER);
@@ -173,6 +181,24 @@ public class MainSchoolClassPanel extends JPanel implements DocumentListener {
 				if (e.getKeyCode() == 10) {
 					addStudents(txfName.getText());
 				}
+			}
+		});
+
+		btnLinkToCourses.addActionListener(e -> {
+			//Checks if the window is opened.
+			if (this.isCourseLinkerOpened) {
+				//Sends debug message:
+				System.out.println("[" + ((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour() : LocalTime.now().getHour()) + ":" + ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute() : LocalTime.now().getMinute())+ ":" + ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond(): LocalTime.now().getSecond())+ "] MainSchoolClassPanel: Link window already opened.");
+			} else {
+				//Opens window
+				lcf = new LinkCoursesFrame(this);
+				lcf.setVisible(true);
+
+				//Tells the program that the window is opened.
+				this.isCourseLinkerOpened = false;
+
+				//Debug message:
+				System.out.println("[" + ((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour() : LocalTime.now().getHour()) + ":" + ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute() : LocalTime.now().getMinute())+ ":" + ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond(): LocalTime.now().getSecond())+ "] MainSchoolClassPanel: Opened link window");
 			}
 		});
 	}
@@ -358,6 +384,17 @@ public class MainSchoolClassPanel extends JPanel implements DocumentListener {
 	 */
 	public ArrayList<Student> getStudents() {
 		return this.students;
+	}
+
+	public LinkCoursesFrame getLinkedCoursesFrame() {
+		return this.lcf;
+	}
+
+	/**
+	 * @param isCourseLinkerOpened if {@code true} if the course linker
+	 */
+	public void setCourseLinkerOpened(boolean isCourseLinkerOpened) {
+		this.isCourseLinkerOpened = isCourseLinkerOpened;
 	}
 
 	@Override

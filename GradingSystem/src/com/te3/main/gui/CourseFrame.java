@@ -405,8 +405,12 @@ public class CourseFrame extends JFrame implements WindowListener {
 	 */
 	@Override
 	public void windowClosing(WindowEvent e) {
+		//Stops flashing
 		mcp.stopFlashing(mcp.getListAddedClasses(), (byte) 0);
 		mcp.stopFlashing(mcp.getListCriteria(), (byte) 1);
+
+		//Disposes the window
+		this.dispose();
 	}
 
 	/**
