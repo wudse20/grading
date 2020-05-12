@@ -199,13 +199,13 @@ public class Course {
 	 */
 	public ArrayList<Task> getNewCourseTask() {
 		// Creates a new ArrayList for the created criteria
-		ArrayList<Task> newCriteria = new ArrayList<Task>();
+		ArrayList<Task> newTask = new ArrayList<Task>();
 
 		// Loops through this course's criteria.
 		for (int i = 0; i < this.courseTasks.size(); i++) {
 			try {
 				// Creates the new criteria with the same name.
-				newCriteria.add(new Task(courseTasks.get(i).getName(), courseTasks.get(i).getNewCriteria()));
+				newTask.add(new Task(courseTasks.get(i).getName(), courseTasks.get(i).getNewCriteria()));
 
 				// A debug message
 				System.out.println("["
@@ -217,7 +217,7 @@ public class Course {
 						+ ":"
 						+ ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond()
 								: LocalTime.now().getSecond())
-						+ "] Course: Created a new task with the name: " + this.courseCriteria.get(i).getName());
+						+ "] Course: Created a new task with the name: " + this.courseTasks.get(i).getName());
 			} catch (IllegalNameException e) {
 				// Prints stack trace to the console.
 				e.printStackTrace();
@@ -235,7 +235,7 @@ public class Course {
 		}
 
 		// Returns the newly created criteria
-		return newCriteria;
+		return newTask;
 	}
 
 	/**

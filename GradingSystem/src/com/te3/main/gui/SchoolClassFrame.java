@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 
 import com.te3.main.enums.State;
 import com.te3.main.exceptions.IllegalNameException;
+import com.te3.main.objects.Course;
 import com.te3.main.objects.SchoolClass;
 
 /**
@@ -232,8 +233,21 @@ public class SchoolClassFrame extends JFrame implements WindowListener {
 			// Sets the name
 			s.setName(np.getLastInput());
 
+			var students = mscp.getStudents();
+
+			//Loops through the students
+			for (int i = 0; i < students.size(); i++) {
+				//Loops through the courses of the school class
+				for (int j = 0; j < this.sc.getStudents().get(0).getCourses().size(); j++) {
+					//Prevents duplicates
+					if (students.get(i).getCourses().size() == 0) {
+						students.get(i).addCourse(new Course(this.sc.getStudents().get(0).getCourses().get(j).getName(), this.sc.getStudents().get(0).getCourses().get(j).getCourseCriteria(), this.sc.getStudents().get(0).getCourses().get(j).getNewCourseTask()));
+					}
+				}
+			}
+
 			// Sets the students
-			s.setStudents(mscp.getStudents());
+			s.setStudents(students);
 
 			// Saves the data
 			mf.saveData(mf.getSaveFilePath());
@@ -421,8 +435,9 @@ public class SchoolClassFrame extends JFrame implements WindowListener {
 		// Stops the flashing
 		mscp.stopFlashing();
 
-		// Closes the link window
-		mscp.getLinkedCoursesFrame().dispose();
+		if (mscp.isCourseLinkerOpened())
+			// Closes the link window
+			mscp.getLinkedCoursesFrame().dispose();
 
 		// Disposes
 		this.dispose();

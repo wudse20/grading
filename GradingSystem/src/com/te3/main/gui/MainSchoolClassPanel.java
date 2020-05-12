@@ -449,6 +449,15 @@ public class MainSchoolClassPanel extends JPanel implements DocumentListener {
 		this.isCourseLinkerOpened = isCourseLinkerOpened;
 	}
 
+	/**
+	 * A getter for isCourseLinkerOpened.
+	 *
+	 * @return if course linker is oppened or not
+	 */
+	public boolean isCourseLinkerOpened() {
+		return this.isCourseLinkerOpened;
+	}
+
 	@Override
 	public void insertUpdate(DocumentEvent e) {
 		txfName.setBackground(Color.white);
