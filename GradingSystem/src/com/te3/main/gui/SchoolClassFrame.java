@@ -235,13 +235,16 @@ public class SchoolClassFrame extends JFrame implements WindowListener {
 
 			var students = mscp.getStudents();
 
-			//Loops through the students
+			// Loops through the students
 			for (int i = 0; i < students.size(); i++) {
-				//Loops through the courses of the school class
+				// Loops through the courses of the school class
 				for (int j = 0; j < this.sc.getStudents().get(0).getCourses().size(); j++) {
-					//Prevents duplicates
+					// Prevents duplicates
 					if (students.get(i).getCourses().size() == 0) {
-						students.get(i).addCourse(new Course(this.sc.getStudents().get(0).getCourses().get(j).getName(), this.sc.getStudents().get(0).getCourses().get(j).getCourseCriteria(), this.sc.getStudents().get(0).getCourses().get(j).getNewCourseTask()));
+						students.get(i)
+								.addCourse(new Course(this.sc.getStudents().get(0).getCourses().get(j).getName(),
+										this.sc.getStudents().get(0).getCourses().get(j).getCourseCriteria(),
+										this.sc.getStudents().get(0).getCourses().get(j).getNewCourseTask()));
 					}
 				}
 			}

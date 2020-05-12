@@ -293,7 +293,7 @@ public class OverviewFrame extends JFrame {
 			GradesPanel[] gps = new GradesPanel[taskCount];
 			JLabel[] lblInfos = new JLabel[taskCount];
 
-			//Overall index
+			// Overall index
 			int overallIndex = 0;
 
 			// Loops through and adds components
@@ -307,7 +307,7 @@ public class OverviewFrame extends JFrame {
 					// Sets the text
 					lblInfos[i].setText("Uppgift: " + tasks.get(overallIndex).getName());
 
-					//Increments overallIndex
+					// Increments overallIndex
 					overallIndex++;
 
 					// Sets font
