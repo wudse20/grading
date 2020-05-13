@@ -149,9 +149,16 @@ public class ButtonPanel extends JPanel {
 
 			// Tries the save it to a file then closes the frame
 			try {
-				BufferedWriter w = new BufferedWriter(new FileWriter(fsf.getFilePath(), true));
+				// Creates the file writer with the path
+				BufferedWriter w = new BufferedWriter(new FileWriter(fsf.getFilePath(), false));
+
+				// Appends the text.
 				w.append(text);
+
+				// Closes the writer
 				w.close();
+
+				// Sends message to user.
 				JOptionPane.showMessageDialog(mf, "Du har sparat till en fil!", "Sparat",
 						JOptionPane.INFORMATION_MESSAGE);
 			} catch (IOException e) {
@@ -371,9 +378,17 @@ public class ButtonPanel extends JPanel {
 		// Saves the data and set's the path
 		if (fsf.getExitCode() == 0) {
 			try {
+				//Sets the file path
 				mf.setSaveFilePath(fsf.getFilePath());
+
+				//Saves the data
 				mf.saveData(mf.getSaveFilePath());
+
+				// Sends message to the user
 				JOptionPane.showMessageDialog(mf, "Du har sparat", "Sparat", JOptionPane.INFORMATION_MESSAGE);
+
+				// Saves the settings
+				mf.saveSettings();
 			} catch (IllegalInputException e) {
 				e.printStackTrace();
 			}
