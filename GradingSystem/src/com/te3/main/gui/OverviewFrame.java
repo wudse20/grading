@@ -36,7 +36,9 @@ public class OverviewFrame extends JFrame {
 			+ "i elevens alla klasser/grupper.<br><br>" + "Det finns två olika vyer: <br>"
 			+ "1. Kurs vy och den visar <br>" + "den samlade vyn över varje kurs <br>" + "som eleven är med i.<br><br>"
 			+ "2. Uppgifts vy och den visar <br>" + "elevens alla uppgifter i samtliga <br>"
-			+ "kurser och klasser. <br><br>" + "Knappen: <b>Stäng</b> stänger rutan. <br><br>"
+			+ "kurser och klasser.<br>" + "OBS Denna vyn kan inte visa en uppgift samtidgt som <br>"
+			+ "den vanliga vyn gör det. Då kommer inte knapparna synas.<br><br>"
+			+ "Knappen: <b>Stäng</b> stänger rutan. <br><br>"
 			+ "Knappen: <b>Uppdatera</b> uppdaterar informationen.";
 
 	/** The state of the information shown, to be feed to the grade panels */
