@@ -286,30 +286,54 @@ public class FileSystemFrame extends JFrame implements KeyListener, ListSelectio
 		}
 
 		if (txfName.getText().indexOf('.') != -1) {
-			throw new IllegalNameException("Du får inte ha några punkter, .,  i namnet. Detta kan vara att du har skivit in filtypen, ta isåfall bort den biten.");
+			throw new IllegalNameException(
+					"Du får inte ha några punkter, .,  i namnet. Detta kan vara att du har skivit in filtypen, ta isåfall bort den biten.");
 		}
 
 		if (txfName.getText().indexOf('/') != -1) {
 			throw new IllegalNameException("Du får inte ha några snedsträck, /, i namnet.");
 		}
 
-		//Checks if the file exists
+		// Checks if the file exists
 		if (new File(this.getFilePath()).exists()) {
-			//Sends confirmation message to the user
-			var ans = JOptionPane.showConfirmDialog(this, "Denna filen finns redan; är du säker på att du vill spara över den?", "Filen finns redan!", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+			// Sends confirmation message to the user
+			var ans = JOptionPane.showConfirmDialog(this,
+					"Denna filen finns redan; är du säker på att du vill spara över den?", "Filen finns redan!",
+					JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 
 			/*
-			* If yes was answered then it will continue with the method, if no was answered it will return.
-			* */
+			 * If yes was answered then it will continue with the method, if no was answered
+			 * it will return.
+			 */
 			if (ans == JOptionPane.YES_OPTION) {
 				// Sends message to the user
 				JOptionPane.showMessageDialog(this, "Filen skrivs över!", "OBSERVERA", JOptionPane.INFORMATION_MESSAGE);
 
 				// Debug message
-				System.out.println("[" + ((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour() : LocalTime.now().getHour()) + ":" + ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute() : LocalTime.now().getMinute())+ ":" + ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond(): LocalTime.now().getSecond())+ "] FileSystemFrame: Got permission to overwrite file(" + this.getFilePath() + ") by user, continuing...");
+				System.out.println("["
+						+ ((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour()
+								: LocalTime.now().getHour())
+						+ ":"
+						+ ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute()
+								: LocalTime.now().getMinute())
+						+ ":"
+						+ ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond()
+								: LocalTime.now().getSecond())
+						+ "] FileSystemFrame: Got permission to overwrite file(" + this.getFilePath()
+						+ ") by user, continuing...");
 			} else {
 				// Debug message
-				System.out.println("[" + ((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour() : LocalTime.now().getHour()) + ":" + ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute() : LocalTime.now().getMinute())+ ":" + ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond(): LocalTime.now().getSecond())+ "] FileSystemFrame: Permission denied to overwrite file(" + this.getFilePath() + ") by user, returning...");
+				System.out.println("["
+						+ ((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour()
+								: LocalTime.now().getHour())
+						+ ":"
+						+ ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute()
+								: LocalTime.now().getMinute())
+						+ ":"
+						+ ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond()
+								: LocalTime.now().getSecond())
+						+ "] FileSystemFrame: Permission denied to overwrite file(" + this.getFilePath()
+						+ ") by user, returning...");
 
 				// Returns
 				return;

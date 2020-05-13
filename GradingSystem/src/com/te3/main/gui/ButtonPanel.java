@@ -378,10 +378,10 @@ public class ButtonPanel extends JPanel {
 		// Saves the data and set's the path
 		if (fsf.getExitCode() == 0) {
 			try {
-				//Sets the file path
+				// Sets the file path
 				mf.setSaveFilePath(fsf.getFilePath());
 
-				//Saves the data
+				// Saves the data
 				mf.saveData(mf.getSaveFilePath());
 
 				// Sends message to the user
