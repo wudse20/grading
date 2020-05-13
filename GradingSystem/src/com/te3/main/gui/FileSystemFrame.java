@@ -10,6 +10,7 @@ import java.awt.event.KeyListener;
 import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Comparator;
 
@@ -280,12 +281,39 @@ public class FileSystemFrame extends JFrame implements KeyListener, ListSelectio
 	 */
 	private void save() throws IllegalNameException {
 		// Checks for all the inputs that wouldn't work
-		if (fileName.trim().equals("")) {
+		if (txfName.getText().trim().equals("")) {
 			throw new IllegalNameException("Du måste skriva något i rutan");
-		} else if (fileName.indexOf('.') != -1) {
-			throw new IllegalNameException("Du får inte ha några punkter, .,  i namnet.");
-		} else if (fileName.indexOf('/') != -1) {
+		}
+
+		if (txfName.getText().indexOf('.') != -1) {
+			throw new IllegalNameException("Du får inte ha några punkter, .,  i namnet. Detta kan vara att du har skivit in filtypen, ta isåfall bort den biten.");
+		}
+
+		if (txfName.getText().indexOf('/') != -1) {
 			throw new IllegalNameException("Du får inte ha några snedsträck, /, i namnet.");
+		}
+
+		//Checks if the file exists
+		if (new File(this.getFilePath()).exists()) {
+			//Sends confirmation message to the user
+			var ans = JOptionPane.showConfirmDialog(this, "Denna filen finns redan; är du säker på att du vill spara över den?", "Filen finns redan!", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+
+			/*
+			* If yes was answered then it will continue with the method, if no was answered it will return.
+			* */
+			if (ans == JOptionPane.YES_OPTION) {
+				// Sends message to the user
+				JOptionPane.showMessageDialog(this, "Filen skrivs över!", "OBSERVERA", JOptionPane.INFORMATION_MESSAGE);
+
+				// Debug message
+				System.out.println("[" + ((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour() : LocalTime.now().getHour()) + ":" + ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute() : LocalTime.now().getMinute())+ ":" + ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond(): LocalTime.now().getSecond())+ "] FileSystemFrame: Got permission to overwrite file(" + this.getFilePath() + ") by user, continuing...");
+			} else {
+				// Debug message
+				System.out.println("[" + ((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour() : LocalTime.now().getHour()) + ":" + ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute() : LocalTime.now().getMinute())+ ":" + ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond(): LocalTime.now().getSecond())+ "] FileSystemFrame: Permission denied to overwrite file(" + this.getFilePath() + ") by user, returning...");
+
+				// Returns
+				return;
+			}
 		}
 
 		// Sets some variables up
@@ -451,7 +479,7 @@ public class FileSystemFrame extends JFrame implements KeyListener, ListSelectio
 	 */
 	public void setFileName(String fileName) throws IllegalNameException {
 		if (fileName.trim().equals("")) {
-			throw new IllegalNameException("För kort!");
+			throw new IllegalNameException("För kort filnamn!");
 		} else {
 			this.fileName = fileName;
 		}
@@ -484,7 +512,7 @@ public class FileSystemFrame extends JFrame implements KeyListener, ListSelectio
 	 */
 	public void setFileType(String fileType) throws IllegalNameException {
 		if (fileType.trim().equals("")) {
-			throw new IllegalNameException("För kort!");
+			throw new IllegalNameException("För kort filtyp!");
 		} else {
 			this.fileType = "." + fileType;
 		}
