@@ -425,7 +425,7 @@ public class FileSystemFrame extends JFrame implements KeyListener, ListSelectio
 			}
 		} else {
 			// Sets the text of the name to the text field.
-			txfName.setText(selected);
+			txfName.setText(selected.substring(0, selected.indexOf('.')));
 		}
 	}
 
