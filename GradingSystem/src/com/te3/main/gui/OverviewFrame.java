@@ -32,17 +32,12 @@ public class OverviewFrame extends JFrame {
 	private static final long serialVersionUID = 8640909301807953951L;
 
 	/** The help text of this frame */
-	private String helpText = "Den här rutan visar elevens alla kurser/uppgifer <br>" +
-			"i elevens alla klasser/grupper.<br><br>" +
-			"Det finns två olika vyer: <br>" +
-			"1. Kurs vy och den visar <br>" +
-			"den samlade vyn över varje kurs <br>" +
-			"som eleven är med i.<br><br>" +
-			"2. Uppgifts vy och den visar <br>" +
-			"elevens alla uppgifter i samtliga <br>" +
-			"kurser och klasser. <br><br>" +
-			"Knappen: <b>Stäng</b> stänger rutan. <br><br>" +
-			"Knappen: <b>Uppdatera</b> uppdaterar informationen.";
+	private String helpText = "Den här rutan visar elevens alla kurser/uppgifer <br>"
+			+ "i elevens alla klasser/grupper.<br><br>" + "Det finns två olika vyer: <br>"
+			+ "1. Kurs vy och den visar <br>" + "den samlade vyn över varje kurs <br>" + "som eleven är med i.<br><br>"
+			+ "2. Uppgifts vy och den visar <br>" + "elevens alla uppgifter i samtliga <br>"
+			+ "kurser och klasser. <br><br>" + "Knappen: <b>Stäng</b> stänger rutan. <br><br>"
+			+ "Knappen: <b>Uppdatera</b> uppdaterar informationen.";
 
 	/** The state of the information shown, to be feed to the grade panels */
 	private State s = State.CLASS_COURSE_STUDENT;
@@ -125,7 +120,8 @@ public class OverviewFrame extends JFrame {
 		// Adds listeners
 		btnClose.addActionListener(e -> this.dispose());
 		btnUpdate.addActionListener(e -> this.handleGradePanel(this.s, this.result));
-		btnHelp.addActionListener(e -> new HelpFrame("Överskådlig Vy", "<html><p>" + helpText + "</p></html>", HelpFrame.DEFAULT_HEIGHT, 450).setVisible(true));
+		btnHelp.addActionListener(e -> new HelpFrame("Överskådlig Vy", "<html><p>" + helpText + "</p></html>",
+				HelpFrame.DEFAULT_HEIGHT, 450).setVisible(true));
 
 		radioClassCourseStudent.addActionListener(e -> {
 			// Sets the state

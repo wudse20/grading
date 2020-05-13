@@ -43,7 +43,7 @@ public class SettingsFrame extends JFrame {
 			+ "<br><br> För att välja bakgrundsbild klicka på den bilden du vill ha. <br><br>"
 			+ "Skulle du vilja spara dina loggar så klicka i rutan <b>Spara Loggar</b> tills det står aktiverat. <br><br>"
 			+ "För att ställa in vart data skall sparas <br>" + "klicka på knappen: <b>Ställ in plats för sparfil</b>"
-			+ " och följ instruktionerna <br><br>"
+			+ "och följ instruktionerna <br><br>"
 			+ "För att radera all data tryck på knappen <b>Rensa all data</b><br><br>"
 			+ "För att applicera inställningarna tryck på <b>verkställ</b><br><br>"
 			+ "För att avbryta tryck på <b>avbryt</b>";
@@ -203,9 +203,8 @@ public class SettingsFrame extends JFrame {
 
 		btnApply.addActionListener((e) -> applySettings());
 		btnCancel.addActionListener((e) -> this.dispose());
-		btnHelp.addActionListener(
-				(e) -> new HelpFrame("Inställningar", "<html><p>" + helpText + "</p></html>", HelpFrame.DEFAULT_HEIGHT, 600)
-						.setVisible(true));
+		btnHelp.addActionListener((e) -> new HelpFrame("Inställningar", "<html><p>" + helpText + "</p></html>",
+				HelpFrame.DEFAULT_HEIGHT, 600).setVisible(true));
 		btnSetSavePath.addActionListener((e) -> setSavePath());
 		banDeleteData.addActionListener((e) -> deleteData());
 		cBoxShouldShowBabyYoda.addActionListener((e) -> setYodaBtnStatus(cBoxShouldShowBabyYoda.isSelected()));

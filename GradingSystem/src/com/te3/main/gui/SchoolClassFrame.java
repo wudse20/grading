@@ -38,8 +38,7 @@ public class SchoolClassFrame extends JFrame implements WindowListener {
 			+ "Du lägger till namnen genom att antigen<br>"
 			+ "trycka på <b>lägg till</b> eller trycka på enter i rutan.<br><br>"
 			+ "Tryck på knappen: <b>Länka till kurser</b> för att länka <br>"
-			+ "kursen till redan existerande kurser. <br>"
-			+ "OBS finns bara tillgängligt när du skapar en klass.<br>"
+			+ "kursen till redan existerande kurser. <br>" + "OBS finns bara tillgängligt när du skapar en klass.<br>"
 			+ "Gå annars via uppdatera kurs för att länka redan <br>"
 			+ "existerande klasser till en befintlig kurs.<br><br>"
 			+ "För att skapa/uppdatera klassen klicka på <b>lägg till</b> eller <b>uppdatera</b>. <br>"
@@ -102,7 +101,8 @@ public class SchoolClassFrame extends JFrame implements WindowListener {
 		});
 
 		acp.getBtnHelp().addActionListener((e) -> {
-			new HelpFrame("Skapa en klass", "<html><p>" + helpInfo + "</p></html>", HelpFrame.DEFAULT_HEIGHT, 500).setVisible(true);
+			new HelpFrame("Skapa en klass", "<html><p>" + helpInfo + "</p></html>", HelpFrame.DEFAULT_HEIGHT, 500)
+					.setVisible(true);
 		});
 	}
 
@@ -143,9 +143,8 @@ public class SchoolClassFrame extends JFrame implements WindowListener {
 
 		ecp.getBtnDelete().addActionListener(e -> this.deleteClass());
 
-		ecp.getBtnHelp().addActionListener(
-				(e) -> new HelpFrame("Uppdatera en klass", "<html><p>" + helpInfo + "</p></html>", HelpFrame.DEFAULT_HEIGHT, 500)
-						.setVisible(true));
+		ecp.getBtnHelp().addActionListener((e) -> new HelpFrame("Uppdatera en klass",
+				"<html><p>" + helpInfo + "</p></html>", HelpFrame.DEFAULT_HEIGHT, 500).setVisible(true));
 	}
 
 	/**
