@@ -306,6 +306,8 @@ public class FileSystemFrame extends JFrame implements KeyListener, ListSelectio
 	 */
 	private void createNewFolder(String path) throws IllegalNameException, UnsuccessfulFolderCreationException {
 		// Checks for all the inputs that wouldn't work
+		// If indexOf returns -1 the character isn't in
+		// the String.
 		if (path.trim().equals("")) {
 			throw new IllegalNameException("Du måste skriva något i rutan");
 		} else if (path.indexOf('.') != -1) {
@@ -380,14 +382,22 @@ public class FileSystemFrame extends JFrame implements KeyListener, ListSelectio
 
 		String selected = content.get(selectedIndex);
 
-		// If there isn't a dot then it's a folder and then we can open that.
+		// If there isn't a dot then it's a folder and then we can open that,
+		// then it will put the name in to the name box.
 		if (selected.indexOf('.') == -1) {
 			try {
+				// Sets path
 				this.setPath(this.path + "/" + selected);
+
+				// Refreshes the table
 				this.refreshTable(this.path);
 			} catch (IllegalInputException e) {
+				// returns
 				return;
 			}
+		} else {
+			// Sets the text of the name to the text field.
+			txfName.setText(selected);
 		}
 	}
 
