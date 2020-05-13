@@ -26,6 +26,15 @@ public class LinkCoursesFrame extends JFrame implements WindowListener {
 	/** Generated */
 	private static final long serialVersionUID = -7505130168699828116L;
 
+	/** The help text of this frame */
+	private String helpText = "För att länka en kurs till klassen<br>" +
+			"Klicka på den i listan: <b>Ej Tillagda Kurser</b> <br><br>" +
+			"För att avlänka en kurs klicka på kursen i listan: <br>" +
+			"<b>Tillagda Kurser</b>. <br><br>" +
+			"För att applicera ändringarna tryck på: <b>Verkställ</b> <br><br>" +
+			"För att avbryta tryck antingen på: <b>Avbryt</b><br>" +
+			"Eller stäng fönstret.";
+
 	// Instances
 	MainSchoolClassPanel mscp;
 	MainFrame mf;
@@ -103,7 +112,7 @@ public class LinkCoursesFrame extends JFrame implements WindowListener {
 		// Adds listeners
 		btnCancel.addActionListener(e -> this.btnCancelPressed());
 		btnHelp.addActionListener(
-				e -> new HelpFrame("Title", "Text", HelpFrame.DEFAULT_HEIGHT, HelpFrame.DEFAULT_HEIGHT));
+				e -> new HelpFrame("Länka kurser", "<html><p>" + helpText + "</p></html>", HelpFrame.DEFAULT_HEIGHT, 450).setVisible(true));
 		btnApply.addActionListener(e -> this.btnApplyPressed());
 
 		jListAddedCourses.addListSelectionListener(e -> {

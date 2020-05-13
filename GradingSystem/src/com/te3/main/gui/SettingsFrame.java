@@ -41,10 +41,11 @@ public class SettingsFrame extends JFrame {
 			+ "skriv in intervallet i sekunder. <br>" + "Det måste vara mellan 60 och 3600 sekunder. <br><br>"
 			+ "För att sätta på bakgrundsbilden klicka på rutan <b>Baby Yoda som bakgrund</b>"
 			+ "<br><br> För att välja bakgrundsbild klicka på den bilden du vill ha. <br><br>"
+			+ "Skulle du vilja spara dina loggar så klicka i rutan <b>Spara Loggar</b> tills det står aktiverat. <br><br>"
 			+ "För att ställa in vart data skall sparas <br>" + "klicka på knappen: <b>Ställ in plats för sparfil</b>"
 			+ " och följ instruktionerna <br><br>"
 			+ "För att radera all data tryck på knappen <b>Rensa all data</b><br><br>"
-			+ "För att applicera inställningarna tryck på <b>verkställ</b><br>"
+			+ "För att applicera inställningarna tryck på <b>verkställ</b><br><br>"
 			+ "För att avbryta tryck på <b>avbryt</b>";
 
 	/** The current yoda */
@@ -203,7 +204,7 @@ public class SettingsFrame extends JFrame {
 		btnApply.addActionListener((e) -> applySettings());
 		btnCancel.addActionListener((e) -> this.dispose());
 		btnHelp.addActionListener(
-				(e) -> new HelpFrame("Inställningar", "<html><p>" + helpText + "</p></html>", 500, 600)
+				(e) -> new HelpFrame("Inställningar", "<html><p>" + helpText + "</p></html>", HelpFrame.DEFAULT_HEIGHT, 600)
 						.setVisible(true));
 		btnSetSavePath.addActionListener((e) -> setSavePath());
 		banDeleteData.addActionListener((e) -> deleteData());
