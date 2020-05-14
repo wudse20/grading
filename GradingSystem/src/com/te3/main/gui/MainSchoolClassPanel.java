@@ -439,6 +439,10 @@ public class MainSchoolClassPanel extends JPanel implements DocumentListener {
 	 */
 	@SuppressWarnings("unchecked")
 	public ArrayList<Course> getLinkedCourses() {
+		// Prevents a NullPointerException in MainSchoolClassPanel
+		if (this.linkedCourses == null)
+			return new ArrayList<Course>();
+
 		return (ArrayList<Course>) this.linkedCourses.clone();
 	}
 
