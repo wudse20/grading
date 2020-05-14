@@ -15,6 +15,8 @@ public class CBPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 	
 	boolean isRefreshing = false;
+	
+	boolean hasInitialized = false;
 
 	GridLayout mainLayout;
 	
@@ -35,6 +37,8 @@ public class CBPanel extends JPanel {
 		
 		initComponents();
 		refreshData(importedData);
+		
+		hasInitialized = true;
 	}
 	
 	@Override
@@ -123,11 +127,11 @@ public class CBPanel extends JPanel {
 			//selected the "Change" option
 			} else if (i == itmCount - 1) {
 				mf.openAddEditGUI(SchoolClass.class, false);
-				mf.setCurrentlySelectedClassIndex(itmCount-3);
+				mf.setCurrentlySelectedClassIndex(itmCount-2);
 			//selected the "New" option
 			} else if (i == itmCount - 2) {
 				mf.openAddEditGUI(SchoolClass.class, true);
-				mf.setCurrentlySelectedClassIndex(itmCount-3);
+				mf.setCurrentlySelectedClassIndex(itmCount-2);
 			}
 		});
 		
@@ -192,6 +196,7 @@ public class CBPanel extends JPanel {
 			} else if (i == itmCount - 2) {
 				mf.openAddEditGUI(Task.class, true);
 				mf.setCurrentlySelectedAssignmentIndex(itmCount-3);
+				mf.updateGradePanel();
 			}
 		});
 		
@@ -224,7 +229,8 @@ public class CBPanel extends JPanel {
 	 * Method to handle the comboboxes disabling when items are not selected
 	 */
 	public void handleNewState() {
-		State curState = mf.getGradeState();
+		//if mf.getGradeState is not initialized (nullptr) then default to the "NOTHING_SELECTED" state.
+		State curState = (mf.getGradeState() == null) ? State.NOTHING_SELECTED : mf.getGradeState();
 		System.out.println(curState.toString());
 		
 		switch(curState) {
@@ -323,6 +329,12 @@ public class CBPanel extends JPanel {
 		cbCourse.addItem("Ändra");
 		cbTask.addItem("Ny");
 		cbTask.addItem("Ändra");
+		
+		/*
+		if (hasInitialized) {
+			this.handleNewState();
+		}
+		*/
 		
 		//Reset the refreshing boolean (so the actionlisteners get run again)
 		isRefreshing = false;
