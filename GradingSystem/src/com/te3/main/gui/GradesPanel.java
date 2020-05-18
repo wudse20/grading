@@ -171,7 +171,7 @@ public class GradesPanel extends JPanel implements KeyListener {
 	private void setProperties() {
 		// As long as tasks aren't null.
 		if (tasks != null) {
-			//Gets the task.
+			// Gets the task.
 			Task t = tasks.get(mf.getCurrentlySelectedAssignmentIndex());
 
 			// Clears textBox
@@ -256,7 +256,7 @@ public class GradesPanel extends JPanel implements KeyListener {
 			// Stores the state
 			s = this.state;
 
-			//Handles the new state
+			// Handles the new state
 			mf.cbPanel.handleNewState();
 		} else {
 			this.state = s;
@@ -344,53 +344,52 @@ public class GradesPanel extends JPanel implements KeyListener {
 			// To prevent IndexOutOfBoundsException with no created tasks.
 			if (tasks.size() == 0) {
 				// Sends dialog to the user
-				int ans = JOptionPane.showConfirmDialog(this, "Du måste ha en kurs för denna vyn; vill du skapa en?", "Inga Kurser", JOptionPane.YES_NO_OPTION, JOptionPane.ERROR_MESSAGE);
+				int ans = JOptionPane.showConfirmDialog(this, "Du måste ha en kurs för denna vyn; vill du skapa en?",
+						"Inga Kurser", JOptionPane.YES_NO_OPTION, JOptionPane.ERROR_MESSAGE);
 
 				// Debug message:
 				System.out.println("["
 						+ ((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour()
-						: LocalTime.now().getHour())
+								: LocalTime.now().getHour())
 						+ ":"
 						+ ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute()
-						: LocalTime.now().getMinute())
+								: LocalTime.now().getMinute())
 						+ ":"
 						+ ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond()
-						: LocalTime.now().getSecond())
+								: LocalTime.now().getSecond())
 						+ "] GradesPanel: Interrupting GUI update, no tasks created.");
 
-				//If answer = yes, then open GUI to
+				// If answer = yes, then open GUI to
 				if (ans == JOptionPane.YES_OPTION) {
 					// Debug message:
 					System.out.println("["
 							+ ((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour()
-							: LocalTime.now().getHour())
+									: LocalTime.now().getHour())
 							+ ":"
 							+ ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute()
-							: LocalTime.now().getMinute())
-							+ ":"
-							+ ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond()
-							: LocalTime.now().getSecond())
+									: LocalTime.now().getMinute())
+							+ ":" + ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond()
+									: LocalTime.now().getSecond())
 							+ "] GradesPanel: Opening task creator");
 
-					//Opens the add GUI for the course
+					// Opens the add GUI for the course
 					mf.openAddEditGUI(Task.class, true);
 
-					//Grabbing the tasks
+					// Grabbing the tasks
 					tasks = courses.get(mf.getCurrentlySelectedCourseIndex()).getCourseTasks();
 
 					if (tasks.size() != 0) {
 						System.out.println("["
 								+ ((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour()
-								: LocalTime.now().getHour())
+										: LocalTime.now().getHour())
 								+ ":"
 								+ ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute()
-								: LocalTime.now().getMinute())
-								+ ":"
-								+ ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond()
-								: LocalTime.now().getSecond())
+										: LocalTime.now().getMinute())
+								+ ":" + ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond()
+										: LocalTime.now().getSecond())
 								+ "] GradesPanel: A task was created");
 
-						//If a task was created then return the state to show it.
+						// If a task was created then return the state to show it.
 						return State.CLASS_COURSE_STUDENT;
 					}
 				}
@@ -398,13 +397,12 @@ public class GradesPanel extends JPanel implements KeyListener {
 				// Debug message:
 				System.out.println("["
 						+ ((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour()
-						: LocalTime.now().getHour())
+								: LocalTime.now().getHour())
 						+ ":"
 						+ ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute()
-						: LocalTime.now().getMinute())
-						+ ":"
-						+ ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond()
-						: LocalTime.now().getSecond())
+								: LocalTime.now().getMinute())
+						+ ":" + ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond()
+								: LocalTime.now().getSecond())
 						+ "] GradesPanel: No new task created.");
 
 				// Sets the tasks to null
