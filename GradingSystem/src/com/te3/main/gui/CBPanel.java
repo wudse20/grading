@@ -357,14 +357,22 @@ public class CBPanel extends JPanel {
 			//cbClass.setSelectedIndex(mf.getCurrentlySelectedClassIndex());
 			{
 				String ch = prevSelectedItems.get(0);
-				System.out.println(ch);
 				if (ch == "Ny" || ch == "Ändra") {
 					cbClass.setSelectedIndex(cbClass.getItemCount()-3);
 				} else {
 					cbClass.setSelectedItem(ch);
 				}
 			}
-			cbCourse.setSelectedItem(prevSelectedItems.get(1));
+			
+			{
+				String ch = prevSelectedItems.get(1);
+				System.out.println(ch);
+				if (ch == "Ny" || ch == "Ändra") {
+					cbCourse.setSelectedIndex(cbCourse.getItemCount()-3);
+				} else {
+					cbCourse.setSelectedItem(ch);
+				}
+			}
 			//cbStudent.setSelectedItem(prevSelectedItems.get(2));
 			cbTask.setSelectedItem(prevSelectedItems.get(3));
 			
