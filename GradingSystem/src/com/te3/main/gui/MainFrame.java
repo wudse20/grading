@@ -695,11 +695,15 @@ public class MainFrame extends JFrame implements ComponentListener, WindowStateL
 		// Handles the logging
 		this.createLogs(s.isShouldSaveLog());
 
-		// Restarts the auto save timer, after setting the new time.
-		this.autoSaveTimer.setDelay(this.saveTimer * 1000);
+		this.autoSaveTimer.stop();
 
-		// restarts the timer
-		this.autoSaveTimer.restart();
+		// Tells the timer to auto save based on the save timer
+		this.autoSaveTimer = new Timer(saveTimer * 1000, (e) -> {
+			saveData("autoSave.xml");
+			saveData(saveFilePath);
+		});
+
+		this.autoSaveTimer.start();
 	}
 
 	/**

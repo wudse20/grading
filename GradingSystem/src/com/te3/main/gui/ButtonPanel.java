@@ -501,6 +501,7 @@ public class ButtonPanel extends JPanel {
 			//Writes over the old data
 			mf.saveData(mf.getSaveFilePath());
 
+			//Sets the state
 			//Info to user
 			JOptionPane.showMessageDialog(mf, "Du har skrivit över data!", "Data överskivning: Lyckades", JOptionPane.INFORMATION_MESSAGE);
 
