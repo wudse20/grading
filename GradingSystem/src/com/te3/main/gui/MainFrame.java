@@ -522,9 +522,6 @@ public class MainFrame extends JFrame implements ComponentListener, WindowStateL
 						(Class<Task>) clazz).setVisible(true);
 			}
 		}
-
-		// Update the CB Panel with the new data
-		cbPanel.refreshData(this.mainData);
 	}
 
 	/**

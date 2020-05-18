@@ -114,7 +114,7 @@ public class Course {
 	public void setName(String name) throws IllegalNameException {
 		// Throws an exception with a message if the name is to short.
 		if (name.trim().length() < 3) {
-			throw new IllegalNameException("Name too short");
+			throw new IllegalNameException("För kort namn");
 		} else {
 			// Sets the name
 			this.name = name;
