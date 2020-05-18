@@ -259,6 +259,21 @@ public class CBPanel extends JPanel {
 		//Set the refreshing boolean (so the actionlisteners do not get run)
 		isRefreshing = true;
 		
+		//--------//
+		System.out.println("Storing previously selected items...");
+		ArrayList<String> prevSelectedItems = new ArrayList<>();
+		try {
+			prevSelectedItems.add(cbClass.getSelectedItem().toString());
+			prevSelectedItems.add(cbCourse.getSelectedItem().toString());
+			prevSelectedItems.add(cbStudent.getSelectedItem().toString());
+			prevSelectedItems.add(cbTask.getSelectedItem().toString());
+		} catch (java.lang.NullPointerException e) {
+			for (int i = 0; i<4; i++) {
+				prevSelectedItems.add(null);
+			}
+		}
+		
+		//--------//
 		System.out.println("Refreshing Data combobox data");
 		System.out.println("Deleting old items...");
 		cbClass.removeAllItems();
@@ -266,20 +281,28 @@ public class CBPanel extends JPanel {
 		cbStudent.removeAllItems();
 		cbTask.removeAllItems();
 		
-		Data localData = newData;
-
+		//--------//
 		System.out.println("Adding default combobox items...");
 		cbClass.addItem("Klass");
 		cbCourse.addItem("Kurs");
 		cbTask.addItem("Samlad vy");
 		
 		System.out.println("Getting new data...");
+		
+		Data localData = newData;
+		
 		ArrayList<SchoolClass> dataClasses = localData.getClasses();
 		if (dataClasses.size() != 0) {
 			
 			dataClasses.forEach((n) -> cbClass.addItem(n.getName()));
 			
-			ArrayList<Student> dataStudents = dataClasses.get(mf.getCurrentlySelectedClassIndex()).getStudents();
+			ArrayList<Student> dataStudents;
+			
+			try {
+				dataStudents = dataClasses.get(mf.getCurrentlySelectedClassIndex()).getStudents();
+			} catch (java.lang.IndexOutOfBoundsException e) {
+				dataStudents = dataClasses.get(0).getStudents();
+			}
 			
 			if (dataStudents.size() != 0) {
 				
@@ -330,11 +353,63 @@ public class CBPanel extends JPanel {
 		cbTask.addItem("Ny");
 		cbTask.addItem("Ändra");
 		
-		/*
 		if (hasInitialized) {
+			State tempState = State.NOTHING_SELECTED;
+			{
+				String ch = prevSelectedItems.get(0);
+				switch(ch) {
+				case "Ny":
+					cbClass.setSelectedIndex(cbClass.getItemCount()-3);
+					mf.setCurrentlySelectedClassIndex(cbClass.getSelectedIndex());
+					tempState = State.CLASS;
+					break;
+				case "Ändra":
+					cbClass.setSelectedIndex(0);
+					break;
+				default:
+					cbClass.setSelectedItem(ch);
+				}
+			}
+			
+			{
+				String ch = prevSelectedItems.get(1);
+				switch(ch) {
+				case "Ny":
+					cbCourse.setSelectedIndex(cbCourse.getItemCount()-3);
+					mf.setCurrentlySelectedCourseIndex(cbCourse.getSelectedIndex());
+					tempState = State.CLASS_COURSE_STUDENT_TASK;
+					break;
+				case "Ändra":
+					cbCourse.setSelectedIndex(0);
+					break;
+				default:
+					cbCourse.setSelectedItem(ch);
+				}
+			}
+			
+			cbStudent.setSelectedItem(prevSelectedItems.get(2));
+			
+			{
+				String ch = prevSelectedItems.get(3);
+				switch(ch) {
+				case "Ny":
+					cbTask.setSelectedIndex(cbTask.getItemCount()-3);
+					mf.setCurrentlySelectedAssignmentIndex(cbTask.getSelectedIndex());
+					tempState = State.CLASS_COURSE_STUDENT;
+					break;
+				case "Ändra":
+					cbTask.setSelectedIndex(0);
+					break;
+				default:
+					cbTask.setSelectedItem(ch);
+				}
+			}
+			
+			if (tempState != State.NOTHING_SELECTED) mf.updateGradePanel(tempState);
 			this.handleNewState();
 		}
-		*/
+		
+		
 		
 		//Reset the refreshing boolean (so the actionlisteners get run again)
 		isRefreshing = false;

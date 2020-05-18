@@ -3,6 +3,7 @@ package com.te3.main.gui;
 import java.awt.FlowLayout;
 import java.awt.print.PrinterException;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalTime;
@@ -58,7 +59,9 @@ public class ButtonPanel extends JPanel {
 			+ "Ett register över alla elever, där man kan få en samlad bild över hur en elev ligger till i alla kurser. <br><br>"
 			+ "<b>Inställningar:</b><br>" + "Några olika inställningar som man kan göra i sitt program. <br>"
 			+ "Skulle det bli tråkigt att sätta betyg tryck tre gånger på <br>"
-			+ "Första knappen med YODA när bakgrunden är på. <br><br>" + "<b>?</b><br>"
+			+ "Första knappen med YODA när bakgrunden är på. <br><br>" +
+			"<b>Ladda Auto spar</b><br>" +
+			"Laddar datan från senaste autosparningen <br><br>" + "<b>?</b><br>"
 			+ "Överallt är detta hjälpknappen där du kan få hjälp om hur allt fungerar. <br> &#9;";
 
 	/** If the search window's opened or not */
@@ -82,6 +85,7 @@ public class ButtonPanel extends JPanel {
 	JButton btnSettings = new JButton("Inställningar");
 	JButton btnHelp = new JButton("?");
 	JButton btnSearch = new JButton("Register");
+	JButton btnLoadAutoSave = new JButton("Ladda autospar");
 
 	// Labels
 	JLabel lblSpacer1 = new JLabel("  ");
@@ -413,6 +417,7 @@ public class ButtonPanel extends JPanel {
 		this.add(btnSearch);
 		this.add(btnPrint);
 		this.add(btnSaveToFile);
+		this.add(btnLoadAutoSave);
 		this.add(btnSaveAs);
 		this.add(btnSave);
 	}
@@ -476,6 +481,47 @@ public class ButtonPanel extends JPanel {
 						+ "] ButtonPanel: Search Window already opened, doing nothing...");
 			}
 		});
+
+		btnLoadAutoSave.addActionListener(e -> this.loadAutoSave());
+	}
+
+	/**
+	 * Loads the auto save data, if the user wants it.
+	 */
+	private void loadAutoSave() {
+		//Confirm dialog to user
+		int ans = JOptionPane.showConfirmDialog(mf, "Är du säker på att du vill skriva över all data, till senaste autosparningen?", "Varning: Vill du skriva över data?", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+
+		if (ans == JOptionPane.YES_OPTION) {
+			if (!new File("autoSave.xml").exists()) {
+				//Message to user:
+				JOptionPane.showMessageDialog(mf, "Det finns inget autospar!", "Inget autospar hittat!", JOptionPane.ERROR_MESSAGE);
+
+				//Returns
+				return;
+			}
+
+			//Loads the auto save data.
+			mf.setMainData(mf.loadData("autoSave.xml"));
+
+			//Writes over the old data
+			mf.saveData(mf.getSaveFilePath());
+
+			//Sets the state
+			mf.updateGradePanel(State.NOTHING_SELECTED);
+
+			//Refreshes the data
+			mf.cbPanel.refreshData(mf.getMainData());
+
+			//Info to user
+			JOptionPane.showMessageDialog(mf, "Du har skrivit över data!", "Data överskivning: Lyckades", JOptionPane.INFORMATION_MESSAGE);
+
+			//Debug message:
+			System.out.println("[" + ((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour() : LocalTime.now().getHour()) + ":" + ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute() : LocalTime.now().getMinute())+ ":" + ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond(): LocalTime.now().getSecond())+ "] ButtonPanel: Loaded the auto save data");
+		} else {
+			//Debug message:
+			System.out.println("[" + ((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour() : LocalTime.now().getHour()) + ":" + ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute() : LocalTime.now().getMinute())+ ":" + ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond(): LocalTime.now().getSecond())+ "] ButtonPanel: User canceled the loading of the auto save data");
+		}
 	}
 
 	/**
