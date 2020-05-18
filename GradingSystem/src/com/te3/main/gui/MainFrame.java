@@ -530,6 +530,7 @@ public class MainFrame extends JFrame implements ComponentListener, WindowStateL
 			}
 		}
 
+		// If the frame isn't null it will give it focus
 		if (frame != null) {
 			frame.toFront();
 			frame.requestFocus();
