@@ -205,6 +205,76 @@
      </void>
     </object>
    </void>
+   <void method="add">
+    <object class="com.te3.main.objects.SchoolClass" id="SchoolClass1">
+     <void property="name">
+      <string>Test</string>
+     </void>
+     <void id="ArrayList5" property="students">
+      <void method="add">
+       <object class="com.te3.main.objects.Student">
+        <void property="courses">
+         <object class="java.util.ArrayList">
+          <void method="add">
+           <object class="com.te3.main.objects.Course" id="Course1">
+            <void id="ArrayList6" property="courseCriteria">
+             <void method="add">
+              <object class="com.te3.main.objects.Criteria">
+               <void property="name">
+                <string>test</string>
+               </void>
+              </object>
+             </void>
+             <void method="add">
+              <object class="com.te3.main.objects.Criteria">
+               <void property="name">
+                <string>testa</string>
+               </void>
+              </object>
+             </void>
+             <void method="add">
+              <object class="com.te3.main.objects.Criteria">
+               <void property="name">
+                <string>teat</string>
+               </void>
+              </object>
+             </void>
+             <void method="add">
+              <object class="com.te3.main.objects.Criteria">
+               <void property="name">
+                <string>testar</string>
+               </void>
+              </object>
+             </void>
+             <void method="add">
+              <object class="com.te3.main.objects.Criteria">
+               <void property="name">
+                <string>tesater</string>
+               </void>
+              </object>
+             </void>
+            </void>
+            <void property="courseCriteria">
+             <object idref="ArrayList6"/>
+            </void>
+            <void property="name">
+             <string>test</string>
+            </void>
+           </object>
+          </void>
+         </object>
+        </void>
+        <void property="name">
+         <string>Test</string>
+        </void>
+       </object>
+      </void>
+     </void>
+     <void property="students">
+      <object idref="ArrayList5"/>
+     </void>
+    </object>
+   </void>
   </void>
  </object>
 </java>

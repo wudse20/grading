@@ -497,30 +497,42 @@ public class MainFrame extends JFrame implements ComponentListener, WindowStateL
 	 */
 	@SuppressWarnings("unchecked")
 	public <E> void openAddEditGUI(Class<E> clazz, boolean isAddMode) {
+		JFrame frame = null;
+
 		if (isAddMode) {
 			if (clazz.equals(SchoolClass.class)) {
-				new SchoolClassFrame(this).setVisible(true);
+				frame = new SchoolClassFrame(this);
+				frame.setVisible(true);
 			} else if (clazz.equals(Course.class)) {
-				new CourseFrame(this).setVisible(true);
+				frame = new CourseFrame(this);
+				frame.setVisible(true);
 			} else if (clazz.equals(Task.class)) {
-				new AssignmentFrame(this).setVisible(true);
+				frame = new AssignmentFrame(this);
+				frame.setVisible(true);
 			}
 		} else {
 			if (clazz.equals(SchoolClass.class)) {
-				new ListUpdateChooser<SchoolClass>(this, mainData.getClasses(), (Class<SchoolClass>) clazz)
-						.setVisible(true);
+				frame = new ListUpdateChooser<SchoolClass>(this, mainData.getClasses(), (Class<SchoolClass>) clazz);
+				frame.setVisible(true);
 			} else if (clazz.equals(Course.class)) {
-				new ListUpdateChooser<Course>(this,
+				frame = new ListUpdateChooser<Course>(this,
 						mainData.getClasses().get(currentlySelectedClassIndex).getStudents()
 								.get(currentlySelectedCourseIndex).getCourses(),
-						(Class<Course>) clazz).setVisible(true);
+						(Class<Course>) clazz);
+				frame.setVisible(true);
 			} else if (clazz.equals(Task.class)) {
-				new ListUpdateChooser<Task>(this,
+				frame = new ListUpdateChooser<Task>(this,
 						mainData.getClasses().get(currentlySelectedClassIndex).getStudents()
 								.get(currentlySelectedStudentIndex).getCourses().get(currentlySelectedCourseIndex)
 								.getCourseTasks(),
-						(Class<Task>) clazz).setVisible(true);
+						(Class<Task>) clazz);
+				frame.setVisible(true);
 			}
+		}
+
+		if (frame != null) {
+			frame.toFront();
+			frame.requestFocus();
 		}
 	}
 

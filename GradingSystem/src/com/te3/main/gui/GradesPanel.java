@@ -39,6 +39,9 @@ public class GradesPanel extends JPanel implements KeyListener {
 	/** If {@code true} it's in list mode, else it's in normal mode */
 	private boolean isListMode;
 
+	/** If {@code true} it will open add Course GUI when done with update */
+	private boolean shouldAddCourse = false;
+
 	// Integers
 	private int keyCount = 0;
 
@@ -318,6 +321,15 @@ public class GradesPanel extends JPanel implements KeyListener {
 		// Updates the frame with the new components
 		mf.revalidate();
 		mf.repaint();
+
+		// Checks if it should add a new course or not
+		if (this.shouldAddCourse) {
+			// Opens the add GUI for the course
+			mf.openAddEditGUI(Task.class, true);
+
+			// Tells the program to not add a course.
+			this.shouldAddCourse = false;
+		}
 	}
 
 	/**
@@ -370,28 +382,15 @@ public class GradesPanel extends JPanel implements KeyListener {
 									: LocalTime.now().getMinute())
 							+ ":" + ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond()
 									: LocalTime.now().getSecond())
-							+ "] GradesPanel: Opening task creator");
+							+ "] GradesPanel: Opening task creator when done updating");
 
-					// Opens the add GUI for the course
-					mf.openAddEditGUI(Task.class, true);
+					// Tells the program to open the GUI when done
+					this.shouldAddCourse = true;
 
-					// Grabbing the tasks
-					tasks = courses.get(mf.getCurrentlySelectedCourseIndex()).getCourseTasks();
+					// Sets the tasks to null the tasks
+					tasks = null;
 
-					if (tasks.size() != 0) {
-						System.out.println("["
-								+ ((LocalTime.now().getHour() < 10) ? "0" + LocalTime.now().getHour()
-										: LocalTime.now().getHour())
-								+ ":"
-								+ ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute()
-										: LocalTime.now().getMinute())
-								+ ":" + ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond()
-										: LocalTime.now().getSecond())
-								+ "] GradesPanel: A task was created");
-
-						// If a task was created then return the state to show it.
-						return State.CLASS_COURSE_STUDENT;
-					}
+					return State.CLASS_COURSE;
 				}
 
 				// Debug message:
