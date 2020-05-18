@@ -388,7 +388,7 @@ public class SchoolClassFrame extends JFrame implements WindowListener {
 	 */
 	private void setProperties() {
 		this.setLayout(layout);
-		this.setSize(new Dimension(650, 600));
+		this.setSize(new Dimension(600, 600));
 		panel.setLayout(pLayout);
 
 		this.addWindowListener(this);
