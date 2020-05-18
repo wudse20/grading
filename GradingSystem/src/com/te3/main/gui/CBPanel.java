@@ -354,31 +354,62 @@ public class CBPanel extends JPanel {
 		cbTask.addItem("Ändra");
 		
 		if (hasInitialized) {
-			//cbClass.setSelectedIndex(mf.getCurrentlySelectedClassIndex());
+			State tempState = State.NOTHING_SELECTED;
 			{
 				String ch = prevSelectedItems.get(0);
-				if (ch == "Ny" || ch == "Ändra") {
+				switch(ch) {
+				case "Ny":
 					cbClass.setSelectedIndex(cbClass.getItemCount()-3);
-				} else {
+					mf.setCurrentlySelectedClassIndex(cbClass.getSelectedIndex());
+					tempState = State.CLASS;
+					break;
+				case "Ändra":
+					cbClass.setSelectedIndex(0);
+					break;
+				default:
 					cbClass.setSelectedItem(ch);
 				}
 			}
 			
 			{
 				String ch = prevSelectedItems.get(1);
-				System.out.println(ch);
-				if (ch == "Ny" || ch == "Ändra") {
+				switch(ch) {
+				case "Ny":
 					cbCourse.setSelectedIndex(cbCourse.getItemCount()-3);
-				} else {
+					mf.setCurrentlySelectedCourseIndex(cbCourse.getSelectedIndex());
+					tempState = State.CLASS_COURSE_STUDENT_TASK;
+					break;
+				case "Ändra":
+					cbCourse.setSelectedIndex(0);
+					break;
+				default:
 					cbCourse.setSelectedItem(ch);
 				}
 			}
-			//cbStudent.setSelectedItem(prevSelectedItems.get(2));
-			cbTask.setSelectedItem(prevSelectedItems.get(3));
 			
+			cbStudent.setSelectedItem(prevSelectedItems.get(2));
+			
+			{
+				String ch = prevSelectedItems.get(3);
+				switch(ch) {
+				case "Ny":
+					cbTask.setSelectedIndex(cbTask.getItemCount()-3);
+					mf.setCurrentlySelectedAssignmentIndex(cbTask.getSelectedIndex());
+					tempState = State.CLASS_COURSE_STUDENT;
+					break;
+				case "Ändra":
+					cbTask.setSelectedIndex(0);
+					break;
+				default:
+					cbTask.setSelectedItem(ch);
+				}
+			}
+			
+			if (tempState != State.NOTHING_SELECTED) mf.updateGradePanel(tempState);
+			this.handleNewState();
 		}
 		
-		this.handleNewState();
+		
 		
 		//Reset the refreshing boolean (so the actionlisteners get run again)
 		isRefreshing = false;
