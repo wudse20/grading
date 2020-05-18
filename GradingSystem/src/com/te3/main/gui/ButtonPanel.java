@@ -3,6 +3,7 @@ package com.te3.main.gui;
 import java.awt.FlowLayout;
 import java.awt.print.PrinterException;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalTime;
@@ -492,16 +493,26 @@ public class ButtonPanel extends JPanel {
 		int ans = JOptionPane.showConfirmDialog(mf, "Är du säker på att du vill skriva över all data, till senaste autosparningen?", "Varning: Vill du skriva över data?", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 
 		if (ans == JOptionPane.YES_OPTION) {
-			//Loads the auto save data.
-			mf.loadData("autoSave.xml");
+			if (!new File("autoSave.xml").exists()) {
+				//Message to user:
+				JOptionPane.showMessageDialog(mf, "Det finns inget autospar!", "Inget autospar hittat!", JOptionPane.ERROR_MESSAGE);
 
-			//Refreshes the data
-			mf.cbPanel.refreshData(mf.getMainData());
+				//Returns
+				return;
+			}
+
+			//Loads the auto save data.
+			mf.setMainData(mf.loadData("autoSave.xml"));
 
 			//Writes over the old data
 			mf.saveData(mf.getSaveFilePath());
 
 			//Sets the state
+			mf.updateGradePanel(State.NOTHING_SELECTED);
+
+			//Refreshes the data
+			mf.cbPanel.refreshData(mf.getMainData());
+
 			//Info to user
 			JOptionPane.showMessageDialog(mf, "Du har skrivit över data!", "Data överskivning: Lyckades", JOptionPane.INFORMATION_MESSAGE);
 
