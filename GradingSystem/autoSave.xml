@@ -192,25 +192,6 @@
             </void>
            </object>
           </void>
-          <void method="add">
-           <object class="com.te3.main.objects.Course" id="Course1">
-            <void id="ArrayList5" property="courseCriteria">
-             <void method="add">
-              <object class="com.te3.main.objects.Criteria">
-               <void property="name">
-                <string>test</string>
-               </void>
-              </object>
-             </void>
-            </void>
-            <void property="courseCriteria">
-             <object idref="ArrayList5"/>
-            </void>
-            <void property="name">
-             <string>Test</string>
-            </void>
-           </object>
-          </void>
          </object>
         </void>
         <void property="name">
