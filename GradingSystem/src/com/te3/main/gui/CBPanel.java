@@ -128,10 +128,12 @@ public class CBPanel extends JPanel {
 			} else if (i == itmCount - 1) {
 				mf.openAddEditGUI(SchoolClass.class, false);
 				mf.setCurrentlySelectedClassIndex(itmCount-2);
+				mf.updateGradePanel(State.NOTHING_SELECTED);
 			//selected the "New" option
 			} else if (i == itmCount - 2) {
 				mf.openAddEditGUI(SchoolClass.class, true);
 				mf.setCurrentlySelectedClassIndex(itmCount-2);
+				mf.updateGradePanel(State.NOTHING_SELECTED);
 			}
 		});
 		
@@ -155,9 +157,11 @@ public class CBPanel extends JPanel {
 			} else if (i == itmCount - 1) {
 				mf.openAddEditGUI(Course.class, false);
 				mf.setCurrentlySelectedCourseIndex(0);
+				mf.updateGradePanel(State.CLASS);
 			} else if (i == itmCount - 2) {
 				mf.openAddEditGUI(Course.class, true);
 				mf.setCurrentlySelectedCourseIndex(0);
+				mf.updateGradePanel(State.CLASS);
 			}
 		});
 		
@@ -193,10 +197,11 @@ public class CBPanel extends JPanel {
 			} else if (i == itmCount - 1) {
 				mf.openAddEditGUI(Task.class, false);
 				mf.setCurrentlySelectedAssignmentIndex(itmCount-3);
+				mf.updateGradePanel(State.CLASS_COURSE_STUDENT);
 			} else if (i == itmCount - 2) {
 				mf.openAddEditGUI(Task.class, true);
 				mf.setCurrentlySelectedAssignmentIndex(itmCount-3);
-				mf.updateGradePanel();
+				mf.updateGradePanel(State.CLASS_COURSE_STUDENT);
 			}
 		});
 		
