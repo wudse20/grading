@@ -419,6 +419,9 @@ public class ButtonPanel extends JPanel {
 		this.add(btnLoadAutoSave);
 		this.add(btnSaveAs);
 		this.add(btnSave);
+
+
+		this.repaint();
 	}
 
 	/**
