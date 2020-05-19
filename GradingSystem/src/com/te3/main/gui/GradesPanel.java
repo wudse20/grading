@@ -1,9 +1,11 @@
 package com.te3.main.gui;
 
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.sql.SQLOutput;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
@@ -374,8 +376,9 @@ public class GradesPanel extends JPanel implements KeyListener {
 			// To prevent IndexOutOfBoundsException with no created tasks.
 			if (tasks.size() == 0) {
 				// Sends dialog to the user
-				int ans = JOptionPane.showConfirmDialog(this, "Du måste ha minst en uppgift för denna vyn; vill du skapa en?",
-						"Inga Uppgfiter", JOptionPane.YES_NO_OPTION, JOptionPane.ERROR_MESSAGE);
+				int ans = JOptionPane.showConfirmDialog(this,
+						"Du måste ha minst en uppgift för denna vyn; vill du skapa en?", "Inga Uppgfiter",
+						JOptionPane.YES_NO_OPTION, JOptionPane.ERROR_MESSAGE);
 
 				// Debug message:
 				System.out.println("["
@@ -398,7 +401,8 @@ public class GradesPanel extends JPanel implements KeyListener {
 							+ ":"
 							+ ((LocalTime.now().getMinute() < 10) ? "0" + LocalTime.now().getMinute()
 									: LocalTime.now().getMinute())
-							+ ":" + ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond()
+							+ ":"
+							+ ((LocalTime.now().getSecond() < 10) ? "0" + LocalTime.now().getSecond()
 									: LocalTime.now().getSecond())
 							+ "] GradesPanel: Opening task creator when done updating");
 
