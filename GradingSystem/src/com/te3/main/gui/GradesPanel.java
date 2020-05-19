@@ -236,7 +236,6 @@ public class GradesPanel extends JPanel implements KeyListener {
 	 */
 	private void saveComment(Task t, boolean isSaveBtnPressed) {
 		t.setComment(txaComment.getText());
-		mf.saveData(mf.getSaveFilePath());
 
 		if (isSaveBtnPressed)
 			JOptionPane.showMessageDialog(this, "Du har sparat din kommentar", "Sparat!",
