@@ -500,7 +500,19 @@ public class MainCoursePanel extends JPanel implements DocumentListener {
 	 */
 	@SuppressWarnings("unchecked")
 	public ArrayList<Criteria> getCriteria() {
-		return (ArrayList<Criteria>) this.criteria.clone();
+		// The list to be cloned
+		var list = new ArrayList<Criteria>();
+
+		// Loops through the criteria and adds a copy.
+		for (Criteria c : this.criteria) {
+			try {
+				list.add(new Criteria(c.getName()));
+			} catch (IllegalNameException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return list;
 	}
 
 	public JList<SchoolClass> getListAddedClasses() {

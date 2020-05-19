@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.Timer;
 
+import com.te3.main.exceptions.IllegalNameException;
 import com.te3.main.objects.Criteria;
 import com.te3.main.objects.Task;
 
@@ -346,9 +347,22 @@ public class MainAssignmentPanel extends JPanel {
 	/**
 	 * A getter for the added criteria.
 	 *
-	 * @return the added criteria.
+	 * @return the added criteria. (Cloned)
 	 */
 	public ArrayList<Criteria> getAddedCriteria() {
-		return this.addedCriteria;
+		//The list with the new criteria
+		var list = new ArrayList<Criteria>();
+
+		//Loops through and adds the criteria
+		for (Criteria c : this.addedCriteria) {
+			try {
+				list.add(new Criteria(c.getName()));
+			} catch (IllegalNameException e) {
+				e.printStackTrace();
+			}
+		}
+
+		//Returns the list
+		return list;
 	}
 }

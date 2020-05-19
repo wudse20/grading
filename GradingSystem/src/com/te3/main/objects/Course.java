@@ -89,6 +89,10 @@ public class Course {
 		if (t == null)
 			return false;
 
+		// Checks if the list is declared or not.
+		if (this.courseTasks == null)
+			this.courseTasks = new ArrayList<Task>();
+
 		// Adds the task
 		this.courseTasks.add(t);
 
