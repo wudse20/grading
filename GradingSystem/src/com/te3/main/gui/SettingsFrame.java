@@ -461,9 +461,9 @@ public class SettingsFrame extends JFrame {
 		// If yes then deletes
 		if (prompt == JOptionPane.YES_OPTION) {
 			mf.updateGradePanel(State.NOTHING_SELECTED);
-			mf.updateGradePanel();
 			mf.setMainData(new Data(new ArrayList<SchoolClass>()));
 			mf.saveData(mf.getSaveFilePath());
+			mf.cbPanel.refreshData(mf.getMainData());
 			JOptionPane.showMessageDialog(this, "All data är raderad!", "Raderingen lyckades",
 					JOptionPane.INFORMATION_MESSAGE);
 		}
@@ -475,7 +475,7 @@ public class SettingsFrame extends JFrame {
 	 * @param isActivated the status of the checkbox
 	 */
 	private void updateCBoxShouldSaveLog(boolean isActivated) {
-		this.cBoxShouldSaveLog.setText("Sparar logar: " + ((isActivated) ? "Aktiverat" : "Inaktiverat"));
+		this.cBoxShouldSaveLog.setText("Sparar loggar: " + ((isActivated) ? "Aktiverat" : "Inaktiverat"));
 	}
 
 	/**
