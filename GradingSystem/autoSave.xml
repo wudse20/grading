@@ -56,7 +56,7 @@
              <void method="add">
               <object class="com.te3.main.objects.Task" id="Task0">
                <void property="comment">
-                <string>testar</string>
+                <string>testar, testar lite till</string>
                </void>
                <void id="ArrayList3" property="criteria">
                 <void method="add">
