@@ -16,51 +16,30 @@
            <object class="com.te3.main.objects.Course" id="Course0">
             <void id="ArrayList1" property="courseCriteria">
              <void method="add">
-              <object class="com.te3.main.objects.Criteria">
+              <object class="com.te3.main.objects.Criteria" id="Criteria0">
                <void property="name">
-                <string>Datasäkerhet</string>
+                <string>Tala</string>
                </void>
               </object>
              </void>
              <void method="add">
-              <object class="com.te3.main.objects.Criteria">
+              <object class="com.te3.main.objects.Criteria" id="Criteria1">
                <void property="name">
-                <string>Nätverket</string>
+                <string>Läsa</string>
                </void>
               </object>
              </void>
              <void method="add">
-              <object class="com.te3.main.objects.Criteria">
+              <object class="com.te3.main.objects.Criteria" id="Criteria2">
                <void property="name">
-                <string>Åtgärda Fel</string>
+                <string>Skriva</string>
                </void>
               </object>
              </void>
              <void method="add">
-              <object class="com.te3.main.objects.Criteria">
+              <object class="com.te3.main.objects.Criteria" id="Criteria3">
                <void property="name">
-                <string>Resultat</string>
-               </void>
-              </object>
-             </void>
-             <void method="add">
-              <object class="com.te3.main.objects.Criteria">
-               <void property="name">
-                <string>Installeringar</string>
-               </void>
-              </object>
-             </void>
-             <void method="add">
-              <object class="com.te3.main.objects.Criteria">
-               <void property="name">
-                <string>Dokumentation</string>
-               </void>
-              </object>
-             </void>
-             <void method="add">
-              <object class="com.te3.main.objects.Criteria">
-               <void property="name">
-                <string>Förmåga</string>
+                <string>Analysera</string>
                </void>
               </object>
              </void>
@@ -76,110 +55,23 @@
                </void>
                <void id="ArrayList3" property="criteria">
                 <void method="add">
-                 <object class="com.te3.main.objects.Criteria">
-                  <void property="name">
-                   <string>Datasäkerhet</string>
-                  </void>
-                 </object>
+                 <object idref="Criteria0"/>
                 </void>
                 <void method="add">
-                 <object class="com.te3.main.objects.Criteria">
-                  <void property="name">
-                   <string>Nätverket</string>
-                  </void>
-                 </object>
+                 <object idref="Criteria1"/>
                 </void>
                 <void method="add">
-                 <object class="com.te3.main.objects.Criteria">
-                  <void property="name">
-                   <string>Åtgärda Fel</string>
-                  </void>
-                 </object>
+                 <object idref="Criteria2"/>
                 </void>
                 <void method="add">
-                 <object class="com.te3.main.objects.Criteria">
-                  <void property="name">
-                   <string>Resultat</string>
-                  </void>
-                 </object>
-                </void>
-                <void method="add">
-                 <object class="com.te3.main.objects.Criteria">
-                  <void property="name">
-                   <string>Installeringar</string>
-                  </void>
-                 </object>
-                </void>
-                <void method="add">
-                 <object class="com.te3.main.objects.Criteria">
-                  <void property="name">
-                   <string>Dokumentation</string>
-                  </void>
-                 </object>
-                </void>
-                <void method="add">
-                 <object class="com.te3.main.objects.Criteria">
-                  <void property="name">
-                   <string>Förmåga</string>
-                  </void>
-                 </object>
+                 <object idref="Criteria3"/>
                 </void>
                </void>
                <void property="criteria">
                 <object idref="ArrayList3"/>
                </void>
                <void property="name">
-                <string>Något jätteprov</string>
-               </void>
-              </object>
-             </void>
-             <void method="add">
-              <object class="com.te3.main.objects.Task" id="Task1">
-               <void property="comment">
-                <string></string>
-               </void>
-               <void id="ArrayList4" property="criteria">
-                <void method="add">
-                 <object class="com.te3.main.objects.Criteria">
-                  <void property="name">
-                   <string>Åtgärda Fel</string>
-                  </void>
-                 </object>
-                </void>
-                <void method="add">
-                 <object class="com.te3.main.objects.Criteria">
-                  <void property="name">
-                   <string>Resultat</string>
-                  </void>
-                 </object>
-                </void>
-                <void method="add">
-                 <object class="com.te3.main.objects.Criteria">
-                  <void property="name">
-                   <string>Installeringar</string>
-                  </void>
-                 </object>
-                </void>
-                <void method="add">
-                 <object class="com.te3.main.objects.Criteria">
-                  <void property="name">
-                   <string>Dokumentation</string>
-                  </void>
-                 </object>
-                </void>
-                <void method="add">
-                 <object class="com.te3.main.objects.Criteria">
-                  <void property="name">
-                   <string>Förmåga</string>
-                  </void>
-                 </object>
-                </void>
-               </void>
-               <void property="criteria">
-                <object idref="ArrayList4"/>
-               </void>
-               <void property="name">
-                <string>Ett till jätteprov</string>
+                <string>NP2020</string>
                </void>
               </object>
              </void>
@@ -188,90 +80,1561 @@
              <object idref="ArrayList2"/>
             </void>
             <void property="name">
-             <string>Dator- och nätverksteknik</string>
+             <string>Sve3</string>
             </void>
            </object>
           </void>
          </object>
         </void>
         <void property="name">
-         <string>Anton</string>
+         <string>André</string>
         </void>
        </object>
       </void>
-     </void>
-     <void property="students">
-      <object idref="ArrayList0"/>
-     </void>
-    </object>
-   </void>
-   <void method="add">
-    <object class="com.te3.main.objects.SchoolClass" id="SchoolClass1">
-     <void property="name">
-      <string>Test</string>
-     </void>
-     <void id="ArrayList5" property="students">
       <void method="add">
        <object class="com.te3.main.objects.Student">
         <void property="courses">
          <object class="java.util.ArrayList">
           <void method="add">
            <object class="com.te3.main.objects.Course" id="Course1">
-            <void id="ArrayList6" property="courseCriteria">
+            <void id="ArrayList4" property="courseCriteria">
              <void method="add">
-              <object class="com.te3.main.objects.Criteria">
-               <void property="name">
-                <string>test</string>
-               </void>
-              </object>
+              <object idref="Criteria0"/>
              </void>
              <void method="add">
-              <object class="com.te3.main.objects.Criteria">
-               <void property="name">
-                <string>testa</string>
-               </void>
-              </object>
+              <object idref="Criteria1"/>
              </void>
              <void method="add">
-              <object class="com.te3.main.objects.Criteria">
-               <void property="name">
-                <string>teat</string>
-               </void>
-              </object>
+              <object idref="Criteria2"/>
              </void>
              <void method="add">
-              <object class="com.te3.main.objects.Criteria">
-               <void property="name">
-                <string>testar</string>
-               </void>
-              </object>
-             </void>
-             <void method="add">
-              <object class="com.te3.main.objects.Criteria">
-               <void property="name">
-                <string>tesater</string>
-               </void>
-              </object>
+              <object idref="Criteria3"/>
              </void>
             </void>
             <void property="courseCriteria">
-             <object idref="ArrayList6"/>
+             <object idref="ArrayList4"/>
+            </void>
+            <void id="ArrayList5" property="courseTasks">
+             <void method="add">
+              <object class="com.te3.main.objects.Task" id="Task1">
+               <void property="comment">
+                <string></string>
+               </void>
+               <void id="ArrayList6" property="criteria">
+                <void method="add">
+                 <object idref="Criteria0"/>
+                </void>
+                <void method="add">
+                 <object idref="Criteria1"/>
+                </void>
+                <void method="add">
+                 <object idref="Criteria2"/>
+                </void>
+                <void method="add">
+                 <object idref="Criteria3"/>
+                </void>
+               </void>
+               <void property="criteria">
+                <object idref="ArrayList6"/>
+               </void>
+               <void property="name">
+                <string>NP2020</string>
+               </void>
+              </object>
+             </void>
+            </void>
+            <void property="courseTasks">
+             <object idref="ArrayList5"/>
             </void>
             <void property="name">
-             <string>test</string>
+             <string>Sve3</string>
             </void>
            </object>
           </void>
          </object>
         </void>
         <void property="name">
-         <string>Test</string>
+         <string>Sebastian</string>
+        </void>
+       </object>
+      </void>
+      <void method="add">
+       <object class="com.te3.main.objects.Student">
+        <void property="courses">
+         <object class="java.util.ArrayList">
+          <void method="add">
+           <object class="com.te3.main.objects.Course" id="Course2">
+            <void id="ArrayList7" property="courseCriteria">
+             <void method="add">
+              <object idref="Criteria0"/>
+             </void>
+             <void method="add">
+              <object idref="Criteria1"/>
+             </void>
+             <void method="add">
+              <object idref="Criteria2"/>
+             </void>
+             <void method="add">
+              <object idref="Criteria3"/>
+             </void>
+            </void>
+            <void property="courseCriteria">
+             <object idref="ArrayList7"/>
+            </void>
+            <void id="ArrayList8" property="courseTasks">
+             <void method="add">
+              <object class="com.te3.main.objects.Task" id="Task2">
+               <void property="comment">
+                <string></string>
+               </void>
+               <void id="ArrayList9" property="criteria">
+                <void method="add">
+                 <object idref="Criteria0"/>
+                </void>
+                <void method="add">
+                 <object idref="Criteria1"/>
+                </void>
+                <void method="add">
+                 <object idref="Criteria2"/>
+                </void>
+                <void method="add">
+                 <object idref="Criteria3"/>
+                </void>
+               </void>
+               <void property="criteria">
+                <object idref="ArrayList9"/>
+               </void>
+               <void property="name">
+                <string>NP2020</string>
+               </void>
+              </object>
+             </void>
+            </void>
+            <void property="courseTasks">
+             <object idref="ArrayList8"/>
+            </void>
+            <void property="name">
+             <string>Sve3</string>
+            </void>
+           </object>
+          </void>
+         </object>
+        </void>
+        <void property="name">
+         <string>Elias B</string>
+        </void>
+       </object>
+      </void>
+      <void method="add">
+       <object class="com.te3.main.objects.Student">
+        <void property="courses">
+         <object class="java.util.ArrayList">
+          <void method="add">
+           <object class="com.te3.main.objects.Course" id="Course3">
+            <void id="ArrayList10" property="courseCriteria">
+             <void method="add">
+              <object idref="Criteria0"/>
+             </void>
+             <void method="add">
+              <object idref="Criteria1"/>
+             </void>
+             <void method="add">
+              <object idref="Criteria2"/>
+             </void>
+             <void method="add">
+              <object idref="Criteria3"/>
+             </void>
+            </void>
+            <void property="courseCriteria">
+             <object idref="ArrayList10"/>
+            </void>
+            <void id="ArrayList11" property="courseTasks">
+             <void method="add">
+              <object class="com.te3.main.objects.Task" id="Task3">
+               <void property="comment">
+                <string></string>
+               </void>
+               <void id="ArrayList12" property="criteria">
+                <void method="add">
+                 <object idref="Criteria0"/>
+                </void>
+                <void method="add">
+                 <object idref="Criteria1"/>
+                </void>
+                <void method="add">
+                 <object idref="Criteria2"/>
+                </void>
+                <void method="add">
+                 <object idref="Criteria3"/>
+                </void>
+               </void>
+               <void property="criteria">
+                <object idref="ArrayList12"/>
+               </void>
+               <void property="name">
+                <string>NP2020</string>
+               </void>
+              </object>
+             </void>
+            </void>
+            <void property="courseTasks">
+             <object idref="ArrayList11"/>
+            </void>
+            <void property="name">
+             <string>Sve3</string>
+            </void>
+           </object>
+          </void>
+         </object>
+        </void>
+        <void property="name">
+         <string>Hampus</string>
+        </void>
+       </object>
+      </void>
+      <void method="add">
+       <object class="com.te3.main.objects.Student">
+        <void property="courses">
+         <object class="java.util.ArrayList">
+          <void method="add">
+           <object class="com.te3.main.objects.Course" id="Course4">
+            <void id="ArrayList13" property="courseCriteria">
+             <void method="add">
+              <object idref="Criteria0"/>
+             </void>
+             <void method="add">
+              <object idref="Criteria1"/>
+             </void>
+             <void method="add">
+              <object idref="Criteria2"/>
+             </void>
+             <void method="add">
+              <object idref="Criteria3"/>
+             </void>
+            </void>
+            <void property="courseCriteria">
+             <object idref="ArrayList13"/>
+            </void>
+            <void id="ArrayList14" property="courseTasks">
+             <void method="add">
+              <object class="com.te3.main.objects.Task" id="Task4">
+               <void property="comment">
+                <string></string>
+               </void>
+               <void id="ArrayList15" property="criteria">
+                <void method="add">
+                 <object idref="Criteria0"/>
+                </void>
+                <void method="add">
+                 <object idref="Criteria1"/>
+                </void>
+                <void method="add">
+                 <object idref="Criteria2"/>
+                </void>
+                <void method="add">
+                 <object idref="Criteria3"/>
+                </void>
+               </void>
+               <void property="criteria">
+                <object idref="ArrayList15"/>
+               </void>
+               <void property="name">
+                <string>NP2020</string>
+               </void>
+              </object>
+             </void>
+            </void>
+            <void property="courseTasks">
+             <object idref="ArrayList14"/>
+            </void>
+            <void property="name">
+             <string>Sve3</string>
+            </void>
+           </object>
+          </void>
+         </object>
+        </void>
+        <void property="name">
+         <string>David</string>
+        </void>
+       </object>
+      </void>
+      <void method="add">
+       <object class="com.te3.main.objects.Student">
+        <void property="courses">
+         <object class="java.util.ArrayList">
+          <void method="add">
+           <object class="com.te3.main.objects.Course" id="Course5">
+            <void id="ArrayList16" property="courseCriteria">
+             <void method="add">
+              <object idref="Criteria0"/>
+             </void>
+             <void method="add">
+              <object idref="Criteria1"/>
+             </void>
+             <void method="add">
+              <object idref="Criteria2"/>
+             </void>
+             <void method="add">
+              <object idref="Criteria3"/>
+             </void>
+            </void>
+            <void property="courseCriteria">
+             <object idref="ArrayList16"/>
+            </void>
+            <void id="ArrayList17" property="courseTasks">
+             <void method="add">
+              <object class="com.te3.main.objects.Task" id="Task5">
+               <void property="comment">
+                <string></string>
+               </void>
+               <void id="ArrayList18" property="criteria">
+                <void method="add">
+                 <object idref="Criteria0"/>
+                </void>
+                <void method="add">
+                 <object idref="Criteria1"/>
+                </void>
+                <void method="add">
+                 <object idref="Criteria2"/>
+                </void>
+                <void method="add">
+                 <object idref="Criteria3"/>
+                </void>
+               </void>
+               <void property="criteria">
+                <object idref="ArrayList18"/>
+               </void>
+               <void property="name">
+                <string>NP2020</string>
+               </void>
+              </object>
+             </void>
+            </void>
+            <void property="courseTasks">
+             <object idref="ArrayList17"/>
+            </void>
+            <void property="name">
+             <string>Sve3</string>
+            </void>
+           </object>
+          </void>
+         </object>
+        </void>
+        <void property="name">
+         <string>Kevin</string>
+        </void>
+       </object>
+      </void>
+      <void method="add">
+       <object class="com.te3.main.objects.Student">
+        <void property="courses">
+         <object class="java.util.ArrayList">
+          <void method="add">
+           <object class="com.te3.main.objects.Course" id="Course6">
+            <void id="ArrayList19" property="courseCriteria">
+             <void method="add">
+              <object idref="Criteria0"/>
+             </void>
+             <void method="add">
+              <object idref="Criteria1"/>
+             </void>
+             <void method="add">
+              <object idref="Criteria2"/>
+             </void>
+             <void method="add">
+              <object idref="Criteria3"/>
+             </void>
+            </void>
+            <void property="courseCriteria">
+             <object idref="ArrayList19"/>
+            </void>
+            <void id="ArrayList20" property="courseTasks">
+             <void method="add">
+              <object class="com.te3.main.objects.Task" id="Task6">
+               <void property="comment">
+                <string></string>
+               </void>
+               <void id="ArrayList21" property="criteria">
+                <void method="add">
+                 <object idref="Criteria0"/>
+                </void>
+                <void method="add">
+                 <object idref="Criteria1"/>
+                </void>
+                <void method="add">
+                 <object idref="Criteria2"/>
+                </void>
+                <void method="add">
+                 <object idref="Criteria3"/>
+                </void>
+               </void>
+               <void property="criteria">
+                <object idref="ArrayList21"/>
+               </void>
+               <void property="name">
+                <string>NP2020</string>
+               </void>
+              </object>
+             </void>
+            </void>
+            <void property="courseTasks">
+             <object idref="ArrayList20"/>
+            </void>
+            <void property="name">
+             <string>Sve3</string>
+            </void>
+           </object>
+          </void>
+         </object>
+        </void>
+        <void property="name">
+         <string>Elias F</string>
+        </void>
+       </object>
+      </void>
+      <void method="add">
+       <object class="com.te3.main.objects.Student">
+        <void property="courses">
+         <object class="java.util.ArrayList">
+          <void method="add">
+           <object class="com.te3.main.objects.Course" id="Course7">
+            <void id="ArrayList22" property="courseCriteria">
+             <void method="add">
+              <object idref="Criteria0"/>
+             </void>
+             <void method="add">
+              <object idref="Criteria1"/>
+             </void>
+             <void method="add">
+              <object idref="Criteria2"/>
+             </void>
+             <void method="add">
+              <object idref="Criteria3"/>
+             </void>
+            </void>
+            <void property="courseCriteria">
+             <object idref="ArrayList22"/>
+            </void>
+            <void id="ArrayList23" property="courseTasks">
+             <void method="add">
+              <object class="com.te3.main.objects.Task" id="Task7">
+               <void property="comment">
+                <string></string>
+               </void>
+               <void id="ArrayList24" property="criteria">
+                <void method="add">
+                 <object idref="Criteria0"/>
+                </void>
+                <void method="add">
+                 <object idref="Criteria1"/>
+                </void>
+                <void method="add">
+                 <object idref="Criteria2"/>
+                </void>
+                <void method="add">
+                 <object idref="Criteria3"/>
+                </void>
+               </void>
+               <void property="criteria">
+                <object idref="ArrayList24"/>
+               </void>
+               <void property="name">
+                <string>NP2020</string>
+               </void>
+              </object>
+             </void>
+            </void>
+            <void property="courseTasks">
+             <object idref="ArrayList23"/>
+            </void>
+            <void property="name">
+             <string>Sve3</string>
+            </void>
+           </object>
+          </void>
+         </object>
+        </void>
+        <void property="name">
+         <string>Pontus</string>
+        </void>
+       </object>
+      </void>
+      <void method="add">
+       <object class="com.te3.main.objects.Student">
+        <void property="courses">
+         <object class="java.util.ArrayList">
+          <void method="add">
+           <object class="com.te3.main.objects.Course" id="Course8">
+            <void id="ArrayList25" property="courseCriteria">
+             <void method="add">
+              <object idref="Criteria0"/>
+             </void>
+             <void method="add">
+              <object idref="Criteria1"/>
+             </void>
+             <void method="add">
+              <object idref="Criteria2"/>
+             </void>
+             <void method="add">
+              <object idref="Criteria3"/>
+             </void>
+            </void>
+            <void property="courseCriteria">
+             <object idref="ArrayList25"/>
+            </void>
+            <void id="ArrayList26" property="courseTasks">
+             <void method="add">
+              <object class="com.te3.main.objects.Task" id="Task8">
+               <void property="comment">
+                <string></string>
+               </void>
+               <void id="ArrayList27" property="criteria">
+                <void method="add">
+                 <object idref="Criteria0"/>
+                </void>
+                <void method="add">
+                 <object idref="Criteria1"/>
+                </void>
+                <void method="add">
+                 <object idref="Criteria2"/>
+                </void>
+                <void method="add">
+                 <object idref="Criteria3"/>
+                </void>
+               </void>
+               <void property="criteria">
+                <object idref="ArrayList27"/>
+               </void>
+               <void property="name">
+                <string>NP2020</string>
+               </void>
+              </object>
+             </void>
+            </void>
+            <void property="courseTasks">
+             <object idref="ArrayList26"/>
+            </void>
+            <void property="name">
+             <string>Sve3</string>
+            </void>
+           </object>
+          </void>
+         </object>
+        </void>
+        <void property="name">
+         <string>Esmail</string>
+        </void>
+       </object>
+      </void>
+      <void method="add">
+       <object class="com.te3.main.objects.Student">
+        <void property="courses">
+         <object class="java.util.ArrayList">
+          <void method="add">
+           <object class="com.te3.main.objects.Course" id="Course9">
+            <void id="ArrayList28" property="courseCriteria">
+             <void method="add">
+              <object idref="Criteria0"/>
+             </void>
+             <void method="add">
+              <object idref="Criteria1"/>
+             </void>
+             <void method="add">
+              <object idref="Criteria2"/>
+             </void>
+             <void method="add">
+              <object idref="Criteria3"/>
+             </void>
+            </void>
+            <void property="courseCriteria">
+             <object idref="ArrayList28"/>
+            </void>
+            <void id="ArrayList29" property="courseTasks">
+             <void method="add">
+              <object class="com.te3.main.objects.Task" id="Task9">
+               <void property="comment">
+                <string></string>
+               </void>
+               <void id="ArrayList30" property="criteria">
+                <void method="add">
+                 <object idref="Criteria0"/>
+                </void>
+                <void method="add">
+                 <object idref="Criteria1"/>
+                </void>
+                <void method="add">
+                 <object idref="Criteria2"/>
+                </void>
+                <void method="add">
+                 <object idref="Criteria3"/>
+                </void>
+               </void>
+               <void property="criteria">
+                <object idref="ArrayList30"/>
+               </void>
+               <void property="name">
+                <string>NP2020</string>
+               </void>
+              </object>
+             </void>
+            </void>
+            <void property="courseTasks">
+             <object idref="ArrayList29"/>
+            </void>
+            <void property="name">
+             <string>Sve3</string>
+            </void>
+           </object>
+          </void>
+         </object>
+        </void>
+        <void property="name">
+         <string>Lukas H</string>
+        </void>
+       </object>
+      </void>
+      <void method="add">
+       <object class="com.te3.main.objects.Student">
+        <void property="courses">
+         <object class="java.util.ArrayList">
+          <void method="add">
+           <object class="com.te3.main.objects.Course" id="Course10">
+            <void id="ArrayList31" property="courseCriteria">
+             <void method="add">
+              <object idref="Criteria0"/>
+             </void>
+             <void method="add">
+              <object idref="Criteria1"/>
+             </void>
+             <void method="add">
+              <object idref="Criteria2"/>
+             </void>
+             <void method="add">
+              <object idref="Criteria3"/>
+             </void>
+            </void>
+            <void property="courseCriteria">
+             <object idref="ArrayList31"/>
+            </void>
+            <void id="ArrayList32" property="courseTasks">
+             <void method="add">
+              <object class="com.te3.main.objects.Task" id="Task10">
+               <void property="comment">
+                <string></string>
+               </void>
+               <void id="ArrayList33" property="criteria">
+                <void method="add">
+                 <object idref="Criteria0"/>
+                </void>
+                <void method="add">
+                 <object idref="Criteria1"/>
+                </void>
+                <void method="add">
+                 <object idref="Criteria2"/>
+                </void>
+                <void method="add">
+                 <object idref="Criteria3"/>
+                </void>
+               </void>
+               <void property="criteria">
+                <object idref="ArrayList33"/>
+               </void>
+               <void property="name">
+                <string>NP2020</string>
+               </void>
+              </object>
+             </void>
+            </void>
+            <void property="courseTasks">
+             <object idref="ArrayList32"/>
+            </void>
+            <void property="name">
+             <string>Sve3</string>
+            </void>
+           </object>
+          </void>
+         </object>
+        </void>
+        <void property="name">
+         <string>Lukas I</string>
+        </void>
+       </object>
+      </void>
+      <void method="add">
+       <object class="com.te3.main.objects.Student">
+        <void property="courses">
+         <object class="java.util.ArrayList">
+          <void method="add">
+           <object class="com.te3.main.objects.Course" id="Course11">
+            <void id="ArrayList34" property="courseCriteria">
+             <void method="add">
+              <object idref="Criteria0"/>
+             </void>
+             <void method="add">
+              <object idref="Criteria1"/>
+             </void>
+             <void method="add">
+              <object idref="Criteria2"/>
+             </void>
+             <void method="add">
+              <object idref="Criteria3"/>
+             </void>
+            </void>
+            <void property="courseCriteria">
+             <object idref="ArrayList34"/>
+            </void>
+            <void id="ArrayList35" property="courseTasks">
+             <void method="add">
+              <object class="com.te3.main.objects.Task" id="Task11">
+               <void property="comment">
+                <string></string>
+               </void>
+               <void id="ArrayList36" property="criteria">
+                <void method="add">
+                 <object idref="Criteria0"/>
+                </void>
+                <void method="add">
+                 <object idref="Criteria1"/>
+                </void>
+                <void method="add">
+                 <object idref="Criteria2"/>
+                </void>
+                <void method="add">
+                 <object idref="Criteria3"/>
+                </void>
+               </void>
+               <void property="criteria">
+                <object idref="ArrayList36"/>
+               </void>
+               <void property="name">
+                <string>NP2020</string>
+               </void>
+              </object>
+             </void>
+            </void>
+            <void property="courseTasks">
+             <object idref="ArrayList35"/>
+            </void>
+            <void property="name">
+             <string>Sve3</string>
+            </void>
+           </object>
+          </void>
+         </object>
+        </void>
+        <void property="name">
+         <string>Oliver</string>
+        </void>
+       </object>
+      </void>
+      <void method="add">
+       <object class="com.te3.main.objects.Student">
+        <void property="courses">
+         <object class="java.util.ArrayList">
+          <void method="add">
+           <object class="com.te3.main.objects.Course" id="Course12">
+            <void id="ArrayList37" property="courseCriteria">
+             <void method="add">
+              <object idref="Criteria0"/>
+             </void>
+             <void method="add">
+              <object idref="Criteria1"/>
+             </void>
+             <void method="add">
+              <object idref="Criteria2"/>
+             </void>
+             <void method="add">
+              <object idref="Criteria3"/>
+             </void>
+            </void>
+            <void property="courseCriteria">
+             <object idref="ArrayList37"/>
+            </void>
+            <void id="ArrayList38" property="courseTasks">
+             <void method="add">
+              <object class="com.te3.main.objects.Task" id="Task12">
+               <void property="comment">
+                <string></string>
+               </void>
+               <void id="ArrayList39" property="criteria">
+                <void method="add">
+                 <object idref="Criteria0"/>
+                </void>
+                <void method="add">
+                 <object idref="Criteria1"/>
+                </void>
+                <void method="add">
+                 <object idref="Criteria2"/>
+                </void>
+                <void method="add">
+                 <object idref="Criteria3"/>
+                </void>
+               </void>
+               <void property="criteria">
+                <object idref="ArrayList39"/>
+               </void>
+               <void property="name">
+                <string>NP2020</string>
+               </void>
+              </object>
+             </void>
+            </void>
+            <void property="courseTasks">
+             <object idref="ArrayList38"/>
+            </void>
+            <void property="name">
+             <string>Sve3</string>
+            </void>
+           </object>
+          </void>
+         </object>
+        </void>
+        <void property="name">
+         <string>Zhiwen</string>
+        </void>
+       </object>
+      </void>
+      <void method="add">
+       <object class="com.te3.main.objects.Student">
+        <void property="courses">
+         <object class="java.util.ArrayList">
+          <void method="add">
+           <object class="com.te3.main.objects.Course" id="Course13">
+            <void id="ArrayList40" property="courseCriteria">
+             <void method="add">
+              <object idref="Criteria0"/>
+             </void>
+             <void method="add">
+              <object idref="Criteria1"/>
+             </void>
+             <void method="add">
+              <object idref="Criteria2"/>
+             </void>
+             <void method="add">
+              <object idref="Criteria3"/>
+             </void>
+            </void>
+            <void property="courseCriteria">
+             <object idref="ArrayList40"/>
+            </void>
+            <void id="ArrayList41" property="courseTasks">
+             <void method="add">
+              <object class="com.te3.main.objects.Task" id="Task13">
+               <void property="comment">
+                <string></string>
+               </void>
+               <void id="ArrayList42" property="criteria">
+                <void method="add">
+                 <object idref="Criteria0"/>
+                </void>
+                <void method="add">
+                 <object idref="Criteria1"/>
+                </void>
+                <void method="add">
+                 <object idref="Criteria2"/>
+                </void>
+                <void method="add">
+                 <object idref="Criteria3"/>
+                </void>
+               </void>
+               <void property="criteria">
+                <object idref="ArrayList42"/>
+               </void>
+               <void property="name">
+                <string>NP2020</string>
+               </void>
+              </object>
+             </void>
+            </void>
+            <void property="courseTasks">
+             <object idref="ArrayList41"/>
+            </void>
+            <void property="name">
+             <string>Sve3</string>
+            </void>
+           </object>
+          </void>
+         </object>
+        </void>
+        <void property="name">
+         <string>Anton L</string>
+        </void>
+       </object>
+      </void>
+      <void method="add">
+       <object class="com.te3.main.objects.Student">
+        <void property="courses">
+         <object class="java.util.ArrayList">
+          <void method="add">
+           <object class="com.te3.main.objects.Course" id="Course14">
+            <void id="ArrayList43" property="courseCriteria">
+             <void method="add">
+              <object idref="Criteria0"/>
+             </void>
+             <void method="add">
+              <object idref="Criteria1"/>
+             </void>
+             <void method="add">
+              <object idref="Criteria2"/>
+             </void>
+             <void method="add">
+              <object idref="Criteria3"/>
+             </void>
+            </void>
+            <void property="courseCriteria">
+             <object idref="ArrayList43"/>
+            </void>
+            <void id="ArrayList44" property="courseTasks">
+             <void method="add">
+              <object class="com.te3.main.objects.Task" id="Task14">
+               <void property="comment">
+                <string></string>
+               </void>
+               <void id="ArrayList45" property="criteria">
+                <void method="add">
+                 <object idref="Criteria0"/>
+                </void>
+                <void method="add">
+                 <object idref="Criteria1"/>
+                </void>
+                <void method="add">
+                 <object idref="Criteria2"/>
+                </void>
+                <void method="add">
+                 <object idref="Criteria3"/>
+                </void>
+               </void>
+               <void property="criteria">
+                <object idref="ArrayList45"/>
+               </void>
+               <void property="name">
+                <string>NP2020</string>
+               </void>
+              </object>
+             </void>
+            </void>
+            <void property="courseTasks">
+             <object idref="ArrayList44"/>
+            </void>
+            <void property="name">
+             <string>Sve3</string>
+            </void>
+           </object>
+          </void>
+         </object>
+        </void>
+        <void property="name">
+         <string>Malte</string>
+        </void>
+       </object>
+      </void>
+      <void method="add">
+       <object class="com.te3.main.objects.Student">
+        <void property="courses">
+         <object class="java.util.ArrayList">
+          <void method="add">
+           <object class="com.te3.main.objects.Course" id="Course15">
+            <void id="ArrayList46" property="courseCriteria">
+             <void method="add">
+              <object idref="Criteria0"/>
+             </void>
+             <void method="add">
+              <object idref="Criteria1"/>
+             </void>
+             <void method="add">
+              <object idref="Criteria2"/>
+             </void>
+             <void method="add">
+              <object idref="Criteria3"/>
+             </void>
+            </void>
+            <void property="courseCriteria">
+             <object idref="ArrayList46"/>
+            </void>
+            <void id="ArrayList47" property="courseTasks">
+             <void method="add">
+              <object class="com.te3.main.objects.Task" id="Task15">
+               <void property="comment">
+                <string></string>
+               </void>
+               <void id="ArrayList48" property="criteria">
+                <void method="add">
+                 <object idref="Criteria0"/>
+                </void>
+                <void method="add">
+                 <object idref="Criteria1"/>
+                </void>
+                <void method="add">
+                 <object idref="Criteria2"/>
+                </void>
+                <void method="add">
+                 <object idref="Criteria3"/>
+                </void>
+               </void>
+               <void property="criteria">
+                <object idref="ArrayList48"/>
+               </void>
+               <void property="name">
+                <string>NP2020</string>
+               </void>
+              </object>
+             </void>
+            </void>
+            <void property="courseTasks">
+             <object idref="ArrayList47"/>
+            </void>
+            <void property="name">
+             <string>Sve3</string>
+            </void>
+           </object>
+          </void>
+         </object>
+        </void>
+        <void property="name">
+         <string>Edvin</string>
+        </void>
+       </object>
+      </void>
+      <void method="add">
+       <object class="com.te3.main.objects.Student">
+        <void property="courses">
+         <object class="java.util.ArrayList">
+          <void method="add">
+           <object class="com.te3.main.objects.Course" id="Course16">
+            <void id="ArrayList49" property="courseCriteria">
+             <void method="add">
+              <object idref="Criteria0"/>
+             </void>
+             <void method="add">
+              <object idref="Criteria1"/>
+             </void>
+             <void method="add">
+              <object idref="Criteria2"/>
+             </void>
+             <void method="add">
+              <object idref="Criteria3"/>
+             </void>
+            </void>
+            <void property="courseCriteria">
+             <object idref="ArrayList49"/>
+            </void>
+            <void id="ArrayList50" property="courseTasks">
+             <void method="add">
+              <object class="com.te3.main.objects.Task" id="Task16">
+               <void property="comment">
+                <string></string>
+               </void>
+               <void id="ArrayList51" property="criteria">
+                <void method="add">
+                 <object idref="Criteria0"/>
+                </void>
+                <void method="add">
+                 <object idref="Criteria1"/>
+                </void>
+                <void method="add">
+                 <object idref="Criteria2"/>
+                </void>
+                <void method="add">
+                 <object idref="Criteria3"/>
+                </void>
+               </void>
+               <void property="criteria">
+                <object idref="ArrayList51"/>
+               </void>
+               <void property="name">
+                <string>NP2020</string>
+               </void>
+              </object>
+             </void>
+            </void>
+            <void property="courseTasks">
+             <object idref="ArrayList50"/>
+            </void>
+            <void property="name">
+             <string>Sve3</string>
+            </void>
+           </object>
+          </void>
+         </object>
+        </void>
+        <void property="name">
+         <string>Thedor</string>
+        </void>
+       </object>
+      </void>
+      <void method="add">
+       <object class="com.te3.main.objects.Student">
+        <void property="courses">
+         <object class="java.util.ArrayList">
+          <void method="add">
+           <object class="com.te3.main.objects.Course" id="Course17">
+            <void id="ArrayList52" property="courseCriteria">
+             <void method="add">
+              <object idref="Criteria0"/>
+             </void>
+             <void method="add">
+              <object idref="Criteria1"/>
+             </void>
+             <void method="add">
+              <object idref="Criteria2"/>
+             </void>
+             <void method="add">
+              <object idref="Criteria3"/>
+             </void>
+            </void>
+            <void property="courseCriteria">
+             <object idref="ArrayList52"/>
+            </void>
+            <void id="ArrayList53" property="courseTasks">
+             <void method="add">
+              <object class="com.te3.main.objects.Task" id="Task17">
+               <void property="comment">
+                <string></string>
+               </void>
+               <void id="ArrayList54" property="criteria">
+                <void method="add">
+                 <object idref="Criteria0"/>
+                </void>
+                <void method="add">
+                 <object idref="Criteria1"/>
+                </void>
+                <void method="add">
+                 <object idref="Criteria2"/>
+                </void>
+                <void method="add">
+                 <object idref="Criteria3"/>
+                </void>
+               </void>
+               <void property="criteria">
+                <object idref="ArrayList54"/>
+               </void>
+               <void property="name">
+                <string>NP2020</string>
+               </void>
+              </object>
+             </void>
+            </void>
+            <void property="courseTasks">
+             <object idref="ArrayList53"/>
+            </void>
+            <void property="name">
+             <string>Sve3</string>
+            </void>
+           </object>
+          </void>
+         </object>
+        </void>
+        <void property="name">
+         <string>Filip</string>
+        </void>
+       </object>
+      </void>
+      <void method="add">
+       <object class="com.te3.main.objects.Student">
+        <void property="courses">
+         <object class="java.util.ArrayList">
+          <void method="add">
+           <object class="com.te3.main.objects.Course" id="Course18">
+            <void id="ArrayList55" property="courseCriteria">
+             <void method="add">
+              <object idref="Criteria0"/>
+             </void>
+             <void method="add">
+              <object idref="Criteria1"/>
+             </void>
+             <void method="add">
+              <object idref="Criteria2"/>
+             </void>
+             <void method="add">
+              <object idref="Criteria3"/>
+             </void>
+            </void>
+            <void property="courseCriteria">
+             <object idref="ArrayList55"/>
+            </void>
+            <void id="ArrayList56" property="courseTasks">
+             <void method="add">
+              <object class="com.te3.main.objects.Task" id="Task18">
+               <void property="comment">
+                <string></string>
+               </void>
+               <void id="ArrayList57" property="criteria">
+                <void method="add">
+                 <object idref="Criteria0"/>
+                </void>
+                <void method="add">
+                 <object idref="Criteria1"/>
+                </void>
+                <void method="add">
+                 <object idref="Criteria2"/>
+                </void>
+                <void method="add">
+                 <object idref="Criteria3"/>
+                </void>
+               </void>
+               <void property="criteria">
+                <object idref="ArrayList57"/>
+               </void>
+               <void property="name">
+                <string>NP2020</string>
+               </void>
+              </object>
+             </void>
+            </void>
+            <void property="courseTasks">
+             <object idref="ArrayList56"/>
+            </void>
+            <void property="name">
+             <string>Sve3</string>
+            </void>
+           </object>
+          </void>
+         </object>
+        </void>
+        <void property="name">
+         <string>Axel</string>
+        </void>
+       </object>
+      </void>
+      <void method="add">
+       <object class="com.te3.main.objects.Student">
+        <void property="courses">
+         <object class="java.util.ArrayList">
+          <void method="add">
+           <object class="com.te3.main.objects.Course" id="Course19">
+            <void id="ArrayList58" property="courseCriteria">
+             <void method="add">
+              <object idref="Criteria0"/>
+             </void>
+             <void method="add">
+              <object idref="Criteria1"/>
+             </void>
+             <void method="add">
+              <object idref="Criteria2"/>
+             </void>
+             <void method="add">
+              <object idref="Criteria3"/>
+             </void>
+            </void>
+            <void property="courseCriteria">
+             <object idref="ArrayList58"/>
+            </void>
+            <void id="ArrayList59" property="courseTasks">
+             <void method="add">
+              <object class="com.te3.main.objects.Task" id="Task19">
+               <void property="comment">
+                <string></string>
+               </void>
+               <void id="ArrayList60" property="criteria">
+                <void method="add">
+                 <object idref="Criteria0"/>
+                </void>
+                <void method="add">
+                 <object idref="Criteria1"/>
+                </void>
+                <void method="add">
+                 <object idref="Criteria2"/>
+                </void>
+                <void method="add">
+                 <object idref="Criteria3"/>
+                </void>
+               </void>
+               <void property="criteria">
+                <object idref="ArrayList60"/>
+               </void>
+               <void property="name">
+                <string>NP2020</string>
+               </void>
+              </object>
+             </void>
+            </void>
+            <void property="courseTasks">
+             <object idref="ArrayList59"/>
+            </void>
+            <void property="name">
+             <string>Sve3</string>
+            </void>
+           </object>
+          </void>
+         </object>
+        </void>
+        <void property="name">
+         <string>Anton S</string>
+        </void>
+       </object>
+      </void>
+      <void method="add">
+       <object class="com.te3.main.objects.Student">
+        <void property="courses">
+         <object class="java.util.ArrayList">
+          <void method="add">
+           <object class="com.te3.main.objects.Course" id="Course20">
+            <void id="ArrayList61" property="courseCriteria">
+             <void method="add">
+              <object idref="Criteria0"/>
+             </void>
+             <void method="add">
+              <object idref="Criteria1"/>
+             </void>
+             <void method="add">
+              <object idref="Criteria2"/>
+             </void>
+             <void method="add">
+              <object idref="Criteria3"/>
+             </void>
+            </void>
+            <void property="courseCriteria">
+             <object idref="ArrayList61"/>
+            </void>
+            <void id="ArrayList62" property="courseTasks">
+             <void method="add">
+              <object class="com.te3.main.objects.Task" id="Task20">
+               <void property="comment">
+                <string></string>
+               </void>
+               <void id="ArrayList63" property="criteria">
+                <void method="add">
+                 <object idref="Criteria0"/>
+                </void>
+                <void method="add">
+                 <object idref="Criteria1"/>
+                </void>
+                <void method="add">
+                 <object idref="Criteria2"/>
+                </void>
+                <void method="add">
+                 <object idref="Criteria3"/>
+                </void>
+               </void>
+               <void property="criteria">
+                <object idref="ArrayList63"/>
+               </void>
+               <void property="name">
+                <string>NP2020</string>
+               </void>
+              </object>
+             </void>
+            </void>
+            <void property="courseTasks">
+             <object idref="ArrayList62"/>
+            </void>
+            <void property="name">
+             <string>Sve3</string>
+            </void>
+           </object>
+          </void>
+         </object>
+        </void>
+        <void property="name">
+         <string>Albin</string>
+        </void>
+       </object>
+      </void>
+      <void method="add">
+       <object class="com.te3.main.objects.Student">
+        <void property="courses">
+         <object class="java.util.ArrayList">
+          <void method="add">
+           <object class="com.te3.main.objects.Course" id="Course21">
+            <void id="ArrayList64" property="courseCriteria">
+             <void method="add">
+              <object idref="Criteria0"/>
+             </void>
+             <void method="add">
+              <object idref="Criteria1"/>
+             </void>
+             <void method="add">
+              <object idref="Criteria2"/>
+             </void>
+             <void method="add">
+              <object idref="Criteria3"/>
+             </void>
+            </void>
+            <void property="courseCriteria">
+             <object idref="ArrayList64"/>
+            </void>
+            <void id="ArrayList65" property="courseTasks">
+             <void method="add">
+              <object class="com.te3.main.objects.Task" id="Task21">
+               <void property="comment">
+                <string></string>
+               </void>
+               <void id="ArrayList66" property="criteria">
+                <void method="add">
+                 <object idref="Criteria0"/>
+                </void>
+                <void method="add">
+                 <object idref="Criteria1"/>
+                </void>
+                <void method="add">
+                 <object idref="Criteria2"/>
+                </void>
+                <void method="add">
+                 <object idref="Criteria3"/>
+                </void>
+               </void>
+               <void property="criteria">
+                <object idref="ArrayList66"/>
+               </void>
+               <void property="name">
+                <string>NP2020</string>
+               </void>
+              </object>
+             </void>
+            </void>
+            <void property="courseTasks">
+             <object idref="ArrayList65"/>
+            </void>
+            <void property="name">
+             <string>Sve3</string>
+            </void>
+           </object>
+          </void>
+         </object>
+        </void>
+        <void property="name">
+         <string>Elias S</string>
+        </void>
+       </object>
+      </void>
+      <void method="add">
+       <object class="com.te3.main.objects.Student">
+        <void property="courses">
+         <object class="java.util.ArrayList">
+          <void method="add">
+           <object class="com.te3.main.objects.Course" id="Course22">
+            <void id="ArrayList67" property="courseCriteria">
+             <void method="add">
+              <object idref="Criteria0"/>
+             </void>
+             <void method="add">
+              <object idref="Criteria1"/>
+             </void>
+             <void method="add">
+              <object idref="Criteria2"/>
+             </void>
+             <void method="add">
+              <object idref="Criteria3"/>
+             </void>
+            </void>
+            <void property="courseCriteria">
+             <object idref="ArrayList67"/>
+            </void>
+            <void id="ArrayList68" property="courseTasks">
+             <void method="add">
+              <object class="com.te3.main.objects.Task" id="Task22">
+               <void property="comment">
+                <string></string>
+               </void>
+               <void id="ArrayList69" property="criteria">
+                <void method="add">
+                 <object idref="Criteria0"/>
+                </void>
+                <void method="add">
+                 <object idref="Criteria1"/>
+                </void>
+                <void method="add">
+                 <object idref="Criteria2"/>
+                </void>
+                <void method="add">
+                 <object idref="Criteria3"/>
+                </void>
+               </void>
+               <void property="criteria">
+                <object idref="ArrayList69"/>
+               </void>
+               <void property="name">
+                <string>NP2020</string>
+               </void>
+              </object>
+             </void>
+            </void>
+            <void property="courseTasks">
+             <object idref="ArrayList68"/>
+            </void>
+            <void property="name">
+             <string>Sve3</string>
+            </void>
+           </object>
+          </void>
+         </object>
+        </void>
+        <void property="name">
+         <string>Marcus</string>
+        </void>
+       </object>
+      </void>
+      <void method="add">
+       <object class="com.te3.main.objects.Student">
+        <void property="courses">
+         <object class="java.util.ArrayList">
+          <void method="add">
+           <object class="com.te3.main.objects.Course" id="Course23">
+            <void id="ArrayList70" property="courseCriteria">
+             <void method="add">
+              <object idref="Criteria0"/>
+             </void>
+             <void method="add">
+              <object idref="Criteria1"/>
+             </void>
+             <void method="add">
+              <object idref="Criteria2"/>
+             </void>
+             <void method="add">
+              <object idref="Criteria3"/>
+             </void>
+            </void>
+            <void property="courseCriteria">
+             <object idref="ArrayList70"/>
+            </void>
+            <void id="ArrayList71" property="courseTasks">
+             <void method="add">
+              <object class="com.te3.main.objects.Task" id="Task23">
+               <void property="comment">
+                <string></string>
+               </void>
+               <void id="ArrayList72" property="criteria">
+                <void method="add">
+                 <object idref="Criteria0"/>
+                </void>
+                <void method="add">
+                 <object idref="Criteria1"/>
+                </void>
+                <void method="add">
+                 <object idref="Criteria2"/>
+                </void>
+                <void method="add">
+                 <object idref="Criteria3"/>
+                </void>
+               </void>
+               <void property="criteria">
+                <object idref="ArrayList72"/>
+               </void>
+               <void property="name">
+                <string>NP2020</string>
+               </void>
+              </object>
+             </void>
+            </void>
+            <void property="courseTasks">
+             <object idref="ArrayList71"/>
+            </void>
+            <void property="name">
+             <string>Sve3</string>
+            </void>
+           </object>
+          </void>
+         </object>
+        </void>
+        <void property="name">
+         <string>Melvin</string>
         </void>
        </object>
       </void>
      </void>
      <void property="students">
-      <object idref="ArrayList5"/>
+      <object idref="ArrayList0"/>
      </void>
     </object>
    </void>

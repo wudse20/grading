@@ -1,9 +1,6 @@
 package com.te3.main.gui;
 
-import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.FlowLayout;
-import java.awt.Font;
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.time.LocalTime;
@@ -355,9 +352,18 @@ public class GradesPanel extends JPanel implements KeyListener {
 
 			// To prevent IndexOutOfBoundsException with no created tasks.
 			if (tasks.size() == 0) {
+				//Sets the label text
+				lblGrades.setText("Det finns inga uppgifter!");
+
+				//Sets the font
+				lblGrades.setFont(new Font(Font.DIALOG, Font.BOLD, 40));
+
+				//Sets the text color.
+				lblGrades.setForeground(Color.RED);
+
 				// Sends dialog to the user
-				int ans = JOptionPane.showConfirmDialog(this, "Du måste ha en kurs för denna vyn; vill du skapa en?",
-						"Inga Kurser", JOptionPane.YES_NO_OPTION, JOptionPane.ERROR_MESSAGE);
+				int ans = JOptionPane.showConfirmDialog(this, "Du måste ha minst en uppgift för denna vyn; vill du skapa en?",
+						"Inga Uppgfiter", JOptionPane.YES_NO_OPTION, JOptionPane.ERROR_MESSAGE);
 
 				// Debug message:
 				System.out.println("["
@@ -452,6 +458,15 @@ public class GradesPanel extends JPanel implements KeyListener {
 			this.add(panelInfo, BorderLayout.LINE_START);
 			this.add(scroll, BorderLayout.CENTER);
 			this.add(lblSpacer5, BorderLayout.LINE_END);
+		} else if (s.equals(State.CLASS_COURSE)) {
+			//Removes all the components that might be on the panel
+			for (Component c : panel.getComponents())
+				panel.remove(c);
+
+			//Adds the label with the information.
+			panel.add(lblGrades);
+
+			this.add(panel, BorderLayout.CENTER);
 		}
 	}
 
