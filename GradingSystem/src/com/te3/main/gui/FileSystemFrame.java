@@ -361,6 +361,10 @@ public class FileSystemFrame extends JFrame implements KeyListener, ListSelectio
 	 *                                             fail.
 	 */
 	private void createNewFolder(String path) throws IllegalNameException, UnsuccessfulFolderCreationException {
+		// So it won't throw a NullPointerException if cancel button is pressed.
+		if (path == null)
+			return;
+
 		// Checks for all the inputs that wouldn't work
 		// If indexOf returns -1 the character isn't in
 		// the String.
