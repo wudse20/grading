@@ -13,6 +13,9 @@ public class Course {
 	/** The name of the course */
 	private String name;
 
+	/** The name of the host Class */
+	private String className;
+
 	/** The list of course criteria */
 	private ArrayList<Criteria> courseCriteria;
 
@@ -27,10 +30,11 @@ public class Course {
 	 * Sets up the course with a name and criteria.
 	 *
 	 * @param name           The name of the course
+	 * @param className		 The name of the class
 	 * @param courseCriteria the course criteria
 	 * @throws IllegalNameException If the name isn't accepted
 	 */
-	public Course(String name, ArrayList<Criteria> courseCriteria) throws IllegalNameException {
+	public Course(String name, String className, ArrayList<Criteria> courseCriteria) throws IllegalNameException {
 		// Sets the name
 		this.setName(name);
 
@@ -45,11 +49,12 @@ public class Course {
 	 * Sets up a course with criteria, tasks and a name
 	 *
 	 * @param name           the name of the course
+	 * @param className      the name of the class
 	 * @param courseCriteria the criteria
 	 * @param courseTasks    the tasks
 	 * @throws IllegalNameException If the name isn't accepted
 	 */
-	public Course(String name, ArrayList<Criteria> courseCriteria, ArrayList<Task> courseTasks)
+	public Course(String name, String className, ArrayList<Criteria> courseCriteria, ArrayList<Task> courseTasks)
 			throws IllegalNameException {
 		try {
 			// Sets the name
@@ -256,6 +261,6 @@ public class Course {
 
 	@Override
 	public String toString() {
-		return this.name;
+		return this.name + " (" + this.className + ")";
 	}
 }

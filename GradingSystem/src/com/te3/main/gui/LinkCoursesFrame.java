@@ -226,7 +226,7 @@ public class LinkCoursesFrame extends JFrame implements WindowListener {
 		for (int i = 0; i < addedCourses.size(); i++) {
 			try {
 				// Adds a new course that's a blank clone the course to the list.
-				courses.add(new Course(addedCourses.get(i).getName(), addedCourses.get(i).getCourseCriteria(),
+				courses.add(new Course(addedCourses.get(i).getName(), mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getName(), addedCourses.get(i).getCourseCriteria(),
 						addedCourses.get(i).getNewCourseTask()));
 
 				// Debug message
@@ -304,7 +304,7 @@ public class LinkCoursesFrame extends JFrame implements WindowListener {
 				// Gets the course
 				Course c = null;
 				try {
-					c = new Course(courses.get(j).getName(), courses.get(j).getCourseCriteria(),
+					c = new Course(courses.get(j).getName(), mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getName(), courses.get(j).getCourseCriteria(),
 							courses.get(j).getCourseTasks());
 				} catch (IllegalNameException e) {
 					e.printStackTrace();

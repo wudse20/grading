@@ -451,7 +451,7 @@ public class MainFrame extends JFrame implements ComponentListener, WindowStateL
 				tasks.add(new Task("Något jätteprov", criteria2));
 				tasks.add(new Task("Ett till jätteprov", criteria3));
 
-				students.get(0).addCourse(new Course("Dator- och nätverksteknik", criteria, tasks));
+				students.get(0).addCourse(new Course("Dator- och nätverksteknik", "TE3B", criteria, tasks));
 
 				classes.add(new SchoolClass("TE3B", students));
 			} catch (Exception e) {
