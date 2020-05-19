@@ -259,6 +259,24 @@ public class Course {
 		this.courseTasks = courseTasks;
 	}
 
+	/**
+	 * A getter for the class name
+	 *
+	 * @return the class name
+	 */
+	public String getClassName() {
+		return this.className;
+	}
+
+	/**
+	 * A setter for class name
+	 *
+	 * @param className the name of the class
+	 */
+	public void setClassName(String className) {
+		this.className = className;
+	}
+
 	@Override
 	public boolean equals(Object obj) {
 		Course c = (Course) obj;
