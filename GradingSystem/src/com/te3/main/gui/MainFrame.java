@@ -515,10 +515,8 @@ public class MainFrame extends JFrame implements ComponentListener, WindowStateL
 				frame = new ListUpdateChooser<SchoolClass>(this, mainData.getClasses(), (Class<SchoolClass>) clazz);
 				frame.setVisible(true);
 			} else if (clazz.equals(Course.class)) {
-				frame = new ListUpdateChooser<Course>(this,
-						mainData.getClasses().get(currentlySelectedClassIndex).getStudents()
-								.get(currentlySelectedCourseIndex).getCourses(),
-						(Class<Course>) clazz);
+				frame = new ListUpdateChooser<Course>(this, mainData.getClasses().get(currentlySelectedClassIndex)
+						.getStudents().get(currentlySelectedCourseIndex).getCourses(), (Class<Course>) clazz);
 				frame.setVisible(true);
 			} else if (clazz.equals(Task.class)) {
 				frame = new ListUpdateChooser<Task>(this,

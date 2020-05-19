@@ -30,7 +30,7 @@ public class Course {
 	 * Sets up the course with a name and criteria.
 	 *
 	 * @param name           The name of the course
-	 * @param className		 The name of the class
+	 * @param className      The name of the class
 	 * @param courseCriteria the course criteria
 	 * @throws IllegalNameException If the name isn't accepted
 	 */
