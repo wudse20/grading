@@ -297,13 +297,12 @@ public class CBPanel extends JPanel {
 		Data localData = newData;
 		
 		ArrayList<SchoolClass> dataClasses = localData.getClasses();
-		ArrayList<Student> dataStudents = null;
-		ArrayList<Course> dataCourses = null;
-		ArrayList<Task> dataTasks = null;
 		
 		if (dataClasses.size() != 0) {
 			
 			dataClasses.forEach((n) -> cbClass.addItem(n.getName()));
+			
+			ArrayList<Student> dataStudents = null;
 			
 			try {
 				dataStudents = dataClasses.get(mf.getCurrentlySelectedClassIndex()).getStudents();
@@ -314,6 +313,8 @@ public class CBPanel extends JPanel {
 			if (dataStudents.size() != 0) {
 				
 				dataStudents.forEach((n) -> cbStudent.addItem(n.getName()));
+				
+				ArrayList<Course> dataCourses = null;
 				
 				try {
 					dataCourses = dataStudents.get(mf.getCurrentlySelectedStudentIndex()).getCourses();
@@ -329,6 +330,8 @@ public class CBPanel extends JPanel {
 				if (dataCourses.size() != 0) {
 					dataCourses.forEach((n) -> cbCourse.addItem(n.getName()));
 				}
+				
+				ArrayList<Task> dataTasks = null;
 				
 				try {
 					dataTasks = dataCourses.get(mf.getCurrentlySelectedCourseIndex()).getCourseTasks();
@@ -356,54 +359,59 @@ public class CBPanel extends JPanel {
 		cbTask.addItem("Ny");
 		cbTask.addItem("Ändra");
 		
+		//Set the comboboxes to their default items whenever we selected to create a new or to change an item.
 		if (hasInitialized) {
 			State tempState = State.NOTHING_SELECTED;
 			{
 				String ch = prevSelectedItems.get(0);
-				switch(ch) {
-				case "Ny":
-					cbClass.setSelectedIndex(0);
-					mf.setCurrentlySelectedClassIndex(0);
-					/*
-					int newItmIndx = cbClass.getItemCount()-3;
-					
-					cbClass.setSelectedIndex(newItmIndx);
-					mf.setCurrentlySelectedClassIndex(newItmIndx);
-					
-					
-					//Update the Course combobox with eventual linked items from the selected class
-					cbCourse.removeAllItems();
-					cbCourse.addItem("Kurs");
-					dataCourses = mf.getMainData().getClasses().get(newItmIndx-1).getStudents().get(0).getCourses();
-					dataCourses.forEach((n) -> cbCourse.addItem(n.getName()));
-					cbCourse.addItem("Ny");
-					cbCourse.addItem("Ändra");
-					*/
-					
-					cbCourse.setSelectedIndex(0);
-					break;
-				case "Ändra":
-					cbClass.setSelectedIndex(0);
-					break;
-				default:
-					cbClass.setSelectedItem(ch);
+				if (ch != null) {
+					switch(ch) {
+					case "Ny":
+						cbClass.setSelectedIndex(0);
+						mf.setCurrentlySelectedClassIndex(0);
+						/*
+						int newItmIndx = cbClass.getItemCount()-3;
+						
+						cbClass.setSelectedIndex(newItmIndx);
+						mf.setCurrentlySelectedClassIndex(newItmIndx);
+						
+						
+						//Update the Course combobox with eventual linked items from the selected class
+						cbCourse.removeAllItems();
+						cbCourse.addItem("Kurs");
+						dataCourses = mf.getMainData().getClasses().get(newItmIndx-1).getStudents().get(0).getCourses();
+						dataCourses.forEach((n) -> cbCourse.addItem(n.getName()));
+						cbCourse.addItem("Ny");
+						cbCourse.addItem("Ändra");
+						*/
+						
+						cbCourse.setSelectedIndex(0);
+						break;
+					case "Ändra":
+						cbClass.setSelectedIndex(0);
+						break;
+					default:
+						cbClass.setSelectedItem(ch);
+					}
 				}
 			}
 			
 			{
 				String ch = prevSelectedItems.get(1);
-				switch(ch) {
-				case "Ny":
-					cbCourse.setSelectedIndex(0);
-					mf.setCurrentlySelectedCourseIndex(0);
-					
-					tempState = State.CLASS;
-					break;
-				case "Ändra":
-					cbCourse.setSelectedIndex(0);
-					break;
-				default:
-					cbCourse.setSelectedItem(ch);
+				if (ch != null) {
+					switch(ch) {
+					case "Ny":
+						cbCourse.setSelectedIndex(0);
+						mf.setCurrentlySelectedCourseIndex(0);
+						
+						tempState = State.CLASS;
+						break;
+					case "Ändra":
+						cbCourse.setSelectedIndex(0);
+						break;
+					default:
+						cbCourse.setSelectedItem(ch);
+					}
 				}
 			}
 			
@@ -411,21 +419,23 @@ public class CBPanel extends JPanel {
 			
 			{
 				String ch = prevSelectedItems.get(3);
-				switch(ch) {
-				case "Ny":
-					cbTask.setSelectedIndex(0);
-					mf.setCurrentlySelectedAssignmentIndex(0);
-					/*
-					cbTask.setSelectedIndex(cbTask.getItemCount()-3);
-					mf.setCurrentlySelectedAssignmentIndex(cbTask.getSelectedIndex()-1);
-					*/
-					tempState = State.CLASS_COURSE_STUDENT_TASK;
-					break;
-				case "Ändra":
-					cbTask.setSelectedIndex(0);
-					break;
-				default:
-					cbTask.setSelectedItem(ch);
+				if (ch != null) {
+					switch(ch) {
+					case "Ny":
+						cbTask.setSelectedIndex(0);
+						mf.setCurrentlySelectedAssignmentIndex(0);
+						/*
+						cbTask.setSelectedIndex(cbTask.getItemCount()-3);
+						mf.setCurrentlySelectedAssignmentIndex(cbTask.getSelectedIndex()-1);
+						*/
+						tempState = State.CLASS_COURSE_STUDENT_TASK;
+						break;
+					case "Ändra":
+						cbTask.setSelectedIndex(0);
+						break;
+					default:
+						cbTask.setSelectedItem(ch);
+					}
 				}
 			}
 			
