@@ -7,7 +7,7 @@ import com.te3.main.gui.MainFrame;
 /**
  * Main class
  */
-public class Main {
+public class Betygsystem {
 	public static void main(String[] args) {
 		// Initializes the frame
 		SwingUtilities.invokeLater(() -> new MainFrame().setVisible(true));
