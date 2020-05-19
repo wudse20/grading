@@ -38,6 +38,9 @@ public class Course {
 		// Sets the name
 		this.setName(name);
 
+		// Sets the class name
+		this.className = className;
+		
 		// Sets the criteria
 		this.setCourseCriteria(courseCriteria);
 
@@ -64,6 +67,9 @@ public class Course {
 			throw new IllegalNameException(e.getMessage());
 		}
 
+		// Sets the class name
+		this.className = className;
+		
 		// This sets the course criteria
 		this.setCourseCriteria(courseCriteria);
 

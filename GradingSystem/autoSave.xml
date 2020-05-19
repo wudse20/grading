@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<java version="13.0.2" class="java.beans.XMLDecoder">
+<java version="13.0.1" class="java.beans.XMLDecoder">
  <object class="com.te3.main.objects.Data" id="Data0">
   <void property="classes">
    <void method="add">
     <object class="com.te3.main.objects.SchoolClass" id="SchoolClass0">
      <void property="name">
-      <string>test</string>
+      <string>TE3B</string>
      </void>
      <void id="ArrayList0" property="students">
       <void method="add">
@@ -18,7 +18,49 @@
              <void method="add">
               <object class="com.te3.main.objects.Criteria">
                <void property="name">
-                <string>test</string>
+                <string>Datasäkerhet</string>
+               </void>
+              </object>
+             </void>
+             <void method="add">
+              <object class="com.te3.main.objects.Criteria">
+               <void property="name">
+                <string>Nätverket</string>
+               </void>
+              </object>
+             </void>
+             <void method="add">
+              <object class="com.te3.main.objects.Criteria">
+               <void property="name">
+                <string>Åtgärda Fel</string>
+               </void>
+              </object>
+             </void>
+             <void method="add">
+              <object class="com.te3.main.objects.Criteria">
+               <void property="name">
+                <string>Resultat</string>
+               </void>
+              </object>
+             </void>
+             <void method="add">
+              <object class="com.te3.main.objects.Criteria">
+               <void property="name">
+                <string>Installeringar</string>
+               </void>
+              </object>
+             </void>
+             <void method="add">
+              <object class="com.te3.main.objects.Criteria">
+               <void property="name">
+                <string>Dokumentation</string>
+               </void>
+              </object>
+             </void>
+             <void method="add">
+              <object class="com.te3.main.objects.Criteria">
+               <void property="name">
+                <string>Förmåga</string>
                </void>
               </object>
              </void>
@@ -26,15 +68,134 @@
             <void property="courseCriteria">
              <object idref="ArrayList1"/>
             </void>
+            <void id="ArrayList2" property="courseTasks">
+             <void method="add">
+              <object class="com.te3.main.objects.Task" id="Task0">
+               <void property="comment">
+                <string></string>
+               </void>
+               <void id="ArrayList3" property="criteria">
+                <void method="add">
+                 <object class="com.te3.main.objects.Criteria">
+                  <void property="name">
+                   <string>Datasäkerhet</string>
+                  </void>
+                 </object>
+                </void>
+                <void method="add">
+                 <object class="com.te3.main.objects.Criteria">
+                  <void property="name">
+                   <string>Nätverket</string>
+                  </void>
+                 </object>
+                </void>
+                <void method="add">
+                 <object class="com.te3.main.objects.Criteria">
+                  <void property="name">
+                   <string>Åtgärda Fel</string>
+                  </void>
+                 </object>
+                </void>
+                <void method="add">
+                 <object class="com.te3.main.objects.Criteria">
+                  <void property="name">
+                   <string>Resultat</string>
+                  </void>
+                 </object>
+                </void>
+                <void method="add">
+                 <object class="com.te3.main.objects.Criteria">
+                  <void property="name">
+                   <string>Installeringar</string>
+                  </void>
+                 </object>
+                </void>
+                <void method="add">
+                 <object class="com.te3.main.objects.Criteria">
+                  <void property="name">
+                   <string>Dokumentation</string>
+                  </void>
+                 </object>
+                </void>
+                <void method="add">
+                 <object class="com.te3.main.objects.Criteria">
+                  <void property="name">
+                   <string>Förmåga</string>
+                  </void>
+                 </object>
+                </void>
+               </void>
+               <void property="criteria">
+                <object idref="ArrayList3"/>
+               </void>
+               <void property="name">
+                <string>Något jätteprov</string>
+               </void>
+              </object>
+             </void>
+             <void method="add">
+              <object class="com.te3.main.objects.Task" id="Task1">
+               <void property="comment">
+                <string></string>
+               </void>
+               <void id="ArrayList4" property="criteria">
+                <void method="add">
+                 <object class="com.te3.main.objects.Criteria">
+                  <void property="name">
+                   <string>Åtgärda Fel</string>
+                  </void>
+                 </object>
+                </void>
+                <void method="add">
+                 <object class="com.te3.main.objects.Criteria">
+                  <void property="name">
+                   <string>Resultat</string>
+                  </void>
+                 </object>
+                </void>
+                <void method="add">
+                 <object class="com.te3.main.objects.Criteria">
+                  <void property="name">
+                   <string>Installeringar</string>
+                  </void>
+                 </object>
+                </void>
+                <void method="add">
+                 <object class="com.te3.main.objects.Criteria">
+                  <void property="name">
+                   <string>Dokumentation</string>
+                  </void>
+                 </object>
+                </void>
+                <void method="add">
+                 <object class="com.te3.main.objects.Criteria">
+                  <void property="name">
+                   <string>Förmåga</string>
+                  </void>
+                 </object>
+                </void>
+               </void>
+               <void property="criteria">
+                <object idref="ArrayList4"/>
+               </void>
+               <void property="name">
+                <string>Ett till jätteprov</string>
+               </void>
+              </object>
+             </void>
+            </void>
+            <void property="courseTasks">
+             <object idref="ArrayList2"/>
+            </void>
             <void property="name">
-             <string>test</string>
+             <string>Dator- och nätverksteknik</string>
             </void>
            </object>
           </void>
          </object>
         </void>
         <void property="name">
-         <string>test</string>
+         <string>Anton</string>
         </void>
        </object>
       </void>
