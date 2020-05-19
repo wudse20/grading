@@ -14,14 +14,7 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Comparator;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JList;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextField;
+import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.event.ListSelectionEvent;
@@ -60,6 +53,15 @@ public class FileSystemFrame extends JFrame implements KeyListener, ListSelectio
 	// Containers
 	Container cp = this.getContentPane();
 
+	// Panels
+	JPanel pWindow = new JPanel();
+	JPanel pInput = new JPanel();
+	JPanel pBtn = new JPanel();
+	JPanel pFiles = new JPanel();
+	JPanel pHeader = new JPanel();
+	JPanel pName = new JPanel();
+	JPanel pLabel = new JPanel();
+
 	// Layouts
 	BorderLayout layout = new BorderLayout();
 	BorderLayout pWindowLayout = new BorderLayout();
@@ -67,14 +69,10 @@ public class FileSystemFrame extends JFrame implements KeyListener, ListSelectio
 	BorderLayout pFilesLayout = new BorderLayout();
 
 	FlowLayout pBtnLayout = new FlowLayout(FlowLayout.RIGHT);
-	FlowLayout pHeaderLayout = new FlowLayout(FlowLayout.LEFT);
+	FlowLayout pNameLayout = new FlowLayout(FlowLayout.LEFT);
+	FlowLayout pLabelLayout = new FlowLayout(FlowLayout.LEFT);
 
-	// Panels
-	JPanel pWindow = new JPanel();
-	JPanel pInput = new JPanel();
-	JPanel pBtn = new JPanel();
-	JPanel pFiles = new JPanel();
-	JPanel pHeader = new JPanel();
+	BoxLayout pHeaderLayout = new BoxLayout(pHeader, BoxLayout.Y_AXIS);
 
 	// Lists
 	JList<Object> files = new JList<Object>();
@@ -94,8 +92,8 @@ public class FileSystemFrame extends JFrame implements KeyListener, ListSelectio
 	JLabel lblSpacer3 = new JLabel("    ");
 	JLabel lblSpacer4 = new JLabel(" ");
 	JLabel lblSpacer5 = new JLabel(" ");
-	JLabel lblSpacer6 = new JLabel(" ");
-	JLabel lblSpacer7 = new JLabel("                      ");
+	JLabel lblFileName = new JLabel("Filnamn: ");
+	JLabel lblPath = new JLabel("Plats: ");
 
 	JLabel lblInfo = new JLabel("Filer:");
 
@@ -139,9 +137,13 @@ public class FileSystemFrame extends JFrame implements KeyListener, ListSelectio
 	 * Adds everything to the frame, and the different panels.
 	 */
 	private void addComponents() {
-		pHeader.add(lblInfo);
-		pHeader.add(lblSpacer7);
-		pHeader.add(txfPath);
+		pName.add(lblPath);
+		pName.add(txfPath);
+
+		pLabel.add(lblInfo);
+
+		pHeader.add(pName);
+		pHeader.add(pLabel);
 
 		pFiles.add(pHeader, BorderLayout.PAGE_START);
 		pFiles.add(scr, BorderLayout.CENTER);
@@ -150,9 +152,9 @@ public class FileSystemFrame extends JFrame implements KeyListener, ListSelectio
 		pBtn.add(btnSave);
 		pBtn.add(btnCancel);
 
+		pInput.add(lblFileName, BorderLayout.LINE_START);
+		pInput.add(txfName, BorderLayout.CENTER);
 		pInput.add(lblSpacer5, BorderLayout.PAGE_START);
-		pInput.add(txfName, BorderLayout.LINE_START);
-		pInput.add(lblSpacer6, BorderLayout.CENTER);
 		pInput.add(pBtn, BorderLayout.LINE_END);
 
 		pWindow.add(pFiles, BorderLayout.CENTER);
@@ -183,6 +185,8 @@ public class FileSystemFrame extends JFrame implements KeyListener, ListSelectio
 		pBtn.setLayout(pBtnLayout);
 		pFiles.setLayout(pFilesLayout);
 		pHeader.setLayout(pHeaderLayout);
+		pName.setLayout(pNameLayout);
+		pLabel.setLayout(pLabelLayout);
 
 		// Set up for the scroll pane.
 		scr = new JScrollPane(files);
