@@ -410,9 +410,11 @@ public class SettingsFrame extends JFrame {
 		} catch (IllegalInputException e) {
 			JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 			txfSaveTimer.setBackground(Color.PINK);
+			return;
 		} catch (NumberFormatException e) {
 			JOptionPane.showMessageDialog(this, "Du måste skriva in ett heltal", "Error", JOptionPane.ERROR_MESSAGE);
 			txfSaveTimer.setBackground(Color.PINK);
+			return;
 		}
 
 		// Sets the save path or sends an error message to the user.
@@ -420,6 +422,7 @@ public class SettingsFrame extends JFrame {
 			s.setSavePath(this.savePath);
 		} catch (IllegalInputException e) {
 			JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+			return;
 		}
 
 		// Sets the current yoda

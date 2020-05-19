@@ -1,11 +1,9 @@
 package com.te3.main.gui;
 
-import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.FlowLayout;
-import java.awt.Font;
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.sql.SQLOutput;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
@@ -44,6 +42,9 @@ public class GradesPanel extends JPanel implements KeyListener {
 
 	// Integers
 	private int keyCount = 0;
+
+	/** Stores when the last time save comment was clicked */
+	private long lastTimeSaveCommentPressed = 0L;
 
 	// State
 	private State state;
@@ -189,7 +190,13 @@ public class GradesPanel extends JPanel implements KeyListener {
 			// To make it final
 			final Task t2 = t;
 
-			btnSaveComment.addActionListener(e -> saveComment(t2, true));
+			btnSaveComment.addActionListener(e -> {
+				if (this.lastTimeSaveCommentPressed + 1000 < System.currentTimeMillis())
+				{
+					saveComment(t2, true);
+					this.lastTimeSaveCommentPressed = System.currentTimeMillis();
+				}
+			});
 
 			// Adds key listener
 			txaComment.addKeyListener(this);
@@ -356,8 +363,8 @@ public class GradesPanel extends JPanel implements KeyListener {
 			// To prevent IndexOutOfBoundsException with no created tasks.
 			if (tasks.size() == 0) {
 				// Sends dialog to the user
-				int ans = JOptionPane.showConfirmDialog(this, "Du måste ha en kurs för denna vyn; vill du skapa en?",
-						"Inga Kurser", JOptionPane.YES_NO_OPTION, JOptionPane.ERROR_MESSAGE);
+				int ans = JOptionPane.showConfirmDialog(this, "Du måste ha minst en uppgift för denna vyn; vill du skapa en?",
+						"Inga Uppgfiter", JOptionPane.YES_NO_OPTION, JOptionPane.ERROR_MESSAGE);
 
 				// Debug message:
 				System.out.println("["

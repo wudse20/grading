@@ -247,6 +247,8 @@ public class SchoolClassFrame extends JFrame implements WindowListener {
 					if (students.get(i).getCourses().size() == 0) {
 						students.get(i)
 								.addCourse(new Course(this.sc.getStudents().get(0).getCourses().get(j).getName(),
+										mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex())
+												.getName(),
 										this.sc.getStudents().get(0).getCourses().get(j).getCourseCriteria(),
 										this.sc.getStudents().get(0).getCourses().get(j).getNewCourseTask()));
 					}

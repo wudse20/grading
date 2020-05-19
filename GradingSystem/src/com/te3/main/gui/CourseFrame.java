@@ -228,7 +228,9 @@ public class CourseFrame extends JFrame implements WindowListener {
 
 			for (var i = 0; i < al2.size(); i++) {
 				for (var j = 0; j < al2.get(i).getStudents().size(); j++) {
-					Course c = new Course(np.getLastInput(), mcp.getCriteria());
+					Course c = new Course(np.getLastInput(),
+							mf.getMainData().getClasses().get(mf.getCurrentlySelectedClassIndex()).getName(),
+							mcp.getCriteria());
 					al2.get(i).getStudents().get(j).addCourse(c);
 				}
 			}
@@ -327,7 +329,10 @@ public class CourseFrame extends JFrame implements WindowListener {
 						if (orgSchoolClasses.contains(sc)) {
 							// Adds the updated course
 							allSchoolClasses.get(i).getStudents().get(j)
-									.addCourse(new Course(np.getLastInput(), mcp.getCriteria(), c.getCourseTasks()));
+									.addCourse(new Course(
+											np.getLastInput(), mf.getMainData().getClasses()
+													.get(mf.getCurrentlySelectedClassIndex()).getName(),
+											mcp.getCriteria(), c.getCourseTasks()));
 
 							// Debug message:
 							System.out.println("["
@@ -343,7 +348,10 @@ public class CourseFrame extends JFrame implements WindowListener {
 						} else {
 							// Adds the updated course with new blank tasks
 							allSchoolClasses.get(i).getStudents().get(j)
-									.addCourse(new Course(np.getLastInput(), mcp.getCriteria(), c.getNewCourseTask()));
+									.addCourse(new Course(
+											np.getLastInput(), mf.getMainData().getClasses()
+													.get(mf.getCurrentlySelectedClassIndex()).getName(),
+											mcp.getCriteria(), c.getNewCourseTask()));
 
 							// Debug message:
 							System.out.println("["
