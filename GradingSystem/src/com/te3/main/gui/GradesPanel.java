@@ -40,11 +40,11 @@ public class GradesPanel extends JPanel implements KeyListener {
 	/** If {@code true} it will open add Course GUI when done with update */
 	private boolean shouldAddCourse = false;
 
+	/** If {@code true} it will save the comment, else it won't. */
+	private boolean shouldSaveComment = false;
+
 	// Integers
 	private int keyCount = 0;
-
-	/** Stores when the last time save comment was clicked */
-	private long lastTimeSaveCommentPressed = 0L;
 
 	// State
 	private State state;
@@ -185,18 +185,25 @@ public class GradesPanel extends JPanel implements KeyListener {
 			txaComment.setText(t.getComment());
 
 			// Adds actionListeners
-			btnClearComment.addActionListener(e -> txaComment.setText(""));
+			btnClearComment.addActionListener(e -> {
+				txaComment.setText("");
+				this.shouldSaveComment = false;
+				btnSaveComment.setEnabled(false);
+			});
 
 			// To make it final
 			final Task t2 = t;
 
 			btnSaveComment.addActionListener(e -> {
-				if (this.lastTimeSaveCommentPressed + 1000 < System.currentTimeMillis())
-				{
+				if (shouldSaveComment) {
 					saveComment(t2, true);
-					this.lastTimeSaveCommentPressed = System.currentTimeMillis();
+					this.shouldSaveComment = false;
+					btnSaveComment.setEnabled(false);
 				}
 			});
+
+			// Disables the save button
+			btnSaveComment.setEnabled(false);
 
 			// Adds key listener
 			txaComment.addKeyListener(this);
@@ -773,8 +780,13 @@ public class GradesPanel extends JPanel implements KeyListener {
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		//Checks for autosave
+		// Checks for autosave
 		if (++keyCount % 50 == 0)
 			saveComment(tasks.get(mf.getCurrentlySelectedAssignmentIndex()), false);
+
+		// If an edit has occurred then it will be allowed to save.
+		this.shouldSaveComment = true;
+
+		btnSaveComment.setEnabled(true);
 	}
 }
