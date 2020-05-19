@@ -14,21 +14,23 @@ public class CBPanel extends JPanel {
 	/** Default */
 	private static final long serialVersionUID = 1L;
 	
-	boolean isRefreshing = false;
+	private boolean isRefreshing = false;
 	
-	boolean hasInitialized = false;
+	private boolean hasInitialized = false;
+	
+	private ArrayList<String> prevSelectedItems = new ArrayList<>();
 
-	GridLayout mainLayout;
+	private GridLayout mainLayout;
 	
-	JLabel lblClass;
-	JLabel lblCourse;
-	JLabel lblStudent;
-	JLabel lblTask;
+	private JLabel lblClass;
+	private JLabel lblCourse;
+	private JLabel lblStudent;
+	private JLabel lblTask;
 	
-	JComboBox<String> cbClass;
-	JComboBox<String> cbCourse;
-	JComboBox<String> cbStudent;
-	JComboBox<String> cbTask;
+	private JComboBox<String> cbClass;
+	private JComboBox<String> cbCourse;
+	private JComboBox<String> cbStudent;
+	private JComboBox<String> cbTask;
 	
 	MainFrame mf;
 	
@@ -85,7 +87,7 @@ public class CBPanel extends JPanel {
 				//Display nothing in the gradepanel
 				mf.updateGradePanel(State.NOTHING_SELECTED);
 			//The user has selected a class
-			} else if (i != -1 && i < itmCount - 2) {
+			} else if (i > 0 && i < itmCount - 2) {
 				//Update the gradepanel state, to have it display nothing (but the other comboboxes become available for selection)
 				mf.updateGradePanel(State.CLASS);
 				//Set the selected class index to the currently selected index in the combobox
@@ -123,16 +125,15 @@ public class CBPanel extends JPanel {
 				} else {
 					cbTask.addItem("Saknas kurs");
 				}
-				
 			//selected the "Change" option
 			} else if (i == itmCount - 1) {
 				mf.openAddEditGUI(SchoolClass.class, false);
-				mf.setCurrentlySelectedClassIndex(itmCount-2);
+				//mf.setCurrentlySelectedClassIndex(0);
 				mf.updateGradePanel(State.NOTHING_SELECTED);
 			//selected the "New" option
 			} else if (i == itmCount - 2) {
 				mf.openAddEditGUI(SchoolClass.class, true);
-				mf.setCurrentlySelectedClassIndex(itmCount-2);
+				//mf.setCurrentlySelectedClassIndex(0);
 				mf.updateGradePanel(State.NOTHING_SELECTED);
 			}
 		});
@@ -148,7 +149,7 @@ public class CBPanel extends JPanel {
 			
 			if (i == 0) { 
 				mf.updateGradePanel(State.CLASS);
-			} else if (i != -1 && i < itmCount - 2) {
+			} else if (i > 0 && i < itmCount - 2) {
 				mf.setCurrentlySelectedCourseIndex(i-1);
 				mf.updateGradePanel(State.CLASS_COURSE_STUDENT);
 				
@@ -156,11 +157,11 @@ public class CBPanel extends JPanel {
 				cbStudent.setSelectedIndex(0);
 			} else if (i == itmCount - 1) {
 				mf.openAddEditGUI(Course.class, false);
-				mf.setCurrentlySelectedCourseIndex(0);
+				//mf.setCurrentlySelectedCourseIndex(0);
 				mf.updateGradePanel(State.CLASS);
 			} else if (i == itmCount - 2) {
 				mf.openAddEditGUI(Course.class, true);
-				mf.setCurrentlySelectedCourseIndex(0);
+				//mf.setCurrentlySelectedCourseIndex(0);
 				mf.updateGradePanel(State.CLASS);
 			}
 		});
@@ -191,16 +192,16 @@ public class CBPanel extends JPanel {
 			if (i == 0) {
 				mf.setCurrentlySelectedAssignmentIndex(i);
 				mf.updateGradePanel(State.CLASS_COURSE_STUDENT);
-			} else if (i != -1 && i < itmCount - 2) {
+			} else if (i > 0 && i < itmCount - 2) {
 				mf.setCurrentlySelectedAssignmentIndex(i-1);
 				mf.updateGradePanel(State.CLASS_COURSE_STUDENT_TASK);
 			} else if (i == itmCount - 1) {
 				mf.openAddEditGUI(Task.class, false);
-				mf.setCurrentlySelectedAssignmentIndex(itmCount-3);
+				//mf.setCurrentlySelectedAssignmentIndex(0);
 				mf.updateGradePanel(State.CLASS_COURSE_STUDENT);
 			} else if (i == itmCount - 2) {
 				mf.openAddEditGUI(Task.class, true);
-				mf.setCurrentlySelectedAssignmentIndex(itmCount-3);
+				//mf.setCurrentlySelectedAssignmentIndex(0);
 				mf.updateGradePanel(State.CLASS_COURSE_STUDENT);
 			}
 		});
@@ -266,7 +267,6 @@ public class CBPanel extends JPanel {
 		
 		//--------//
 		System.out.println("Storing previously selected items...");
-		ArrayList<String> prevSelectedItems = new ArrayList<>();
 		try {
 			prevSelectedItems.add(cbClass.getSelectedItem().toString());
 			prevSelectedItems.add(cbCourse.getSelectedItem().toString());
@@ -393,6 +393,8 @@ public class CBPanel extends JPanel {
 					default:
 						cbClass.setSelectedItem(ch);
 					}
+				} else {
+					System.out.println("Class combobox was empty when selection occured.");
 				}
 			}
 			
@@ -412,6 +414,8 @@ public class CBPanel extends JPanel {
 					default:
 						cbCourse.setSelectedItem(ch);
 					}
+				} else {
+					System.out.println("Course combobox was empty when selection occured.");
 				}
 			}
 			
@@ -428,7 +432,7 @@ public class CBPanel extends JPanel {
 						cbTask.setSelectedIndex(cbTask.getItemCount()-3);
 						mf.setCurrentlySelectedAssignmentIndex(cbTask.getSelectedIndex()-1);
 						*/
-						tempState = State.CLASS_COURSE_STUDENT_TASK;
+						tempState = State.CLASS_COURSE_STUDENT;
 						break;
 					case "Ändra":
 						cbTask.setSelectedIndex(0);
@@ -436,6 +440,8 @@ public class CBPanel extends JPanel {
 					default:
 						cbTask.setSelectedItem(ch);
 					}
+				} else {
+					System.out.println("Task combobox was empty when selection occured.");
 				}
 			}
 			
