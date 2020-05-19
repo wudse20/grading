@@ -17,6 +17,12 @@
             <void id="ArrayList1" property="courseCriteria">
              <void method="add">
               <object class="com.te3.main.objects.Criteria" id="Criteria0">
+               <void property="grade">
+                <object class="java.lang.Enum" id="Grade0" method="valueOf">
+                 <class>com.te3.main.enums.Grade</class>
+                 <string>C</string>
+                </object>
+               </void>
                <void property="name">
                 <string>Tala</string>
                </void>
@@ -24,22 +30,21 @@
              </void>
              <void method="add">
               <object class="com.te3.main.objects.Criteria" id="Criteria1">
-               <void property="name">
-                <string>Läsa</string>
+               <void property="grade">
+                <object idref="Grade0"/>
                </void>
-              </object>
-             </void>
-             <void method="add">
-              <object class="com.te3.main.objects.Criteria" id="Criteria2">
                <void property="name">
                 <string>Skriva</string>
                </void>
               </object>
              </void>
              <void method="add">
-              <object class="com.te3.main.objects.Criteria" id="Criteria3">
+              <object class="com.te3.main.objects.Criteria" id="Criteria2">
+               <void property="grade">
+                <object idref="Grade0"/>
+               </void>
                <void property="name">
-                <string>Analysera</string>
+                <string>Läsa</string>
                </void>
               </object>
              </void>
@@ -51,27 +56,24 @@
              <void method="add">
               <object class="com.te3.main.objects.Task" id="Task0">
                <void property="comment">
-                <string></string>
+                <string>testar</string>
                </void>
                <void id="ArrayList3" property="criteria">
                 <void method="add">
-                 <object idref="Criteria0"/>
+                 <object idref="Criteria2"/>
                 </void>
                 <void method="add">
                  <object idref="Criteria1"/>
                 </void>
                 <void method="add">
-                 <object idref="Criteria2"/>
-                </void>
-                <void method="add">
-                 <object idref="Criteria3"/>
+                 <object idref="Criteria0"/>
                 </void>
                </void>
                <void property="criteria">
                 <object idref="ArrayList3"/>
                </void>
                <void property="name">
-                <string>NP2020</string>
+                <string>NpSve03</string>
                </void>
               </object>
              </void>
@@ -107,9 +109,6 @@
              <void method="add">
               <object idref="Criteria2"/>
              </void>
-             <void method="add">
-              <object idref="Criteria3"/>
-             </void>
             </void>
             <void property="courseCriteria">
              <object idref="ArrayList4"/>
@@ -122,23 +121,20 @@
                </void>
                <void id="ArrayList6" property="criteria">
                 <void method="add">
-                 <object idref="Criteria0"/>
+                 <object idref="Criteria2"/>
                 </void>
                 <void method="add">
                  <object idref="Criteria1"/>
                 </void>
                 <void method="add">
-                 <object idref="Criteria2"/>
-                </void>
-                <void method="add">
-                 <object idref="Criteria3"/>
+                 <object idref="Criteria0"/>
                 </void>
                </void>
                <void property="criteria">
                 <object idref="ArrayList6"/>
                </void>
                <void property="name">
-                <string>NP2020</string>
+                <string>NpSve03</string>
                </void>
               </object>
              </void>
@@ -174,9 +170,6 @@
              <void method="add">
               <object idref="Criteria2"/>
              </void>
-             <void method="add">
-              <object idref="Criteria3"/>
-             </void>
             </void>
             <void property="courseCriteria">
              <object idref="ArrayList7"/>
@@ -189,23 +182,20 @@
                </void>
                <void id="ArrayList9" property="criteria">
                 <void method="add">
-                 <object idref="Criteria0"/>
+                 <object idref="Criteria2"/>
                 </void>
                 <void method="add">
                  <object idref="Criteria1"/>
                 </void>
                 <void method="add">
-                 <object idref="Criteria2"/>
-                </void>
-                <void method="add">
-                 <object idref="Criteria3"/>
+                 <object idref="Criteria0"/>
                 </void>
                </void>
                <void property="criteria">
                 <object idref="ArrayList9"/>
                </void>
                <void property="name">
-                <string>NP2020</string>
+                <string>NpSve03</string>
                </void>
               </object>
              </void>
@@ -241,9 +231,6 @@
              <void method="add">
               <object idref="Criteria2"/>
              </void>
-             <void method="add">
-              <object idref="Criteria3"/>
-             </void>
             </void>
             <void property="courseCriteria">
              <object idref="ArrayList10"/>
@@ -256,23 +243,20 @@
                </void>
                <void id="ArrayList12" property="criteria">
                 <void method="add">
-                 <object idref="Criteria0"/>
+                 <object idref="Criteria2"/>
                 </void>
                 <void method="add">
                  <object idref="Criteria1"/>
                 </void>
                 <void method="add">
-                 <object idref="Criteria2"/>
-                </void>
-                <void method="add">
-                 <object idref="Criteria3"/>
+                 <object idref="Criteria0"/>
                 </void>
                </void>
                <void property="criteria">
                 <object idref="ArrayList12"/>
                </void>
                <void property="name">
-                <string>NP2020</string>
+                <string>NpSve03</string>
                </void>
               </object>
              </void>
@@ -308,9 +292,6 @@
              <void method="add">
               <object idref="Criteria2"/>
              </void>
-             <void method="add">
-              <object idref="Criteria3"/>
-             </void>
             </void>
             <void property="courseCriteria">
              <object idref="ArrayList13"/>
@@ -323,23 +304,20 @@
                </void>
                <void id="ArrayList15" property="criteria">
                 <void method="add">
-                 <object idref="Criteria0"/>
+                 <object idref="Criteria2"/>
                 </void>
                 <void method="add">
                  <object idref="Criteria1"/>
                 </void>
                 <void method="add">
-                 <object idref="Criteria2"/>
-                </void>
-                <void method="add">
-                 <object idref="Criteria3"/>
+                 <object idref="Criteria0"/>
                 </void>
                </void>
                <void property="criteria">
                 <object idref="ArrayList15"/>
                </void>
                <void property="name">
-                <string>NP2020</string>
+                <string>NpSve03</string>
                </void>
               </object>
              </void>
@@ -375,9 +353,6 @@
              <void method="add">
               <object idref="Criteria2"/>
              </void>
-             <void method="add">
-              <object idref="Criteria3"/>
-             </void>
             </void>
             <void property="courseCriteria">
              <object idref="ArrayList16"/>
@@ -390,23 +365,20 @@
                </void>
                <void id="ArrayList18" property="criteria">
                 <void method="add">
-                 <object idref="Criteria0"/>
+                 <object idref="Criteria2"/>
                 </void>
                 <void method="add">
                  <object idref="Criteria1"/>
                 </void>
                 <void method="add">
-                 <object idref="Criteria2"/>
-                </void>
-                <void method="add">
-                 <object idref="Criteria3"/>
+                 <object idref="Criteria0"/>
                 </void>
                </void>
                <void property="criteria">
                 <object idref="ArrayList18"/>
                </void>
                <void property="name">
-                <string>NP2020</string>
+                <string>NpSve03</string>
                </void>
               </object>
              </void>
@@ -442,9 +414,6 @@
              <void method="add">
               <object idref="Criteria2"/>
              </void>
-             <void method="add">
-              <object idref="Criteria3"/>
-             </void>
             </void>
             <void property="courseCriteria">
              <object idref="ArrayList19"/>
@@ -457,23 +426,20 @@
                </void>
                <void id="ArrayList21" property="criteria">
                 <void method="add">
-                 <object idref="Criteria0"/>
+                 <object idref="Criteria2"/>
                 </void>
                 <void method="add">
                  <object idref="Criteria1"/>
                 </void>
                 <void method="add">
-                 <object idref="Criteria2"/>
-                </void>
-                <void method="add">
-                 <object idref="Criteria3"/>
+                 <object idref="Criteria0"/>
                 </void>
                </void>
                <void property="criteria">
                 <object idref="ArrayList21"/>
                </void>
                <void property="name">
-                <string>NP2020</string>
+                <string>NpSve03</string>
                </void>
               </object>
              </void>
@@ -509,9 +475,6 @@
              <void method="add">
               <object idref="Criteria2"/>
              </void>
-             <void method="add">
-              <object idref="Criteria3"/>
-             </void>
             </void>
             <void property="courseCriteria">
              <object idref="ArrayList22"/>
@@ -524,23 +487,20 @@
                </void>
                <void id="ArrayList24" property="criteria">
                 <void method="add">
-                 <object idref="Criteria0"/>
+                 <object idref="Criteria2"/>
                 </void>
                 <void method="add">
                  <object idref="Criteria1"/>
                 </void>
                 <void method="add">
-                 <object idref="Criteria2"/>
-                </void>
-                <void method="add">
-                 <object idref="Criteria3"/>
+                 <object idref="Criteria0"/>
                 </void>
                </void>
                <void property="criteria">
                 <object idref="ArrayList24"/>
                </void>
                <void property="name">
-                <string>NP2020</string>
+                <string>NpSve03</string>
                </void>
               </object>
              </void>
@@ -576,9 +536,6 @@
              <void method="add">
               <object idref="Criteria2"/>
              </void>
-             <void method="add">
-              <object idref="Criteria3"/>
-             </void>
             </void>
             <void property="courseCriteria">
              <object idref="ArrayList25"/>
@@ -591,23 +548,20 @@
                </void>
                <void id="ArrayList27" property="criteria">
                 <void method="add">
-                 <object idref="Criteria0"/>
+                 <object idref="Criteria2"/>
                 </void>
                 <void method="add">
                  <object idref="Criteria1"/>
                 </void>
                 <void method="add">
-                 <object idref="Criteria2"/>
-                </void>
-                <void method="add">
-                 <object idref="Criteria3"/>
+                 <object idref="Criteria0"/>
                 </void>
                </void>
                <void property="criteria">
                 <object idref="ArrayList27"/>
                </void>
                <void property="name">
-                <string>NP2020</string>
+                <string>NpSve03</string>
                </void>
               </object>
              </void>
@@ -643,9 +597,6 @@
              <void method="add">
               <object idref="Criteria2"/>
              </void>
-             <void method="add">
-              <object idref="Criteria3"/>
-             </void>
             </void>
             <void property="courseCriteria">
              <object idref="ArrayList28"/>
@@ -658,23 +609,20 @@
                </void>
                <void id="ArrayList30" property="criteria">
                 <void method="add">
-                 <object idref="Criteria0"/>
+                 <object idref="Criteria2"/>
                 </void>
                 <void method="add">
                  <object idref="Criteria1"/>
                 </void>
                 <void method="add">
-                 <object idref="Criteria2"/>
-                </void>
-                <void method="add">
-                 <object idref="Criteria3"/>
+                 <object idref="Criteria0"/>
                 </void>
                </void>
                <void property="criteria">
                 <object idref="ArrayList30"/>
                </void>
                <void property="name">
-                <string>NP2020</string>
+                <string>NpSve03</string>
                </void>
               </object>
              </void>
@@ -710,9 +658,6 @@
              <void method="add">
               <object idref="Criteria2"/>
              </void>
-             <void method="add">
-              <object idref="Criteria3"/>
-             </void>
             </void>
             <void property="courseCriteria">
              <object idref="ArrayList31"/>
@@ -725,23 +670,20 @@
                </void>
                <void id="ArrayList33" property="criteria">
                 <void method="add">
-                 <object idref="Criteria0"/>
+                 <object idref="Criteria2"/>
                 </void>
                 <void method="add">
                  <object idref="Criteria1"/>
                 </void>
                 <void method="add">
-                 <object idref="Criteria2"/>
-                </void>
-                <void method="add">
-                 <object idref="Criteria3"/>
+                 <object idref="Criteria0"/>
                 </void>
                </void>
                <void property="criteria">
                 <object idref="ArrayList33"/>
                </void>
                <void property="name">
-                <string>NP2020</string>
+                <string>NpSve03</string>
                </void>
               </object>
              </void>
@@ -777,9 +719,6 @@
              <void method="add">
               <object idref="Criteria2"/>
              </void>
-             <void method="add">
-              <object idref="Criteria3"/>
-             </void>
             </void>
             <void property="courseCriteria">
              <object idref="ArrayList34"/>
@@ -792,23 +731,20 @@
                </void>
                <void id="ArrayList36" property="criteria">
                 <void method="add">
-                 <object idref="Criteria0"/>
+                 <object idref="Criteria2"/>
                 </void>
                 <void method="add">
                  <object idref="Criteria1"/>
                 </void>
                 <void method="add">
-                 <object idref="Criteria2"/>
-                </void>
-                <void method="add">
-                 <object idref="Criteria3"/>
+                 <object idref="Criteria0"/>
                 </void>
                </void>
                <void property="criteria">
                 <object idref="ArrayList36"/>
                </void>
                <void property="name">
-                <string>NP2020</string>
+                <string>NpSve03</string>
                </void>
               </object>
              </void>
@@ -844,9 +780,6 @@
              <void method="add">
               <object idref="Criteria2"/>
              </void>
-             <void method="add">
-              <object idref="Criteria3"/>
-             </void>
             </void>
             <void property="courseCriteria">
              <object idref="ArrayList37"/>
@@ -859,23 +792,20 @@
                </void>
                <void id="ArrayList39" property="criteria">
                 <void method="add">
-                 <object idref="Criteria0"/>
+                 <object idref="Criteria2"/>
                 </void>
                 <void method="add">
                  <object idref="Criteria1"/>
                 </void>
                 <void method="add">
-                 <object idref="Criteria2"/>
-                </void>
-                <void method="add">
-                 <object idref="Criteria3"/>
+                 <object idref="Criteria0"/>
                 </void>
                </void>
                <void property="criteria">
                 <object idref="ArrayList39"/>
                </void>
                <void property="name">
-                <string>NP2020</string>
+                <string>NpSve03</string>
                </void>
               </object>
              </void>
@@ -911,9 +841,6 @@
              <void method="add">
               <object idref="Criteria2"/>
              </void>
-             <void method="add">
-              <object idref="Criteria3"/>
-             </void>
             </void>
             <void property="courseCriteria">
              <object idref="ArrayList40"/>
@@ -926,23 +853,20 @@
                </void>
                <void id="ArrayList42" property="criteria">
                 <void method="add">
-                 <object idref="Criteria0"/>
+                 <object idref="Criteria2"/>
                 </void>
                 <void method="add">
                  <object idref="Criteria1"/>
                 </void>
                 <void method="add">
-                 <object idref="Criteria2"/>
-                </void>
-                <void method="add">
-                 <object idref="Criteria3"/>
+                 <object idref="Criteria0"/>
                 </void>
                </void>
                <void property="criteria">
                 <object idref="ArrayList42"/>
                </void>
                <void property="name">
-                <string>NP2020</string>
+                <string>NpSve03</string>
                </void>
               </object>
              </void>
@@ -978,9 +902,6 @@
              <void method="add">
               <object idref="Criteria2"/>
              </void>
-             <void method="add">
-              <object idref="Criteria3"/>
-             </void>
             </void>
             <void property="courseCriteria">
              <object idref="ArrayList43"/>
@@ -993,23 +914,20 @@
                </void>
                <void id="ArrayList45" property="criteria">
                 <void method="add">
-                 <object idref="Criteria0"/>
+                 <object idref="Criteria2"/>
                 </void>
                 <void method="add">
                  <object idref="Criteria1"/>
                 </void>
                 <void method="add">
-                 <object idref="Criteria2"/>
-                </void>
-                <void method="add">
-                 <object idref="Criteria3"/>
+                 <object idref="Criteria0"/>
                 </void>
                </void>
                <void property="criteria">
                 <object idref="ArrayList45"/>
                </void>
                <void property="name">
-                <string>NP2020</string>
+                <string>NpSve03</string>
                </void>
               </object>
              </void>
@@ -1045,9 +963,6 @@
              <void method="add">
               <object idref="Criteria2"/>
              </void>
-             <void method="add">
-              <object idref="Criteria3"/>
-             </void>
             </void>
             <void property="courseCriteria">
              <object idref="ArrayList46"/>
@@ -1060,23 +975,20 @@
                </void>
                <void id="ArrayList48" property="criteria">
                 <void method="add">
-                 <object idref="Criteria0"/>
+                 <object idref="Criteria2"/>
                 </void>
                 <void method="add">
                  <object idref="Criteria1"/>
                 </void>
                 <void method="add">
-                 <object idref="Criteria2"/>
-                </void>
-                <void method="add">
-                 <object idref="Criteria3"/>
+                 <object idref="Criteria0"/>
                 </void>
                </void>
                <void property="criteria">
                 <object idref="ArrayList48"/>
                </void>
                <void property="name">
-                <string>NP2020</string>
+                <string>NpSve03</string>
                </void>
               </object>
              </void>
@@ -1112,9 +1024,6 @@
              <void method="add">
               <object idref="Criteria2"/>
              </void>
-             <void method="add">
-              <object idref="Criteria3"/>
-             </void>
             </void>
             <void property="courseCriteria">
              <object idref="ArrayList49"/>
@@ -1127,23 +1036,20 @@
                </void>
                <void id="ArrayList51" property="criteria">
                 <void method="add">
-                 <object idref="Criteria0"/>
+                 <object idref="Criteria2"/>
                 </void>
                 <void method="add">
                  <object idref="Criteria1"/>
                 </void>
                 <void method="add">
-                 <object idref="Criteria2"/>
-                </void>
-                <void method="add">
-                 <object idref="Criteria3"/>
+                 <object idref="Criteria0"/>
                 </void>
                </void>
                <void property="criteria">
                 <object idref="ArrayList51"/>
                </void>
                <void property="name">
-                <string>NP2020</string>
+                <string>NpSve03</string>
                </void>
               </object>
              </void>
@@ -1179,9 +1085,6 @@
              <void method="add">
               <object idref="Criteria2"/>
              </void>
-             <void method="add">
-              <object idref="Criteria3"/>
-             </void>
             </void>
             <void property="courseCriteria">
              <object idref="ArrayList52"/>
@@ -1194,23 +1097,20 @@
                </void>
                <void id="ArrayList54" property="criteria">
                 <void method="add">
-                 <object idref="Criteria0"/>
+                 <object idref="Criteria2"/>
                 </void>
                 <void method="add">
                  <object idref="Criteria1"/>
                 </void>
                 <void method="add">
-                 <object idref="Criteria2"/>
-                </void>
-                <void method="add">
-                 <object idref="Criteria3"/>
+                 <object idref="Criteria0"/>
                 </void>
                </void>
                <void property="criteria">
                 <object idref="ArrayList54"/>
                </void>
                <void property="name">
-                <string>NP2020</string>
+                <string>NpSve03</string>
                </void>
               </object>
              </void>
@@ -1246,9 +1146,6 @@
              <void method="add">
               <object idref="Criteria2"/>
              </void>
-             <void method="add">
-              <object idref="Criteria3"/>
-             </void>
             </void>
             <void property="courseCriteria">
              <object idref="ArrayList55"/>
@@ -1261,23 +1158,20 @@
                </void>
                <void id="ArrayList57" property="criteria">
                 <void method="add">
-                 <object idref="Criteria0"/>
+                 <object idref="Criteria2"/>
                 </void>
                 <void method="add">
                  <object idref="Criteria1"/>
                 </void>
                 <void method="add">
-                 <object idref="Criteria2"/>
-                </void>
-                <void method="add">
-                 <object idref="Criteria3"/>
+                 <object idref="Criteria0"/>
                 </void>
                </void>
                <void property="criteria">
                 <object idref="ArrayList57"/>
                </void>
                <void property="name">
-                <string>NP2020</string>
+                <string>NpSve03</string>
                </void>
               </object>
              </void>
@@ -1313,9 +1207,6 @@
              <void method="add">
               <object idref="Criteria2"/>
              </void>
-             <void method="add">
-              <object idref="Criteria3"/>
-             </void>
             </void>
             <void property="courseCriteria">
              <object idref="ArrayList58"/>
@@ -1328,23 +1219,20 @@
                </void>
                <void id="ArrayList60" property="criteria">
                 <void method="add">
-                 <object idref="Criteria0"/>
+                 <object idref="Criteria2"/>
                 </void>
                 <void method="add">
                  <object idref="Criteria1"/>
                 </void>
                 <void method="add">
-                 <object idref="Criteria2"/>
-                </void>
-                <void method="add">
-                 <object idref="Criteria3"/>
+                 <object idref="Criteria0"/>
                 </void>
                </void>
                <void property="criteria">
                 <object idref="ArrayList60"/>
                </void>
                <void property="name">
-                <string>NP2020</string>
+                <string>NpSve03</string>
                </void>
               </object>
              </void>
@@ -1380,9 +1268,6 @@
              <void method="add">
               <object idref="Criteria2"/>
              </void>
-             <void method="add">
-              <object idref="Criteria3"/>
-             </void>
             </void>
             <void property="courseCriteria">
              <object idref="ArrayList61"/>
@@ -1395,23 +1280,20 @@
                </void>
                <void id="ArrayList63" property="criteria">
                 <void method="add">
-                 <object idref="Criteria0"/>
+                 <object idref="Criteria2"/>
                 </void>
                 <void method="add">
                  <object idref="Criteria1"/>
                 </void>
                 <void method="add">
-                 <object idref="Criteria2"/>
-                </void>
-                <void method="add">
-                 <object idref="Criteria3"/>
+                 <object idref="Criteria0"/>
                 </void>
                </void>
                <void property="criteria">
                 <object idref="ArrayList63"/>
                </void>
                <void property="name">
-                <string>NP2020</string>
+                <string>NpSve03</string>
                </void>
               </object>
              </void>
@@ -1447,9 +1329,6 @@
              <void method="add">
               <object idref="Criteria2"/>
              </void>
-             <void method="add">
-              <object idref="Criteria3"/>
-             </void>
             </void>
             <void property="courseCriteria">
              <object idref="ArrayList64"/>
@@ -1462,23 +1341,20 @@
                </void>
                <void id="ArrayList66" property="criteria">
                 <void method="add">
-                 <object idref="Criteria0"/>
+                 <object idref="Criteria2"/>
                 </void>
                 <void method="add">
                  <object idref="Criteria1"/>
                 </void>
                 <void method="add">
-                 <object idref="Criteria2"/>
-                </void>
-                <void method="add">
-                 <object idref="Criteria3"/>
+                 <object idref="Criteria0"/>
                 </void>
                </void>
                <void property="criteria">
                 <object idref="ArrayList66"/>
                </void>
                <void property="name">
-                <string>NP2020</string>
+                <string>NpSve03</string>
                </void>
               </object>
              </void>
@@ -1514,9 +1390,6 @@
              <void method="add">
               <object idref="Criteria2"/>
              </void>
-             <void method="add">
-              <object idref="Criteria3"/>
-             </void>
             </void>
             <void property="courseCriteria">
              <object idref="ArrayList67"/>
@@ -1529,23 +1402,20 @@
                </void>
                <void id="ArrayList69" property="criteria">
                 <void method="add">
-                 <object idref="Criteria0"/>
+                 <object idref="Criteria2"/>
                 </void>
                 <void method="add">
                  <object idref="Criteria1"/>
                 </void>
                 <void method="add">
-                 <object idref="Criteria2"/>
-                </void>
-                <void method="add">
-                 <object idref="Criteria3"/>
+                 <object idref="Criteria0"/>
                 </void>
                </void>
                <void property="criteria">
                 <object idref="ArrayList69"/>
                </void>
                <void property="name">
-                <string>NP2020</string>
+                <string>NpSve03</string>
                </void>
               </object>
              </void>
@@ -1581,9 +1451,6 @@
              <void method="add">
               <object idref="Criteria2"/>
              </void>
-             <void method="add">
-              <object idref="Criteria3"/>
-             </void>
             </void>
             <void property="courseCriteria">
              <object idref="ArrayList70"/>
@@ -1596,23 +1463,20 @@
                </void>
                <void id="ArrayList72" property="criteria">
                 <void method="add">
-                 <object idref="Criteria0"/>
+                 <object idref="Criteria2"/>
                 </void>
                 <void method="add">
                  <object idref="Criteria1"/>
                 </void>
                 <void method="add">
-                 <object idref="Criteria2"/>
-                </void>
-                <void method="add">
-                 <object idref="Criteria3"/>
+                 <object idref="Criteria0"/>
                 </void>
                </void>
                <void property="criteria">
                 <object idref="ArrayList72"/>
                </void>
                <void property="name">
-                <string>NP2020</string>
+                <string>NpSve03</string>
                </void>
               </object>
              </void>

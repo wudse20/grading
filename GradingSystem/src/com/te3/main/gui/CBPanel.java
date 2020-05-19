@@ -197,11 +197,9 @@ public class CBPanel extends JPanel {
 			} else if (i == itmCount - 1) {
 				mf.openAddEditGUI(Task.class, false);
 				mf.setCurrentlySelectedAssignmentIndex(itmCount-3);
-				mf.updateGradePanel(State.CLASS_COURSE_STUDENT);
 			} else if (i == itmCount - 2) {
 				mf.openAddEditGUI(Task.class, true);
 				mf.setCurrentlySelectedAssignmentIndex(itmCount-3);
-				mf.updateGradePanel(State.CLASS_COURSE_STUDENT);
 			}
 		});
 		
