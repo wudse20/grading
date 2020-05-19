@@ -287,12 +287,18 @@ public class MainFrame extends JFrame implements ComponentListener, WindowStateL
 		// sets baby yoda up
 		this.setBabyYoda(shouldShowBabyYoda);
 
-		// Adds the panel
-		this.add(panel);
-
 		// Sets the panels bounds
 		panel.setBounds(0, 0, this.getWidth() - 15, this.getHeight());
-
+		
+		// Adds the panel
+		this.add(panel);
+		
+		//Sets the preferred size of the JFrame
+		this.setPreferredSize(new Dimension(this.getWidth() - 15, this.getHeight()));
+		
+		//Packs the JFrame into its size
+		this.pack();
+		
 		// Updates the grade panel state
 		this.updateGradePanel(State.NOTHING_SELECTED);
 	}
