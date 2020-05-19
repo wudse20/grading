@@ -8,7 +8,7 @@
    <string>./saves.xml</string>
   </void>
   <void property="saveTimer">
-   <int>60</int>
+   <int>300</int>
   </void>
  </object>
 </java>

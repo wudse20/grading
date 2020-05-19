@@ -201,6 +201,10 @@ public class GradesPanel extends JPanel implements KeyListener {
 			// Adds key listener
 			txaComment.addKeyListener(this);
 
+			// Makes it so it will create a new line when it runs out of space.
+			txaComment.setLineWrap(true);
+			txaComment.setWrapStyleWord(true);
+
 			// Sets the properties of the pCommentButtons panel
 			pCommentButtons.setLayout(pCommentButtonsLayout);
 			pCommentButtons.add(btnSaveComment);
@@ -765,11 +769,12 @@ public class GradesPanel extends JPanel implements KeyListener {
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		if (++keyCount % 50 == 0)
-			saveComment(tasks.get(mf.getCurrentlySelectedAssignmentIndex()), false);
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
+		//Checks for autosave
+		if (++keyCount % 50 == 0)
+			saveComment(tasks.get(mf.getCurrentlySelectedAssignmentIndex()), false);
 	}
 }
