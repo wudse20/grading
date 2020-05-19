@@ -350,10 +350,10 @@ public class MainAssignmentPanel extends JPanel {
 	 * @return the added criteria. (Cloned)
 	 */
 	public ArrayList<Criteria> getAddedCriteria() {
-		//The list with the new criteria
+		// The list with the new criteria
 		var list = new ArrayList<Criteria>();
 
-		//Loops through and adds the criteria
+		// Loops through and adds the criteria
 		for (Criteria c : this.addedCriteria) {
 			try {
 				list.add(new Criteria(c.getName()));
@@ -362,7 +362,7 @@ public class MainAssignmentPanel extends JPanel {
 			}
 		}
 
-		//Returns the list
+		// Returns the list
 		return list;
 	}
 }
